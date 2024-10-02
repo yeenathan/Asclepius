@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import Vision from "@/components/vision";
 
 export default function Index() {
   return (
@@ -10,6 +11,7 @@ export default function Index() {
       }}
     >
       <Text style={{fontSize: "32pt"}}>Main</Text>
+      <Vision></Vision>
     </View>
   );
 }
