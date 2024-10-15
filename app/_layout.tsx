@@ -1,9 +1,14 @@
-import { Stack } from 'expo-router/stack';
+import { Stack } from "expo-router";
+import React from 'react';
+import { ApplicationProvider } from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
 
-export default function Layout() {
+export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <ApplicationProvider {...eva} theme={eva.dark}>
+      <Stack>
+        <Stack.Screen name="home"/>
+      </Stack>
+    </ApplicationProvider>
   );
 }
