@@ -1,20 +1,31 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen } from './home.component';
-import { DetailsScreen } from './details.component';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
+import { HomeScreen } from "./home.component"
+import { DetailsScreen } from "./details.component"
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
-const HomeNavigator = () => (
-  <Navigator screenOptions={{headerShown: false}}>
-    <Screen name='Home' component={HomeScreen}/>
-    <Screen name='Details' component={DetailsScreen}/>
+const BottomTabBar = ({ navigation, state }) => (
+  <BottomNavigation
+    selectedIndex={state.index}
+    onSelect={index => navigation.navigate(state.routeNames[index])}
+  >
+    <BottomNavigationTab title='Home'/>
+    <BottomNavigationTab title='Details'/>
+  </BottomNavigation>
+);
+
+const TabNavigator = () => (
+  <Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={{tabBarShowLabel: false}}>
+    <Screen name='Home' component={HomeScreen} options={{ headerShown: false }}/>
+    <Screen name='Details' component={DetailsScreen} options={{ headerShown: false }}/>
   </Navigator>
 );
 
 export const AppNavigator = () => (
   <NavigationContainer independent={true}>
-    <HomeNavigator/>
+    <TabNavigator/>
   </NavigationContainer>
 );
