@@ -14,7 +14,7 @@ const HomeNavigator = () => (
 );
 
 export const AppNavigator = () => (
-  <NavigationContainer>
+  <NavigationContainer independent={true}>
     <HomeNavigator/>
   </NavigationContainer>
 );
