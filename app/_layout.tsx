@@ -7,12 +7,13 @@ import { default as colorTheme } from '../custom-theme.json';
 import { default as mapping } from "../mapping.json"
 
 
+
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack}/>
     <ApplicationProvider
       {...eva}
-      theme={{...eva.light, ...colorTheme}}
+      theme={{...eva.light, ...colorTheme,}}
       customMapping={mapping}
     >
       <AppNavigator/>

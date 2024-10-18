@@ -1,5 +1,5 @@
 {
-  "CustomSchemaType": {
+  "strict": {
     "text-font-family": "Poppins-Regular"
   }
 }
