@@ -1,9 +1,78 @@
 import React from 'react';
-import { SafeAreaView, styles, StyleSheet, ScrollView } from 'react-native';
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles } from '@ui-kitten/components';
+import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem } from '@ui-kitten/components';
 import { View } from 'react-native';
 
+const StarIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='star'
+  />
+);
+
+const HeartIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='heart'
+  />
+);
+
+const ForwardIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
+);
+
 export const DetailsScreen = ({ navigation }) => {
+  
+  const [value, setValue] = React.useState('');
+  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  const [selectIndex, selectedIndex] = React.useState(undefined);
+  const [menuVisible, setMenuVisible] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
+  const toggleSecureEntry = (): void => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
+  const toggleTooltip = (): void => {
+    setTooltipVisible(!menuVisible);
+  };
+
+  const toggleMenu = (): void => {
+    setMenuVisible(!menuVisible);
+  };
+
+  const renderInputIcon = (props): React.ReactElement => (
+    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+      <Icon
+        {...props}
+        name={!secureTextEntry ? 'eye' : 'eye-off'}
+      />
+    </TouchableWithoutFeedback>
+  );
+
+  const renderTooltipButton = (): React.ReactElement => (
+    <Button
+      style={inputStyles.button}
+      accessoryLeft={HeartIcon}
+      onPress={toggleTooltip}
+    >
+      PRESS ME :3
+    </Button>
+  );
+
+  const renderMenuButton = (): React.ReactElement => (
+    <Button
+      style={inputStyles.button}
+      accessoryLeft={HeartIcon}
+      onPress={toggleMenu}
+    >
+      Press Me PLZ!
+    </Button>
+  );
+
   return (
     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#f8f8f8", gap: 10}}>
       {/* <ScrollView className="scrollview"> */}
@@ -43,14 +112,59 @@ export const DetailsScreen = ({ navigation }) => {
           <Text appearance='alternative'>Alternative Text.....</Text>
         </View>
 
-        <View style={{ }}>
+        <View style={{ flexDirection: "row", gap: 8 }}>
           <Text status='primary'>Primary yipee</Text>
+          <Text status='sucess'>Sucess Woo Hoo</Text>
+          <Text status='info'>Info Smart</Text>
+          <Text status='warning'>Warning !!!!</Text>
+          <Text status='danger'>Danger Watch out</Text>
+          <Text status='basic'>Basic as b*tch</Text>
+          <Text style={{ borderRadius: 4, padding: 2, backgroundColor: '#3366FF' }} status='control'>Control your self</Text>
         </View>
 
+        <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>
+          <Input placeholder='Input' value={value} secureTextEntry={secureTextEntry} onChangeText={setValue} accessoryRight={renderInputIcon}/>
+
+          <Select placeholder='Select' selectIndex={selectIndex} accessoryLeft={StarIcon} onSelect={index => setselectIndex(index)}>
+            <SelectItem accessoryLeft={HeartIcon} title='Click here for free food!!!'/>
+            <SelectItem accessoryLeft={HeartIcon} title='YIPEEE'/>
+            <SelectItem accessoryLeft={HeartIcon} title=';asldkjpgojg'/>
+          </Select>
+
+          <OverflowMenu fullWidth={true} onSelect={toggleMenu} visible={menuVisible} anchor={renderMenuButton} onBackdropPress={toggleMenu}>
+            <MenuItem title='The First Option' accessoryRight={ForwardIcon}/>
+            <MenuItem title='The Second Option' accessoryRight={ForwardIcon}/>
+          </OverflowMenu>
+
+          <Tooltip anchor={renderTooltipButton} visible={tooltipVisible} accessoryLeft={StarIcon} onBackdropPress={toggleTooltip}>
+            Yipeee
+          </Tooltip>
+
+          <Button appearance='ghost' accessoryLeft={StarIcon}/>
+
+        </View>
       {/* </ScrollView> */}
     </Layout>
   );
 };
+
+const inputStyles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+  },
+  input: {
+    flex: 1,
+    margin: 2,
+  },
+  button: {
+    margin: 2,
+  },
+});
+
 
 {/* <View style={{flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 5}}>
           <Button style={{  }} size='tiny'>Tiny</Button>
