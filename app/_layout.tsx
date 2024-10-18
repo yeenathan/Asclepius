@@ -12,7 +12,7 @@ export default () => (
     <ApplicationProvider
       {...eva}
       theme={{...eva.light, ...colorTheme,}}
-      customMapping={mapping}
+      // customMapping={mapping}
     >
       <AppNavigator/>
     </ApplicationProvider>
