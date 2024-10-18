@@ -10,7 +10,8 @@ import { SafeAreaView, Text } from 'react-native';
 
 export default () => {
   const [loaded, error] = useFonts({
-    'Poppins-Regular':require("../assets/fonts/Poppins-Regular.ttf")
+    'Poppins-Regular':require("../assets/fonts/Poppins-Regular.ttf"),
+    'Poppins-SemiBold':require("../assets/fonts/Poppins-SemiBold.ttf"),
   })
 
 
