@@ -130,6 +130,7 @@ export const DetailsScreen = ({ navigation }) => {
   );
 
   return (
+    <ScrollView>
     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#f8f8f8", gap: 10}}>
       {/* <ScrollView className="scrollview"> */}
         <Text category='h1'>Components</Text>
@@ -247,6 +248,7 @@ export const DetailsScreen = ({ navigation }) => {
         </View>
       {/* </ScrollView> */}
     </Layout>
+    </ScrollView>
   );
 };
 
