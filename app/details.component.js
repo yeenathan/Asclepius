@@ -32,12 +32,68 @@ export const DetailsScreen = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
+  const zoomIconRef = React.useRef(null);
+  const pulseIconRef = React.useRef(null);
+  const shakeIconRef = React.useRef(null);
+  const infiniteAnimationIconRef = React.useRef(null);
+  const noAnimationIconRef = React.useRef();
+
+  React.useEffect(() => {
+    infiniteAnimationIconRef.current.startAnimation();
+  }, []);
+
+  const renderZoomIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={zoomIconRef}
+      animation='zoom'
+      name='maximize-outline'
+    />
+  );
+
+  const renderPulseIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={pulseIconRef}
+      animation='pulse'
+      name='activity'
+    />
+  );
+
+  const renderShakeIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={shakeIconRef}
+      animation='shake'
+      name='shake'
+    />
+  );
+
+  const renderInfiniteAnimationIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={infiniteAnimationIconRef}
+      animationConfig={{ cycles: Infinity }}
+      animation='shake'
+      name='clock-outline'
+    />
+  );
+
+  const renderNoAnimationIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={noAnimationIconRef}
+      animation={null}
+      name='eye'
+    />
+  );
+
   const toggleSecureEntry = (): void => {
     setSecureTextEntry(!secureTextEntry);
   };
 
   const toggleTooltip = (): void => {
-    setTooltipVisible(!menuVisible);
+    setTooltipVisible(!tooltipVisible);
   };
 
   const toggleMenu = (): void => {
@@ -142,6 +198,52 @@ export const DetailsScreen = ({ navigation }) => {
 
           <Button appearance='ghost' accessoryLeft={StarIcon}/>
 
+          <Button
+        style={buttonStyles.button}
+        accessoryLeft={renderZoomIcon}
+        onPress={() => zoomIconRef.current.startAnimation()}
+      >
+        ZOOM
+      </Button>
+
+      <Button
+        appearance='outline'
+        status='success'
+        style={buttonStyles.button}
+        accessoryLeft={renderPulseIcon}
+        onPress={() => pulseIconRef.current.startAnimation()}
+      >
+        PULSE
+      </Button>
+
+      <Button
+        appearance='ghost'
+        status='danger'
+        style={buttonStyles.button}
+        accessoryLeft={renderShakeIcon}
+        onPress={() => shakeIconRef.current.startAnimation()}
+      >
+        SHAKE
+      </Button>
+
+      <Button
+        appearance='ghost'
+        status='info'
+        style={buttonStyles.button}
+        accessoryRight={renderInfiniteAnimationIcon}
+      >
+        INFINITE
+      </Button>
+
+      <Button
+        appearance='ghost'
+        status='warning'
+        style={buttonStyles.button}
+        accessoryRight={renderNoAnimationIcon}
+      >
+        NO ANIMATION
+      </Button>
+
         </View>
       {/* </ScrollView> */}
     </Layout>
@@ -165,6 +267,15 @@ const inputStyles = StyleSheet.create({
   },
 });
 
+const buttonStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  button: {
+    margin: 2,
+  },
+});
 
 {/* <View style={{flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 5}}>
           <Button style={{  }} size='tiny'>Tiny</Button>
