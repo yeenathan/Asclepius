@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback, } from 'react-native';
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem } from '@ui-kitten/components';
 import { View } from 'react-native';
 
@@ -25,7 +25,11 @@ const ForwardIcon = (props): IconElement => (
 );
 
 export const DetailsScreen = ({ navigation }) => {
-  
+
+  const zoomIconRefpress = React.useRef(null);
+  const pulseIconRefpress = React.useRef(null);
+  const shakeIconRefpress = React.useRef(null);
+
   const [value, setValue] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const [selectIndex, selectedIndex] = React.useState(undefined);
@@ -40,12 +44,42 @@ export const DetailsScreen = ({ navigation }) => {
 
   React.useEffect(() => {
     infiniteAnimationIconRef.current.startAnimation();
+    zoomIconRef.current.startAnimation();
+    pulseIconRef.current.startAnimation();
+    shakeIconRef.current.startAnimation();
   }, []);
+
+  const renderZoomIconani = (props): IconElement => (
+    <Icon 
+      {...props}
+      ref={zoomIconRef}
+      animationConfig={{ cycles: Infinity }}
+      animation='zoom'
+      name='maximize-outline'/>
+  );
+
+  const renderPulseIconani = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={pulseIconRef}
+      animationConfig={{ cycles: Infinity }}
+      animation='pulse'
+      name='activity' />
+  );
+
+  const renderShakeIconani = (props): IconElement => (
+    <Icon
+      {...props}
+      ref={shakeIconRef}
+      animationConfig={{ cycles: Infinity }}
+      animation='shake'
+      name='shake' />
+  );
 
   const renderZoomIcon = (props): IconElement => (
     <Icon
       {...props}
-      ref={zoomIconRef}
+      ref={zoomIconRefpress}
       animation='zoom'
       name='maximize-outline'
     />
@@ -54,7 +88,7 @@ export const DetailsScreen = ({ navigation }) => {
   const renderPulseIcon = (props): IconElement => (
     <Icon
       {...props}
-      ref={pulseIconRef}
+      ref={pulseIconRefpress}
       animation='pulse'
       name='activity'
     />
@@ -63,7 +97,7 @@ export const DetailsScreen = ({ navigation }) => {
   const renderShakeIcon = (props): IconElement => (
     <Icon
       {...props}
-      ref={shakeIconRef}
+      ref={shakeIconRefpress}
       animation='shake'
       name='shake'
     />
@@ -200,57 +234,90 @@ export const DetailsScreen = ({ navigation }) => {
           <Button appearance='ghost' accessoryLeft={StarIcon}/>
 
           <Button
-        style={buttonStyles.button}
-        accessoryLeft={renderZoomIcon}
-        onPress={() => zoomIconRef.current.startAnimation()}
-      >
-        ZOOM
-      </Button>
+            style={buttonStyles.button}
+            accessoryLeft={renderZoomIcon}
+            onPress={() => zoomIconRefpress.current.startAnimation()}
+              >
+            ZOOM
+          </Button>
 
-      <Button
-        appearance='outline'
-        status='success'
-        style={buttonStyles.button}
-        accessoryLeft={renderPulseIcon}
-        onPress={() => pulseIconRef.current.startAnimation()}
-      >
-        PULSE
-      </Button>
+          <Button
+            appearance='outline'
+            status='success'
+            style={buttonStyles.button}
+            accessoryLeft={renderPulseIcon}
+            onPress={() => pulseIconRefpress.current.startAnimation()}
+          >
+            PULSE
+          </Button>
 
-      <Button
-        appearance='ghost'
-        status='danger'
-        style={buttonStyles.button}
-        accessoryLeft={renderShakeIcon}
-        onPress={() => shakeIconRef.current.startAnimation()}
-      >
-        SHAKE
-      </Button>
+          <Button
+            appearance='ghost'
+            status='danger'
+            style={buttonStyles.button}
+            accessoryLeft={renderShakeIcon}
+            onPress={() => shakeIconRefpress.current.startAnimation()}
+          >
+            SHAKE
+          </Button>
 
-      <Button
-        appearance='ghost'
-        status='info'
-        style={buttonStyles.button}
-        accessoryRight={renderInfiniteAnimationIcon}
-      >
-        INFINITE
-      </Button>
+          <Button
+            appearance='ghost'
+            status='info'
+            style={buttonStyles.button}
+            accessoryRight={renderInfiniteAnimationIcon}
+          >
+            INFINITE
+          </Button>
 
-      <Button
-        appearance='ghost'
-        status='warning'
-        style={buttonStyles.button}
-        accessoryRight={renderNoAnimationIcon}
-      >
-        NO ANIMATION
-      </Button>
+          <Button
+            appearance='ghost'
+            status='warning'
+            style={buttonStyles.button}
+            accessoryRight={renderNoAnimationIcon}
+          >
+            NO ANIMATION
+          </Button>
 
+        </View>
+
+        <View>
+          <Button style={anibuttonStyles.button}
+            accessoryLeft={renderZoomIconani}>
+            ZooooooM      
+          </Button>
+
+          <Button
+            appearance='outline'
+            style={anibuttonStyles.button}
+            accessoryLeft={renderPulseIconani}
+          >
+            PULSE BUMP BUMP
+          </Button>
+
+          <Button
+            appearance='ghost'
+            style={anibuttonStyles.button}
+            accessoryLeft={renderShakeIconani}
+          >
+            SHAKE!
+          </Button>
         </View>
       {/* </ScrollView> */}
     </Layout>
     </ScrollView>
   );
 };
+
+const anibuttonStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexwrap: 'wrap',
+  },
+  button: {
+    margin: 2,
+  }
+})
 
 const inputStyles = StyleSheet.create({
   inputContainer: {
