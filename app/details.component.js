@@ -1,7 +1,40 @@
 import React from 'react';
-import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback, } from 'react-native';
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem } from '@ui-kitten/components';
+import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback, ViewProps} from 'react-native';
+import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem, Card } from '@ui-kitten/components';
 import { View } from 'react-native';
+
+const Header = (props: ViewProps): React.ReactElement => (
+  <View {...props}>
+    <Text category='h6'>
+      Jujutsu Kaisen
+    </Text>
+    <Text category='s1'>
+      By Gege Akutami
+    </Text>
+  </View>
+); 
+
+const Footer = (props: ViewProps): React.ReactElement => (
+  <View 
+    {...props}
+    // eslint-disable-next-line react/prop-types
+    style={[props.style, cardStyles.footerContainer]}
+  >
+    <Button
+      style={cardStyles.footerControl}
+      size='small'
+      status='basic'
+    >
+      Deny
+    </Button>
+    <Button
+      style={cardStyles.footerControl}
+      size='small'
+    >
+      OK
+    </Button>
+  </View>
+);
 
 const StarIcon = (props): IconElement => (
   <Icon
@@ -303,11 +336,147 @@ export const DetailsScreen = ({ navigation }) => {
             SHAKE!
           </Button>
         </View>
+
+        <View style={{ gap: 10 }}>
+          <Card>
+            <Text>
+              Bee Movie
+                By Jerry Seinfeld
+
+                NARRATOR:
+                (Black screen with text; The sound of buzzing bees can be heard)
+                According to all known laws
+                of aviation,
+                :
+                there is no way a bee
+                should be able to fly.
+                :
+                Its wings are too small to get
+                its fat little body off the ground.
+                :
+                The bee, of course, flies anyway
+                :
+                because bees don't care
+                what humans think is impossible.
+                BARRY BENSON:
+                (Barry is picking out a shirt)
+                Yellow, black. Yellow, black.
+                Yellow, black. Yellow, black.
+                :
+                Ooh, black and yellow!
+                Let's shake it up a little.
+                JANET BENSON:
+                Barry! Breakfast is ready!
+                BARRY:
+                Coming!
+                :
+                Hang on a second.
+                (Barry uses his antenna like a phone)
+                :
+                Hello?
+                ADAM FLAYMAN:
+
+                (Through phone)
+                - Barry?
+                BARRY:
+                - Adam?
+                ADAM:
+                - Can you believe this is happening?
+                BARRY:
+                - I can't. I'll pick you up.
+                (Barry flies down the stairs)
+            </Text>
+          </Card>
+        </View>
+
+        <View style={cardStyles.topContainer}>
+          <Card style={cardStyles.card} header={Header}>
+            <Text>
+              Header
+            </Text>
+          </Card>
+
+          <Card style={cardStyles.card} footer={Footer}>
+            Footer
+          </Card>
+        </View>
+
+        <Card style={cardStyles.card} header={Header} footer={Footer}>
+          <Text>
+          Jujutsu Kaisen is a Japanese manga series written and illustrated 
+          by Gege Akutami. It was serialized in Shueisha's shōnen manga 
+          magazine Weekly Shōnen Jump from March 2018 to September 2024, 
+          with its chapters collected in 28 tankōbon volumes as of October 
+          2024.
+          </Text>
+        </Card>
+
+        <View style={{ flexDirection: 'row', flexwrap: 'wrap ', gap: 10, marginTop: 20 }}>
+          <Card status='primary' style={{ margin: 2 }}>
+            <Text>
+              Primary
+            </Text>
+          </Card>
+
+          <Card status='success' style={{ margin: 2 }}>
+            <Text>
+              Success
+            </Text>
+          </Card>
+          
+          <Card status='info' style={{ margin: 2 }}>
+            <Text>
+              Info
+            </Text>
+          </Card>
+
+          <Card status='warning' style={{ margin: 2 }}>
+            <Text>
+              Warning
+            </Text>
+          </Card>
+
+          <Card status='danger' style={{ margin: 2 }}>
+            <Text>
+              Danger
+            </Text>
+          </Card>
+
+          <Card status='basic' style={{ margin: 2 }}>
+            <Text>
+              Basic
+            </Text>
+          </Card>
+          
+        </View>
+     
       {/* </ScrollView> */}
     </Layout>
     </ScrollView>
   );
 };
+
+const cardStyles = StyleSheet.create({
+  topContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'space-between',
+  },
+  
+  card: {
+    flex: 1,
+    margin: 2,
+  },
+
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+
+  footerControl: {
+    marginHorizontal: 2,
+  }
+})
 
 const anibuttonStyles = StyleSheet.create({
   container: {
