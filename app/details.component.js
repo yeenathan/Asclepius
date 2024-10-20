@@ -1,7 +1,34 @@
 import React from 'react';
-import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback, ViewProps} from 'react-native';
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem, Card } from '@ui-kitten/components';
+import { SafeAreaView, styles, StyleSheet, ScrollView, TouchableWithoutFeedback, ViewProps, Image} from 'react-native';
+import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, Button, container, withStyles, Avatar, SelectItem, OverflowMenu, Select, Tooltip, IconElement, Input, MenuItem, Card, list, ListItem, List, IndexPath, Menu, Spinner } from '@ui-kitten/components';
 import { View } from 'react-native';
+
+const StarIcons = (props): IconElement => (
+  <Icon
+    {...props}
+    name='stars'
+  />
+);
+
+const LoadingIndicator  = (props: ImageProps): React.ReactElement => (
+  <View style={[props.style, inidStyles.indicator]}>
+    <Spinner size='small' />
+  </View>
+);
+
+interface IListItem {
+  title: string;
+  description: string ;
+}
+
+const dataList = new Array(8).fill ({
+  title: 'Items',
+  description: 'Description For Item',
+});
+
+const data   = new Array(8).fill ({
+  title: 'Item',
+});
 
 const Header = (props: ViewProps): React.ReactElement => (
   <View {...props}>
@@ -58,6 +85,21 @@ const ForwardIcon = (props): IconElement => (
 );
 
 export const DetailsScreen = ({ navigation }) => {
+
+  const [myselectedIndex, setMySelectedIndex] = React.useState(new IndexPath(0));
+
+  const renderItems = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
+    <ListItem
+      title={`${item.title} ${index + 1}`}
+      description={`${item.description} ${index + 1}`}
+    />
+  );
+
+  const renderItem = ({ item, index }: {item: { title: string }; index: number }): React.ReactElement=> (
+    <ListItem 
+      title={`${item.title} ${index + 1}`} 
+    />
+  )
 
   const zoomIconRefpress = React.useRef(null);
   const pulseIconRefpress = React.useRef(null);
@@ -447,7 +489,72 @@ export const DetailsScreen = ({ navigation }) => {
               Basic
             </Text>
           </Card>
-          
+        </View>
+
+        <List 
+          style={listStyles.container}
+          data={data}
+          renderItem={renderItem}
+        />
+
+        <List
+          style={desListStyles.container}
+          data={dataList}
+          ItemSeparatorComponent={Divider}
+          renderItem={renderItems}
+          keyExtractor={(item, index) => index.toString()}
+        />
+        <View style={{ width: 400}}>
+        <Menu
+          selectedIndex={myselectedIndex}
+          onSelect={index => setMySelectedIndex(index)}
+        >
+          <MenuItem title='Banana' />
+          <MenuItem title='Eggplant' />
+          <MenuItem title='Watermelon' />
+          <MenuItem title='worcestershire' />
+        </Menu>
+        </View>
+
+        <View
+          style={bananaStyles.container}
+        >
+          <Button
+            style={{ margin: 2}}
+            status='primary'
+            accessoryLeft={StarIcon}
+          >
+            HAHAHAHA
+          </Button>
+
+          <Button
+            style={{ margin: 2}}
+            status='success'
+            accessoryRight={StarIcon}
+          >
+            WINNLSDKFJ:SDKfj
+          </Button>
+
+          <Button
+            style={{ margin: 2}}
+            status='danger'
+            accessoryLeft={StarIcon}
+          />
+
+          <Button
+            style={{ margin: 2}}
+            appearance='ghost'
+            status='danger'
+            accessoryLeft={StarIcon}
+          />
+
+          <Button
+            style={{ margin: 2}}
+            appearance='outline'
+            accessoryLeft={LoadingIndicator}
+          >
+            AHHHHHH
+          </Button>
         </View>
      
       {/* </ScrollView> */}
@@ -455,6 +562,36 @@ export const DetailsScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+const bananaStyles = StyleSheet.create ({
+  container: {
+    flexDirection: 'row',
+    flexwrap: 'wrap',
+    gap: 10,
+    marginTop: 10,
+  },
+});
+
+const inidStyles = StyleSheet.create({
+  indicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+const desListStyles = StyleSheet.create ({
+  container: {
+    maxHeight: 200,
+    width: 400
+  }
+})
+
+const listStyles = StyleSheet.create({
+  container: {
+    maxHeight: 180,
+    width: 400
+  },
+})
 
 const cardStyles = StyleSheet.create({
   topContainer: {
