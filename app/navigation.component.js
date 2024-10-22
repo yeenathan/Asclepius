@@ -8,6 +8,7 @@ import { AddScreen } from "./pages/addmed.component"
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
+import { CustomButton } from './button.component';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -73,8 +74,12 @@ const TabNavigator = () => (
 
 export function AppNavigator(props) {
   return(
-    <NavigationContainer independent={true}>
-      <TabNavigator/>
-    </NavigationContainer>
+    <View style={{ flex: 1 }}>
+      <CustomButton />  
+      <NavigationContainer independent={true}>
+        <TabNavigator />
+      </NavigationContainer>
+    </View>
+
   );
 };
