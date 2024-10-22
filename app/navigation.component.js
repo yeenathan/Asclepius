@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomNavigation, BottomNavigationTab, IconElement, Icon} from '@ui-kitten/components';
-import { HomeScreen } from "./home.component"
-import { DetailsScreen } from "./details.component"
-import { ThirdScreen} from "./third.component"
+import { BottomNavigation, BottomNavigationTab, IconElement, Icon, Button } from '@ui-kitten/components';
+import { HomeScreen } from "./pages/home.component"
+import { MedListScreen } from "./pages/medlist.component"
+import { AddScreen } from "./pages/addmed.component"
+import { View } from 'react-native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -28,16 +29,16 @@ const BottomTabBar = ({ navigation, state }) => (
     onSelect={index => navigation.navigate(state.routeNames[index])}
   >
     <BottomNavigationTab title='HOME' icon={PersonIcon}/>
-    <BottomNavigationTab title='DETAILS' icon={BellIcon}/>
-    <BottomNavigationTab title="THIRD" icon={BellIcon}/>
+    <BottomNavigationTab title="add med"/>
+    <BottomNavigationTab title='MED LIBRARY' icon={BellIcon}/>
   </BottomNavigation>
 );
 
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={{tabBarShowLabel: false}}>
     <Screen name='Home' component={HomeScreen} options={{ headerShown: false }}/>
-    <Screen name='Details' component={DetailsScreen} options={{ headerShown: false }}/>
-    <Screen name="Third" component={ThirdScreen} options={{headerShown: false }}/>
+    <Screen name='Add Med' component={AddScreen} options={{ headerShown: false }}/>
+    <Screen name='Med Library' component={MedListScreen} options={{ headerShown: false }}/>
   </Navigator>
 );
 
