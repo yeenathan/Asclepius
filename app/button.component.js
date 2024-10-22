@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
   smallButton: {
     backgroundColor: '#89CCC8',
     borderRadius: 15,
-    width: '8%',
+    width: '7%',
     borderWidth: 0,
   },
   smallButtonB: {
     backgroundColor: 'white',
     borderColor: '#89CCC8',
     borderRadius: 15,
-    width: '10%',
+    width: '7%',
     borderWidth: 3,
   },
   mediumButtonOrange: {
@@ -61,8 +61,11 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   mediumButtonB: {
+    backgroundColor: 'white',
     borderRadius: 15,
     width: '10%',
+    borderColor: '#FDC26A',
+    borderWidth: 3,
   },
   largeButtonOrange: {
     backgroundColor: '#FDC26A',
