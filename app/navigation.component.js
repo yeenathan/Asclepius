@@ -35,7 +35,6 @@ const BottomTabBar = ({ navigation, state }) => (
       selectedIndex={state.index}
       onSelect={index => {
         navigation.navigate(state.routeNames[index]);
-        console.log(navigation);
       }}
     >
       <BottomNavigationTab style={{flex: 1}} title='HOME' icon={HomeIcon}/>

@@ -63,14 +63,14 @@ const MedCard = (props) => {
         <Text category='p1'>{data.time}</Text>
         <Text category='h2'>{data.name}</Text>
         <View style={{alignItems: "flex-end"}}>
-          <Button size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem", maxWidth: "8rem"}}>Mark as Taken</Button>
+          <Button size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
         </View>
       </View>
     </View>
   )
 }
 
-const MedList = (props) => {
+const MedList = () => {
   return(
     <ScrollView style={{width: "100%"}}>
       <SectionList
