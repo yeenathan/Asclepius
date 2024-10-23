@@ -5,8 +5,6 @@ import { BottomNavigation, BottomNavigationTab, IconElement, Icon, Button } from
 import { HomeScreen } from "./pages/home.component"
 import { MedListScreen } from "./pages/medlist.component"
 import { AddScreen } from "./pages/addmed.component"
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -24,10 +22,6 @@ const ClipIcon = (props): IconElement => (
     name='clipboard-outline'
   />
 );
-
-const PlusIcon = (props): IconElement => (
-  <Icon {...props} name="plus-circle-outline" />
-)
 
 const BottomTabBar = ({ navigation, state }) => (
   <>
@@ -71,7 +65,7 @@ const TabNavigator = () => (
 );
 
 
-export function AppNavigator(props) {
+export function AppNavigator() {
   return(
     <NavigationContainer independent={true}>
       <TabNavigator/>

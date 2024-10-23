@@ -8,13 +8,13 @@ const DATA = [
         date: 7,
         day: "Mon",
         id: 1,
-        status: false
+        status: true
     },
     {
         date: 8,
         day: "Tue",
         id: 2,
-        status: true
+        status: false
     },
     {
         date: 9,
@@ -69,13 +69,16 @@ const Item = (props) => {
 
 export function HorizontalCalendar() {   
     return(
-        <ScrollView horizontal="true">
-            <FlatList
-                data={DATA}
-                renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} />}
-                keyExtractor={ item => item.id}
-                horizontal="true"
-            />
-        </ScrollView>
+        <>
+            <Text category="p2">October</Text>
+            <ScrollView horizontal="true" style={{marginBottom: "1rem"}}>
+                <FlatList
+                    data={DATA}
+                    renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} />}
+                    keyExtractor={ item => item.id}
+                    horizontal="true"
+                />
+            </ScrollView>
+        </>
     )
 }
