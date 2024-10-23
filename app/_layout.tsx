@@ -5,13 +5,14 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './navigation.component';
 import { default as colorTheme } from '../custom-theme.json';
 import { default as mapping } from "../mapping.json"
-import {useFonts} from 'expo-font';
+import { useFonts } from 'expo-font';
 import { SafeAreaView, Text } from 'react-native';
 
 export default () => {
   const [loaded, error] = useFonts({
-    'Poppins-Regular':require("../assets/fonts/Poppins-Regular.ttf"),
+    'Poppins-Medium':require("../assets/fonts/Poppins-Medium.ttf"),
     'Poppins-SemiBold':require("../assets/fonts/Poppins-SemiBold.ttf"),
+    'Poppins-Bold':require("../assets/fonts/Poppins-Bold.ttf")
   })
 
 
