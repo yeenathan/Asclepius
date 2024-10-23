@@ -81,7 +81,27 @@ const MED_DATA = {
         }
       ]
     }
-  ]
+  ],
+  Wed: {
+    hour: "",
+    data: []
+  },
+  Thu: {
+    hour: "",
+    data: []
+  },
+  Fri: {
+    hour: "",
+    data: []
+  },
+  Sat: {
+    hour: "",
+    data: []
+  },
+  Sun: {
+    hour: "",
+    data: []
+  }
 };
 
 const MedCard = (props) => {
@@ -140,11 +160,12 @@ export const HomeScreen = ({ }) => {
     setOverlayVisible(!overlayVisible);
   }
   
-  const [medData, setMedData] = useState(null);
+  const [medData, setMedData] = useState({data: []});
   const [day, setDay] = useState("Mon");
 
   const handleSetDay = (day) => {
     setDay(day);
+    setMedData(MED_DATA[day]);
   }
 
   return (
@@ -171,7 +192,7 @@ export const HomeScreen = ({ }) => {
         <Important toggleOverlayVisible={toggleOverlayVisible} />
         <Text category='h1' style={{justifyContent: "flex-start", width: "100%"}}>Today's Meds</Text>
         {
-          medData ? <MedList day={day}/>
+          medData.length > 0 ? <MedList day={day}/>
           :
           <View style={{flex: 1, justifyContent: "center"}}>
             <Text onPress={() => setMedData(MED_DATA[day])} category='p1'>Add meds</Text>
