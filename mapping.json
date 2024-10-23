@@ -1,8 +1,17 @@
 {
   "strict": {
-    "text-font-family": "Poppins-Regular",
+    "text-font-family": "Poppins-Medium",
 
-    "text-heading-1-font-size": 36,
-    "text-heading-1-font-family": "Poppins-Semibold"
+    "text-heading-1-font-size": 32,
+    "text-heading-1-font-family": "Poppins-Bold",
+
+    "text-heading-2-font-size": 20,
+    "text-heading-2-font-family": "Poppins-SemiBold",
+
+    "text-paragraph-1-font-size": 16,
+    "text-paragraph-1-font-family": "Poppins-Medium",
+
+    "text-paragraph-2-font-size": 16,
+    "text-paragraph-2-font-family": "Poppins-Bold"
   }
 }
