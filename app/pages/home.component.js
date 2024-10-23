@@ -105,6 +105,8 @@ export const HomeScreen = ({ }) => {
     setOverlayVisible(!overlayVisible);
   }
   
+  const [medData, setMedData] = useState(null);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem"}}>
@@ -128,7 +130,13 @@ export const HomeScreen = ({ }) => {
         </View>
         <Important toggleOverlayVisible={toggleOverlayVisible} />
         <Text category='h1' style={{justifyContent: "flex-start", width: "100%"}}>Today's Meds</Text>
-        <MedList />
+        {
+          medData ? <MedList />
+          :
+          <View style={{flex: 1, justifyContent: "center"}}>
+            <Text onPress={() => setMedData(MED_DATA)} category='p1'>Add meds</Text>
+          </View>
+        }
       </Layout>
     </SafeAreaView>
   );
