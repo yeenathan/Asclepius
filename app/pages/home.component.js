@@ -106,7 +106,6 @@ const MED_DATA = {
 
 const MedCard = (props) => {
   const data = props.data;
-  console.log(data);
   if (!data.taken) {  
     return(
       <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
@@ -120,7 +119,7 @@ const MedCard = (props) => {
           <Text category='p1'>{data.time}</Text>
           <Text category='h2'>{data.name}</Text>
           <View style={{alignItems: "flex-end"}}>
-            <Button onPress={() => props.handleTaken(data)} size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
+            <Button size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
           </View>
         </View>
       </View>  
@@ -147,12 +146,12 @@ const MedCard = (props) => {
   }
 }
 
-const MedList = ({medData, handleTaken}) => {
+const MedList = ({dayData}) => {
   return(
     <ScrollView style={{ width: "100%"}}>
       <SectionList
-        sections={medData}
-        renderItem={({item}) => <MedCard medData={medData} handleTaken={handleTaken} data={item}/>}
+        sections={dayData}
+        renderItem={({item}) => <MedCard dayData={dayData} data={item}/>}
         keyExtractor={ item => item.id}
         renderSectionHeader={({section: {hour}}) => (
           <Text category='p2'>{hour}</Text>
@@ -181,28 +180,20 @@ export const HomeScreen = ({ }) => {
     setOverlayVisible(!overlayVisible);
   }
   
-  const [medData, setMedData] = useState({data: []});
+  const [dayData, setDayData] = useState({data: []});
   const [day, setDay] = useState("Mon");
 
   const [dataFilled, setDataFilled] = useState(false); // just for faking purposes
   const handleDataFilled = () => {
     setDataFilled(true);        // for faking empty schedule
-    setMedData(MED_DATA[day]);  // only need this
+    setDayData(MED_DATA[day]);  // only need this
   }
 
   const handleSetDay = (day) => {
     setDay(day);
     if (dataFilled) {
-      setMedData(MED_DATA[day]);
+      setDayData(MED_DATA[day]);
     }
-  }
-
-  const handleTaken = (data) => {
-    console.log(data);
-    // setMedData({
-    //   ...MED_DATA,
-      
-    // })
   }
 
   return (
@@ -228,10 +219,10 @@ export const HomeScreen = ({ }) => {
         </View>
         <Text category='h1' style={{justifyContent: "flex-start", width: "100%"}}>Today's Meds</Text>
         {
-          medData.length > 0 ?
+          dayData.length > 0 ?
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList medData={medData} handleTaken={handleTaken}/>
+              <MedList dayData={dayData}/>
             </>
           :
           <View style={{...styles.container, flex: 1, justifyContent: "center", gap: "2rem"}}>
