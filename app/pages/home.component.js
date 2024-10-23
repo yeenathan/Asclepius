@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { SafeAreaView, SectionList } from 'react-native';
-import { Button, Icon, Layout, Text} from '@ui-kitten/components';
+import { Button, Icon, Layout, Text, Modal} from '@ui-kitten/components';
 import { View, Image, ScrollView } from 'react-native';
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
-import { Overlay } from "@/app/components/overlay"
+import { ModalContainer } from "@/app/components/modalContainer"
 
 import { styles } from "../stylesheet"
 import { default as colorTheme } from '@/custom-theme.json';
@@ -87,10 +87,10 @@ const MedList = (props) => {
 
 const Important = (props) => (
   <Button
-    // onPress={props.toggleOverlayVisible}
+    onPress={props.toggleOverlayVisible}
     style={{...styles.orangeButton, width: "100%", marginVertical: ".5rem"}}
     children={() => (
-      <View>
+      <View style={{...styles.overlay}}>
         <Text category='p2'>1 serious drug interaction</Text>
       </View>  
     )}
@@ -102,14 +102,23 @@ const Important = (props) => (
 export const HomeScreen = ({ }) => {
   const [overlayVisible, setOverlayVisible] = useState(false); 
   const toggleOverlayVisible = () => {
-    console.log("toggle visible")
     setOverlayVisible(!overlayVisible);
   }
   
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Overlay setOverlayVisible={toggleOverlayVisible} visible={overlayVisible}/>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem"}}>
+        <Modal
+            visible={overlayVisible}
+            backdropStyle={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}
+            onBackdropPress={toggleOverlayVisible}
+        >
+          <ModalContainer
+            title="1 serious drug interaction"
+            body="THERE IS SOMETHING WRONG!!!"
+            toggleOverlayVisible={toggleOverlayVisible}
+          />
+        </Modal>
         <View style={styles.rowContainer}>
           <Text category='h2' style={{color: colorTheme['persian-green']}}>Good morning, Nathan.</Text>
           <Icon style={{width: "40px"}} name="settings-2-outline"></Icon>
