@@ -106,31 +106,53 @@ const MED_DATA = {
 
 const MedCard = (props) => {
   const data = props.data;
-  return(
-    <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
-      <View style={{flex: 3, alignItems: "center"}}>
-        <Image
-          style={{maxHeight: "4rem", maxWidth: "4rem"}}
-          source={require("@/assets/icons/button.svg")}
-        />
-      </View>
-      <View style={{flex: 7}}>
-        <Text category='p1'>{data.time}</Text>
-        <Text category='h2'>{data.name}</Text>
-        <View style={{alignItems: "flex-end"}}>
-          <Button size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
+  console.log(data);
+  if (!data.taken) {  
+    return(
+      <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
+        <View style={{flex: 3, alignItems: "center"}}>
+          <Image
+            style={{maxHeight: "4rem", maxWidth: "4rem"}}
+            source={require("@/assets/icons/button.svg")}
+          />
+        </View>
+        <View style={{flex: 7}}>
+          <Text category='p1'>{data.time}</Text>
+          <Text category='h2'>{data.name}</Text>
+          <View style={{alignItems: "flex-end"}}>
+            <Button onPress={() => props.handleTaken(data)} size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
+          </View>
+        </View>
+      </View>  
+    )
+  }
+  else {
+    return(
+      <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
+        <View style={{flex: 3, alignItems: "center"}}>
+          <Image
+            style={{maxHeight: "4rem", maxWidth: "4rem"}}
+            source={require("@/assets/icons/button.svg")}
+          />
+        </View>
+        <View style={{flex: 7}}>
+          <Text category='p1'>{data.time}</Text>
+          <Text category='h2'>{data.name}</Text>
+          <View style={{alignItems: "flex-end"}}>
+            <Text category='p1'>Taken at {data.timeTaken}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  )
+    )
+  }
 }
 
-const MedList = ({day}) => {
+const MedList = ({medData, handleTaken}) => {
   return(
-    <ScrollView style={{width: "100%"}}>
+    <ScrollView style={{ width: "100%"}}>
       <SectionList
-        sections={MED_DATA[day]}
-        renderItem={({item}) => <MedCard data={item}/>}
+        sections={medData}
+        renderItem={({item}) => <MedCard medData={medData} handleTaken={handleTaken} data={item}/>}
         keyExtractor={ item => item.id}
         renderSectionHeader={({section: {hour}}) => (
           <Text category='p2'>{hour}</Text>
@@ -162,9 +184,25 @@ export const HomeScreen = ({ }) => {
   const [medData, setMedData] = useState({data: []});
   const [day, setDay] = useState("Mon");
 
+  const [dataFilled, setDataFilled] = useState(false); // just for faking purposes
+  const handleDataFilled = () => {
+    setDataFilled(true);        // for faking empty schedule
+    setMedData(MED_DATA[day]);  // only need this
+  }
+
   const handleSetDay = (day) => {
     setDay(day);
-    setMedData(MED_DATA[day]);
+    if (dataFilled) {
+      setMedData(MED_DATA[day]);
+    }
+  }
+
+  const handleTaken = (data) => {
+    console.log(data);
+    // setMedData({
+    //   ...MED_DATA,
+      
+    // })
   }
 
   return (
@@ -193,14 +231,14 @@ export const HomeScreen = ({ }) => {
           medData.length > 0 ?
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList day={day}/>
+              <MedList medData={medData} handleTaken={handleTaken}/>
             </>
           :
           <View style={{...styles.container, flex: 1, justifyContent: "center", gap: "2rem"}}>
             <View style={{alignItems: "center", backgroundColor: "#ffffff", borderRadius: "1rem", padding: "3rem"}}>
               <Text category='p1'>Input your medication to view schedule</Text>
             </View>
-            <Button size="giant" style={{...styles.orangeButton, borderRadius: "1rem"}} onPress={() => setMedData(MED_DATA[day])} children={() => <Text category='h2'>Add Medication</Text>}/>
+            <Button size="giant" style={{...styles.orangeButton, borderRadius: "1rem"}} onPress={handleDataFilled} children={() => <Text category='h2'>Add Medication</Text>}/>
           </View>
         }
       </Layout>
