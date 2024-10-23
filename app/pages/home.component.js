@@ -8,46 +8,81 @@ import { ModalContainer } from "@/app/components/modalContainer"
 import { styles } from "../stylesheet"
 import { default as colorTheme } from '@/custom-theme.json';
 
-const MED_DATA = [
-  {
-    hour: "9:00AM",
-    data: [
+const MED_DATA = {
+  Mon: [
+    {
+      hour: "9:00AM",
+      data: [
+          {
+          time: "9:00AM",
+          name: "Medication Name",
+          taken: true,
+          timeTaken: "9:12AM",
+          id: 1
+        },
         {
-        time: "9:00AM",
-        name: "Medication Name",
-        taken: true,
-        timeTaken: "9:12AM",
-        id: 1
-      },
-      {
-        time: "9:30AM",
-        name: "Medication Name",
-        taken: false,
-        timeTaken: null,
-        id: 2
-      }
-    ]
-  },
-  {
-    hour: "12:00PM",
-    data: [
-      {
-        time: "12:00PM",
-        name: "Medication Name",
-        taken: false,
-        timeTaken: null,
-        id: 3
-      },
-      {
-        time: "12:10PM",
-        name: "Medication Name",
-        taken: false,
-        timeTaken: null,
-        id: 4
-      }
-    ]
-  }
-];
+          time: "9:30AM",
+          name: "Medication Name",
+          taken: false,
+          timeTaken: null,
+          id: 2
+        }
+      ]
+    },
+    {
+      hour: "12:00PM",
+      data: [
+        {
+          time: "12:00PM",
+          name: "Medication Name",
+          taken: false,
+          timeTaken: null,
+          id: 3
+        },
+        {
+          time: "12:10PM",
+          name: "Medication Name",
+          taken: false,
+          timeTaken: null,
+          id: 4
+        }
+      ]
+    }
+  ],
+  Tue: [
+    {
+      hour: "9:00AM",
+      data: [
+          {
+          time: "9:00AM",
+          name: "Tuesday Medication",
+          taken: true,
+          timeTaken: "9:12AM",
+          id: 1
+        },
+      ]
+    },
+    {
+      hour: "12:00PM",
+      data: [
+        {
+          time: "12:00PM",
+          name: "Medication Name",
+          taken: false,
+          timeTaken: null,
+          id: 3
+        },
+        {
+          time: "12:10PM",
+          name: "Medication Name",
+          taken: false,
+          timeTaken: null,
+          id: 4
+        }
+      ]
+    }
+  ]
+};
 
 const MedCard = (props) => {
   const data = props.data;
@@ -70,11 +105,11 @@ const MedCard = (props) => {
   )
 }
 
-const MedList = () => {
+const MedList = ({day}) => {
   return(
     <ScrollView style={{width: "100%"}}>
       <SectionList
-        sections={MED_DATA}
+        sections={MED_DATA[day]}
         renderItem={({item}) => <MedCard data={item}/>}
         keyExtractor={ item => item.id}
         renderSectionHeader={({section: {hour}}) => (
@@ -106,6 +141,11 @@ export const HomeScreen = ({ }) => {
   }
   
   const [medData, setMedData] = useState(null);
+  const [day, setDay] = useState("Mon");
+
+  const handleSetDay = (day) => {
+    setDay(day);
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -126,15 +166,15 @@ export const HomeScreen = ({ }) => {
           <Icon style={{width: "40px"}} name="settings-2-outline"></Icon>
         </View>
         <View style={{width: "100%"}}>
-          <HorizontalCalendar/>
+          <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day}/>
         </View>
         <Important toggleOverlayVisible={toggleOverlayVisible} />
         <Text category='h1' style={{justifyContent: "flex-start", width: "100%"}}>Today's Meds</Text>
         {
-          medData ? <MedList />
+          medData ? <MedList day={day}/>
           :
           <View style={{flex: 1, justifyContent: "center"}}>
-            <Text onPress={() => setMedData(MED_DATA)} category='p1'>Add meds</Text>
+            <Text onPress={() => setMedData(MED_DATA[day])} category='p1'>Add meds</Text>
           </View>
         }
       </Layout>

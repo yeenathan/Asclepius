@@ -58,23 +58,23 @@ const Item = (props) => {
             paddingHorizontal: ".5rem",
             paddingVertical: "1rem",
             alignItems: "center",
-            backgroundColor: props.selected? colorTheme["light-green"] : null
+            backgroundColor: props.day === props.currentDay ? colorTheme["light-green"] : null
         }}
         >
-            <Text category="h2">{props.date}</Text>
-            <Text category="h2">{props.day}</Text>
+            <Text onPress={() => props.handleSetDay(props.day)} category="h2">{props.date}</Text>
+            <Text onPress={() => props.handleSetDay(props.day)} category="h2">{props.day}</Text>
         </View>
     )
 }
 
-export function HorizontalCalendar() {   
+export function HorizontalCalendar({handleSetDay, currentDay}) {   
     return(
         <>
             <Text category="p2">October</Text>
             <ScrollView horizontal="true" style={{marginBottom: "1rem"}}>
                 <FlatList
                     data={DATA}
-                    renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} />}
+                    renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} handleSetDay={handleSetDay} currentDay={currentDay}/>}
                     keyExtractor={ item => item.id}
                     horizontal="true"
                 />
