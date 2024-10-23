@@ -47,7 +47,9 @@ const DATA = [
         status: false
     }
 ]
-
+/**
+ * dw about the onpress stuff
+ */
 const Item = (props) => {
     return(
         <View style={{
@@ -72,7 +74,7 @@ export function HorizontalCalendar({handleSetDay, currentDay}) {
         <>
             <Text category="p2">October</Text>
             <ScrollView horizontal="true" style={{marginBottom: "1rem"}}>
-                <FlatList
+                <FlatList // check MedList component in home.component.js for explanation of some properties
                     data={DATA}
                     renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} handleSetDay={handleSetDay} currentDay={currentDay}/>}
                     keyExtractor={ item => item.id}
