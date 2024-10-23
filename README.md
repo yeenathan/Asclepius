@@ -1,3 +1,4 @@
-# Asclepius
-Experiment on different branch. Keep main clean for now.
-Run with `npm expo start`
+# Remedify (Formerly Asclepius)
+MAKE YOUR OWN BRANCH FIRST
+1. `npm install`
+2. `npm expo start`
