@@ -150,7 +150,6 @@ const Important = (props) => (
       </View>  
     )}
   >
-    
   </Button>
 )
 
@@ -170,7 +169,7 @@ export const HomeScreen = ({ }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem"}}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white']}}>
         <Modal
             visible={overlayVisible}
             backdropStyle={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}
@@ -189,13 +188,19 @@ export const HomeScreen = ({ }) => {
         <View style={{width: "100%"}}>
           <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day}/>
         </View>
-        <Important toggleOverlayVisible={toggleOverlayVisible} />
         <Text category='h1' style={{justifyContent: "flex-start", width: "100%"}}>Today's Meds</Text>
         {
-          medData.length > 0 ? <MedList day={day}/>
+          medData.length > 0 ?
+            <>
+              <Important toggleOverlayVisible={toggleOverlayVisible} />
+              <MedList day={day}/>
+            </>
           :
-          <View style={{flex: 1, justifyContent: "center"}}>
-            <Text onPress={() => setMedData(MED_DATA[day])} category='p1'>Add meds</Text>
+          <View style={{...styles.container, flex: 1, justifyContent: "center", gap: "2rem"}}>
+            <View style={{alignItems: "center", backgroundColor: "#ffffff", borderRadius: "1rem", padding: "3rem"}}>
+              <Text category='p1'>Input your medication to view schedule</Text>
+            </View>
+            <Button size="giant" style={{...styles.orangeButton, borderRadius: "1rem"}} onPress={() => setMedData(MED_DATA[day])} children={() => <Text category='h2'>Add Medication</Text>}/>
           </View>
         }
       </Layout>
