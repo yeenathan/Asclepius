@@ -21,8 +21,8 @@ const MED_DATA = {
           {
           time: "9:00AM",
           name: "Medication Name",
-          taken: true,
-          timeTaken: "9:12AM",
+          taken: false,
+          timeTaken: null,
           id: 1
         },
         {
@@ -61,8 +61,8 @@ const MED_DATA = {
           {
           time: "9:00AM",
           name: "Tuesday Medication",
-          taken: true,
-          timeTaken: "9:12AM",
+          taken: false,
+          timeTaken: null,
           id: 1
         },
       ]
@@ -117,44 +117,28 @@ const MED_DATA = {
  */
 const MedCard = (props) => {
   const data = props.data;
-  if (!data.taken) {  // just checks if it's taken and will return something different whether it is or isn't. honestly i just copy pasted and changed 1 line so it's kind of clunky rn. this sucks actually
-    return(
-      <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
-        <View style={{flex: 3, alignItems: "center"}}>
-          <Image
-            style={{maxHeight: "4rem", maxWidth: "4rem"}}
-            source={require("@/assets/icons/button.svg")}
-          />
-        </View>
-        <View style={{flex: 7}}>
-          <Text category='p1'>{data.time}</Text>
-          <Text category='h2'>{data.name}</Text>
-          <View style={{alignItems: "flex-end"}}>
-            <Button size='small' style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
-          </View>
-        </View>
-      </View>  
-    )
-  }
-  else {
-    return(
-      <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
-        <View style={{flex: 3, alignItems: "center"}}>
-          <Image
-            style={{maxHeight: "4rem", maxWidth: "4rem"}}
-            source={require("@/assets/icons/button.svg")}
-          />
-        </View>
-        <View style={{flex: 7}}>
-          <Text category='p1'>{data.time}</Text>
-          <Text category='h2'>{data.name}</Text>
-          <View style={{alignItems: "flex-end"}}>
+  return(
+    <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
+      <View style={{flex: 3, alignItems: "center"}}>
+        <Image
+          style={{maxHeight: "4rem", maxWidth: "4rem"}}
+          source={require("@/assets/icons/button.svg")}
+        />
+      </View>
+      <View style={{flex: 7}}>
+        <Text category='p1'>{data.time}</Text>
+        <Text category='h2'>{data.name}</Text>
+        <View style={{alignItems: "flex-end"}}>
+          {
+            data.taken ?
             <Text category='p1'>Taken at {data.timeTaken}</Text>
-          </View>
+            :
+            <Button size='small' onPress={() => props.handleTaken(data.id)} style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
+          }
         </View>
       </View>
-    )
-  }
+    </View>  
+  )
 }
 
 /**
@@ -166,12 +150,12 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({dayData}) => {
+const MedList = ({dayData, handleTaken}) => {
   return(
     <ScrollView style={{ width: "100%"}}> 
       <SectionList
         sections={dayData}
-        renderItem={({item}) => <MedCard dayData={dayData} data={item}/>}
+        renderItem={({item}) => <MedCard handleTaken={handleTaken} data={item}/>}
         keyExtractor={ item => item.id}
         renderSectionHeader={({section: {hour}}) => (
           <Text category='p2'>{hour}</Text>
@@ -198,6 +182,10 @@ const Important = (props) => (
 )
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 
+function getTime() {
+  const time = new Date().toLocaleTimeString();
+  return time.substring(0, 5).concat(" ".concat(time.substring(9).toUpperCase()));
+}
 
 /**
  * main page component
@@ -228,6 +216,18 @@ export const HomeScreen = ({ }) => {
     if (dataFilled) {
       setDayData(MED_DATA[day]);
     }
+  }
+
+  const handleTaken = (id) => {
+    console.log(dayData);
+    setDayData((previous) => 
+      previous.map((category) => ({
+        ...category,
+        data: category.data.map((med) => 
+          med.id === id ? {...med, taken: true, timeTaken: getTime() } : med
+        )
+      }))
+    )
   }
 
   return (
@@ -270,7 +270,7 @@ export const HomeScreen = ({ }) => {
               <Important toggleOverlayVisible={toggleOverlayVisible} />
 
               {/* custom component for the list of medications created above */}
-              <MedList dayData={dayData}/>
+              <MedList dayData={dayData} handleTaken={handleTaken}/>
             </>
           :
           // else (no data), render this
