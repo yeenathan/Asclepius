@@ -184,7 +184,7 @@ const Important = (props) => (
 
 function getTime() {
   const time = new Date().toLocaleTimeString();
-  return time.substring(0, 5).concat(" ".concat(time.substring(9).toUpperCase()));
+  return time.slice(0, -8).concat(" ".concat(time.slice(-4).toUpperCase()));
 }
 
 /**
@@ -219,7 +219,6 @@ export const HomeScreen = ({ }) => {
   }
 
   const handleTaken = (id) => {
-    console.log(dayData);
     setDayData((previous) => 
       previous.map((category) => ({
         ...category,
