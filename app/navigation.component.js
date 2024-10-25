@@ -1,13 +1,18 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, IconElement, Icon, Button } from '@ui-kitten/components';
-import { HomeScreen } from "./pages/home.component"
-import { MedListScreen } from "./pages/medlist.component"
-import { AddScreen } from "./pages/addmed.component"
+import { HomeScreen } from "@/app/pages/home.component"
+import { MedListScreen } from "@/app/pages/medlist.component"
+import { MedNavigator } from "@/app/pages/addMed/mednavigator.component"
+import { AddScreen } from "@/app/pages/addMed/addmed.component"
+import { ScanScreen } from "@/app/pages/addMed/scanscreen.component"
+import { ManualScreen } from "@/app/pages/addMed/manualscreen.component"
 import { Image } from 'react-native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const HomeIcon = (props): IconElement => (
   <Icon
@@ -43,30 +48,22 @@ const BottomTabBar = ({ navigation, state }) => (
   </>  
 );
 
-// const CustomTabBar = ({navigation, state}) => (
-//   <View style={{flexDirection: "row"}}>
-//     <Button style={{flex: 3}} onPress={() => navigation.navigate("Home")}>Home</Button>
-//     <Image
-//         source={require("@/assets/icons/button.svg")}
-//         onClick={() => navigation.navigate("Add Med")}
-//         style={{position: "absolute", bottom: "3rem", margin: "auto"}}
-//       />
-//     <Button style={{flex: 3}} onPress={() => navigation.navigate("Med Libary")}>Med Libary</Button>
-//   </View>
-// );
-
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={{tabBarShowLabel: false}}>
     <Screen name='Home' component={HomeScreen} options={{ headerShown: false }}/>
     <Screen name='Med Library' component={MedListScreen} options={{ headerShown: false }}/>
-    <Screen name='Add Med' component={AddScreen} options={{ headerShown: false }}/>
+    <Screen name='Add Med' component={MedNavigator} options={{ headerShown: false }}/>
   </Navigator>
 );
-
 
 export function AppNavigator() {
   return(
     <NavigationContainer independent={true}>
+      {/* <Stack.Navigator>
+        <Stack.Screen name="Add Med" component={AddScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Scan" component={ScanScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Manual" component={ManualScreen} options={{headerShown: false}}/>
+      </Stack.Navigator> */}
       <TabNavigator/>
     </NavigationContainer>
   );
