@@ -5,10 +5,12 @@ import { Button, Layout, Text} from '@ui-kitten/components';
 import { default as colorTheme } from "@/custom-theme.json"
 
 import { medication, suggestions } from "./medData"
+import { Header } from '@/app/components/header';
 
 export const ScanScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} />
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <Text category='h1'>scan screen</Text>
         <Button onPress={() => navigation.navigate("Scan 2")}>Go to screen 2</Button>

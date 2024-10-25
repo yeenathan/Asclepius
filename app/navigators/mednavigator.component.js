@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 export const MedNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Add Med" component={AddScreen}/>
-      <Stack.Screen name="Scan" component={ScanScreen}/>
-      <Stack.Screen name="Manual" component={ManualScreen}/>
+      <Stack.Screen name="Add Med" component={AddScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Scan" component={ScanScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Manual" component={ManualScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }

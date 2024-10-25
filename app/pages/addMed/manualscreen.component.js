@@ -2,15 +2,19 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { Button, Layout, Text} from '@ui-kitten/components';
 
+import { Header } from "@/app/components/header"
+
 import { default as colorTheme } from "@/custom-theme.json"
+import { styles } from '@/app/stylesheet';
 
 import { medication, suggestions } from "./medData"
 
-export const ManualScreen = () => {
+export const ManualScreen = ({navigation}) => {
+  console.log(navigation);
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <Text category='h1'>manual screen</Text>
+      <Header navigation={navigation}/>
+      <Layout style={styles.masterLayout}>
       </Layout>
     </SafeAreaView>
   )

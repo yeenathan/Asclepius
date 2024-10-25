@@ -2,9 +2,11 @@
   "persian-green": "#00A39B",
   "light-green": "#89CCC8",
   "light-blue": "#D9EDFF",
+  "light-blue-80": "#D9EDFF50",
   "princeton-orange": "#FFB057",
   "hunyadi-yellow": "#FDC26A",
   "silver-white": "#FAF8FE",
+  "black-80": "#00000050",
 
   "color-primary-100": "#C8FAE6",
   "color-primary-200": "#93F5D6",

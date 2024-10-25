@@ -73,7 +73,7 @@ export function HorizontalCalendar({handleSetDay, currentDay}) {
     return(
         <>
             <Text category="p2">October</Text>
-            <ScrollView horizontal="true" style={{marginBottom: "1rem"}}>
+            <ScrollView horizontal="true" style={{marginBottom: "1rem", marginTop: ".4rem"}}>
                 <FlatList // check MedList component in home.component.js for explanation of some properties
                     data={DATA}
                     renderItem={ ({item}) => <Item date={item.date} day={item.day} selected={item.status} handleSetDay={handleSetDay} currentDay={currentDay}/>}

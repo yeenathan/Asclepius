@@ -7,6 +7,7 @@ import { ModalContainer } from "@/app/components/modalContainer"
 
 import { styles } from "@/app/stylesheet"
 import { default as colorTheme } from '@/custom-theme.json';
+import { CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON } from "@/app/images";
 
 // you might need to define some dummy data for other screens too. dont think it will be this complex on other pages tho
 const MED_DATA = {
@@ -16,17 +17,19 @@ const MED_DATA = {
       data: [
           {
           time: "9:00AM",
-          name: "Medication Name",
+          name: "Capsule",
           taken: false,
           timeTaken: null,
-          id: 1
+          id: 1,
+          icon: CAPSULE_ICON
         },
         {
           time: "9:30AM",
-          name: "Medication Name",
+          name: "Dropper",
           taken: false,
           timeTaken: null,
-          id: 2
+          id: 2,
+          icon: DROPPER_ICON
         }
       ]
     },
@@ -35,17 +38,19 @@ const MED_DATA = {
       data: [
         {
           time: "12:00PM",
-          name: "Medication Name",
+          name: "Injection",
           taken: false,
           timeTaken: null,
-          id: 3
+          id: 3,
+          icon: INJECTION_ICON
         },
         {
           time: "12:10PM",
-          name: "Medication Name",
+          name: "Liquid",
           taken: false,
           timeTaken: null,
-          id: 4
+          id: 4,
+          icon: LIQUID_ICON
         }
       ]
     }
@@ -56,10 +61,11 @@ const MED_DATA = {
       data: [
           {
           time: "9:00AM",
-          name: "Tuesday Medication",
+          name: "Ointment",
           taken: false,
           timeTaken: null,
-          id: 1
+          id: 1,
+          icon: OINTMENT_ICON
         },
       ]
     },
@@ -68,17 +74,19 @@ const MED_DATA = {
       data: [
         {
           time: "12:00PM",
-          name: "Medication Name",
+          name: "Spray",
           taken: false,
           timeTaken: null,
-          id: 3
+          id: 3,
+          icon: SPRAY_ICON
         },
         {
           time: "12:10PM",
-          name: "Medication Name",
+          name: "Tablets",
           taken: false,
           timeTaken: null,
-          id: 4
+          id: 4,
+          icon: TABLETS_ICON
         }
       ]
     }
@@ -114,11 +122,15 @@ const MED_DATA = {
 const MedCard = (props) => {
   const data = props.data;
   return(
-    <View style={{...styles.rowContainer, backgroundColor: colorTheme['light-blue'], padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem"}}>
+    <View style={
+      !data.taken ?
+        {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue']}
+        :
+        {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue-80']}
+      }>
       <View style={{flex: 3, alignItems: "center"}}>
         <Image
-          style={{maxHeight: "4rem", maxWidth: "4rem"}}
-          source={require("@/assets/icons/button.svg")}
+          source={data.icon}
         />
       </View>
       <View style={{flex: 7}}>
