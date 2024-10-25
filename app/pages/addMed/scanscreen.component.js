@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View, ScrollView } from 'react-native';
 import { Button, Layout, Text} from '@ui-kitten/components';
 
 import { default as colorTheme } from "@/custom-theme.json"
@@ -12,13 +12,19 @@ export const ScanScreen = ({navigation}) => {
       <Header navigation={navigation} />
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <Text category='h1'>scan screen</Text>
-        <Button onPress={() => navigation.navigate("Scan 2")}>Go to screen 2</Button>
-        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D9D9D9', width: 300, height: 500, borderRadius: 30 }} />
-        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D9EDFF', width: 300, height: 50, borderRadius: 30, marginTop: 20}}>
-          <Text category='s1'>Instructions:
-            - position
-          </Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D9D9D9', flex: 9, width: '80%', borderRadius: 20 }}>
+          <Text category='h1'>Camera</Text>
         </View>
+        <View style={{ flex: 2, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#D9EDFF', width: '80%', borderRadius: 20, marginTop: 20}}>
+          <Text category='s1'> Instructions:</Text>
+          <Text category='s1'> Position your camera over the label</Text>
+          <Text category='s1'> Ensure the label is clear and well-lit</Text>
+        </View>
+
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Button size='large' onPress={() => navigation.navigate("Confirm Med")}>Confirm</Button>
+        </View>
+
       </Layout>
     </SafeAreaView>
   );
