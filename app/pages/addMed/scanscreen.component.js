@@ -4,6 +4,8 @@ import { Button, Layout, Text} from '@ui-kitten/components';
 
 import { default as colorTheme } from "@/custom-theme.json"
 
+import { medication, suggestions } from "./medData"
+
 export const ScanScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
