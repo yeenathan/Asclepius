@@ -5,12 +5,8 @@ import { View, Image, ScrollView } from 'react-native';
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer"
 
-import { styles } from "../stylesheet"
+import { styles } from "@/app/stylesheet"
 import { default as colorTheme } from '@/custom-theme.json';
-
-/**
- * 
- */
 
 // you might need to define some dummy data for other screens too. dont think it will be this complex on other pages tho
 const MED_DATA = {
@@ -190,7 +186,7 @@ function getTime() {
 /**
  * main page component
  */
-export const HomeScreen = ({ }) => {
+export const HomeScreen = ({navigation}) => {
 
   // determines whether or not the modal is visible. if you need to implement a modal just copy this and the modal below (not including ModalContainer) and it should work
   const [overlayVisible, setOverlayVisible] = useState(false); 
@@ -231,7 +227,7 @@ export const HomeScreen = ({ }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white']}}>
+      <Layout style={styles.masterLayout}>
 
         {/* modal component from UI kitten. it's a popup/overlay thing */}
         <Modal
