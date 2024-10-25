@@ -4,7 +4,6 @@ import { Button, Layout, Text} from '@ui-kitten/components';
 
 import { default as colorTheme } from "@/custom-theme.json"
 
-import { medication, suggestions } from "./medData"
 import { Header } from '@/app/components/header';
 
 export const ScanScreen = ({navigation}) => {
