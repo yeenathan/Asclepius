@@ -13,9 +13,21 @@ export const styles = StyleSheet.create({
     container: {
         width: "100%"
     },
-    
     orangeButton: {
         backgroundColor: colorTheme["hunyadi-yellow"],
         borderColor: colorTheme["hunyadi-yellow"],
+    },
+    invisBorder: {
+        border: "none",
+        borderTopColor: "none",
+        borderBottomColor: "none",
+        borderLeftColor: "none",
+        borderRightColor: "none"
+    },
+    blackBorder: {
+        borderTopColor: "#000000",
+        borderBottomColor: "#000000",
+        borderLeftColor: "#000000",
+        borderRightColor: "#000000"
     }
 });

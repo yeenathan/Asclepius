@@ -1,34 +1,53 @@
 import { suggestions } from "@/app/data/addMedData"
 import { View } from "react-native"
-import { Text } from "@ui-kitten/components"
-import { Input } from "@ui-kitten/components"
+import { Text, Input, Button } from "@ui-kitten/components"
 import { useState } from "react"
 
-const SuggestionContainer = () => {
+import { styles } from "@/app/stylesheet"
+
+const SuggestionContainer = ({handleFill}) => {
   return (
     suggestions.map((suggestion, index) => (
-      <View>
-        <Text key={index} category="p2">{suggestion}</Text>
-      </View>
+      <Button
+        key={index}
+        onPress={() => handleFill(suggestion)}
+        style={{backgroundColor: "#ffffff", justifyContent: "flex-start", ...styles.blackBorder, marginVertical: ".2rem"}}
+        children={
+          <View>
+            <Text category="p2">{suggestion}</Text>
+          </View>
+        }
+      />
     ))
   )
 }
 
 export const SuggestionSearch = () => {
   const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
 
   function handleInput(e) {
-    if (e.target.value) setVisible(true);
+    if (e.target.value) {
+      setValue(e.target.value);
+      setVisible(true);
+    }
     else setVisible(false);
+  }
+
+  function handleFill(value) {
+    setValue(value);
+    setVisible(false);
   }
 
   return (
     <View>
-      <Input placeholder="Input field" onChange={handleInput}/>
+      <Input
+        placeholder="Input field" onChange={handleInput} value={value}
+        style={{width: "100%,", paddingVertical: ".2rem"}}
+      />
       {
         visible ?
-        <SuggestionContainer />
+        <SuggestionContainer handleFill={handleFill} />
         :
         null
       }
