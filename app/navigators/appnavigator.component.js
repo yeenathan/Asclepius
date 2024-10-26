@@ -3,7 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, IconElement, Icon, Button } from '@ui-kitten/components';
 import { HomeScreen } from "@/app/pages/home.component"
-import { MedListScreen } from "@/app/pages/medlist.component"
+import { MedLibraryScreen, InfoScreen } from "@/app/pages/medLibrary.component"
+import { MedLibNavigator } from "@/app/navigators/medLibNavigator.component"
 import { AddMedButton } from '@/app/components/addMedButton';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -43,7 +44,7 @@ export function AppNavigator({navigation}) {
       <AddMedButton navigation={navigation}/>
       <Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={{tabBarShowLabel: false}}>
         <Screen name='Home' component={HomeScreen} options={{ headerShown: false }}/>
-        <Screen name='Med Library' component={MedListScreen} options={{ headerShown: false }}/>
+        <Screen name='Med Library' component={MedLibNavigator} options={{ headerShown: false }}/>
       </Navigator>
     </>
   );
