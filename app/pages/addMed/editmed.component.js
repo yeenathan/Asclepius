@@ -7,6 +7,7 @@ import { default as colorTheme } from "@/custom-theme.json"
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 
+
 export const EditScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -21,7 +22,7 @@ export const EditScreen = ({navigation}) => {
           <SuggestionSearch />
         </View>
         <View style={{ flex: 3, width: '100%'}}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Med Time')} />
         </View>
       </Layout>
     </SafeAreaView>
