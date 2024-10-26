@@ -9,14 +9,14 @@ import { AddMedButton } from '@/app/components/addMedButton';
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const HomeIcon = (props): IconElement => (
+const HomeIcon = (props) => (
   <Icon
     {...props}
     name='home-outline'
   />
 );
 
-const ClipIcon = (props): IconElement => (
+const ClipIcon = (props) => (
   <Icon
     {...props}
     name='clipboard-outline'
