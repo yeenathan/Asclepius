@@ -14,8 +14,8 @@ export const MedNavigator = () => {
       <Stack.Screen name="Scan" component={ScanScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Manual" component={MedNameEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Interval Edit" component={MedIntervalEdit} options={{headerShown: false}}/>
-      <Stack.Screen name="Confirm Med" component={ConfirmScan} />
-      <Stack.Screen name="Edit Med" component={EditScreen} />
+      <Stack.Screen name="Confirm Med" component={ConfirmScan} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Med" component={EditScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }

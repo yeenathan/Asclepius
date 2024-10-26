@@ -54,3 +54,4 @@ export const SuggestionSearch = () => {
     </View>
   )
 }
+
