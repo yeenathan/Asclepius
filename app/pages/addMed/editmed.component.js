@@ -6,7 +6,6 @@ import { SuggestionSearch } from '@/app/components/suggestionSearch';
 import { default as colorTheme } from "@/custom-theme.json"
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
-import { CurrentRenderContext } from '@react-navigation/native';
 
 export const EditScreen = ({navigation}) => {
   return (
@@ -21,7 +20,6 @@ export const EditScreen = ({navigation}) => {
         <View style={{ flex: 8, width: '70%'}}>
           <SuggestionSearch />
         </View>
-
         <View style={{ flex: 3, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('')} />
         </View>
