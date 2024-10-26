@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, ScrollView, View } from "react-native";
+import { FlatList, ScrollView, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { default as colorTheme } from "@/custom-theme.json"
 
@@ -52,20 +52,22 @@ const DATA = [
  */
 const Item = (props) => {
     return(
-        <View style={{
-            marginHorizontal: ".5rem",
-            border: "1px solid black", 
-            borderRadius: "5rem",
-            width: "4.5rem",
-            paddingHorizontal: ".5rem",
-            paddingVertical: "1rem",
-            alignItems: "center",
-            backgroundColor: props.day === props.currentDay ? colorTheme["light-green"] : null
-        }}
-        >
-            <Text onPress={() => props.handleSetDay(props.day)} category="h2">{props.date}</Text>
-            <Text onPress={() => props.handleSetDay(props.day)} category="h2">{props.day}</Text>
-        </View>
+        <TouchableOpacity onPress={() => props.handleSetDay(props.day)}>
+            <View style={{
+                marginHorizontal: ".5rem",
+                border: "1px solid black", 
+                borderRadius: "5rem",
+                width: "4.5rem",
+                paddingHorizontal: ".5rem",
+                paddingVertical: "1rem",
+                alignItems: "center",
+                backgroundColor: props.day === props.currentDay ? colorTheme["light-green"] : null
+            }}
+            >
+                <Text category="h2">{props.date}</Text>
+                <Text category="h2">{props.day}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 

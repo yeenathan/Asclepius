@@ -4,6 +4,7 @@ import { ScanScreen } from "@/app/pages/addMed/scanscreen.component"
 import { MedNameEdit, MedIntervalEdit } from "@/app/pages/addMed/manualscreen.component"
 import { ConfirmScan } from "@/app/pages/addMed/scanconfirm.component"
 import { EditScreen } from "@/app/pages/addMed/editmed.component"
+import { MedLibraryScreen, InfoScreen, EditInfoScreen, EditReminderScreen } from "@/app/pages/medLibrary.component"
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,9 @@ export const MedNavigator = () => {
       <Stack.Screen name="Interval Edit" component={MedIntervalEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Confirm Med" component={ConfirmScan} options={{headerShown: false}}/>
       <Stack.Screen name="Edit Med" component={EditScreen} options={{headerShown: false}}/>
+
+      <Stack.Screen name="Edit Info" component={EditInfoScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }

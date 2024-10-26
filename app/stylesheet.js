@@ -17,6 +17,10 @@ export const styles = StyleSheet.create({
         backgroundColor: colorTheme["hunyadi-yellow"],
         borderColor: colorTheme["hunyadi-yellow"],
     },
+    orangerButton: {
+        backgroundColor: colorTheme["princeton-orange"],
+        borderColor: colorTheme["princeton-orange"],
+    },
     invisBorder: {
         border: "none",
         borderTopColor: "none",
@@ -29,5 +33,15 @@ export const styles = StyleSheet.create({
         borderBottomColor: "#000000",
         borderLeftColor: "#000000",
         borderRightColor: "#000000"
+    },
+    orangeBorder: {
+        borderTopColor: colorTheme["princeton-orange"],
+        borderBottomColor: colorTheme["princeton-orange"],
+        borderLeftColor: colorTheme["princeton-orange"],
+        borderRightColor: colorTheme["princeton-orange"]
+    },
+    baseBigButton: {
+        width: "100%",
+        borderRadius: "1rem"
     }
 });
