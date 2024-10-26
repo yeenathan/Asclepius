@@ -1,6 +1,8 @@
 import React from 'react';
-import { SafeAreaView, View, ScrollView } from 'react-native';
+import { SafeAreaView, View, ScrollView, } from 'react-native';
 import { Button, Layout, Text} from '@ui-kitten/components';
+import { MyButton } from '@/app/components/MyButton';
+import { styles } from '@/app/stylesheet';
 
 import { default as colorTheme } from "@/custom-theme.json"
 
@@ -21,8 +23,8 @@ export const ScanScreen = ({navigation}) => {
           <Text category='s1'> Ensure the label is clear and well-lit</Text>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Button size='large' onPress={() => navigation.navigate("Confirm Med")}>Confirm</Button>
+        <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
         </View>
 
       </Layout>

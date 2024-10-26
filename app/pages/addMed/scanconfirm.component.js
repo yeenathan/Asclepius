@@ -1,8 +1,9 @@
 import React from 'react';
-import { SafeAreaView, styles, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, Icon, Layout, Text, IconElement, Input, ButtonGroup} from '@ui-kitten/components';
-
 import { default as colorTheme } from "@/custom-theme.json"
+import { MyButton } from "@/app/components/MyButton"
+import { styles as buttonStyles } from '@/app/stylesheet';
 
 export const ConfirmScan = ({navigation}) => {
   const styles = StyleSheet.create({
@@ -61,9 +62,9 @@ export const ConfirmScan = ({navigation}) => {
           <Button style={{ flex: 3 }} onPress={() => navigation.navigate("Edit Med")}>Edit</Button>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10}}>
-          <Button style={{ backgroundColor: '#FFB057', borderColor: '#FFB057' }} size='large'>Confirm</Button>
-          <Button style={{ backgroundColor: '#FFFFFF', borderColor: '#FFB057', }} size='large'>Scan Again</Button>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
+          <MyButton text="Confirm" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate('Edit Med')} />
+          <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => navigation.navigate('Scan')}/>
         </View>
 
         {/* <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "white", width: 300, height: 55, borderRadius: 20, borderColor: '#89CCC8' }}>
