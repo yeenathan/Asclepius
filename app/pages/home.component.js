@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { SafeAreaView, SectionList } from 'react-native';
-import { Button, Icon, Layout, Text, Modal} from '@ui-kitten/components';
+import { SafeAreaView, SectionList, TouchableOpacity } from 'react-native';
+import { Button, Icon, Layout, Text, Modal, ModalService} from '@ui-kitten/components';
 import { View, Image, ScrollView } from 'react-native';
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer"
+import { Scroll } from "@/app/components/scrollPicker"
 
 import { styles } from "@/app/stylesheet"
 import { default as colorTheme } from '@/custom-theme.json';
@@ -17,32 +18,74 @@ import { MED_DATA } from "@/app/data/medData"
  * is a singular item in the list
  */
 const MedCard = (props) => {
+  const [menuVisible, setMenuVisible] = useState(false);
+  const toggleMenuVisible = () => {
+    setMenuVisible(!menuVisible);
+    setReschedule(false);
+  }
+
+  const [reschedule, setReschedule] = useState(false);
+
+  const defaultView = (
+    <View style={{flexDirection: "row", gap: "1rem", justifyContent: "center"}}>
+      <Button size='giant'>Skip</Button>
+      <Button size='giant' onPress={() => setReschedule(true)}>Reschedule</Button>
+      <Button size='giant' onPress={() => {
+        props.handleTaken(data.id);
+        toggleMenuVisible();
+      }}>Take</Button>
+    </View>
+  )
+
+  // const rescheduleView = (
+  //   <Scroll />
+  // )
+
   const data = props.data;
   return(
-    <View style={
-      !data.taken ?
-        {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue']}
-        :
-        {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue-80']}
-      }>
-      <View style={{flex: 3, alignItems: "center"}}>
-        <Image
-          source={data.icon}
-        />
+    <>
+    <Modal
+      visible={menuVisible}
+      backdropStyle={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}
+      onBackdropPress={toggleMenuVisible}
+    >
+      <View style={{
+        backgroundColor: "#ffffff", justifyContent: "center", padding: "2.5rem", paddingTop: "3rem", width: "100vw",
+        position: "fixed", bottom: "0", left: "0", borderTopLeftRadius: "5rem", borderTopRightRadius: "5rem"
+      }}>
+        <Text style={{marginBottom: "2rem", paddingHorizontal: "2rem"}} category='h2'>{data.name}</Text>
+        {
+          !reschedule? defaultView : null
+        }        
       </View>
-      <View style={{flex: 7}}>
-        <Text category='p1'>{data.time}</Text>
-        <Text category='h2'>{data.name}</Text>
-        <View style={{alignItems: "flex-end"}}>
-          {
-            data.taken ?
-            <Text category='p1'>Taken at {data.timeTaken}</Text>
-            :
-            <Button size='small' onPress={() => props.handleTaken(data.id)} style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
-          }
+    </Modal>
+    <TouchableOpacity onPress={!data.taken ? () => toggleMenuVisible() : null}>
+      <View style={
+        !data.taken ?
+          {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue']}
+          :
+          {...styles.rowContainer, padding: "1rem", borderRadius: "2rem", justifyContent: "center", marginVertical: ".5rem", backgroundColor: colorTheme['light-blue-80']}
+        }>
+        <View style={{flex: 3, alignItems: "center"}}>
+          <Image
+            source={data.icon}
+          />
+        </View>
+        <View style={{flex: 7}}>
+          <Text category='p1'>{data.time}</Text>
+          <Text category='h2'>{data.name}</Text>
+          <View style={{alignItems: "flex-end"}}>
+            {
+              data.taken ?
+              <Text category='p1'>Taken at {data.timeTaken}</Text>
+              :
+              <Button size='small' onPress={() => props.handleTaken(data.id)} style={{...styles.orangeButton, borderRadius: "4rem", marginTop: ".5rem"}} children={() => <Text style={{margin:"none", paddingHorizontal: ".5rem"}} category='p2'>Mark as Taken</Text>}/>
+            }
+          </View>
         </View>
       </View>
-    </View>  
+    </TouchableOpacity>
+    </>
   )
 }
 
@@ -140,9 +183,9 @@ export const HomeScreen = ({navigation}) => {
 
         {/* modal component from UI kitten. it's a popup/overlay thing */}
         <Modal
-            visible={overlayVisible}
-            backdropStyle={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}
-            onBackdropPress={toggleOverlayVisible}
+          visible={overlayVisible}
+          backdropStyle={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}
+          onBackdropPress={toggleOverlayVisible}
         >
           <ModalContainer // custom component in components/modalContainer.js the white box itself
             title="1 serious drug interaction"
@@ -174,7 +217,7 @@ export const HomeScreen = ({navigation}) => {
               <Important toggleOverlayVisible={toggleOverlayVisible} />
 
               {/* custom component for the list of medications created above */}
-              <MedList dayData={dayData} handleTaken={handleTaken}/>
+              <MedList dayData={dayData} handleTaken={handleTaken} />
             </>
           :
           // else (no data), render this
