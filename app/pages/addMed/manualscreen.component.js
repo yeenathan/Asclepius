@@ -51,7 +51,7 @@ export const MedConfirm = ({navigation}) => {
               size="medium"
               onPress={() => {
                 setShowBackModal(false);
-                navigation.goBack();
+                navigation.navigate("Home");
               }}
               style={{
                 flex: 1,
@@ -82,8 +82,8 @@ export const MedConfirm = ({navigation}) => {
           <InputPill label="Refill Reminder" text="10 pill(s) left"/>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate("Home Stack", {screen: "Home"})} />
-          <MyButton text="Scan Again" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => setShowBackModal(true)}/>
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate("Home")} />
+          <Text category='p2' onPress={() => setShowBackModal(true)}>Discard Input</Text>
         </View>
       </Layout>
     </SafeAreaView>
@@ -99,7 +99,7 @@ export const IconPick = ({navigation}) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar style={{width: "100%"}} progress={.90}/>
+          <ProgressBar animating={false} style={{width: "100%"}} progress={.90}/>
 
           <View style={{justifyContent: "center", alignItems: "center", gap: "2rem", flex: 2}}>
             <Image style={{marginTop: "2rem"}} source={icons[index]}/>
@@ -142,7 +142,7 @@ export const ExtraOptions = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar style={{width: "100%"}} progress={.80}/>
+          <ProgressBar animating={false} style={{width: "100%"}} progress={.80}/>
           <Text category='h2'>Would you like to set: (optional)</Text>
           <View style={{marginTop: "2rem", width: "100%"}}>
             <View style={{width: "100%", gap: "1rem"}}>
@@ -171,9 +171,12 @@ export const ManualDoseEdit = ({navigation}) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar style={{width: "100%"}} progress={.66}/>
+          <ProgressBar animating={false} style={{width: "100%"}} progress={.66}/>
           <Text category='h2'>Dose per time</Text>
-          
+          <View style={{flexDirection: "row", gap: "1rem", marginTop: "5rem"}}>
+            <Input style={{width: "5rem"}}></Input>
+            <DisplayDropdown data={["Pill(s)", "mL", "CC", "Unit(s)", "Application(s)", "Pen(s)"]}/>
+          </View>
         </View>
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Confirm" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Extra Options")}/>
@@ -189,7 +192,7 @@ export const ManualNameEdit = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar style={{width: "100%"}} progress={.25}/>
+          <ProgressBar animating={false} style={{width: "100%"}} progress={.25}/>
           <Text category='h2'>What is the medication name?</Text>
           <Text category='p1'>Search or type your medication name</Text>
           <SuggestionSearch />
@@ -208,7 +211,7 @@ export const ManualIntervalEdit = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar style={{width: "100%"}} progress={.47}/>
+          <ProgressBar animating={false} style={{width: "100%"}} progress={.47}/>
           <Text category='h2'>Set Time Interval</Text>
           <View style={{flexDirection: "row", width: "100%", gap: "1rem", justifyContent: "center", marginTop: "5rem"}}>
             <Text style={{flex: 1}} category='h2'>Every</Text>
