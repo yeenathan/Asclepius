@@ -19,7 +19,6 @@ import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
-import { TimeInterval } from "../components/timeInterval";
 
 const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
   const [showArchiveBottomModal, setShowArchiveBottomModal] = useState(false);
@@ -553,7 +552,7 @@ export const InfoScreen = ({ navigation, route }) => {
   );
 };
 
-export const EditReminderScreen = ({ navigation }) => {
+export const EditReminderScreen = ({ route, navigation }) => {
   // edit reminder screen
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const strengthOptions = ["2.5mg", "5mg", "10mg", "20mg", "30mg", "40mg"];
@@ -567,7 +566,6 @@ export const EditReminderScreen = ({ navigation }) => {
     "Cream",
   ];
   const refillsOptions = ["1", "2", "3", "4"];
-  const [date, setDate] = React.useState(new Date());
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -672,7 +670,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
           </Text>
           <View style={{ gap: 20, margin: 20 }}>
             <View>
-              <Text category="p2">Direnctions for Use</Text>
+              <Text category="p2">Directions for Use</Text>
               <textarea
                 name="directions"
                 style={{
