@@ -32,11 +32,7 @@ export const DosePerTime = ({navigation}) => {
             </View>
 
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', width: '100%' }}>
-<<<<<<< HEAD
                 <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
-=======
-                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Next Dose')}/>
->>>>>>> deluka
             </View>
 
            
