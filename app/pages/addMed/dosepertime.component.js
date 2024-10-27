@@ -4,6 +4,7 @@ import { Button, Input, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 import { Measure } from '@/app/components/measurements'
+import { DateTimeSet } from '@/app/components/datetimepicker'
 
 import { default as colorTheme } from "@/custom-theme.json"
 
@@ -31,6 +32,8 @@ export const DosePerTime = ({navigation}) => {
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', width: '100%' }}>
                 <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} />
             </View>
+
+           
 
         </Layout>
         </SafeAreaView>
