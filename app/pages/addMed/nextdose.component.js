@@ -36,7 +36,7 @@ export const NextDose = ({navigation}) => {
             </View>
 
             <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} />
+                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Time Dose')}/>
             </View>
         </Layout>
         </SafeAreaView>
