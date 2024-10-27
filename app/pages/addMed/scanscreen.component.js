@@ -13,11 +13,10 @@ export const ScanScreen = ({navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <Text category='h1'>scan screen</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D9D9D9', flex: 9, width: '80%', borderRadius: 20 }}>
           <Text category='h1'>Camera</Text>
         </View>
-        <View style={{ flex: 2, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#D9EDFF', width: '80%', borderRadius: 20, marginTop: 20}}>
+        <View style={{ flex: 2, justifyContent: 'center', paddingHorizontal: "1rem", alignContent: 'center', alignItems: 'center', backgroundColor: '#D9EDFF', borderRadius: 20, marginBottom: 20, marginTop: 10}}>
           <Text category='s1'> Instructions:</Text>
           <Text category='s1'> Position your camera over the label</Text>
           <Text category='s1'> Ensure the label is clear and well-lit</Text>

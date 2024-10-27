@@ -3,7 +3,7 @@ import { SafeAreaView, View, ScrollView, } from 'react-native';
 import { Button, Input, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
-import { TimeInterval } from '../../components/timeInterval';
+import { DisplayDropdown } from '../../components/displayDropdown';
 
 
 import { default as colorTheme } from "@/custom-theme.json"
@@ -29,7 +29,7 @@ export const SetTime = ({navigation}) => {
             value={value}
             onChangeText={nextValue => setValue(nextValue)}
           />
-          <TimeInterval />
+          <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/>
         </View>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
