@@ -99,7 +99,7 @@ export const IconPick = ({navigation}) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar animating={false} style={{width: "100%"}} progress={.90}/>
+          <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.90}/>
 
           <View style={{justifyContent: "center", alignItems: "center", gap: "2rem", flex: 2}}>
             <Image style={{marginTop: "2rem"}} source={icons[index]}/>
@@ -142,7 +142,7 @@ export const ExtraOptions = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar animating={false} style={{width: "100%"}} progress={.80}/>
+          <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.80}/>
           <Text category='h2'>Would you like to set: (optional)</Text>
           <View style={{marginTop: "2rem", width: "100%"}}>
             <View style={{width: "100%", gap: "1rem"}}>
@@ -171,7 +171,7 @@ export const ManualDoseEdit = ({navigation}) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar animating={false} style={{width: "100%"}} progress={.66}/>
+          <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.66}/>
           <Text category='h2'>Dose per time</Text>
           <View style={{flexDirection: "row", gap: "1rem", marginTop: "5rem"}}>
             <Input style={{width: "5rem"}}></Input>
@@ -192,7 +192,7 @@ export const ManualNameEdit = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar animating={false} style={{width: "100%"}} progress={.25}/>
+          <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.25}/>
           <Text category='h2'>What is the medication name?</Text>
           <Text category='p1'>Search or type your medication name</Text>
           <SuggestionSearch />
@@ -211,7 +211,7 @@ export const ManualIntervalEdit = ({navigation}) => {
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
-          <ProgressBar animating={false} style={{width: "100%"}} progress={.47}/>
+          <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.47}/>
           <Text category='h2'>Set Time Interval</Text>
           <View style={{flexDirection: "row", width: "100%", gap: "1rem", justifyContent: "center", marginTop: "5rem"}}>
             <Text style={{flex: 1}} category='h2'>Every</Text>
