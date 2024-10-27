@@ -199,7 +199,9 @@ function getTime() {
 /**
  * main page component
  */
-export const HomeScreen = ({ navigation }) => {
+export const HomeScreen = ({ route, navigation }) => {
+  const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
+
   // determines whether or not the modal is visible. if you need to implement a modal just copy this and the modal below (not including ModalContainer) and it should work
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
@@ -238,6 +240,34 @@ export const HomeScreen = ({ navigation }) => {
   };
 
   return (
+    <>
+    <Modal
+      visible={addedMedModalVisible}
+      backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+      onBackdropPress={() => setAddedMedModalVisible(false)}
+    >
+      <View
+        style={{
+          backgroundColor: "#ffffff",
+          justifyContent: "center",
+          padding: "2.5rem",
+          paddingTop: "3rem",
+          width: "100vw",
+          position: "fixed",
+          bottom: "0",
+          left: "0",
+          borderTopLeftRadius: "5rem",
+          borderTopRightRadius: "5rem",
+        }}
+      >
+        <Text
+          style={{ marginBottom: "2rem", paddingHorizontal: "2rem" }}
+          category="h2"
+        >
+          {route.params.medication}
+        </Text>
+      </View>
+    </Modal>
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={styles.masterLayout}>
         {/* modal component from UI kitten. it's a popup/overlay thing */}
@@ -318,5 +348,6 @@ export const HomeScreen = ({ navigation }) => {
         }
       </Layout>
     </SafeAreaView>
+    </>
   );
 };
