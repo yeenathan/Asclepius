@@ -5,6 +5,7 @@ import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 import { TimeInterval } from '../../components/timeInterval';
 
+
 import { default as colorTheme } from "@/custom-theme.json"
 
 import { Header } from '@/app/components/header';
@@ -32,7 +33,7 @@ export const SetTime = ({navigation}) => {
         </View>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Med Time')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Dose Time')} />
         </View>
 
       </Layout>
