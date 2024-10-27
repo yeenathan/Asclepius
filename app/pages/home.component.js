@@ -159,18 +159,20 @@ const MedCard = (props) => {
  */
 const MedList = ({ dayData, handleTaken }) => {
   return (
-    <ScrollView style={{ width: "100%" }}>
-      <SectionList
-        sections={dayData}
-        renderItem={({ item }) => (
-          <MedCard handleTaken={handleTaken} data={item} />
-        )}
-        keyExtractor={(item) => item.id}
-        renderSectionHeader={({ section: { hour } }) => (
-          <Text category="p2">{hour}</Text>
-        )}
-      />
-    </ScrollView>
+    <SectionList style={{ flex: 1, width: '100%' }}
+      sections={dayData}
+      renderItem={({ item }) => (
+        <MedCard handleTaken={handleTaken} data={item} />
+      )}
+      keyExtractor={(item) => item.id}
+      renderSectionHeader={({ section: { hour } }) => (
+        <Text category="p2">{hour}</Text>
+      )}
+      // Optional: Add a header or footer if needed
+      ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: 'bold' }}>My Medications</Text>}
+      ListFooterComponent={<View style={{ height: 20 }} />} // Example footer; adjust as necessary
+      contentContainerStyle={{ padding: 10 }} // Add padding to the content
+    />
   );
 };
 
