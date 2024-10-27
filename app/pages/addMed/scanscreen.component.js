@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View, ScrollView, } from 'react-native';
 import { Button, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
@@ -25,7 +25,6 @@ export const ScanScreen = ({navigation}) => {
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
         </View>
-
       </Layout>
     </SafeAreaView>
   );

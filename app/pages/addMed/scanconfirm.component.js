@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
-import { Button, Icon, Layout, Text, IconElement, Input, ButtonGroup} from '@ui-kitten/components';
+import { Button, Icon, Layout, Text, Modal, IconElement, Input, ButtonGroup} from '@ui-kitten/components';
 import { default as colorTheme } from "@/custom-theme.json"
 import { MyButton } from "@/app/components/MyButton"
 import { styles as buttonStyles } from '@/app/stylesheet';
@@ -25,7 +25,7 @@ export const ConfirmScan = ({navigation}) => {
   const InputPill = ({label, text, destination}) => {
     return (
       <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
-        <Text category='p2'>{label}</Text>
+        <Text category='p2' style={{marginBottom: ".5rem"}}>{label}</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', width: "100%",
           border: `${colorTheme['light-green']} solid 3px`, borderRadius: "1rem", backgroundColor: "#ffffff", paddingLeft: "3rem"
         }}>
@@ -44,7 +44,46 @@ export const ConfirmScan = ({navigation}) => {
     )
   }
 
+  const [showBackModal, setShowBackModal] = useState(false);
+
   return (
+    <>
+    <Modal
+        visible={showBackModal}
+        backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        onBackdropPress={() => setShowBackModal(false)}
+      >
+        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: "2rem", borderRadius: "2rem"}}>
+          <Text category="p2">Discard changes and exit?</Text>
+          <View style={{ display: "flex", flexDirection: "row", gap: "1rem", marginTop: "1rem", width: "100%" }}>
+            <Button
+              size="small"
+              onPress={() => setShowBackModal(false)}
+              style={{
+                flex: 1,
+                backgroundColor: colorTheme["silver-white"],
+                borderColor: colorTheme["light-green"],
+                borderRadius: "1rem",
+              }}
+              children={() => <Text category="p1">Cancel</Text>}
+            />
+            <Button
+              size="medium"
+              onPress={() => {
+                setShowBackModal(false);
+                navigation.navigate("Scan");
+              }}
+              style={{
+                flex: 1,
+                backgroundColor: colorTheme["light-green"],
+                borderColor: colorTheme["light-green"],
+                borderRadius: "1rem",
+              }}
+              children={() => <Text category="p2">Exit</Text>}
+            />
+          </View>
+        </View>
+    </Modal>
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
@@ -75,7 +114,7 @@ export const ConfirmScan = ({navigation}) => {
 
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
           <MyButton text="Confirm" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate('Edit Med')} />
-          <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => navigation.navigate('Scan')}/>
+          <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => setShowBackModal(true)}/>
         </View>
 
         {/* <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "white", width: 300, height: 55, borderRadius: 20, borderColor: '#89CCC8' }}>
@@ -89,5 +128,6 @@ export const ConfirmScan = ({navigation}) => {
 
       </Layout>
     </SafeAreaView>
+    </>
   );
 };
