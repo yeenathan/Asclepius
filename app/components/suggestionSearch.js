@@ -11,7 +11,7 @@ const SuggestionContainer = ({handleFill}) => {
       <Button
         key={index}
         onPress={() => handleFill(suggestion)}
-        style={{backgroundColor: "#ffffff", justifyContent: "flex-start", ...styles.blackBorder, marginVertical: ".2rem"}}
+        style={{backgroundColor: "#ffffff", justifyContent: "flex-start", ...styles.blackBorder}}
         children={
           <View>
             <Text category="p2">{suggestion}</Text>

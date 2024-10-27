@@ -2,21 +2,26 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-export const TimeInterval = (): React.ReactElement => {
+export const TimeInterval = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+  const data = [
+    "Hours",
+    "Days",
+    "Weeks",
+    "Months"
+  ]
 
   return (
-    <Layout style={styles.container} level='1'>
-      <Select
-        selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(IndexPath)}
-      >
-        <SelectItem title='Hours' />
-        <SelectItem title='Days' />
-        <SelectItem title='Weeks' />
-        <SelectItem title='Months' />
-      </Select>
-    </Layout>
+    <Select
+      selectedIndex={selectedIndex}
+      onSelect={index => setSelectedIndex(index)}
+      value={data[selectedIndex-1]}
+    >
+      <SelectItem title='Hours' />
+      <SelectItem title='Days' />
+      <SelectItem title='Weeks' />
+      <SelectItem title='Months' />
+    </Select>
   );
 };
 

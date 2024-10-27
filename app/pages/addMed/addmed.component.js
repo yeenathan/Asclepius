@@ -18,7 +18,7 @@ export const AddScreen = ({navigation}) => {
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
         <MyButton text="Scan" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Scan')}/>
-        <MyButton text="Manual Add" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: "#ffffff"}} press={() => navigation.navigate('Manual')}/>
+        <MyButton text="Manual Add" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: "#ffffff"}} press={() => navigation.navigate('Manual Name')}/>
       </Layout>
     </SafeAreaView>
   );
