@@ -7,6 +7,7 @@ import { EditScreen } from "@/app/pages/addMed/editmed.component"
 import { MedLibraryScreen, InfoScreen, EditInfoScreen, EditReminderScreen } from "@/app/pages/medLibrary.component"
 import { SetTime } from "@/app/pages/addMed/addtimeinterval.component"
 import { DosePerTime } from "@/app/pages/addMed/dosepertime.component"
+import { NextDose } from "@/app/pages/addMed/nextdose.component"
 
 
 const Stack = createStackNavigator();
@@ -22,6 +23,7 @@ export const MedNavigator = () => {
       <Stack.Screen name="Edit Med" component={EditScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Med Time" component={SetTime} options={{headerShown: false}} />
       <Stack.Screen name="Dose Time" component={DosePerTime} options={{headerShown: false}} />
+      <Stack.Screen name="Next Dose" component={NextDose} options={{headerShown: false}} />
 
       <Stack.Screen name="Edit Info" component={EditInfoScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
