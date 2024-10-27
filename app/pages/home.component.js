@@ -37,11 +37,12 @@ const MedCard = (props) => {
     <View
       style={{ flexDirection: "row", gap: "1rem", justifyContent: "center" }}
     >
-      <Button size="giant">Skip</Button>
-      <Button size="giant" onPress={() => setReschedule(true)}>
+      <Button style={{flex: 3}} size="giant">Skip</Button>
+      <Button style={{flex: 7}} size="giant" onPress={() => setReschedule(true)}>
         Reschedule
       </Button>
       <Button
+        style={{flex: 4}}
         size="giant"
         onPress={() => {
           props.handleTaken(data.id);

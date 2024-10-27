@@ -551,7 +551,7 @@ export const InfoScreen = ({ navigation, route }) => {
   );
 };
 
-export const EditReminderScreen = ({ navigation }) => {
+export const EditReminderScreen = ({ route, navigation }) => {
   // edit reminder screen
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const strengthOptions = ["2.5mg", "5mg", "10mg", "20mg", "30mg", "40mg"];
@@ -565,6 +565,7 @@ export const EditReminderScreen = ({ navigation }) => {
     "Cream",
   ];
   const refillsOptions = ["1", "2", "3", "4"];
+  // const medication = route.params.medication;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
