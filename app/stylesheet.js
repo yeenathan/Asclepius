@@ -29,10 +29,10 @@ export const styles = StyleSheet.create({
         borderRightColor: "none"
     },
     blackBorder: {
-        borderTopColor: "#000000",
-        borderBottomColor: "#000000",
-        borderLeftColor: "#000000",
-        borderRightColor: "#000000"
+        borderTopColor: "#00000050",
+        borderBottomColor: "#00000050",
+        borderLeftColor: "#00000050",
+        borderRightColor: "#00000050"
     },
     orangeBorder: {
         borderTopColor: colorTheme["princeton-orange"],

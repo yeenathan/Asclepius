@@ -9,7 +9,7 @@ export const Header = ({navigation}) => {
         icon={<Icon name="arrow-back"/>}
       />
     }
-      style={{width: "100%", backgroundColor: colorTheme["silver-white"]}}
+      style={{width: "100%", backgroundColor: colorTheme["silver-white"], paddingVertical: "2rem", paddingHorizontal: "1.5rem"}}
     />
   )
 }
