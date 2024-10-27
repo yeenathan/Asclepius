@@ -566,6 +566,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
     "Cream",
   ];
   const refillsOptions = ["1", "2", "3", "4"];
+  const [date, setDate] = React.useState(new Date());
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
