@@ -175,13 +175,6 @@ export const InfoScreen = ({navigation, route}) => { // info screen
     //       </View>
 
     //       Archive Button
-    //       <Button 
-    //         size="giant"
-    //         style={{ backgroundColor: colorTheme['persian-green'], borderRadius: 10, marginTop: 16 }}
-    //         onPress={handleArchive}
-    //       >
-    //         Archive This Med
-    //       </Button>
     //     </Layout>
     //   </ScrollView>
     <SafeAreaView style={{ flex: 1}}>
@@ -279,7 +272,7 @@ export const InfoScreen = ({navigation, route}) => { // info screen
                   </View>
               </View>
             </View>
-            <Button size="giant" style={{backgroundColor: colorTheme["light-green"], borderColor: colorTheme["light-green"], borderRadius: "1rem"}} children={() => <Text category='h2'>Archive This Med</Text>}/>
+            <Button size="giant" onPress={handleArchive} style={{backgroundColor: colorTheme["light-green"], borderColor: colorTheme["light-green"], borderRadius: "1rem"}} children={() => <Text category='h2'>Archive This Med</Text>}/>
           </View>
         </ScrollView>
       </Layout>
