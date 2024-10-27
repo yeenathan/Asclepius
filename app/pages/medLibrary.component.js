@@ -239,13 +239,13 @@ export const InfoScreen = ({navigation, route}) => { // info screen
             <View style={{flexDirection: "column", gap: 6}}>
               <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
                 <Icon style={{width: "40px"}} name="edit"></Icon>
-                <Text style={{color: colorTheme["persian-green"]}}>Medicaition Info</Text>
+                <Text style={{color: colorTheme["persian-green"]}}>Medication Info</Text>
               </View>
               <View style={{
                 backgroundColor: "#fff",
-                padding: 32,
+                padding: "2rem",
                 borderRadius: 20,
-                maxWidth: "362px"
+                gap: "1rem"
                 }}>
                   <View>
                     <Text style={{color: colorTheme["persian-green"]}}>Description</Text>
@@ -253,26 +253,28 @@ export const InfoScreen = ({navigation, route}) => { // info screen
                   </View>
                   <View>
                     <Text style={{color: colorTheme["persian-green"]}}>Side Effects</Text>
-                    <Text>{medication.sideEffects}</Text>
+                    {medication.sideEffects.map((effect, index) => (
+                      <Text key={index}>• {effect}</Text>
+                    ))}
                   </View>
                   <View>
                     <Text style={{color: colorTheme["persian-green"]}}>Directions for Use</Text>
                     <Text>{medication.directions}</Text>
                   </View>
                   <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems:'center', gap: 6}}>
-                    <Text style={{color: colorTheme["persian-green"]}}>Directions for Use</Text>
+                    <Text style={{color: colorTheme["persian-green"]}}>Drug Strength</Text>
                     <Text>{medication.strength}</Text>
                   </View>
                   <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems:'center', gap: 6}}>
-                    <Text style={{color: colorTheme["persian-green"]}}>Directions for Use</Text>
+                    <Text style={{color: colorTheme["persian-green"]}}>Dosage Type</Text>
                     <Text>{medication.type}</Text>
                   </View>
                   <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems:'center', gap: 6}}>
-                    <Text style={{color: colorTheme["persian-green"]}}>Directions for Use</Text>
+                    <Text style={{color: colorTheme["persian-green"]}}>Quantity Prescribed</Text>
                     <Text>{medication.quantity}</Text>
                   </View>
                   <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems:'center', gap: 6}}>
-                    <Text style={{color: colorTheme["persian-green"]}}>Directions for Use</Text>
+                    <Text style={{color: colorTheme["persian-green"]}}>Number of Refills</Text>
                     <Text>{medication.refills}</Text>
                   </View>
               </View>
