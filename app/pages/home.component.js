@@ -189,7 +189,7 @@ const Important = (props) => (
     onPress={props.toggleOverlayVisible}
     style={{ ...styles.orangeButton, width: "100%", marginVertical: ".5rem" }}
     children={() => (
-      <View style={{ ...styles.overlay }}>
+      <View style={{}}>
         <Text category="p2">1 serious drug interaction</Text>
       </View>
     )}
@@ -290,7 +290,17 @@ export const HomeScreen = ({ route, navigation }) => {
         >
           <ModalContainer // custom component in components/modalContainer.js the white box itself
             title="1 serious drug interaction"
-            body="THERE IS SOMETHING WRONG!!!"
+            body={
+              <>
+              <View style={{alignItems: "center", marginVertical: "2rem"}}>
+                <Text category="p2">Medication 1</Text>
+                <Text category="p2">Medication 2</Text>
+                <Text style={{marginVertical: "1rem"}} category="p1">has a drug interaction with</Text>
+                <Text category="p2">Medication 3</Text>
+                <Text style={{marginVertical: "1rem"}} category="p1">Consult your doctor or pharmacist.</Text>
+              </View>
+              </>
+            }
             toggleOverlayVisible={toggleOverlayVisible}
           />
         </Modal>

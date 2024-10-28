@@ -6,8 +6,8 @@ export function ModalContainer(props) {
     return(
         <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: "2rem", borderRadius: "2rem"}}>
             <Text category="h2">{props.title}</Text>
-            <Text category="p1">{props.body}</Text>
-            <View style={{marginTop: "4rem"}}>
+            {props.body}
+            <View>
                 <Button onPress={props.toggleOverlayVisible} size="giant" style={{...style.button, backgroundColor: colorTheme["princeton-orange"]}} children={() => <Text category="p2">I understand</Text>}/>
                 <Button onPress={props.toggleOverlayVisible} size="giant" style={{...style.button, backgroundColor: "ffffff"}} children={() => <Text category="p2">Remind me later</Text>}/>               
             </View>
