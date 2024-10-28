@@ -75,10 +75,10 @@ export const MedConfirm = ({navigation}) => {
           />
         </View>
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
-          <InputPill label="Medication Name" text="Lisinopril"/>
-          <InputPill label="How Often" text="Once per day"/>
-          <InputPill label="Dose" text="1 tablet"/>
-          <InputPill label="Treatment Duration" text="2 Oct, 2024 - 8 Oct, 2024"/>
+          <InputPill destination={"Manual Name"} navigation={navigation} label="Medication Name" text="Lisinopril"/>
+          <InputPill destination={"Manual Interval"} navigation={navigation} label="How Often" text="Once per day"/>
+          <InputPill destination={"Manual Dose"} navigation={navigation} label="Dose" text="1 tablet"/>
+          <InputPill destination={"Duration"} navigation={navigation} label="Treatment Duration" text="2 Oct, 2024 - 8 Oct, 2024"/>
           <InputPill label="Refill Reminder" text="10 pill(s) left"/>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
