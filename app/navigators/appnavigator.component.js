@@ -41,7 +41,6 @@ const BottomTabBar = ({ navigation, state }) => (
 export function AppNavigator({ navigation }) {
   return (
     <>
-      <AddMedButton navigation={navigation} />
       <Navigator
         tabBar={(props) => <BottomTabBar {...props} />}
         screenOptions={{ tabBarShowLabel: false }}
@@ -50,13 +49,15 @@ export function AppNavigator({ navigation }) {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
+          initialParams={{justAdded: false}}
         />
         <Screen
-          name="Med Library"
+          name="Med Folder"
           component={MedLibNavigator}
           options={{ headerShown: false }}
         />
       </Navigator>
+      <AddMedButton navigation={navigation} />
     </>
   );
 }

@@ -1,9 +1,33 @@
 import React, {useState} from 'react';
 import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
-import { Button, Icon, Layout, Text, Modal, IconElement, Input, ButtonGroup} from '@ui-kitten/components';
+import { Button, Icon, Layout, Text, Modal, IconElement, Input, ButtonGroup, ProgressBar} from '@ui-kitten/components';
 import { default as colorTheme } from "@/custom-theme.json"
 import { MyButton } from "@/app/components/MyButton"
 import { styles as buttonStyles } from '@/app/stylesheet';
+import { medication } from '@/app/data/addMedData';
+import { Header } from '@/app/components/header';
+
+export const InputPill = ({label, text, navigation=null, destination=null}) => {
+  return (
+    <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
+      <Text category='p2' style={{marginBottom: ".5rem"}}>{label}</Text>
+      <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', width: "100%",
+        border: `${colorTheme['light-green']} solid 3px`, borderRadius: "1rem", backgroundColor: "#ffffff", paddingLeft: "3rem"
+      }}>
+        <Text style={{flex: 6}} category='p1'>{text}</Text>
+        <Button style={{ flex: 3, ...buttonStyles.invisBorder, backgroundColor: colorTheme['light-green'],
+          borderTopLeftRadius: "0", borderBottomLeftRadius: "0"
+        }} 
+          onPress={() => navigation && navigation.navigate(destination)}
+          children={() => (
+            <Text category='p2'>Edit</Text>
+          )}  
+        />
+      </View>
+    </View>
+    
+  )
+}
 
 export const ConfirmScan = ({navigation}) => {
   const styles = StyleSheet.create({
@@ -22,27 +46,7 @@ export const ConfirmScan = ({navigation}) => {
 
   const [value, setValue] = React.useState('');
 
-  const InputPill = ({label, text, destination}) => {
-    return (
-      <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
-        <Text category='p2' style={{marginBottom: ".5rem"}}>{label}</Text>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', width: "100%",
-          border: `${colorTheme['light-green']} solid 3px`, borderRadius: "1rem", backgroundColor: "#ffffff", paddingLeft: "3rem"
-        }}>
-          <Text style={{flex: 6}} category='p1'>{text}</Text>
-          <Button style={{ flex: 3, ...buttonStyles.invisBorder, backgroundColor: colorTheme['light-green'],
-            borderTopLeftRadius: "0", borderBottomLeftRadius: "0"
-          }} 
-            onPress={() => navigation.navigate(destination)}
-            children={() => (
-              <Text category='p2'>Edit</Text>
-            )}  
-          />
-        </View>
-      </View>
-      
-    )
-  }
+  
 
   const [showBackModal, setShowBackModal] = useState(false);
 
@@ -71,7 +75,7 @@ export const ConfirmScan = ({navigation}) => {
               size="medium"
               onPress={() => {
                 setShowBackModal(false);
-                navigation.navigate("Scan");
+                navigation.goBack();
               }}
               style={{
                 flex: 1,
@@ -86,7 +90,8 @@ export const ConfirmScan = ({navigation}) => {
     </Modal>
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
+        <ProgressBar size='giant' style={{width: "100%", marginBottom: "5rem"}} animating={false} progress={.5}/>
+        <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
           <Icon 
             style={editstyles.icon}
@@ -96,9 +101,9 @@ export const ConfirmScan = ({navigation}) => {
         </View>
 
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
-          <InputPill label="Medication Name" text="Lisinopril" destination={"Edit Med"}/>
-          <InputPill label="How Often" text="Once per day" destination={"Med Time"}/>
-          <InputPill label="Dose" text="1 tablet" destination={"Dose Time"}/>
+          <InputPill label="Medication Name" text="Lisinopril" destination={"Edit Med"} navigation={navigation}/>
+          <InputPill label="How Often" text="Once per day" destination={"Med Time"} navigation={navigation}/>
+          <InputPill label="Dose" text="1 tablet" destination={"Dose Time"} navigation={navigation}/>
         </View>
 
 
@@ -113,7 +118,7 @@ export const ConfirmScan = ({navigation}) => {
         </View> */}
 
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
-          <MyButton text="Confirm" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate('Edit Med')} />
+          <MyButton text="Next" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate("Extra Options")} />
           <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => setShowBackModal(true)}/>
         </View>
 
@@ -123,9 +128,6 @@ export const ConfirmScan = ({navigation}) => {
             Hello
           </Button>
         </View> */}
-
-
-
       </Layout>
     </SafeAreaView>
     </>

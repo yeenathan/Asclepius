@@ -22,7 +22,7 @@ export const EditScreen = ({navigation}) => {
           <SuggestionSearch />
         </View>
         <View style={{ flex: 3, width: '100%'}}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Med Time')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
         </View>
       </Layout>
     </SafeAreaView>
