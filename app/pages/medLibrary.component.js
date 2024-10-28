@@ -19,6 +19,7 @@ import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
+import { HomeScreen } from "./home.component";
 
 const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
   const [showArchiveBottomModal, setShowArchiveBottomModal] = useState(false);
@@ -736,6 +737,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
           </View>
           <View style={{ gap: 6 }}>
             <Button
+              onPress={() => navigation.navigate(InfoScreen)}
               size="giant"
               style={{ ...styles.orangerButton, borderRadius: "1rem" }}
               children={() => <Text category="h2">Confirm</Text>}
@@ -755,12 +757,6 @@ export const EditInfoScreen = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-
-// TimeIntervaledit screen
-export const TimeIntervaledit = ({navigation}) => {
-  return
-
-}
 
 export const MedLibraryScreen = ({ navigation }) => {
   // main med library screen
