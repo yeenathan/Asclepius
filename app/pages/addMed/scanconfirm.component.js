@@ -7,6 +7,11 @@ import { styles as buttonStyles } from '@/app/stylesheet';
 import { medication } from '@/app/data/addMedData';
 import { Header } from '@/app/components/header';
 
+
+const EditIcon = (props) => (
+  <Icon {...props} name='edit-2' fill='#8F9BB3' style={{ width: 30, height: 30, justifyContent: 'center', alignItems: 'end'}} />
+);
+
 export const InputPill = ({label, text, navigation=null, destination=null}) => {
   return (
     <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
@@ -43,6 +48,16 @@ export const ConfirmScan = ({navigation}) => {
       height: 30,
     },
   })
+
+  const butstyles= StyleSheet.create({
+    button: {
+      width: 30,
+      height: 30,
+      margin: 2
+    }
+  })
+
+
 
   const [value, setValue] = React.useState('');
 
@@ -93,11 +108,17 @@ export const ConfirmScan = ({navigation}) => {
         <ProgressBar size='giant' style={{width: "100%", marginBottom: "5rem"}} animating={false} progress={.5}/>
         <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
-          <Icon 
+          <Button 
+            style={butstyles.button}
+            appearance='ghost'
+            accessoryLeft={EditIcon}
+            onPress={() => navigation.navigate("Icon Pick")}
+          />
+          {/* <Icon 
             style={editstyles.icon}
             fill='#8F9BB3'
             name='edit-2'
-          />
+          /> */}
         </View>
 
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
