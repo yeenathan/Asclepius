@@ -57,7 +57,8 @@ export function AppNavigator({ navigation }) {
           options={{ headerShown: false }}
         />
       </Navigator>
-      <AddMedButton navigation={navigation} />
+Expo_Go_Layout
+            <AddMedButton navigation={navigation} />
     </>
   );
 }
