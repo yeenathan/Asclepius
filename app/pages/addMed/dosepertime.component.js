@@ -5,6 +5,8 @@ import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 import { Measure } from '@/app/components/measurements'
 
+
+
 import { default as colorTheme } from "@/custom-theme.json"
 
 import { Header } from '@/app/components/header';
@@ -24,13 +26,16 @@ export const DosePerTime = ({navigation}) => {
                 placeholder='#'
                 value={value}
                 onChangeText={nextValue => setValue(nextValue)}
+                style={{width: "5rem"}}
                 />
                 <Measure />
             </View>
 
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', width: '100%' }}>
-                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} />
+                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
             </View>
+
+           
 
         </Layout>
         </SafeAreaView>

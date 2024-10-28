@@ -49,6 +49,7 @@ export function AppNavigator({ navigation }) {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
+          initialParams={{justAdded: false}}
         />
         <Screen
           name="Med Folder"
@@ -56,6 +57,7 @@ export function AppNavigator({ navigation }) {
           options={{ headerShown: false }}
         />
       </Navigator>
+Expo_Go_Layout
             <AddMedButton navigation={navigation} />
     </>
   );
