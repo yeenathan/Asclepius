@@ -255,7 +255,7 @@ export const HomeScreen = ({ route, navigation }) => {
           onNameSubmit={(name) => setUserName(name)}
         />
       ) : (
-        <Layout style={{ flex: 1, padding: '1.25rem' }}>
+        <Layout style={{ flex: 1, padding: '0' }}>
           <Modal
       visible={addedMedModalVisible}
       backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
