@@ -103,7 +103,7 @@ const MedCard = (props) => {
                   padding: "1rem",
                   borderRadius: "2rem",
                   justifyContent: "center",
-                  marginVertical: ".5rem",
+                  marginVertical: "1.5rem",
                   backgroundColor: colorTheme["light-blue"],
                 }
               : {
@@ -111,7 +111,7 @@ const MedCard = (props) => {
                   padding: "1rem",
                   borderRadius: "2rem",
                   justifyContent: "center",
-                  marginVertical: ".5rem",
+                  marginVertical: "1.5rem",
                   backgroundColor: colorTheme["light-blue-80"],
                 }
           }
@@ -133,6 +133,7 @@ const MedCard = (props) => {
                     ...styles.orangeButton,
                     borderRadius: "4rem",
                     marginTop: ".5rem",
+                    position: "absolute"
                   }}
                   children={() => (
                     <Text
