@@ -67,7 +67,7 @@ export const SetDuration = ({navigation}) => {
         </View>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Extra Options')} />
         </View>
 
       </Layout>
