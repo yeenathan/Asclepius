@@ -34,40 +34,40 @@
 //         </>
 //     );
 // };
-import React, { useState } from 'react';
-import { Button, View, StyleSheet, Text } from 'react-native';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+// import React, { useState } from 'react';
+// import { Button, View, StyleSheet, Text } from 'react-native';
+// import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
-export const DateTimeSet = () => {
-    const [date, setDate] = useState(new Date());
+// export const DateTimeSet = () => {
+//     const [date, setDate] = useState(new Date());
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-    };
+//     const onChange = (event, selectedDate) => {
+//         const currentDate = selectedDate || date;
+//         setDate(currentDate);
+//     };
 
-    const showMode = (currentMode) => {
-        DateTimePickerAndroid.open({
-            value: date,
-            onChange,
-            mode: currentMode,
-            is24Hour: true,
-        });
-    };
+//     const showMode = (currentMode) => {
+//         DateTimePickerAndroid.open({
+//             value: date,
+//             onChange,
+//             mode: currentMode,
+//             is24Hour: true,
+//         });
+//     };
 
-    return (
-        <View style={styles.container}>
-            <Text>Selected Date: {date.toLocaleString()}</Text>
-            <Button title="Show Date Picker" onPress={() => showMode("date")} />
-            <Button title="Show Time Picker" onPress={() => showMode("time")} />
-        </View>
-    );
-};
+//     return (
+//         <View style={styles.container}>
+//             <Text>Selected Date: {date.toLocaleString()}</Text>
+//             <Button title="Show Date Picker" onPress={() => showMode("date")} />
+//             <Button title="Show Time Picker" onPress={() => showMode("time")} />
+//         </View>
+//     );
+// };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+// });
