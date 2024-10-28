@@ -9,6 +9,7 @@ import { SetTime } from "@/app/pages/addMed/addtimeinterval.component"
 import { DosePerTime } from "@/app/pages/addMed/dosepertime.component"
 import { NextDose } from "@/app/pages/addMed/nextdose.component"
 import { TimeDose } from "@/app/pages/addMed/timenextdose.component"
+import { SetDuration } from "@/app/pages/addMed/duration.component"
 
 
 const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ export const MedNavigator = () => {
       <Stack.Screen name="Dose Time" component={DosePerTime} options={{headerShown: false}} />
       <Stack.Screen name="Next Dose" component={NextDose} options={{headerShown: false}} />
       <Stack.Screen name="Time Dose" component={TimeDose} options={{headerShown: false}} />
+      <Stack.Screen name="Duration" component={SetDuration} options={{headerShown: false}} />
 
       <Stack.Screen name="Edit Info" component={EditInfoScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>

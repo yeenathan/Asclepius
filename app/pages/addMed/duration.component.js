@@ -18,11 +18,11 @@ export const SetDuration = ({navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h6'>Set date Duration</Text>
         </View>
 
-        <View style={{ flex: 7, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem"}}>
+        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem"}}>
           <Input
             placeholder='#'
             value={value}
@@ -32,11 +32,11 @@ export const SetDuration = ({navigation}) => {
           <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
             <Text category='h6'>From</Text>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem" }}>
+        <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem" }}>
             <Input
                 placeholder='#'
                 value={value}

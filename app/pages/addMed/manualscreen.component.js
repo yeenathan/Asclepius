@@ -148,7 +148,7 @@ export const ExtraOptions = ({navigation}) => {
             <View style={{width: "100%", gap: "1rem"}}>
               <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: "2rem", padding: "1.5rem", justifyContent: "center", gap: "2rem", alignItems: "center"}}>
                 <Image source={require("@/assets/icons/Vector.svg")}/>
-                <Text category='h2'>Treatment Duration</Text>
+                <Text onPress={() => navigation.navigate("Duration")} category='h2'>Treatment Duration</Text>
               </View>
               <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: "2rem", padding: "1.5rem", justifyContent: "center", gap: "2rem", alignItems: "center"}}>
                 <Image source={require("@/assets/icons/admin_meds.svg")}/>
