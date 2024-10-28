@@ -35,7 +35,14 @@
         {
           "fonts":["./assets/fonts/Poppins-Regular.ttf"]
         }
-
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Remedify to access your camera",
+          "microphonePermission": "Allow Remedify to access your microphone",
+          "recordAudioAndroid": true
+        }
       ]
     ],
     "experiments": {
