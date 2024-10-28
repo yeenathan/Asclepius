@@ -206,6 +206,12 @@ function getTime() {
  */
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
+  const [onboarding, setOnboarding] = useState(route.params.onboarding);
+
+  useEffect(() => {
+    console.log(onboarding);
+    if (onboarding) navigation.navigate("Med Stack", {screen: "Onboarding"});
+  },[])
 
   // determines whether or not the modal is visible. if you need to implement a modal just copy this and the modal below (not including ModalContainer) and it should work
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -244,19 +250,9 @@ export const HomeScreen = ({ route, navigation }) => {
     );
   };
 
-  const [showOnboarding, setShowOnboarding] = useState(true);
-  const [userName, setUserName] = useState('');
-
-  return (
-    <>
-    {showOnboarding ? (
-        <Onboarding 
-          onComplete={() => setShowOnboarding(false)}
-          onNameSubmit={(name) => setUserName(name)}
-        />
-      ) : (
-        <Layout style={{ flex: 1, padding: '0' }}>
-          <Modal
+   return (
+    <> 
+    <Modal
       visible={addedMedModalVisible}
       backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       onBackdropPress={() => setAddedMedModalVisible(false)}
@@ -363,17 +359,15 @@ export const HomeScreen = ({ route, navigation }) => {
         }
       </Layout>
     </SafeAreaView>
-        </Layout>
-      )}
-    
     </>
   );
 };
 
 // onboarding
-export const Onboarding = ({ onComplete, onNameSubmit }) => {
+export const Onboarding = ({ navigation }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [userName, setUserName] = useState('');
+  const onNameSubmit = (name) => setUserName(name); 
 
   const onboardingPages = [
     // Logo Page
@@ -606,7 +600,8 @@ export const Onboarding = ({ onComplete, onNameSubmit }) => {
             size="giant"
             onPress={() => {
               onNameSubmit(userName);
-              onComplete();
+              navigation.navigate("Home Stack", {screen: "Home"});
+              // onComplete();
             }}
             style={{
               width: '100%',
@@ -624,13 +619,16 @@ export const Onboarding = ({ onComplete, onNameSubmit }) => {
   ];
 
   return (
-    <Layout style={{
-      flex: 1,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '1.25rem',
-    }}>
-      {onboardingPages[currentPage].render()}
-    </Layout>
+    <SafeAreaView style={{flex: 1}}>
+      <Layout style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '1.25rem',
+      }}>
+        {onboardingPages[currentPage].render()}
+      </Layout>
+    </SafeAreaView>
+    
   );
 };
