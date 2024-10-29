@@ -8,7 +8,8 @@ import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 
 
-export const EditScreen = ({navigation}) => {
+export const EditScreen = ({navigation, route}) => {
+  const fromManual=route.params.fromManual;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
@@ -22,7 +23,10 @@ export const EditScreen = ({navigation}) => {
           <SuggestionSearch />
         </View>
         <View style={{ flex: 3, width: '100%'}}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
+              if (fromManual) navigation.navigate("Med Confirm");
+              else navigation.navigate('Confirm Med');
+            }} />
         </View>
       </Layout>
     </SafeAreaView>
