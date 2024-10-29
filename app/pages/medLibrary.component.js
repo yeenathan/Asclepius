@@ -43,18 +43,18 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "2.5rem",
-            paddingTop: "3rem",
+            padding: "40",
+            paddingTop: "48",
             width: "100vw",
             position: "fixed",
             bottom: "0",
             left: "0",
-            borderTopLeftRadius: "5rem",
-            borderTopRightRadius: "5rem",
+            borderTopLeftRadius: "80",
+            borderTopRightRadius: "80",
           }}
         >
           <Text
-            style={{ marginBottom: "2rem", paddingHorizontal: "2rem" }}
+            style={{ marginBottom: "32", paddingHorizontal: "32" }}
             category="h2"
           >
             {med.name}
@@ -65,7 +65,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             style={{
               backgroundColor: colorTheme["light-green"],
               borderColor: colorTheme["light-green"],
-              borderRadius: "1rem",
+              borderRadius: "16",
             }}
             children={() => <Text category="h2">{actionWord} This Med</Text>}
           />
@@ -80,8 +80,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "2.5rem",
-            paddingTop: "3rem",
+            padding: "40",
+            paddingTop: "48m",
             width: "calc(100vw - 30px)",
             position: "fixed",
             top: "50%",
@@ -92,7 +92,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           }}
         >
           <Text
-            style={{ marginBottom: "18px", paddingHorizontal: "2rem" }}
+            style={{ marginBottom: "18px", paddingHorizontal: "32" }}
             category="h2"
           >
             {actionWord} This Medication?
@@ -102,7 +102,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           >
             {description}
           </Text>
-          <View style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+          <View style={{ display: "flex", flexDirection: "row", gap: "16" }}>
             <Button
               size="small"
               onPress={() => setShowArchiveModal(false)}
@@ -110,7 +110,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
                 flex: 1,
                 backgroundColor: colorTheme["white"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: "16",
               }}
               children={() => <Text category="h2">cancel</Text>}
             />
@@ -126,7 +126,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
                 flex: 1,
                 backgroundColor: colorTheme["light-green"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: "16",
               }}
               children={() => <Text category="h2">{actionWord}</Text>}
             />
@@ -232,9 +232,9 @@ export const MedFolder = ({ navigation }) => {
       >
         <View
           style={{
-            paddingHorizontal: "2.5rem",
-            marginTop: "2rem",
-            gap: "1rem",
+            paddingHorizontal: "40",
+            marginTop: "32",
+            gap: "16",
           }}
         >
           {data.map((med, index) => (
@@ -457,9 +457,9 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{
                   backgroundColor: "#fff",
-                  padding: "2rem",
+                  padding: "32",
                   borderRadius: 20,
-                  gap: "1rem",
+                  gap: "16",
                 }}
               >
                 <View>
@@ -542,7 +542,7 @@ export const InfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["light-green"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: "16",
               }}
               children={() => <Text category="h2">Archive This Med</Text>}
             />
@@ -616,6 +616,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
           </View>
           <View style={{ gap: 6 }}>
             <Button
+              onPress={() => navigation.navigate("Info")}
               size="giant"
               style={{ ...styles.orangerButton, borderRadius: "1rem" }}
               children={() => <Text category="h2">Confirm</Text>}
@@ -625,7 +626,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "1rem",
+                borderRadius: "16",
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />
@@ -747,7 +748,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "1rem",
+                borderRadius: "16",
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />

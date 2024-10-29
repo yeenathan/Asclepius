@@ -36,7 +36,7 @@
 // };
 import React, { useState } from 'react';
 import { Button, View, StyleSheet, Text } from 'react-native';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+// import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 // export const DateTimeSet = () => {
 //     const [date, setDate] = useState(new Date());
