@@ -38,9 +38,6 @@ export const DosePerTime = ({navigation, route}) => {
                     else navigation.navigate('Confirm Med');
                     }} />
             </View>
-
-           
-
         </Layout>
         </SafeAreaView>
     );
