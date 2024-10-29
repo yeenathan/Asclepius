@@ -740,7 +740,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
             <Button
               onPress={() => navigation.navigate(InfoScreen)}
               size="giant"
-              style={{ ...styles.orangerButton, borderRadius: "1rem" }}
+              style={{ ...styles.orangerButton, borderRadius: "16" }}
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
