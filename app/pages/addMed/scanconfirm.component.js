@@ -12,7 +12,7 @@ const EditIcon = (props) => (
   <Icon {...props} name='edit-2' fill='#8F9BB3' style={{ width: 30, height: 30, justifyContent: 'center', alignItems: 'end'}} />
 );
 
-export const InputPill = ({label, text, navigation=null, destination=null}) => {
+export const InputPill = ({label, text, navigation=null, destination=null, fromManual=false}) => {
   return (
     <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
       <Text category='p2' style={{marginBottom: ".5rem"}}>{label}</Text>
@@ -23,7 +23,7 @@ export const InputPill = ({label, text, navigation=null, destination=null}) => {
         <Button style={{ flex: 3, ...buttonStyles.invisBorder, backgroundColor: colorTheme['light-green'],
           borderTopLeftRadius: "0", borderBottomLeftRadius: "0"
         }} 
-          onPress={() => navigation && navigation.navigate(destination)}
+          onPress={() => navigation && navigation.navigate(destination, {fromManual})}
           children={() => (
             <Text category='p2'>Edit</Text>
           )}  

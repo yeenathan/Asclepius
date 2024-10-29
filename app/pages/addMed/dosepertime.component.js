@@ -11,7 +11,8 @@ import { default as colorTheme } from "@/custom-theme.json"
 
 import { Header } from '@/app/components/header';
 
-export const DosePerTime = ({navigation}) => {
+export const DosePerTime = ({navigation, route}) => {
+    const fromManual=route.params.fromManual;
     const [value, setValue] = React.useState('');
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -32,11 +33,11 @@ export const DosePerTime = ({navigation}) => {
             </View>
 
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', width: '100%' }}>
-                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
+                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
+                    if (fromManual) navigation.navigate("Med Confirm");
+                    else navigation.navigate('Confirm Med');
+                    }} />
             </View>
-
-           
-
         </Layout>
         </SafeAreaView>
     );

@@ -111,7 +111,7 @@ const MedCard = (props) => {
                   padding: "1rem",
                   borderRadius: "2rem",
                   justifyContent: "center",
-                  marginVertical: "1.5rem",
+                  marginVertical: ".5rem",
                   backgroundColor: colorTheme["light-blue-80"],
                 }
           }
