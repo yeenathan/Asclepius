@@ -27,7 +27,7 @@ export const ScanScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayoutNoNav}}>
         { 
           //Camera permissions are still loading.
           !permission?
@@ -38,27 +38,19 @@ export const ScanScreen = ({navigation}) => {
               <Text category='p2'>Allow Camera Access?</Text>
               <Text category='s1' style={{textAlign: "center"}}>We need camera access to scan your medication details quickly and accurately.</Text>
               <View style={{gap: 16}}>
-                <Button onPress={requestPermission} size="large" style={{borderRadius: '20px'}} children={() => <Text category="h2" style={{color: colorTheme['silver-white']}}>Allow Access</Text>}></Button>
-                <Button onPress={() => navigation.goBack()} size="large" style={{ borderRadius: '20px', backgroundColor: colorTheme['silver-white']}} children={() => <Text category="h2">Not Now</Text>}></Button>
+                <Button onPress={requestPermission} size="large" style={{borderRadius: 20}} children={() => <Text category="h2" style={{color: colorTheme['silver-white']}}>Allow Access</Text>}></Button>
+                <Button onPress={() => navigation.goBack()} size="large" style={{ borderRadius: 20, backgroundColor: colorTheme['silver-white']}} children={() => <Text category="h2">Not Now</Text>}></Button>
               </View>
             </View>
           //Camera permissions are granted.
-          : <View> 
-              <View>
-                <CameraView style={styles.camera} ref={cameraRef}>
-                  <View>
-                    <TouchableOpacity><View style={{ height: 600 }}></View></TouchableOpacity>
-                  </View>
-                </CameraView>
-              </View>
-              <View style={{ flex: 2, justifyContent: 'center', paddingHorizontal: 16, alignItems: 'flex-start', padding: 16, backgroundColor: '#D9EDFF', borderRadius: 20, marginBottom: 20, marginTop: 10}}>
+          : <View style={{gap: 12, flex: 1, width: "100%"}}>
+              <CameraView style={{flex: 4}} ref={cameraRef}/>
+              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
                 <Text category='p2'> Instructions</Text>
-                <Text category='s1'> Position your camera over the label</Text>
-                <Text category='s1'> Ensure the label is clear and well-lit</Text>
+                <Text category='p1'> Position your camera over the label</Text>
+                <Text category='p1'> Ensure the label is clear and well-lit</Text>
               </View>
-              <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
-              </View>
+              <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Confirm Med')} />
             </View>
           }
       </Layout>

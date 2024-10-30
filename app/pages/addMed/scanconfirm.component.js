@@ -23,7 +23,7 @@ export const InputPill = ({label, text, navigation=null, destination=null, fromM
       }}>
         <Text style={{flex: 6}} category='p1'>{text}</Text>
         <Button style={{ flex: 3, ...buttonStyles.invisBorder, backgroundColor: colorTheme['light-green'],
-          borderTopLeftRadius: "0", borderBottomLeftRadius: "0"
+          borderTopLeftRadius: 0, borderBottomLeftRadius: 0
         }} 
           onPress={() => navigation && navigation.navigate(destination, {fromManual})}
           children={() => (
@@ -128,29 +128,10 @@ export const ConfirmScan = ({navigation}) => {
           <InputPill label="How Often" text="Once per day" destination={"Med Time"} navigation={navigation}/>
           <InputPill label="Dose" text="1 tablet" destination={"Dose Time"} navigation={navigation}/>
         </View>
-
-
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', backgroundColor: "white", width: '90%', borderRadius: 20 }}>
-          <Input style={{ flex: 6}} placeholder='Once per day'/>
-          <Button style={{ flex: 3 }} onPress={() => navigation.navigate("Edit Med")}>Edit</Button>
-        </View> */}
-
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', backgroundColor: "white", width: '90%', borderRadius: 20 }}>
-          <Input style={{ flex: 6}} placeholder='1 tablet'/>
-          <Button style={{ flex: 3 }} onPress={() => navigation.navigate("Edit Med")}>Edit</Button>
-        </View> */}
-
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
           <MyButton text="Next" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate("Extra Options")} />
           <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => setShowBackModal(true)}/>
         </View>
-
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "white", width: 300, height: 55, borderRadius: 20, borderColor: '#89CCC8' }}>
-          <Text category='s1'>FML</Text>
-          <Button style={{ backgroundColor: 'blue', marginLeft: '14em', marginBottom: '1.4em', height: 55, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>
-            Hello
-          </Button>
-        </View> */}
       </Layout>
     </SafeAreaView>
     </>
