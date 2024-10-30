@@ -11,9 +11,9 @@ export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
+      <Layout style={styles.masterLayoutNoNav}>
         <Image source={require("@/assets/icons/Scan.svg")} style={{minWidth: 160, minHeight: 160, marginBottom: 32 }}/>
-        <View style={{marginVertical: 48}}>
+        <View>
           <Text style={{marginBottom: 16 }} category='h2'>Scan your medication</Text>
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>

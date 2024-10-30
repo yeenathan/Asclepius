@@ -109,8 +109,9 @@ const MedCard = (props) => {
         >
           <View style={{ flex: 3, alignItems: "center" }}>
             {/* <Image source={data.icon} /> */}
+            {data.icon}
           </View>
-          <View style={{ flex: 7 }}>
+          <View style={{ flex: 7, paddingVertical: 16 }}>
             <Text category="p1">{data.time}</Text>
             <Text category="h2">{data.name}</Text>
             <View style={{ alignItems: "flex-end" }}>

@@ -27,7 +27,7 @@ export const ScanScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colorTheme['silver-white'], gap: 10}}>
+      <Layout style={styles.masterLayout}>
         { 
           //Camera permissions are still loading.
           !permission?
