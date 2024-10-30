@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 import {default as colorTheme} from "@/custom-theme.json"
 
 export const styles = StyleSheet.create({
-    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 15, paddingBottom: "0", backgroundColor: colorTheme['silver-white']},
+    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16, paddingBottom: "0", backgroundColor: colorTheme['silver-white']},
     rowContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -22,11 +22,11 @@ export const styles = StyleSheet.create({
         borderColor: colorTheme["princeton-orange"],
     },
     invisBorder: {
-        border: "none",
-        borderTopColor: "none",
-        borderBottomColor: "none",
-        borderLeftColor: "none",
-        borderRightColor: "none"
+        border: "transparent",
+        borderTopColor: "transparent",
+        borderBottomColor: "transparent",
+        borderLeftColor: "transparent",
+        borderRightColor: "transparent"
     },
     blackBorder: {
         borderTopColor: "#00000050",

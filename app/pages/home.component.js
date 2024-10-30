@@ -18,6 +18,7 @@ import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
 import { MED_DATA } from "@/app/data/medData";
+import { NavButton } from "@/assets/svgExports";
 
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
@@ -107,7 +108,7 @@ const MedCard = (props) => {
           }
         >
           <View style={{ flex: 3, alignItems: "center" }}>
-            <Image source={data.icon} />
+            {/* <Image source={data.icon} /> */}
           </View>
           <View style={{ flex: 7 }}>
             <Text category="p1">{data.time}</Text>
