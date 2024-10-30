@@ -11,10 +11,10 @@ export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <Image source={require("@/assets/icons/Scan.svg")} style={{minWidth: "10rem", minHeight: "10rem", marginBottom: "2rem"}}/>
-        <View style={{marginVertical: "3rem"}}>
-          <Text style={{marginBottom: "1rem"}} category='h2'>Scan your medication</Text>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
+        <Image source={require("@/assets/icons/Scan.svg")} style={{minWidth: 160, minHeight: 160, marginBottom: 32 }}/>
+        <View style={{marginVertical: 48}}>
+          <Text style={{marginBottom: 16 }} category='h2'>Scan your medication</Text>
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
         <MyButton text="Scan" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Scan')}/>

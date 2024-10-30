@@ -43,7 +43,7 @@ export const SuggestionSearch = () => {
     <View>
       <Input
         placeholder="Input field" onChange={handleInput} value={value}
-        style={{width: "100%,", paddingVertical: ".2rem"}}
+        style={{width: "100%,", paddingVertical: 3.2}}
       />
       {
         visible ?

@@ -8,16 +8,18 @@ import { medication } from '@/app/data/addMedData';
 import { Header } from '@/app/components/header';
 
 
+
 const EditIcon = (props) => (
   <Icon {...props} name='edit-2' fill='#8F9BB3' style={{ width: 30, height: 30, justifyContent: 'center', alignItems: 'end'}} />
 );
 
 export const InputPill = ({label, text, navigation=null, destination=null, fromManual=false}) => {
   return (
-    <View style={{alignItems: "flex-start", width: "100%", marginVertical: ".5rem"}}>
-      <Text category='p2' style={{marginBottom: ".5rem"}}>{label}</Text>
+    
+    <View style={{alignItems: "flex-start", width: "100%", marginVertical: 8}}>
+      <Text category='p2' style={{marginBottom: 8}}>{label}</Text>
       <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', width: "100%",
-        border: `${colorTheme['light-green']} solid 3px`, borderRadius: "1rem", backgroundColor: "#ffffff", paddingLeft: "3rem"
+        border: `${colorTheme['light-green']} solid 3px`, borderRadius: 16, backgroundColor: "#ffffff", paddingLeft: 48
       }}>
         <Text style={{flex: 6}} category='p1'>{text}</Text>
         <Button style={{ flex: 3, ...buttonStyles.invisBorder, backgroundColor: colorTheme['light-green'],
@@ -72,9 +74,9 @@ export const ConfirmScan = ({navigation}) => {
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={() => setShowBackModal(false)}
       >
-        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: "2rem", borderRadius: "2rem"}}>
+        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: 32, borderRadius: 32}}>
           <Text category="p2">Discard changes and exit?</Text>
-          <View style={{ display: "flex", flexDirection: "row", gap: "1rem", marginTop: "1rem", width: "100%" }}>
+          <View style={{ display: "flex", flexDirection: "row", gap: 16, marginTop: 16, width: "100%" }}>
             <Button
               size="small"
               onPress={() => setShowBackModal(false)}
@@ -82,7 +84,7 @@ export const ConfirmScan = ({navigation}) => {
                 flex: 1,
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="p1">Cancel</Text>}
             />
@@ -96,7 +98,7 @@ export const ConfirmScan = ({navigation}) => {
                 flex: 1,
                 backgroundColor: colorTheme["light-green"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="p2">Exit</Text>}
             />
@@ -104,8 +106,8 @@ export const ConfirmScan = ({navigation}) => {
         </View>
     </Modal>
     <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <ProgressBar size='giant' style={{width: "100%", marginBottom: "5rem"}} animating={false} progress={.5}/>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
+        <ProgressBar size='giant' style={{width: "100%", marginBottom: 80}} animating={false} progress={.5}/>
         <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
           <Button 

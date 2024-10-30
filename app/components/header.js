@@ -33,8 +33,8 @@ export const Header = ({ navigation, title, showSettings = true }) => {
       style={{
         width: "100%",
         backgroundColor: colorTheme["silver-white"],
-        paddingVertical: "2rem",
-        paddingHorizontal: "1.5rem",
+        paddingVertical: 32,
+        paddingHorizontal: 24,
       }}
     />
   );

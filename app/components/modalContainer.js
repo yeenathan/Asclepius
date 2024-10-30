@@ -4,7 +4,7 @@ import { default as colorTheme } from "@/custom-theme.json"
 
 export function ModalContainer(props) {
     return(
-        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: "2rem", borderRadius: "2rem"}}>
+        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: 32, borderRadius: 32 }}>
             <Text category="h2">{props.title}</Text>
             {props.body}
             <View>
@@ -17,9 +17,9 @@ export function ModalContainer(props) {
 
 const style = StyleSheet.create({
     button: {
-        minWidth: "18rem",
-        marginVertical: ".2rem",
-        borderRadius: "1rem",
+        minWidth: 288,
+        marginVertical: 3.2,
+        borderRadius: 16,
         borderColor: colorTheme["princeton-orange"],
         color: "#000000"
     }

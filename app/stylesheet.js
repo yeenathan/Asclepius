@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native"
 import {default as colorTheme} from "@/custom-theme.json"
 
 export const styles = StyleSheet.create({
-    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", paddingBottom: "0", backgroundColor: colorTheme['silver-white']},
+    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 15, paddingBottom: "0", backgroundColor: colorTheme['silver-white']},
     rowContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginVertical: "1rem",
+        marginVertical: 16,
         width: "100%"
     },
     container: {
@@ -42,6 +42,6 @@ export const styles = StyleSheet.create({
     },
     baseBigButton: {
         width: "100%",
-        borderRadius: "1rem"
+        borderRadius: 16
     }
 });

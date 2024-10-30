@@ -27,7 +27,7 @@ const BottomTabBar = ({ navigation, state }) => (
     onSelect={(index) => {
       navigation.navigate(state.routeNames[index]);
     }}
-    style={{ minHeight: "4.5rem" }}
+    style={{ minHeight: 72 }}
   >
     <BottomNavigationTab style={{ flex: 1 }} title="HOME" icon={HomeIcon} />
     <BottomNavigationTab

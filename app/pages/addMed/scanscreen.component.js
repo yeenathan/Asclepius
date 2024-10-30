@@ -34,10 +34,10 @@ export const ScanScreen = ({navigation}) => {
             <View />
           //Camera permissions are not granted yet.
           : !permission.granted?
-            <View style={{gap: "3rem", width: "90%", alignItems: 'center'}}>
+            <View style={{gap: 48, width: "90%", alignItems: 'center'}}>
               <Text category='p2'>Allow Camera Access?</Text>
               <Text category='s1' style={{textAlign: "center"}}>We need camera access to scan your medication details quickly and accurately.</Text>
-              <View style={{gap: "1rem"}}>
+              <View style={{gap: 16}}>
                 <Button onPress={requestPermission} size="large" style={{borderRadius: '20px'}} children={() => <Text category="h2" style={{color: colorTheme['silver-white']}}>Allow Access</Text>}></Button>
                 <Button onPress={() => navigation.goBack()} size="large" style={{ borderRadius: '20px', backgroundColor: colorTheme['silver-white']}} children={() => <Text category="h2">Not Now</Text>}></Button>
               </View>
@@ -51,7 +51,7 @@ export const ScanScreen = ({navigation}) => {
                   </View>
                 </CameraView>
               </View>
-              <View style={{ flex: 2, justifyContent: 'center', paddingHorizontal: "1rem", alignItems: 'flex-start', padding: "1rem", backgroundColor: '#D9EDFF', borderRadius: 20, marginBottom: 20, marginTop: 10}}>
+              <View style={{ flex: 2, justifyContent: 'center', paddingHorizontal: 16, alignItems: 'flex-start', padding: 16, backgroundColor: '#D9EDFF', borderRadius: 20, marginBottom: 20, marginTop: 10}}>
                 <Text category='p2'> Instructions</Text>
                 <Text category='s1'> Position your camera over the label</Text>
                 <Text category='s1'> Ensure the label is clear and well-lit</Text>

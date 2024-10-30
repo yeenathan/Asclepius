@@ -13,7 +13,7 @@ export const EditScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white']}}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white']}}>
         <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flex: 2}}>
           <Text category='h6'>What is the medication name?</Text>
           <Text category='c1'>Search or type your medication name</Text>

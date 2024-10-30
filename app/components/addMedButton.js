@@ -3,11 +3,11 @@ import { Image } from "react-native"
 import { styles } from "@/app/stylesheet";
 
 export const AddMedButton = ({navigation}) => {
-  const size = "5rem";
+  const size = 80;
   return (
     <Button
       onPress={() => navigation.navigate("Med Stack", { screen: "Add Med" })}
-      style={{...styles.invisBorder, position: "absolute", bottom: "1rem", backgroundColor: "none", zIndex: "1", padding: "0",
+      style={{...styles.invisBorder, position: "absolute", bottom: 16, backgroundColor: "none", zIndex: "1", padding: "0",
         left: "0", right: "0", margin: "auto", 
         maxWidth: size
       }}
