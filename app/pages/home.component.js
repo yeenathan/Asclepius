@@ -36,16 +36,16 @@ const MedCard = (props) => {
   const [reschedule, setReschedule] = useState(false);
 
   const defaultView = (
-    <View style={{ flexDirection: "row", gap: 16, justifyContent: "center" }}>
-      <Button style={{ flex: 3 }} size="giant">
+    <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
+      <Button style={{ flex: 3 }} size="small">
         Skip
       </Button>
-      <Button style={{ flex: 7 }} size="giant" onPress={() => setReschedule(true)}>
+      <Button style={{ flex: 8 }} size="medium" onPress={() => setReschedule(true)}>
         Reschedule
       </Button>
       <Button
         style={{ flex: 4 }}
-        size="giant"
+        size="small"
         onPress={() => {
           props.handleTaken(data.id);
           toggleMenuVisible();
@@ -64,6 +64,7 @@ const MedCard = (props) => {
         visible={menuVisible}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleMenuVisible}
+        style={{width: "100%", height: "100%", justifyContent: "flex-end"}}
       >
         <View
           style={{
@@ -71,10 +72,6 @@ const MedCard = (props) => {
             justifyContent: "center",
             padding: 40,
             paddingTop: 48,
-            width: "100vw",
-            position: "fixed",
-            bottom: "0",
-            left: "0",
             borderTopLeftRadius: 80,
             borderTopRightRadius: 80,
           }}
@@ -141,6 +138,7 @@ const MedCard = (props) => {
     </>
   );
 };
+
 
 /**
  * generates the list of medications. uses react native's SectionList (a variation of FlatList) that has section headers. useful cuz we have time values
