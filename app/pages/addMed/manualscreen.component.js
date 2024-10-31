@@ -66,14 +66,14 @@ export const MedConfirm = ({navigation}) => {
     </Modal>
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
+      <Layout style={{...styles.masterLayoutNoNav}}>
+        {/* <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
           <Icon 
             fill='#8F9BB3'
             name='edit-2'
           />
-        </View>
+        </View> */}
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
           <InputPill destination={"Edit Med"} navigation={navigation} label="Medication Name" text="Lisinopril" fromManual={true}/>
           <InputPill destination={"Med Time"} navigation={navigation} label="How Often" text="Once per day" fromManual={true}/>
@@ -81,7 +81,7 @@ export const MedConfirm = ({navigation}) => {
           <InputPill destination={"Duration"} navigation={navigation} label="Treatment Duration" text="2 Oct, 2024 - 8 Oct, 2024"/>
           <InputPill label="Refill Reminder" text="10 pill(s) left"/>
         </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate("Home")} />
           <Text category='p2' onPress={() => setShowBackModal(true)}>Discard Input</Text>
         </View>
