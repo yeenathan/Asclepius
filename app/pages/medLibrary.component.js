@@ -38,6 +38,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         visible={showArchiveBottomModal}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleArchiveBottomModal}
+        style={{width: "100%", justifyContent: "flex-end", position: "fixed", bottom: 0}}
       >
         <View
           style={{
@@ -45,10 +46,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             justifyContent: "center",
             padding: 40,
             paddingTop: 48,
-            width: "100vw",
-            position: "fixed",
-            bottom: "0",
-            left: "0",
             borderTopLeftRadius: 80,
             borderTopRightRadius: 80,
           }}
@@ -75,6 +72,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         visible={showArchiveModal}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={() => setShowArchiveModal(false)}
+
       >
         <View
           style={{
@@ -82,12 +80,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             justifyContent: "center",
             padding: 40,
             paddingTop: 48,
-            width: "calc(100vw - 30px)",
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(50px)",
-            left: "15px",
-            right: "15px",
             borderRadius: 20,
           }}
         >
