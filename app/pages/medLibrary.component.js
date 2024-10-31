@@ -88,7 +88,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             transform: "translateY(50px)",
             left: "15px",
             right: "15px",
-            borderRadius: "20px",
+            borderRadius: 20,
           }}
         >
           <Text
@@ -361,11 +361,11 @@ export const InfoScreen = ({ navigation, route }) => {
               marginBottom: 60,
             }}
           >
-            {/* <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
+            <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
               {medication.icon}
               <Text>{medication.name} Info</Text>
             </View>
-            <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
+            {/* <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Reminder", medication: medication})}>Edit Reminder</Button>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Info", medication: medication})}>Edit Info</Button>
             </View> */}
@@ -454,7 +454,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   backgroundColor: "#fff",
                   padding: "2rem",
                   borderRadius: 20,
-                  gap: "1rem",
+                  gap: 16,
                 }}
               >
                 <View>
@@ -537,7 +537,7 @@ export const InfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["light-green"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: 16
               }}
               children={() => <Text category="h2">Archive This Med</Text>}
             />
@@ -613,7 +613,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
             <Button
               onPress={() => navigation.navigate("Info")}
               size="giant"
-              style={{ ...styles.orangerButton, borderRadius: "1rem" }}
+              style={{ ...styles.orangerButton, borderRadius: 16 }}
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
@@ -621,7 +621,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />
@@ -735,7 +735,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
             <Button
               onPress={() => navigation.navigate(InfoScreen)}
               size="giant"
-              style={{ ...styles.orangerButton, borderRadius: "1rem" }}
+              style={{ ...styles.orangerButton, borderRadius: 16 }}
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
@@ -743,7 +743,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />
