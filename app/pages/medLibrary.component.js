@@ -151,7 +151,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
               alignItems: "center",
             }}
           >
-            <Image source={med.icon} />
+            {/* <Image source={med.icon} /> */}
             <Text category="h2">{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
@@ -194,8 +194,8 @@ export const MedFolder = ({ navigation }) => {
             borderColor: colorTheme["silver-white"],
             textAlign: "center",
             border: `solid ${colorTheme["silver-white"]} 3px`,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             height: "64px",
             lineHeight: 64,
           }}
@@ -211,9 +211,8 @@ export const MedFolder = ({ navigation }) => {
             borderColor: colorTheme["silver-white"],
             textAlign: "center",
             border: `solid ${colorTheme["silver-white"]} 3px`,
-            borderRadius: "20px 20px 0px 0px",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             height: "64px",
             lineHeight: 64,
           }}
@@ -225,11 +224,8 @@ export const MedFolder = ({ navigation }) => {
   };
 
   return (
-    <Layout style={{ flex: "1" }}>
+    <View style={{backgroundColor: colorTheme["silver-white"], flex: 1}}>
       <TabSwitch />
-      <Layout
-        style={{ flex: "1", backgroundColor: colorTheme["silver-white"] }}
-      >
         <View
           style={{
             paddingHorizontal: 40,
@@ -260,8 +256,7 @@ export const MedFolder = ({ navigation }) => {
             />
           ))}
         </View>
-      </Layout>
-    </Layout>
+      </View>
   );
 };
 
@@ -382,10 +377,10 @@ export const InfoScreen = ({ navigation, route }) => {
                 marginBottom: 16,
               }}
             >
-              <Image
+              {/* <Image
                 source={medication.icon}
                 style={{ width: 40, height: 40, marginRight: 16 }}
-              />
+              /> */}
               <Text category="h2">{medication.name}</Text>
             </View>
 
@@ -765,8 +760,7 @@ export const MedLibraryScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Layout
         style={{
-          ...styles.masterLayout,
-          flex: "none",
+          ...styles.masterLayout, flex: 1,
           backgroundColor: "#fff",
         }}
       >
@@ -774,10 +768,12 @@ export const MedLibraryScreen = ({ navigation }) => {
           <Text category="h1" style={{ color: colorTheme["persian-green"] }}>
             Med Library
           </Text>
-          <Icon style={{ width: "40px" }} name="settings-2-outline"></Icon>
+          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
       </Layout>
-      <MedFolder navigation={navigation} />
+      <View style={{flex: 8}}>
+        <MedFolder navigation={navigation} />
+      </View>
     </SafeAreaView>
   );
 };
