@@ -59,7 +59,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
             style={{
               flex: 1,
               backgroundColor: colorTheme["white"],
-              borderColor: colorTheme["light-green"],
+              borderColor: colorTheme["green"],
               borderRadius: "16px",
             }}
             children={() => <Text category="h2">cancel</Text>}
@@ -69,8 +69,8 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
             onPress={onPress}
             style={{
               flex: 1,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
               borderRadius: "16px",
             }}
             children={() => <Text category="h2">{actionWord}</Text>}
@@ -123,8 +123,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             size="giant"
             onPress={() => setShowArchiveModal(true)}
             style={{
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
               borderRadius: "16px",
             }}
             children={() => <Text category="h2">{actionWord} This Med</Text>}
@@ -147,7 +147,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         onPress={onPress}
         style={{
           backgroundColor: med.isArchive
-            ? colorTheme["light-orange"]
+            ? colorTheme["hunyadi-yellow"]
             : colorTheme["light-blue"],
           ...styles.invisBorder,
         }}
@@ -200,10 +200,10 @@ export const MedFolder = ({ navigation }) => {
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? colorTheme["silver-white"] : "#fff",
-            borderColor: colorTheme["silver-white"],
+              selectedTab === 1 ? colorTheme["green"] : "#fff",
+            borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["silver-white"]} 3px`,
+            border: `solid ${colorTheme["white"]} 3px`,
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
             height: "64px",
@@ -217,10 +217,10 @@ export const MedFolder = ({ navigation }) => {
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? "#fff" : colorTheme["silver-white"],
-            borderColor: colorTheme["silver-white"],
+              selectedTab === 1 ? "#fff" : colorTheme["green"],
+            borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["silver-white"]} 3px`,
+            border: `solid ${colorTheme["white"]} 3px`,
             borderRadius: "20px 20px 0px 0px",
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
@@ -253,7 +253,7 @@ export const MedFolder = ({ navigation }) => {
     <Layout style={{ flex: "1" }}>
       <TabSwitch />
       <Layout
-        style={{ flex: "1", backgroundColor: colorTheme["silver-white"] }}
+        style={{ flex: "1", backgroundColor: colorTheme["white"] }}
       >
         <View
           style={{
@@ -363,13 +363,13 @@ export const InfoScreen = ({ navigation, route }) => {
                 }
                 style={{
                   flex: 1,
-                  backgroundColor: colorTheme["persian-green"],
+                  backgroundColor: colorTheme["green"],
                 }}
                 accessoryLeft={(props) => (
                   <Icon {...props} name="edit-outline" />
                 )}
               >
-                Edit Reminder
+                Reminder
               </Button>
               <Button
                 onPress={() =>
@@ -380,13 +380,13 @@ export const InfoScreen = ({ navigation, route }) => {
                 }
                 style={{
                   flex: 1,
-                  backgroundColor: colorTheme["persian-green"],
+                  backgroundColor: colorTheme["green"],
                 }}
                 accessoryLeft={(props) => (
                   <Icon {...props} name="edit-outline" />
                 )}
               >
-                Edit Info
+                Info
               </Button>
             </View>
             <View style={{ flexDirection: "column", gap: 6 }}>
@@ -394,7 +394,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
                 <Icon style={{ width: "40px" }} name="clock"></Icon>
-                <Text style={{ color: colorTheme["persian-green"] }}>
+                <Text style={{ color: colorTheme["green"] }}>
                   Reminder
                 </Text>
               </View>
@@ -503,9 +503,9 @@ export const InfoScreen = ({ navigation, route }) => {
               size="giant"
               onPress={onPress}
               style={{
-                backgroundColor: colorTheme["light-green"],
-                borderColor: colorTheme["light-green"],
-                borderRadius: "16px",
+                backgroundColor: colorTheme["white"],
+                borderColor: colorTheme["green"],
+                borderRadius: "20px",
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
@@ -767,7 +767,7 @@ export const MedLibraryScreen = ({ navigation }) => {
         style={{
           ...styles.masterLayout,
           flex: "none",
-          backgroundColor: "#fff",
+          backgroundColor: "#FAF8FE",
         }}
       >
         <View style={styles.rowContainer}>
