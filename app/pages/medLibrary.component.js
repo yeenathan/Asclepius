@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SafeAreaView, View, Image, ScrollView } from "react-native";
-import { MedLibNavigator } from "@/app/navigators/medLibNavigator.component";
 import {
   Button,
   Layout,
@@ -33,9 +32,9 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
         style={{
           backgroundColor: "white",
           justifyContent: "center",
-          padding: "40px",
-          paddingTop: "48px",
-          width: "calc(100% - 30px)",
+          padding: 40,
+          paddingTop: 48,
+          // width: "calc(100% - 30px)",
           position: "fixed",
           top: "40%",
           left: 15,
@@ -52,7 +51,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
         <Text style={{ width: 270, margin: "auto", marginBottom: 15 }}>
           {description}
         </Text>
-        <View style={{ display: "flex", flexDirection: "row", gap: 16 }}>
+        <View style={{ flexDirection: "row", gap: 16 }}>
           <Button
             size="small"
             onPress={() => close()}
@@ -104,14 +103,14 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "40px",
-            paddingTop: "48px",
+            padding: 40,
+            paddingTop: 48,
             width: "100%",
             position: "fixed",
             bottom: "0",
             left: "0",
-            borderTopLeftRadius: "80px",
-            borderTopRightRadius: "80px",
+            borderTopLeftRadius: 80,
+            borderTopRightRadius: 80,
           }}
         >
           <Text
@@ -205,9 +204,9 @@ export const MedFolder = ({ navigation }) => {
             borderColor: colorTheme["white"],
             textAlign: "center",
             border: `solid ${colorTheme["white"]} 3px`,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -222,10 +221,10 @@ export const MedFolder = ({ navigation }) => {
             borderColor: colorTheme["white"],
             textAlign: "center",
             border: `solid ${colorTheme["white"]} 3px`,
-            borderRadius: "20px 20px 0px 0px",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            // borderRadius: "20px 20px 0px 0px",
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -502,7 +501,7 @@ export const InfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["white"],
                 borderColor: colorTheme["green"],
-                borderRadius: "20px",
+                borderRadius: 20,
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
@@ -772,7 +771,7 @@ export const MedLibraryScreen = ({ navigation }) => {
       <Layout
         style={{
           ...styles.masterLayout,
-          flex: "none",
+          flex: 0,
           backgroundColor: "#FAF8FE",
         }}
       >
