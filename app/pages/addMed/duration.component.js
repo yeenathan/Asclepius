@@ -22,17 +22,17 @@ export const SetDuration = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h6'>Set date Duration</Text>
         </View>
 
-        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem"}}>
+        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 16}}>
           <Input
             placeholder='#'
             value={value}
             onChangeText={nextValue => setValue(nextValue)}
-            style={{width: "5rem"}}
+            style={{width: 80}}
           />    
           <DoseMonth />
 
@@ -40,7 +40,7 @@ export const SetDuration = ({navigation}) => {
             placeholder='Year'
             value={value2}
             onChangeText={nextValue => setValue2(nextValue)}
-            style={{width: "5rem"}}
+            style={{width: 80}}
           />   
           {/* <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/> */}
         </View>
@@ -49,19 +49,19 @@ export const SetDuration = ({navigation}) => {
             <Text category='h6'>From</Text>
         </View>
 
-        <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem" }}>
+        <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 16 }}>
             <Input
                 placeholder='#'
                 value={value3}
                 onChangeText={nextValue => setValue3(nextValue)}
-                style={{width: "5rem"}}
+                style={{width: 80}}
             />
             <DoseMonth />
             <Input
                 placeholder='#'
                 value={value4}
                 onChangeText={nextValue => setValue4(nextValue)}
-                style={{width: "5rem"}}
+                style={{width: 80}}
             />
             {/* <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/> */}
         </View>

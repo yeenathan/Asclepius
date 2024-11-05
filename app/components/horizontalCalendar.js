@@ -25,9 +25,9 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
                     borderWidth: 1,
                     borderColor: "black",
                     borderRadius: 25,
-                    width: "4.5rem",
-                    paddingHorizontal: ".5rem",
-                    paddingVertical: "1rem",
+                    width: 72,
+                    paddingHorizontal: 8,
+                    paddingVertical: 16,
                     alignItems: "center",
                     backgroundColor: day === currentDay ? colorTheme["light-green"] : null,
                 }}
@@ -59,7 +59,7 @@ export function HorizontalCalendar({ handleSetDay, currentDay }) {
                 keyExtractor={(item) => item.id.toString()} // Ensure key is a string
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginBottom: "1rem", marginTop: ".4rem" }}
+                contentContainerStyle={{ marginBottom: 16, marginTop: 6.4 }}
             />
         </>
     );

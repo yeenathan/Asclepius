@@ -98,23 +98,20 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         visible={showArchiveBottomModal}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleArchiveBottomModal}
+        style={{width: "100%", justifyContent: "flex-end", position: "fixed", bottom: 0}}
       >
         <View
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "40px",
-            paddingTop: "48px",
-            width: "100%",
-            position: "fixed",
-            bottom: "0",
-            left: "0",
-            borderTopLeftRadius: "80px",
-            borderTopRightRadius: "80px",
+            padding: 40,
+            paddingTop: 48,
+            borderTopLeftRadius: 80,
+            borderTopRightRadius: 80,
           }}
         >
           <Text
-            style={{ marginBottom: "32px", paddingHorizontal: "32px" }}
+            style={{ marginBottom: 32, paddingHorizontal: 32 }}
             category="h2"
           >
             {med.name}
@@ -161,7 +158,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
               alignItems: "center",
             }}
           >
-            <Image source={med.icon} />
+            {/* <Image source={med.icon} /> */}
             <Text category="h2">{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
@@ -203,9 +200,9 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? colorTheme["green"] : "#fff",
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
+            border: `solid ${colorTheme["silver-white"]} 3px`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             height: "64px",
             lineHeight: 64,
           }}
@@ -220,10 +217,9 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? "#fff" : colorTheme["green"],
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderRadius: "20px 20px 0px 0px",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
+            border: `solid ${colorTheme["silver-white"]} 3px`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             height: "64px",
             lineHeight: 64,
           }}
@@ -250,16 +246,13 @@ export const MedFolder = ({ navigation }) => {
   };
 
   return (
-    <Layout style={{ flex: "1" }}>
+    <View style={{backgroundColor: colorTheme["silver-white"], flex: 1}}>
       <TabSwitch />
-      <Layout
-        style={{ flex: "1", backgroundColor: colorTheme["white"] }}
-      >
         <View
           style={{
-            paddingHorizontal: "40px",
-            marginTop: "32px",
-            gap: "16px",
+            paddingHorizontal: 40,
+            marginTop: 32,
+            gap: 16,
           }}
         >
           {data.map((med, index) => (
@@ -279,8 +272,7 @@ export const MedFolder = ({ navigation }) => {
             />
           ))}
         </View>
-      </Layout>
-    </Layout>
+      </View>
   );
 };
 
@@ -329,11 +321,11 @@ export const InfoScreen = ({ navigation, route }) => {
               marginBottom: 60,
             }}
           >
-            {/* <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
+            <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
               {medication.icon}
               <Text>{medication.name} Info</Text>
             </View>
-            <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
+            {/* <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Reminder", medication: medication})}>Edit Reminder</Button>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Info", medication: medication})}>Edit Info</Button>
             </View> */}
@@ -345,10 +337,10 @@ export const InfoScreen = ({ navigation, route }) => {
                 marginBottom: 16,
               }}
             >
-              <Image
+              {/* <Image
                 source={medication.icon}
                 style={{ width: 40, height: 40, marginRight: 16 }}
-              />
+              /> */}
               <Text category="h2">{medication.name}</Text>
             </View>
 
@@ -422,7 +414,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   backgroundColor: "#fff",
                   padding: "32px",
                   borderRadius: 20,
-                  gap: "16px",
+                  gap: 16,
                 }}
               >
                 <View>
@@ -503,9 +495,9 @@ export const InfoScreen = ({ navigation, route }) => {
               size="giant"
               onPress={onPress}
               style={{
-                backgroundColor: colorTheme["white"],
-                borderColor: colorTheme["green"],
-                borderRadius: "20px",
+                backgroundColor: colorTheme["light-green"],
+                borderColor: colorTheme["light-green"],
+                borderRadius: 16
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
@@ -596,16 +588,25 @@ export const EditReminderScreen = ({ route, navigation }) => {
             <View>
               <Text category="p2">Refill Reminder</Text>
             </View>
-            <View
+            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', backgroundColor: "sliver-white", width: '90%', borderRadius: 20 }}>
+          <Input style={{ flex: 6}} placeholder='10 pill(s) left'/>
+          <Button style={{ flex: 3 }} onPress={() => navigation.navigate("Current Pill Number")}>Edit</Button>
+          </View>
+          <View style={{ gap: 6 }}>
+            <Button
+              onPress={() => navigation.navigate("Info")}
+              size="giant"
+              style={{ ...styles.orangerButton, borderRadius: 16 }}
+              children={() => <Text category="h2">Confirm</Text>}
+            />
+            <Button
+              size="giant"
               style={{
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row",
-                backgroundColor: "sliver-white",
-                width: "90%",
-                borderRadius: 20,
+                backgroundColor: colorTheme["silver-white"],
+                borderColor: colorTheme["princeton-orange"],
+                borderRadius: 16,
               }}
-            >
+            />
               <Input style={{ flex: 6 }} placeholder="10 pill(s) left" />
               <Button
                 style={{ flex: 3 }}
@@ -740,7 +741,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
             <Button
               // onPress={() => navigation.navigate("Info", { medication: med })}
               size="giant"
-              style={{ ...styles.orangerButton, borderRadius: "16px" }}
+              style={{ ...styles.orangerButton, borderRadius: 16 }}
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
@@ -748,7 +749,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "16px",
+                borderRadius: 16,
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />
@@ -774,10 +775,12 @@ export const MedLibraryScreen = ({ navigation }) => {
           <Text category="h1" style={{ color: colorTheme["persian-green"] }}>
             Med Library
           </Text>
-          <Icon style={{ width: "40px" }} name="settings-2-outline"></Icon>
+          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
       </Layout>
-      <MedFolder navigation={navigation} />
+      <View style={{flex: 8}}>
+        <MedFolder navigation={navigation} />
+      </View>
     </SafeAreaView>
   );
 };
