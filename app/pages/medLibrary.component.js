@@ -684,7 +684,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               <textarea
                 name="directions"
                 style={{
-                  border: `solid ${colorTheme["light-green"]} 3px`,
+                  border: `solid ${colorTheme["light-green"]} 3`,
                   borderRadius: 20,
                   padding: 16,
                 }}
@@ -722,7 +722,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
                 <input
                   type="number"
                   style={{
-                    border: `solid ${colorTheme["light-green"]} 3px`,
+                    border: `solid ${colorTheme["light-green"]} 3`,
                     borderRadius: 10,
                     padding: 8,
                   }}
