@@ -196,20 +196,22 @@ export const MedFolder = ({ navigation }) => {
 
   const TabSwitch = () => {
     return (
-      <View style={{ flexDirection: "row", gap: 0 }}>
+      <View style={{ flexDirection: "row", gap: 0, }}>
         <Text
           onPress={() => handleSwitch(1)}
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? colorTheme["silver-white"] : "#fff",
-            borderColor: "silver-white",
+              selectedTab === 1 ? colorTheme["green"] : "#fff",
+            borderColor: "green",
             textAlign: "center",
-            border: `solid ${colorTheme["silver-white"]} 3`,
+            border: `solid ${colorTheme["green"]} 3`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             height: 64,
             lineHeight: 64,
+            color:
+              selectedTab === 1 ? colorTheme["white"] : "black",
           }}
         >
           Current
@@ -219,16 +221,18 @@ export const MedFolder = ({ navigation }) => {
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? "#fff" : colorTheme["silver-white"],
-            borderColor: colorTheme["silver-white"],
+              selectedTab === 1 ? "#fff" : colorTheme["green"],
+            borderColor: colorTheme["green"],
             textAlign: "center",
-            border: `solid ${colorTheme["silver-white"]} 3`,
+            border: `solid ${colorTheme["green"]} 3`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0,
             height: 64,
             lineHeight: 64,
+            color:
+              selectedTab === 1 ? colorTheme["black"] : "white",
           }}
         >
           Archive
@@ -253,7 +257,7 @@ export const MedFolder = ({ navigation }) => {
   };
 
   return (
-    <View style={{backgroundColor: colorTheme["silver-white"], flex: 1}}>
+    <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
       <TabSwitch />
         <View
           style={{
@@ -731,7 +735,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
-              onPress={() => navigation.navigate(ScanScreen)}
+              onPress={() => navigation.navigate("Med Stack", {screen: "Scan"})}
               size="giant"
               style={{
                 backgroundColor: colorTheme["silver-white"],
