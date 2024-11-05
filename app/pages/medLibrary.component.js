@@ -121,7 +121,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             style={{
               backgroundColor: colorTheme["green"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord} This Med</Text>}
           />
@@ -202,7 +202,7 @@ export const MedFolder = ({ navigation }) => {
             border: `solid ${colorTheme["silver-white"]} 3px`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-            height: "64px",
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -219,7 +219,7 @@ export const MedFolder = ({ navigation }) => {
             border: `solid ${colorTheme["silver-white"]} 3px`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-            height: "64px",
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -384,7 +384,7 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
-                <Icon style={{ width: "40px" }} name="clock"></Icon>
+                <Icon style={{ width: 40 }} name="clock"></Icon>
                 <Text style={{ color: colorTheme["green"] }}>
                   Reminder
                 </Text>
@@ -403,7 +403,7 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
-                <Icon style={{ width: "40px" }} name="edit"></Icon>
+                <Icon style={{ width: 40 }} name="edit"></Icon>
                 <Text style={{ color: colorTheme["persian-green"] }}>
                   Medication Info
                 </Text>
@@ -411,7 +411,7 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{
                   backgroundColor: "#fff",
-                  padding: "32px",
+                  padding: 32,
                   borderRadius: 20,
                   gap: 16,
                 }}
@@ -528,7 +528,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
-          <Icon style={{ width: "40px" }} name="clock"></Icon>
+          <Icon style={{ width: 40 }} name="clock"></Icon>
           <Text>
             Lisinoprill
             {/* {medication.name} */}
@@ -618,7 +618,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
               <Button
                 onPress={() => navigation.navigate("Info")}
                 size="giant"
-                style={{ ...styles.orangerButton, borderRadius: "16px" }}
+                style={{ ...styles.orangerButton, borderRadius: 16 }}
                 children={() => <Text category="h2">Confirm</Text>}
               />
               <Button
@@ -626,7 +626,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
                 style={{
                   backgroundColor: colorTheme["silver-white"],
                   borderColor: colorTheme["princeton-orange"],
-                  borderRadius: "16px",
+                  borderRadius: 16,
                 }}
                 children={() => <Text category="h2">Scan Med Again</Text>}
               />
@@ -665,7 +665,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
-          <Icon style={{ width: "40px" }} name="edit"></Icon>
+          <Icon style={{ width: 40 }} name="edit"></Icon>
           <Text>Edit medication Info</Text>
           <Text>
             Lisinoprill
