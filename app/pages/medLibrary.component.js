@@ -20,6 +20,7 @@ import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
 import { HomeScreen } from "./home.component";
+import { ScanScreen } from "./addMed/scanscreen.component";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   return (
@@ -202,7 +203,7 @@ export const MedFolder = ({ navigation }) => {
             flex: 1,
             backgroundColor:
               selectedTab === 1 ? colorTheme["silver-white"] : "#fff",
-            borderColor: colorTheme["white"],
+            borderColor: "silver-white",
             textAlign: "center",
             border: `solid ${colorTheme["silver-white"]} 3`,
             borderTopLeftRadius: 20,
@@ -219,7 +220,7 @@ export const MedFolder = ({ navigation }) => {
             flex: 1,
             backgroundColor:
               selectedTab === 1 ? "#fff" : colorTheme["silver-white"],
-            borderColor: colorTheme["white"],
+            borderColor: colorTheme["silver-white"],
             textAlign: "center",
             border: `solid ${colorTheme["silver-white"]} 3`,
             borderTopLeftRadius: 20,
@@ -600,42 +601,20 @@ export const EditReminderScreen = ({ route, navigation }) => {
           </View>
           <View style={{ gap: 6 }}>
             <Button
-              onPress={() => navigation.navigate("Info")}
+              onPress={() => navigation.goBack()}
               size="giant"
               style={{ ...styles.orangerButton, borderRadius: 16 }}
               children={() => <Text category="h2">Confirm</Text>}
             />
-            <Button
-              size="giant"
-              style={{
-                backgroundColor: colorTheme["silver-white"],
-                borderColor: colorTheme["princeton-orange"],
-                borderRadius: 16,
-              }}
-            />
-              <Input style={{ flex: 6 }} placeholder="10 pill(s) left" />
               <Button
-                style={{ flex: 3 }}
-                onPress={() => navigation.navigate("Current Pill Number")}
-              >
-                Edit
-              </Button>
-            </View>
-            <View style={{ gap: 6 }}>
-              <Button
-                onPress={() => navigation.navigate("Info")}
-                size="giant"
-                style={{ ...styles.orangerButton, borderRadius: 16 }}
-                children={() => <Text category="h2">Confirm</Text>}
-              />
-              <Button
+                onPress={() => navigation.goBack()}
                 size="giant"
                 style={{
                   backgroundColor: colorTheme["silver-white"],
                   borderColor: colorTheme["princeton-orange"],
                   borderRadius: 16,
                 }}
-                children={() => <Text category="h2">Scan Med Again</Text>}
+                children={() => <Text category="h2">Cancel</Text>}
               />
             </View>
           </View>
@@ -745,12 +724,14 @@ export const EditInfoScreen = ({ navigation, route }) => {
           </View>
           <View style={{ gap: 6 }}>
             <Button
+            onPress={() => navigation.goBack()}
               // onPress={() => navigation.navigate("Info", { medication: med })}
               size="giant"
               style={{ ...styles.orangerButton, borderRadius: 16 }}
               children={() => <Text category="h2">Confirm</Text>}
             />
             <Button
+              onPress={() => navigation.navigate(ScanScreen)}
               size="giant"
               style={{
                 backgroundColor: colorTheme["silver-white"],
