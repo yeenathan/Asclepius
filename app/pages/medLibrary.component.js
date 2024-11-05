@@ -33,26 +33,25 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
         style={{
           backgroundColor: "white",
           justifyContent: "center",
-          padding: "40px",
-          paddingTop: "48px",
-          width: "calc(100% - 30px)",
+          padding: 40,
+          paddingTop: 48,
           position: "fixed",
           top: "40%",
-          left: "15px",
-          right: "15px",
-          borderRadius: "20px",
+          left: 15,
+          right: 15,
+          borderRadius: 20,
         }}
       >
         <Text
-          style={{ marginBottom: "18px", paddingHorizontal: "32px" }}
+          style={{ marginBottom: 18, paddingHorizontal: 32 }}
           category="h2"
         >
           {actionWord} This Medication?
         </Text>
-        <Text style={{ width: "270px", margin: "auto", marginBottom: "15px" }}>
+        <Text style={{ width: 270, margin: "auto", marginBottom: 15 }}>
           {description}
         </Text>
-        <View style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
+        <View style={{ display: "flex", flexDirection: "row", gap: 16 }}>
           <Button
             size="small"
             onPress={() => close()}
@@ -60,7 +59,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
               flex: 1,
               backgroundColor: colorTheme["white"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">cancel</Text>}
           />
@@ -71,7 +70,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
               flex: 1,
               backgroundColor: colorTheme["green"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord}</Text>}
           />
