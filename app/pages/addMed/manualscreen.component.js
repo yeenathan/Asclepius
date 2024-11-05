@@ -33,9 +33,9 @@ export const MedConfirm = ({navigation}) => {
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={() => setShowBackModal(false)}
       >
-        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: "2rem", borderRadius: "2rem"}}>
+        <View style={{backgroundColor: "#ffffff", alignItems: "center", padding: 32, borderRadius: 32}}>
           <Text category="p2">Discard changes and exit?</Text>
-          <View style={{ display: "flex", flexDirection: "row", gap: "1rem", marginTop: "1rem", width: "100%" }}>
+          <View style={{ display: "flex", flexDirection: "row", gap: 16, marginTop: 16, width: "100%" }}>
             <Button
               size="small"
               onPress={() => setShowBackModal(false)}
@@ -43,7 +43,7 @@ export const MedConfirm = ({navigation}) => {
                 flex: 1,
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="p1">Cancel</Text>}
             />
@@ -57,7 +57,7 @@ export const MedConfirm = ({navigation}) => {
                 flex: 1,
                 backgroundColor: colorTheme["light-green"],
                 borderColor: colorTheme["light-green"],
-                borderRadius: "1rem",
+                borderRadius: 16,
               }}
               children={() => <Text category="p2">Exit</Text>}
             />
@@ -66,14 +66,14 @@ export const MedConfirm = ({navigation}) => {
     </Modal>
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
-        <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
+      <Layout style={{...styles.masterLayoutNoNav}}>
+        {/* <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
           <Icon 
             fill='#8F9BB3'
             name='edit-2'
           />
-        </View>
+        </View> */}
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
           <InputPill destination={"Edit Med"} navigation={navigation} label="Medication Name" text="Lisinopril" fromManual={true}/>
           <InputPill destination={"Med Time"} navigation={navigation} label="How Often" text="Once per day" fromManual={true}/>
@@ -81,7 +81,7 @@ export const MedConfirm = ({navigation}) => {
           <InputPill destination={"Duration"} navigation={navigation} label="Treatment Duration" text="2 Oct, 2024 - 8 Oct, 2024"/>
           <InputPill label="Refill Reminder" text="10 pill(s) left"/>
         </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate("Home")} />
           <Text category='p2' onPress={() => setShowBackModal(true)}>Discard Input</Text>
         </View>
@@ -98,15 +98,15 @@ export const IconPick = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.90}/>
 
-          <View style={{justifyContent: "center", alignItems: "center", gap: "2rem", flex: 2}}>
-            <Image style={{marginTop: "2rem"}} source={icons[index]}/>
+          <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
+            <Image style={{marginTop: 32}} source={icons[index]}/>
             <Text category='h2'>Pick icon</Text>
           </View>
 
-          <View style={{flexDirection: "row", flexWrap: "wrap", width: "100%", gap: "1rem", marginTop: "3rem", flex: 7, paddingBottom: "4rem"}}>
+          <View style={{flexDirection: "row", flexWrap: "wrap", width: "100%", gap: 16, marginTop: 48, flex: 7, paddingBottom: 64}}>
             {
               icons.map((icon, index) => {
                 return (
@@ -141,16 +141,16 @@ export const ExtraOptions = ({navigation}) => {
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.80}/>
           <Text category='h2'>Would you like to set: (optional)</Text>
-          <View style={{marginTop: "2rem", width: "100%"}}>
-            <View style={{width: "100%", gap: "1rem"}}>
-              <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: "2rem", padding: "1.5rem", justifyContent: "center", gap: "2rem", alignItems: "center"}}>
+          <View style={{marginTop: 32, width: "100%"}}>
+            <View style={{width: "100%", gap: 16}}>
+              <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: 32, padding: 24, justifyContent: "center", gap: 32, alignItems: "center"}}>
                 <Image source={require("@/assets/icons/Vector.svg")}/>
                 <Text onPress={() => navigation.navigate("Duration")} category='h2'>Treatment Duration</Text>
               </View>
-              <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: "2rem", padding: "1.5rem", justifyContent: "center", gap: "2rem", alignItems: "center"}}>
+              <View style={{width: "100%", flexDirection: "row", backgroundColor: colorTheme['light-blue'], borderRadius: 32, padding: 24, justifyContent: "center", gap: 32, alignItems: "center"}}>
                 <Image source={require("@/assets/icons/admin_meds.svg")}/>
                 <Text category='h2'>Refill Reminder</Text>
               </View>
@@ -170,11 +170,11 @@ export const ManualDoseEdit = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.66}/>
           <Text category='h2'>Dose per time</Text>
-          <View style={{flexDirection: "row", gap: "1rem", marginTop: "5rem"}}>
-            <Input style={{width: "5rem"}}></Input>
+          <View style={{flexDirection: "row", gap: 16, marginTop: 80}}>
+            <Input style={{width: 80}}></Input>
             <DisplayDropdown data={["Pill(s)", "mL", "CC", "Unit(s)", "Application(s)", "Pen(s)"]}/>
           </View>
         </View>
@@ -191,7 +191,7 @@ export const ManualNameEdit = ({navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.25}/>
           <Text category='h2'>What is the medication name?</Text>
           <Text category='p1'>Search or type your medication name</Text>
@@ -210,10 +210,10 @@ export const ManualIntervalEdit = ({navigation}) => {
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 7, alignItems: "center", gap: "1rem", width: "100%"}}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.47}/>
           <Text category='h2'>Set Time Interval</Text>
-          <View style={{flexDirection: "row", width: "100%", gap: "1rem", justifyContent: "center", marginTop: "5rem"}}>
+          <View style={{flexDirection: "row", width: "100%", gap: 16, justifyContent: "center", marginTop: 80}}>
             <Text style={{flex: 1}} category='h2'>Every</Text>
             <Input placeholder="#" style={{flex: 2}}></Input>
             <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/>

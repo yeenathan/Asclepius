@@ -21,21 +21,23 @@ const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const ClipIcon = (props) => <Icon {...props} name="clipboard-outline" />;
 
 const BottomTabBar = ({ navigation, state }) => (
-  <BottomNavigation
-    // appearance='noIndicator'
-    selectedIndex={state.index}
-    onSelect={(index) => {
-      navigation.navigate(state.routeNames[index]);
-    }}
-    style={{ minHeight: "4.5rem" }}
-  >
-    <BottomNavigationTab style={{ flex: 1 }} title="HOME" icon={HomeIcon} />
-    <BottomNavigationTab
-      style={{ flex: 1 }}
-      title="MED LIBRARY"
-      icon={ClipIcon}
-    />
-  </BottomNavigation>
+  <>
+    <BottomNavigation
+      // appearance='noIndicator'
+      selectedIndex={state.index}
+      onSelect={(index) => {
+        navigation.navigate(state.routeNames[index]);
+      }}
+      style={{ minHeight: 72 }}
+    >
+      <BottomNavigationTab style={{ flex: 1 }} title="HOME" icon={HomeIcon} />
+      <BottomNavigationTab
+        style={{ flex: 1 }}
+        title="MED LIBRARY"
+        icon={ClipIcon}
+      />
+    </BottomNavigation>
+  </>
 );
 
 export function AppNavigator({ navigation }) {
@@ -49,7 +51,7 @@ export function AppNavigator({ navigation }) {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-          initialParams={{justAdded: false, onboarding: true}}
+          initialParams={{justAdded: false, onboarding: false}}
         />
         <Screen
           name="Med Folder"

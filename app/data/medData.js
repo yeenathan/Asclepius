@@ -1,12 +1,4 @@
-import {
-  CAPSULE_ICON,
-  DROPPER_ICON,
-  INJECTION_ICON,
-  LIQUID_ICON,
-  OINTMENT_ICON,
-  SPRAY_ICON,
-  TABLETS_ICON,
-} from "@/app/images";
+import { CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON } from "@/assets/svgExports";
 
 export const MED_DATA = {
   Mon: [

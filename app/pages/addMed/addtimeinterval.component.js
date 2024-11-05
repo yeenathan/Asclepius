@@ -18,18 +18,18 @@ export const SetTime = ({navigation, route}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "40", backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h6'>Set time interval</Text>
         </View>
 
-        <View style={{ flex: 7, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: "1rem"}}>
+        <View style={{ flex: 7, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 16}}>
           <Text category='p2'>Every</Text>
           <Input
             placeholder='#'
             value={value}
             onChangeText={nextValue => setValue(nextValue)}
-            style={{width: "5rem"}}
+            style={{width: 80}}
           />
           <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/>
         </View>

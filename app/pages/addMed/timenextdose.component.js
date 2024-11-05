@@ -15,7 +15,7 @@ export const TimeDose = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
         <Header navigation={navigation} />
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: "2.5rem", backgroundColor: colorTheme['silver-white'], gap: 10}}>
+        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text category='h6'>Time for next dose?</Text>
             </View>
