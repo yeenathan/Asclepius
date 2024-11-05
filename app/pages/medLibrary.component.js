@@ -34,7 +34,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
           justifyContent: "center",
           padding: 40,
           paddingTop: 48,
-          // width: "calc(100% - 30px)",
+          width: "90%",
           position: "fixed",
           top: "40%",
           left: 15,
