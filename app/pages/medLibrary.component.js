@@ -106,6 +106,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             padding: 40,
             paddingTop: 48,
             width: "100%",
+            height: "25%",
             position: "fixed",
             bottom: "0",
             left: "0",
