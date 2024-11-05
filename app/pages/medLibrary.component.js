@@ -33,14 +33,14 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
         style={{
           backgroundColor: "white",
           justifyContent: "center",
-          padding: "40px",
-          paddingTop: "48px",
+          padding: 40,
+          paddingTop: 48,
           width: "calc(100% - 30px)",
           position: "fixed",
           top: "40%",
-          left: "15px",
-          right: "15px",
-          borderRadius: "20px",
+          left: 15,
+          right: 15,
+          borderRadius: 20,
         }}
       >
         <Text
@@ -49,10 +49,10 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
         >
           {actionWord} This Medication?
         </Text>
-        <Text style={{ width: "270px", margin: "auto", marginBottom: "15px" }}>
+        <Text style={{ width: 270, margin: "auto", marginBottom: 15 }}>
           {description}
         </Text>
-        <View style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
+        <View style={{ display: "flex", flexDirection: "row", gap: 16 }}>
           <Button
             size="small"
             onPress={() => close()}
@@ -60,7 +60,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
               flex: 1,
               backgroundColor: colorTheme["white"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">cancel</Text>}
           />
@@ -71,7 +71,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
               flex: 1,
               backgroundColor: colorTheme["green"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord}</Text>}
           />
@@ -103,18 +103,18 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "40px",
-            paddingTop: "48px",
+            padding: 40,
+            paddingTop: 48,
             width: "100%",
             position: "fixed",
-            bottom: "0",
-            left: "0",
-            borderTopLeftRadius: "80px",
-            borderTopRightRadius: "80px",
+            bottom: 0,
+            left: 0,
+            borderTopLeftRadius: 80,
+            borderTopRightRadius: 80,
           }}
         >
           <Text
-            style={{ marginBottom: "32px", paddingHorizontal: "32px" }}
+            style={{ marginBottom: 32, paddingHorizontal: 32 }}
             category="h2"
           >
             {med.name}
@@ -125,7 +125,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             style={{
               backgroundColor: colorTheme["green"],
               borderColor: colorTheme["green"],
-              borderRadius: "16px",
+              borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord} This Med</Text>}
           />
@@ -203,10 +203,10 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? colorTheme["green"] : "#fff",
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            border: `solid ${colorTheme["white"]} 3`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -220,11 +220,12 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? "#fff" : colorTheme["green"],
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderRadius: "20px 20px 0px 0px",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            border: `solid ${colorTheme["white"]} 3`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -257,9 +258,9 @@ export const MedFolder = ({ navigation }) => {
       >
         <View
           style={{
-            paddingHorizontal: "40px",
-            marginTop: "32px",
-            gap: "16px",
+            paddingHorizontal: 40,
+            marginTop: 32,
+            gap: 16,
           }}
         >
           {data.map((med, index) => (
@@ -314,7 +315,7 @@ export const InfoScreen = ({ navigation, route }) => {
               handleDelete(medication);
             } else {
               handleArchive(medication);
-              navigation.navigate(MedLibNavigator);
+              navigation.goBack();
             }
             setShowArchiveModal(false);
           }}
@@ -393,7 +394,7 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
-                <Icon style={{ width: "40px" }} name="clock"></Icon>
+                <Icon style={{ width: 40 }} name="clock"></Icon>
                 <Text style={{ color: colorTheme["green"] }}>
                   Reminder
                 </Text>
@@ -412,7 +413,7 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
-                <Icon style={{ width: "40px" }} name="edit"></Icon>
+                <Icon style={{ width: 40 }} name="edit"></Icon>
                 <Text style={{ color: colorTheme["persian-green"] }}>
                   Medication Info
                 </Text>
@@ -420,9 +421,9 @@ export const InfoScreen = ({ navigation, route }) => {
               <View
                 style={{
                   backgroundColor: "#fff",
-                  padding: "32px",
+                  padding: 32,
                   borderRadius: 20,
-                  gap: "16px",
+                  gap: 16,
                 }}
               >
                 <View>
@@ -505,7 +506,7 @@ export const InfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["white"],
                 borderColor: colorTheme["green"],
-                borderRadius: "20px",
+                borderRadius: 20,
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
@@ -537,7 +538,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
-          <Icon style={{ width: "40px" }} name="clock"></Icon>
+          <Icon style={{ width: 40 }} name="clock"></Icon>
           <Text>
             Lisinoprill
             {/* {medication.name} */}
@@ -618,7 +619,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
               <Button
                 onPress={() => navigation.navigate("Info")}
                 size="giant"
-                style={{ ...styles.orangerButton, borderRadius: "16px" }}
+                style={{ ...styles.orangerButton, borderRadius: 16 }}
                 children={() => <Text category="h2">Confirm</Text>}
               />
               <Button
@@ -626,7 +627,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
                 style={{
                   backgroundColor: colorTheme["silver-white"],
                   borderColor: colorTheme["princeton-orange"],
-                  borderRadius: "16px",
+                  borderRadius: 16,
                 }}
                 children={() => <Text category="h2">Scan Med Again</Text>}
               />
@@ -665,7 +666,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
       <Header navigation={navigation} />
       <Layout style={styles.masterLayout}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
-          <Icon style={{ width: "40px" }} name="edit"></Icon>
+          <Icon style={{ width: 40 }} name="edit"></Icon>
           <Text>Edit medication Info</Text>
           <Text>
             Lisinoprill
@@ -748,7 +749,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
               style={{
                 backgroundColor: colorTheme["silver-white"],
                 borderColor: colorTheme["princeton-orange"],
-                borderRadius: "16px",
+                borderRadius: 16,
               }}
               children={() => <Text category="h2">Scan Med Again</Text>}
             />
@@ -774,7 +775,7 @@ export const MedLibraryScreen = ({ navigation }) => {
           <Text category="h1" style={{ color: colorTheme["persian-green"] }}>
             Med Library
           </Text>
-          <Icon style={{ width: "40px" }} name="settings-2-outline"></Icon>
+          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
       </Layout>
       <MedFolder navigation={navigation} />
