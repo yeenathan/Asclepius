@@ -204,10 +204,10 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? colorTheme["silver-white"] : "#fff",
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            border: `solid ${colorTheme["silver-white"]} 3`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -221,11 +221,12 @@ export const MedFolder = ({ navigation }) => {
               selectedTab === 1 ? "#fff" : colorTheme["silver-white"],
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
-            borderRadius: "20px 20px 0px 0px",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-            height: "64px",
+            border: `solid ${colorTheme["silver-white"]} 3`,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+            height: 64,
             lineHeight: 64,
           }}
         >
@@ -251,7 +252,6 @@ export const MedFolder = ({ navigation }) => {
   };
 
   return (
-    <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
     <View style={{backgroundColor: colorTheme["silver-white"], flex: 1}}>
       <TabSwitch />
         <View
@@ -277,7 +277,6 @@ export const MedFolder = ({ navigation }) => {
               handleDelete={handleDelete}
             />
           ))}
-        </View>
       </View>
       </View>
   );
@@ -775,7 +774,7 @@ export const MedLibraryScreen = ({ navigation }) => {
         style={{
           ...styles.masterLayout,
           flex: "none",
-          backgroundColor: "#FAF8FE",
+          backgroundColor: "white",
         }}
       >
         <View style={styles.rowContainer}>
