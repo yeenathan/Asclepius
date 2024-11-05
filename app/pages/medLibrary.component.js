@@ -59,7 +59,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
             style={{
               flex: 1,
               backgroundColor: colorTheme["white"],
-              borderColor: colorTheme["green"],
+              borderColor: colorTheme["hunyadi-yellow"],
               borderRadius: 16,
             }}
             children={() => <Text category="h2">cancel</Text>}
@@ -69,8 +69,8 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
             onPress={onPress}
             style={{
               flex: 1,
-              backgroundColor: colorTheme["green"],
-              borderColor: colorTheme["green"],
+              backgroundColor: colorTheme["hunyadi-yellow"],
+              borderColor: colorTheme["hunyadi-yellow"],
               borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord}</Text>}
@@ -125,8 +125,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             size="giant"
             onPress={() => setShowArchiveModal(true)}
             style={{
-              backgroundColor: colorTheme["green"],
-              borderColor: colorTheme["green"],
+              backgroundColor: colorTheme["hunyadi-yellow"],
+              borderColor: colorTheme["hunyadi-yellow"],
               borderRadius: 16,
             }}
             children={() => <Text category="h2">{actionWord} This Med</Text>}
@@ -202,10 +202,10 @@ export const MedFolder = ({ navigation }) => {
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? colorTheme["green"] : "#fff",
+              selectedTab === 1 ? colorTheme["silver-white"] : "#fff",
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
+            border: `solid ${colorTheme["silver-white"]} 3px`,
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
             height: "64px",
@@ -219,10 +219,10 @@ export const MedFolder = ({ navigation }) => {
           style={{
             flex: 1,
             backgroundColor:
-              selectedTab === 1 ? "#fff" : colorTheme["green"],
+              selectedTab === 1 ? "#fff" : colorTheme["silver-white"],
             borderColor: colorTheme["white"],
             textAlign: "center",
-            border: `solid ${colorTheme["white"]} 3px`,
+            border: `solid ${colorTheme["white"]} 4`,
             borderRadius: "20px 20px 0px 0px",
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
@@ -252,6 +252,7 @@ export const MedFolder = ({ navigation }) => {
   };
 
   return (
+    <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
     <View style={{backgroundColor: colorTheme["silver-white"], flex: 1}}>
       <TabSwitch />
         <View
@@ -278,6 +279,7 @@ export const MedFolder = ({ navigation }) => {
             />
           ))}
         </View>
+      </View>
       </View>
   );
 };
@@ -774,7 +776,7 @@ export const MedLibraryScreen = ({ navigation }) => {
         style={{
           ...styles.masterLayout,
           flex: "none",
-          backgroundColor: "#FAF8FE",
+          backgroundColor: "white",
         }}
       >
         <View style={styles.rowContainer}>
