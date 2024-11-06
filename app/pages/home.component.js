@@ -357,7 +357,7 @@ export const Onboarding = ({ navigation }) => {
                 style={{ width: 300, marginBottom: 20 }}
                 resizeMode="contain"
               />
-              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["light-green"] }}></Text>
+              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["light-green"]}}></Text>
               <Text category="p" style={{ fontSize: 8, fontWeight: "bold", color: colorTheme["light-green"] }}>
                 from Asclepius
               </Text>
