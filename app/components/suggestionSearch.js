@@ -1,4 +1,3 @@
-import { suggestions } from "@/app/data/addMedData"
 import { View } from "react-native"
 import { Text, Input, Button } from "@ui-kitten/components"
 import { useState } from "react"
@@ -6,6 +5,15 @@ import { useState } from "react"
 import { styles } from "@/app/stylesheet"
 
 const SuggestionContainer = ({handleFill}) => {
+  const suggestions = [
+    "Lisinopril",
+    "Lidocaine-Menthol",
+    "Lipoc Acid",
+    "Lidopro",
+    "Lipase Concentrate-Hp",
+    "Lidozengel",
+    "Lipitor"
+  ]
   return (
     suggestions.map((suggestion, index) => (
       <Button
@@ -22,28 +30,27 @@ const SuggestionContainer = ({handleFill}) => {
   )
 }
 
-export const SuggestionSearch = () => {
+export const SuggestionSearch = (props) => {
   const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState("");
 
   function handleInput(e) {
-    if (e.target.value) {
-      setValue(e.target.value);
+    if (e) {
+      props.setValue(e);
       setVisible(true);
     }
     else setVisible(false);
   }
 
   function handleFill(value) {
-    setValue(value);
+    props.setValue(value);
     setVisible(false);
   }
 
   return (
     <View>
       <Input
-        placeholder="Input field" onChangeText={handleInput} value={value}
-        style={{width: "100%,", paddingVertical: 3.2}}
+        placeholder="Input field" onChangeText={(e) => handleInput(e)} value={props.value}
+        style={{width: "100%", paddingVertical: 3.2}}
       />
       {
         visible ?

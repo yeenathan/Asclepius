@@ -2,13 +2,18 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-export const DisplayDropdown = ({data}) => {
+export const DisplayDropdown = ({data, setUnit}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+
+  function handleSelect(index) {
+    setSelectedIndex(index);
+    setUnit(data[index-1]);
+  }
 
   return (
     <Select
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}
+      onSelect={index => handleSelect(index)}
       value={data[selectedIndex-1]}
     >
       {data.map((options, index) => {

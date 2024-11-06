@@ -18,8 +18,8 @@ import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
 import { MED_DATA } from "@/app/data/medData";
-import { NavButton } from "@/assets/svgExports";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
  * look at MedList first
@@ -27,6 +27,7 @@ import { NavButton } from "@/assets/svgExports";
  * is a singular item in the list
  */
 const MedCard = (props) => {
+  const data = props.data;
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisible = () => {
     setMenuVisible(!menuVisible);
@@ -47,7 +48,7 @@ const MedCard = (props) => {
         style={{ flex: 4 }}
         size="small"
         onPress={() => {
-          props.handleTaken(data.id);
+          // props.handleTaken(data.id);
           toggleMenuVisible();
         }}
       >
@@ -55,8 +56,6 @@ const MedCard = (props) => {
       </Button>
     </View>
   );
-
-  const data = props.data;
 
   return (
     <>
@@ -106,7 +105,7 @@ const MedCard = (props) => {
         >
           <View style={{ flex: 3, alignItems: "center" }}>
             {/* <Image source={data.icon} /> */}
-            {data.icon}
+            {/* {data.icon} */}
           </View>
           <View style={{ flex: 7, paddingVertical: 16 }}>
             <Text category="p1">{data.time}</Text>
@@ -139,6 +138,27 @@ const MedCard = (props) => {
   );
 };
 
+// const MedCard = ({data}) => {
+//   console.log(data);
+//   return(
+//     <View style={
+//       {
+//         ...styles.rowContainer,
+//         padding: 16,
+//         borderRadius: 32,
+//         justifyContent: "center",
+//         marginVertical: 12,
+//         backgroundColor: colorTheme["light-blue"],
+//       }
+//     }>
+//       <View style={{ flex: 3, alignItems: "center" }}>
+//         {/* {data.icon} */}
+//       </View>
+//       <Text category="p1">{data.time}</Text>
+//       <Text category="h2">{data.name}</Text>
+//     </View>
+//   )
+// }
 
 /**
  * generates the list of medications. uses react native's SectionList (a variation of FlatList) that has section headers. useful cuz we have time values
@@ -155,11 +175,10 @@ const MedList = ({ dayData, handleTaken }) => {
       style={{ flex: 1, width: "100%" }}
       sections={dayData}
       renderItem={({ item }) => (
-        <MedCard handleTaken={handleTaken} data={item} />
+        <MedCard data={item} />
       )}
-      keyExtractor={(item) => item.id}
-      renderSectionHeader={({ section: { hour } }) => (
-        <Text category="p2">{hour}</Text>
+      renderSectionHeader={({ section: { title } }) => (
+        <Text category="p2">{title}</Text>
       )}
       ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: "bold" }}>My Medications</Text>}
       ListFooterComponent={<View style={{ height: 20 }} />}
@@ -195,30 +214,47 @@ function getTime() {
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const value = await AsyncStorage.getItem("ALL");
+        setData(JSON.parse(value));
+      }
+      catch (e) {
+        console.log(e);
+      }
+    }
+    fetchData();
+  }, [route.params])
 
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const [dayData, setDayData] = useState({ data: [] });
-  const [day, setDay] = useState("Mon");
+  const [dayData, setDayData] = useState([]);
+  const [day, setDay] = useState(1);
 
   const [dataFilled, setDataFilled] = useState(false);
-  const handleDataFilled = () => {
-    setDataFilled(true);
-    setDayData(MED_DATA[day]);
-  };
 
   const handleSetDay = (day) => {
     setDay(day);
-    if (dataFilled) {
-      setDayData(MED_DATA[day]);
-    }
+    setDayData(() => {
+      if (data) {
+        return data.filter((med) => { // array [med1, med2]
+          const date = new Date(med.date);
+          if (date.getDay() === day) {
+            return med;
+          };
+        })
+      } else return [];
+    });
   };
 
   const handleTaken = (id) => {
@@ -231,6 +267,28 @@ export const HomeScreen = ({ route, navigation }) => {
       }))
     );
   };
+
+  function format(data) {
+    const groupedData = data.reduce((sections, item) => {
+      const time = new Date(item.time);
+      const hour = `${time.getHours()}:00`;
+      if (!sections[hour]) {
+        sections[hour] = [];
+      }
+      sections[hour].push(item);
+      return sections;
+    }, {});
+
+    const sections = Object.keys(groupedData).map((time) => {
+      return (
+        {
+          title: time,
+          data: groupedData[time]
+        }
+      )
+    })
+    return sections;
+  }
 
   return (
     <>
@@ -286,7 +344,7 @@ export const HomeScreen = ({ route, navigation }) => {
           </Modal>
 
           <View style={styles.rowContainer}>
-            <Text category="h2" style={{ color: colorTheme["persian-green"] }}>
+            <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
@@ -303,7 +361,7 @@ export const HomeScreen = ({ route, navigation }) => {
           {dayData.length > 0 ? (
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={dayData} handleTaken={handleTaken} />
+              <MedList dayData={format(dayData)} handleTaken={handleTaken} />
             </>
           ) : (
             <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
@@ -320,7 +378,7 @@ export const HomeScreen = ({ route, navigation }) => {
               <Button
                 size="giant"
                 style={{ ...styles.orangeButton, borderRadius: 16 }}
-                onPress={handleDataFilled}
+                onPress={() => navigation.navigate("Med Stack", { screen: "Add Med" })}
                 children={() => <Text category="h2">Add Medication</Text>}
               />
             </View>

@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { AddScreen } from "@/app/pages/addMed/addmed.component"
 import { ScanScreen } from "@/app/pages/addMed/scanscreen.component"
-import { ManualNameEdit, ManualIntervalEdit, ManualDoseEdit, ExtraOptions, IconPick, MedConfirm } from "@/app/pages/addMed/manualscreen.component"
+import { ManualNameEdit, ManualIntervalEdit, ManualDoseEdit, ExtraOptions, IconPick, MedConfirm, StartDatePick} from "@/app/pages/addMed/manualscreen.component"
 import { ConfirmScan } from "@/app/pages/addMed/scanconfirm.component"
 import { EditScreen } from "@/app/pages/addMed/editmed.component"
 import { EditInfoScreen, EditReminderScreen } from "@/app/pages/medLibrary.component"
@@ -24,6 +24,7 @@ export const MedNavigator = () => {
       <Stack.Screen name="Manual Name" component={ManualNameEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Manual Interval" component={ManualIntervalEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Manual Dose" component={ManualDoseEdit} options={{headerShown: false}}/>
+      <Stack.Screen name="Start Date" component={StartDatePick} options={{headerShown: false}}/>
       <Stack.Screen name='Extra Options' component={ExtraOptions} options={{headerShown: false}}/>
       <Stack.Screen name='Icon Pick' component={IconPick} options={{headerShown: false}}/>
       <Stack.Screen name='Med Confirm' component={MedConfirm} options={{headerShown: false}}/>
