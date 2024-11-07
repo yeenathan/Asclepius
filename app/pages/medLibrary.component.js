@@ -13,14 +13,11 @@ import {
   Datepicker,
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
-import { MyButton } from "@/app/components/MyButton";
 
 import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
-import { HomeScreen } from "./home.component";
-import { ScanScreen } from "./addMed/scanscreen.component";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, } from "react";
 import { SafeAreaView, SectionList, TouchableOpacity } from "react-native";
 import {
   Button,
@@ -13,11 +13,10 @@ import { View, Image, ScrollView } from "react-native";
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer";
 import { Scroll } from "@/app/components/scrollPicker";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
-
-import { MED_DATA } from "@/app/data/medData";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
@@ -48,7 +47,7 @@ const MedCard = (props) => {
         style={{ flex: 4 }}
         size="small"
         onPress={() => {
-          // props.handleTaken(data.id);
+          props.handleTaken(data.id);
           toggleMenuVisible();
         }}
       >
@@ -56,7 +55,11 @@ const MedCard = (props) => {
       </Button>
     </View>
   );
-
+  const formatTime = () => {
+    const t = new Date(data.time);
+    let minutes = t.getMinutes().toString().length < 2 ? `0${t.getMinutes()}` : t.getMinutes();
+    return `${t.getHours()}:${minutes}`;
+  } 
   return (
     <>
       <Modal
@@ -108,7 +111,7 @@ const MedCard = (props) => {
             {/* {data.icon} */}
           </View>
           <View style={{ flex: 7, paddingVertical: 16 }}>
-            <Text category="p1">{data.time}</Text>
+            <Text category="p1">{formatTime()}</Text>
             <Text category="h2">{data.name}</Text>
             <View style={{ alignItems: "flex-end" }}>
               {data.taken ? (
@@ -175,7 +178,7 @@ const MedList = ({ dayData, handleTaken }) => {
       style={{ flex: 1, width: "100%" }}
       sections={dayData}
       renderItem={({ item }) => (
-        <MedCard data={item} />
+        <MedCard handleTaken={handleTaken} data={item} />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Text category="p2">{title}</Text>
@@ -203,11 +206,6 @@ const Important = (props) => (
 );
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 
-function getTime() {
-  const time = new Date().toLocaleTimeString();
-  return time.slice(0, -8).concat(" ".concat(time.slice(-4).toUpperCase()));
-}
-
 /**
  * main page component
  */
@@ -216,32 +214,73 @@ export const HomeScreen = ({ route, navigation }) => {
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
   const [data, setData] = useState({});
 
+  const [dayData, setDayData] = useState([]);
+  const [day, setDay] = useState(1);
+
   useEffect(() => {
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const value = await AsyncStorage.getItem("ALL");
-        setData(JSON.parse(value));
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchData() {
+        const thisDay = await AsyncStorage.getItem("Day");
+        console.log(thisDay);
+        try {
+          const value = JSON.parse(await AsyncStorage.getItem("ALL"));
+          setData(value);
+          setDayData(() => {
+            if (value) {
+              return value.filter((med) => { // array [med1, med2]
+                const date = new Date(med.date);
+                if (date.getDay() === thisDay) {
+                  return med;
+                };
+              })
+            } else return [];
+          });
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
-      catch (e) {
+      console.log("focus effect")
+      fetchData();
+    }, [])
+  )
+
+  useFocusEffect(
+    useCallback(() => {
+      const loadDay = async () => {
+        try {
+          const data = await AsyncStorage.getItem("Day");
+          console.log(data);
+          if (data) {
+            setDay(JSON.parse(data));
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      loadDay();
+    }, [])
+  )
+
+  useEffect(() => {
+    const saveDay = async () => {
+      try {
+        await AsyncStorage.setItem("Day", JSON.stringify(day));
+      } catch (e) {
         console.log(e);
       }
     }
-    fetchData();
-  }, [route.params])
+    saveDay();
+  }, [day])
 
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
     setOverlayVisible(!overlayVisible);
   };
-
-  const [dayData, setDayData] = useState([]);
-  const [day, setDay] = useState(1);
-
-  const [dataFilled, setDataFilled] = useState(false);
 
   const handleSetDay = (day) => {
     setDay(day);
@@ -258,14 +297,14 @@ export const HomeScreen = ({ route, navigation }) => {
   };
 
   const handleTaken = (id) => {
-    setDayData((previous) =>
-      previous.map((category) => ({
-        ...category,
-        data: category.data.map((med) =>
-          med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
-        ),
-      }))
-    );
+    // setDayData((previous) =>
+    //   previous.map((category) => ({
+    //     ...category,
+    //     data: category.data.map((med) =>
+    //       med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
+    //     ),
+    //   }))
+    // );
   };
 
   function format(data) {

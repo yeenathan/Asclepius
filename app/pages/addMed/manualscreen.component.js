@@ -113,7 +113,6 @@ export const MedConfirm = ({navigation, route}) => {
 export const IconPick = ({navigation, route}) => {
   const [index, setIndex] = useState(0);
   const obj = route.params.obj;
-  console.log(obj);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
@@ -151,7 +150,7 @@ export const IconPick = ({navigation, route}) => {
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Confirm" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Med Confirm", {obj: {
             ...obj,
-            icon: icons[index]
+            // icon: icons[index]
           }})}/>
         </View>
       </Layout>
@@ -161,7 +160,6 @@ export const IconPick = ({navigation, route}) => {
 
 export const ExtraOptions = ({navigation, route}) => {
   const obj = route.params.obj;
-  console.log(obj);
   return (
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
@@ -196,7 +194,6 @@ export const ExtraOptions = ({navigation, route}) => {
 export const StartDatePick = ({navigation, route}) => {
   const obj = route.params.obj;
   const [date, setDate] = useState(new Date());
-  console.log(obj);
   return(
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
@@ -209,8 +206,8 @@ export const StartDatePick = ({navigation, route}) => {
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Next" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Extra Options", { obj: {
             ...obj,
-            date: date,
-            time: new Date("Nov 1, 2024 09:30:00") //9:30
+            date: date.toISOString(),
+            time: Date.now()
           }})}/>
         </View>
       </Layout>
@@ -222,7 +219,6 @@ export const ManualDoseEdit = ({navigation, route}) => {
   const obj = route.params.obj;
   const [doseNumber, setDoseNumber] = useState(0);
   const [doseUnit, setDoseUnit] = useState("");
-  console.log(obj);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
@@ -254,7 +250,6 @@ export const ManualNameEdit = ({navigation}) => {
   const obj = {
     name: name
   }
-  console.log(obj);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
@@ -281,7 +276,6 @@ export const ManualIntervalEdit = ({navigation, route}) => {
   const obj = route.params.obj;
   const [intervalNumber, setIntervalNumber] = useState(0);
   const [intervalUnit, setIntervalUnit] = useState("");
-  console.log(obj);
   return (
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
