@@ -42,7 +42,6 @@ export const MedNavigator = () => {
       <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
 
       <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
-      <Stack.Screen name="Med Detail" component={MedDescription} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }
