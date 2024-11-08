@@ -3,6 +3,7 @@ import {
   MedLibraryScreen,
   InfoScreen,
   EditInfoScreen,
+  MedDescription,
 } from "@/app/pages/medLibrary.component";
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export const MedLibNavigator = () => {
         component={InfoScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="Med Detail" component={MedDescription} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 };

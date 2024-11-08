@@ -18,8 +18,14 @@ import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
+import { HomeScreen } from "./home.component";
+import { ScanScreen } from "./addMed/scanscreen.component";
+import { medication } from "../data/addMedData";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
+  
+  
+  
   return (
     <Modal
       visible={open}
@@ -116,7 +122,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             style={{ marginBottom: 32, paddingHorizontal: 32 }}
             category="h2"
           >
-            {med.name}
+            {med.icon} {med.name}
           </Text>
           <Button
             size="giant"
@@ -269,7 +275,7 @@ export const MedFolder = ({ navigation }) => {
               med={med}
               index={index}
               onPress={() =>
-                navigation.navigate("Info", {
+                navigation.navigate("Med Detail", {
                   medication: med,
                   handleDelete,
                   handleArchive,
@@ -281,6 +287,44 @@ export const MedFolder = ({ navigation }) => {
           ))}
       </View>
       </View>
+  );
+};
+
+export const MedDescription = ({ navigation, route }) => {
+  const medication = route.params.medication;
+
+  return(
+<SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
+        <Text category="h1" style={{ color: "white", marginBottom: 8 }}>
+          {medication.dosage}
+        </Text>
+        <Text style={{ color: "white", marginBottom: 24 }}>
+          {medication.instructions}
+        </Text>
+        <Image
+          source={{ uri: medication.icon }}
+          style={{ width: 195, height: 195, marginBottom: 24 }}
+        />
+        <Text style={{ color: "white", marginBottom: 24 }}>
+          {medication.description}
+        </Text>
+        <Button
+          style={{
+            backgroundColor: colorTheme["white"],
+            borderColor: colorTheme["green"],
+            borderRadius: 20,
+            width: "80%",
+          }}
+          onPress={() => navigation.navigate("Info", {
+            medication: medication,
+          })
+        }
+        >
+          <Text category="h2" style={{ color: "green" }}>View & Edit Details</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 };
 
