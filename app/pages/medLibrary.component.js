@@ -18,9 +18,6 @@ import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
-import { HomeScreen } from "./home.component";
-import { ScanScreen } from "./addMed/scanscreen.component";
-import { medication } from "../data/addMedData";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   
