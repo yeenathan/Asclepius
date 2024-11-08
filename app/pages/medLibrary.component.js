@@ -23,6 +23,9 @@ import { HomeScreen } from "./home.component";
 import { ScanScreen } from "./addMed/scanscreen.component";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
+  
+  
+  
   return (
     <Modal
       visible={open}
@@ -272,7 +275,7 @@ export const MedFolder = ({ navigation }) => {
               med={med}
               index={index}
               onPress={() =>
-                navigation.navigate("Info", {
+                navigation.navigate("Edit Info", {
                   medication: med,
                   handleDelete,
                   handleArchive,
@@ -284,6 +287,42 @@ export const MedFolder = ({ navigation }) => {
           ))}
       </View>
       </View>
+  );
+};
+
+export const MedDescription = ({ navigation, route }) => {
+  const medication = route.params.medication;
+
+  return(
+<SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
+      <Header navigation={navigation} />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
+        <Text category="h1" style={{ color: "white", marginBottom: 8 }}>
+          {medication.name}, {medication.dosage}
+        </Text>
+        <Text style={{ color: "white", marginBottom: 24 }}>
+          {medication.instructions}
+        </Text>
+        <Image
+          source={{ uri: medication.iconUri }}
+          style={{ width: 195, height: 195, marginBottom: 24 }}
+        />
+        <Text style={{ color: "white", marginBottom: 24 }}>
+          {medication.description}
+        </Text>
+        <Button
+          style={{
+            backgroundColor: colorTheme["white"],
+            borderColor: colorTheme["green"],
+            borderRadius: 20,
+            width: "80%",
+          }}
+          onPress={() => navigation.navigate("Info")}
+        >
+          <Text category="h2" style={{ color: colorTheme["green"] }}>View & Edit Details</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 };
 

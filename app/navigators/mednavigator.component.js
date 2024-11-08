@@ -4,7 +4,7 @@ import { ScanScreen } from "@/app/pages/addMed/scanscreen.component"
 import { ManualNameEdit, ManualIntervalEdit, ManualDoseEdit, ExtraOptions, IconPick, MedConfirm } from "@/app/pages/addMed/manualscreen.component"
 import { ConfirmScan } from "@/app/pages/addMed/scanconfirm.component"
 import { EditScreen } from "@/app/pages/addMed/editmed.component"
-import { EditInfoScreen, EditReminderScreen } from "@/app/pages/medLibrary.component"
+import { EditInfoScreen, EditReminderScreen, MedDescription } from "@/app/pages/medLibrary.component"
 import { SetTime } from "@/app/pages/addMed/addtimeinterval.component"
 import { DosePerTime } from "@/app/pages/addMed/dosepertime.component"
 import { NextDose } from "@/app/pages/addMed/nextdose.component"
@@ -42,6 +42,7 @@ export const MedNavigator = () => {
       <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
 
       <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
+      <Stack.Screen name="Med Detail" component={MedDescription} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }
