@@ -20,9 +20,6 @@ import { styles } from "@/app/stylesheet";
 import { LIBRARY_DATA } from "@/app/data/medData";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
-  
-  
-  
   return (
     <Modal
       visible={open}

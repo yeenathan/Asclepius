@@ -66,6 +66,7 @@ const MedCard = (props) => {
         visible={menuVisible}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleMenuVisible}
+        pointerEvents="box-none"
         style={{width: "100%", height: "100%", justifyContent: "flex-end"}}
       >
         <View
@@ -141,28 +142,6 @@ const MedCard = (props) => {
   );
 };
 
-// const MedCard = ({data}) => {
-//   console.log(data);
-//   return(
-//     <View style={
-//       {
-//         ...styles.rowContainer,
-//         padding: 16,
-//         borderRadius: 32,
-//         justifyContent: "center",
-//         marginVertical: 12,
-//         backgroundColor: colorTheme["light-blue"],
-//       }
-//     }>
-//       <View style={{ flex: 3, alignItems: "center" }}>
-//         {/* {data.icon} */}
-//       </View>
-//       <Text category="p1">{data.time}</Text>
-//       <Text category="h2">{data.name}</Text>
-//     </View>
-//   )
-// }
-
 /**
  * generates the list of medications. uses react native's SectionList (a variation of FlatList) that has section headers. useful cuz we have time values
  * but made the data so complex i got lost trying to change the taken status
@@ -212,7 +191,7 @@ const Important = (props) => (
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
 
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState(1);
@@ -225,26 +204,24 @@ export const HomeScreen = ({ route, navigation }) => {
     useCallback(() => {
       async function fetchData() {
         const thisDay = await AsyncStorage.getItem("Day");
-        console.log(thisDay);
         try {
-          const value = JSON.parse(await AsyncStorage.getItem("ALL"));
-          setData(value);
-          setDayData(() => {
-            if (value) {
-              return value.filter((med) => { // array [med1, med2]
-                const date = new Date(med.date);
-                if (date.getDay() === thisDay) {
-                  return med;
-                };
-              })
-            } else return [];
-          });
+          const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+          
+          let meds = []
+          keys && keys.forEach(async (key) => {
+            let med = JSON.parse(await AsyncStorage.getItem(key)) ;
+            // setData((prev) => {
+            //   if (prev) return [...prev, med];
+            //   return [med];
+            meds.push(med);
+            }
+          )
+          setData(meds);
         }
         catch (e) {
           console.log(e);
         }
       }
-      console.log("focus effect")
       fetchData();
     }, [])
   )
@@ -254,7 +231,6 @@ export const HomeScreen = ({ route, navigation }) => {
       const loadDay = async () => {
         try {
           const data = await AsyncStorage.getItem("Day");
-          console.log(data);
           if (data) {
             setDay(JSON.parse(data));
           }
@@ -285,6 +261,7 @@ export const HomeScreen = ({ route, navigation }) => {
   const handleSetDay = (day) => {
     setDay(day);
     setDayData(() => {
+      console.log(data);
       if (data) {
         return data.filter((med) => { // array [med1, med2]
           const date = new Date(med.date);

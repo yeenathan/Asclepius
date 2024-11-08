@@ -27,13 +27,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storeData = async (key, value) => {
   try {
-    let newData = [value];
-    const prevData = await AsyncStorage.getItem(key);
-    if (prevData) {
-      newData = [...JSON.parse(prevData), value];
+    let newKeys = [key];
+    const prevKeys = await AsyncStorage.getItem("KEYS");
+    if (prevKeys) {
+      newKeys = [...JSON.parse(prevKeys), key];
     }
-    const jsonValue = JSON.stringify(newData);
-    await AsyncStorage.setItem(key, jsonValue);
+    await AsyncStorage.setItem("KEYS", JSON.stringify(newKeys));
+    await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     console.log(e);
   }
@@ -99,7 +99,7 @@ export const MedConfirm = ({navigation, route}) => {
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
-            storeData("ALL", obj)
+            storeData(obj.name, obj)
             navigation.navigate("Home")
           }}/>
           <Text category='p2' onPress={() => setShowBackModal(true)}>Discard Input</Text>
