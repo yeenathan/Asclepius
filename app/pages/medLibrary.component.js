@@ -102,8 +102,10 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         visible={showArchiveBottomModal}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleArchiveBottomModal}
-        style={{width: "100%", justifyContent: "flex-end", position: "fixed", bottom: 0}}
+        style={{width: "100%"}}
       >
+        <View style={{width: "100%", justifyContent: "flex-end"}}>
+
         <View
           style={{
             backgroundColor: "white",
@@ -112,9 +114,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             paddingTop: 48,
             width: "100%",
             height: "25%",
-            position: "fixed",
-            bottom: "0",
-            left: "0",
             borderTopLeftRadius: 80,
             borderTopRightRadius: 80,
           }}
@@ -136,6 +135,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             children={() => <Text category="h2">{actionWord} This Med</Text>}
           />
         </View>
+        </View>
+
       </Modal>
       <ArchiveModal
         open={showArchiveModal}
@@ -298,17 +299,13 @@ export const MedDescription = ({ navigation, route }) => {
 <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
         <Text category="h1" style={{ color: "white", marginBottom: 8 }}>
-          {medication.dosage}
+          Dosage
         </Text>
         <Text style={{ color: "white", marginBottom: 24 }}>
-          {medication.instructions}
+          ins
         </Text>
-        <Image
-          source={{ uri: medication.icon }}
-          style={{ width: 195, height: 195, marginBottom: 24 }}
-        />
         <Text style={{ color: "white", marginBottom: 24 }}>
-          {medication.description}
+          description
         </Text>
         <Button
           style={{
