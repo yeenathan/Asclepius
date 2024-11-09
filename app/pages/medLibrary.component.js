@@ -102,10 +102,9 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
         visible={showArchiveBottomModal}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleArchiveBottomModal}
-        style={{width: "100%"}}
+        pointerEvents="box-none"
+        style={{width: "100%", justifyContent: "flex-end", position: "fixed", bottom: 0}}
       >
-        <View style={{width: "100%", justifyContent: "flex-end"}}>
-
         <View
           style={{
             backgroundColor: "white",
@@ -114,6 +113,9 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             paddingTop: 48,
             width: "100%",
             height: "25%",
+            position: "fixed",
+            bottom: "0",
+            left: "0",
             borderTopLeftRadius: 80,
             borderTopRightRadius: 80,
           }}
@@ -135,8 +137,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
             children={() => <Text category="h2">{actionWord} This Med</Text>}
           />
         </View>
-        </View>
-
       </Modal>
       <ArchiveModal
         open={showArchiveModal}
