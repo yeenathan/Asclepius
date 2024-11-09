@@ -64,7 +64,9 @@ export const ScanScreen = ({navigation}) => {
                   style={{}}
                   onPress={async () => {
                     if (camReady) {
-                      setPhoto(await cameraRef.current.takePictureAsync());
+                      const _photo = await cameraRef.current.takePictureAsync()
+                      console.log("what is photo", _photo)
+                      setPhoto(_photo);
                       setPhotoTaken(true);
                     }
                   }}

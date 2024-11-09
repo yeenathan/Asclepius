@@ -19,6 +19,7 @@ import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import UploadImg from "@/app/components/UploadImg";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
  * look at MedList first
@@ -35,6 +36,11 @@ const MedCard = (props) => {
 
   const [reschedule, setReschedule] = useState(false);
 
+  async function handleTaken(data) {
+    let newData = {...data, taken: true, timeTaken: formatTime()};
+    await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
+  }
+
   const defaultView = (
     <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
       <Button style={{ flex: 3 }} size="small">
@@ -47,7 +53,7 @@ const MedCard = (props) => {
         style={{ flex: 4 }}
         size="small"
         onPress={() => {
-          props.handleTaken(data.id);
+          handleTaken(data);
           toggleMenuVisible();
         }}
       >
@@ -120,7 +126,7 @@ const MedCard = (props) => {
               ) : (
                 <Button
                   size="small"
-                  onPress={() => props.handleTaken(data.id)}
+                  onPress={() => handleTaken(data)}
                   style={{
                     ...styles.orangeButton,
                     borderRadius: 64,
@@ -151,13 +157,13 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({ dayData, handleTaken }) => {
+const MedList = ({ dayData }) => {
   return (
     <SectionList
       style={{ flex: 1, width: "100%" }}
       sections={dayData}
       renderItem={({ item }) => (
-        <MedCard handleTaken={handleTaken} data={item} />
+        <MedCard data={item} />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Text category="p2">{title}</Text>
@@ -197,50 +203,59 @@ export const HomeScreen = ({ route, navigation }) => {
   const [day, setDay] = useState(1);
 
   useEffect(() => {
+    // fetchData()
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
 
   useFocusEffect(
     useCallback(() => {
-      async function fetchData() {
-        const thisDay = await AsyncStorage.getItem("Day");
-        try {
-          const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
-          
-          let meds = []
-          keys && keys.forEach(async (key) => {
-            let med = JSON.parse(await AsyncStorage.getItem(key)) ;
-            // setData((prev) => {
-            //   if (prev) return [...prev, med];
-            //   return [med];
-            meds.push(med);
-            }
-          )
-          setData(meds);
-        }
-        catch (e) {
-          console.log(e);
-        }
+      const init = async()=>{
+        const _day = await loadDay();
+        console.log("loaded day", _day)
+        const _data = await fetchData();
+        handleSetDay(Number(_day), _data);
       }
-      fetchData();
+      init();
     }, [])
   )
 
-  useFocusEffect(
-    useCallback(() => {
-      const loadDay = async () => {
-        try {
-          const data = await AsyncStorage.getItem("Day");
-          if (data) {
-            setDay(JSON.parse(data));
-          }
-        } catch (e) {
-          console.log(e);
-        }
+  // useEffect((),[data])
+
+  async function fetchData() {
+    const thisDay = await AsyncStorage.getItem("Day");
+    try {
+      const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+      
+      let meds = []
+      for (let key of keys) {
+        let med = JSON.parse(await AsyncStorage.getItem(key)) ;
+        // setData((prev) => {
+        //   if (prev) return [...prev, med];
+        //   return [med];
+        // console.log("each med", med)
+        meds.push(med);
+        // console.log("meds after push", meds)
       }
-      loadDay();
-    }, [])
-  )
+      console.log("meds", meds, thisDay, keys);
+      setData([...meds]);
+      return meds;
+    }
+    catch (e) {
+      console.log("error", e.message);
+    }
+  }
+  const loadDay = async () => {
+    try {
+      const data = await AsyncStorage.getItem("Day");
+      console.log("what is day", data)
+      if (data) {
+        setDay(JSON.parse(data));
+        return data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   useEffect(() => {
     const saveDay = async () => {
@@ -258,10 +273,9 @@ export const HomeScreen = ({ route, navigation }) => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const handleSetDay = (day) => {
+  const handleSetDay = (day, data=[]) => {
     setDay(day);
     setDayData(() => {
-      console.log(data);
       if (data) {
         return data.filter((med) => { // array [med1, med2]
           const date = new Date(med.date);
@@ -271,17 +285,6 @@ export const HomeScreen = ({ route, navigation }) => {
         })
       } else return [];
     });
-  };
-
-  const handleTaken = (id) => {
-    // setDayData((previous) =>
-    //   previous.map((category) => ({
-    //     ...category,
-    //     data: category.data.map((med) =>
-    //       med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
-    //     ),
-    //   }))
-    // );
   };
 
   function format(data) {
@@ -363,6 +366,7 @@ export const HomeScreen = ({ route, navigation }) => {
             <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
+            <UploadImg/>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
           </View>
 
@@ -377,7 +381,7 @@ export const HomeScreen = ({ route, navigation }) => {
           {dayData.length > 0 ? (
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={format(dayData)} handleTaken={handleTaken} />
+              <MedList dayData={format(dayData)} />
             </>
           ) : (
             <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>

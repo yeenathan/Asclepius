@@ -32,8 +32,9 @@ const storeData = async (key, value) => {
     if (prevKeys) {
       newKeys = [...JSON.parse(prevKeys), key];
     }
+    let valueWithKey = {...value, key: key}
     await AsyncStorage.setItem("KEYS", JSON.stringify(newKeys));
-    await AsyncStorage.setItem(key, JSON.stringify(value));
+    await AsyncStorage.setItem(key, JSON.stringify(valueWithKey));
   } catch (e) {
     console.log(e);
   }
@@ -150,6 +151,8 @@ export const IconPick = ({navigation, route}) => {
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Confirm" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Med Confirm", {obj: {
             ...obj,
+            taken: false,
+            timeTaken: null
             // icon: icons[index]
           }})}/>
         </View>
