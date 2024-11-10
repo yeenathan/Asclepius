@@ -13,25 +13,19 @@ import {
   Datepicker,
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
-import { MyButton } from "@/app/components/MyButton";
 
 import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
 
 import { LIBRARY_DATA } from "@/app/data/medData";
-import { HomeScreen } from "./home.component";
-import { ScanScreen } from "./addMed/scanscreen.component";
-import { medication } from "../data/addMedData";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
-  
-  
-  
   return (
     <Modal
       visible={open}
       backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       onBackdropPress={() => close()}
+      pointerEvent="box-none"
     >
       <View
         style={{

@@ -4,19 +4,30 @@ import { Text } from "@ui-kitten/components";
 import { default as colorTheme } from "@/custom-theme.json";
 
 const DATA = [
-    { date: 7, day: "Mon", id: 1, status: true },
-    { date: 8, day: "Tue", id: 2, status: false },
-    { date: 9, day: "Wed", id: 3, status: false },
-    { date: 10, day: "Thu", id: 4, status: false },
-    { date: 11, day: "Fri", id: 5, status: false },
-    { date: 12, day: "Sat", id: 6, status: false },
-    { date: 13, day: "Sun", id: 7, status: false },
+    { date: 7, day: 1, id: 1, status: true },
+    { date: 8, day: 2, id: 2, status: false },
+    { date: 9, day: 3, id: 3, status: false },
+    { date: 10, day: 4, id: 4, status: false },
+    { date: 11, day: 5, id: 5, status: false },
+    { date: 12, day: 6, id: 6, status: false },
+    { date: 13, day: 0, id: 7, status: false },
 ];
 
 /**
  * Individual calendar item component
  */
 const Item = ({ date, day, handleSetDay, currentDay }) => {
+    function getDayString(dayNum) {
+        switch (dayNum) {
+            case 0 : return "Sun";
+            case 1 : return "Mon";
+            case 2 : return "Tue";
+            case 3 : return "Wed";
+            case 4 : return "Thu";
+            case 5 : return "Fri";
+            case 6 : return "Sat";
+        }
+    }
     return (
         <TouchableOpacity onPress={() => handleSetDay(day)}>
             <View
@@ -33,7 +44,7 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
                 }}
             >
                 <Text category="h2">{date}</Text>
-                <Text category="h2">{day}</Text>
+                <Text category="h2">{getDayString(day)}</Text>
             </View>
         </TouchableOpacity>
     );

@@ -4,7 +4,6 @@ import { Button, Icon, Layout, Text, Modal, IconElement, Input, ButtonGroup, Pro
 import { default as colorTheme } from "@/custom-theme.json"
 import { MyButton } from "@/app/components/MyButton"
 import { styles as buttonStyles } from '@/app/stylesheet';
-import { medication } from '@/app/data/addMedData';
 import { Header } from '@/app/components/header';
 
 

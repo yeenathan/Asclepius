@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, } from "react";
 import { SafeAreaView, SectionList, TouchableOpacity } from "react-native";
 import {
   Button,
@@ -13,13 +13,12 @@ import { View, Image, ScrollView } from "react-native";
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer";
 import { Scroll } from "@/app/components/scrollPicker";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
-import { MED_DATA } from "@/app/data/medData";
-import { NavButton } from "@/assets/svgExports";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
  * look at MedList first
@@ -27,6 +26,7 @@ import { NavButton } from "@/assets/svgExports";
  * is a singular item in the list
  */
 const MedCard = (props) => {
+  const data = props.data;
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisible = () => {
     setMenuVisible(!menuVisible);
@@ -55,15 +55,18 @@ const MedCard = (props) => {
       </Button>
     </View>
   );
-
-  const data = props.data;
-
+  const formatTime = () => {
+    const t = new Date(data.time);
+    let minutes = t.getMinutes().toString().length < 2 ? `0${t.getMinutes()}` : t.getMinutes();
+    return `${t.getHours()}:${minutes}`;
+  } 
   return (
     <>
       <Modal
         visible={menuVisible}
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={toggleMenuVisible}
+        pointerEvents="box-none"
         style={{width: "100%", height: "100%", justifyContent: "flex-end"}}
       >
         <View
@@ -106,10 +109,10 @@ const MedCard = (props) => {
         >
           <View style={{ flex: 3, alignItems: "center" }}>
             {/* <Image source={data.icon} /> */}
-            {data.icon}
+            {/* {data.icon} */}
           </View>
           <View style={{ flex: 7, paddingVertical: 16 }}>
-            <Text category="p1">{data.time}</Text>
+            <Text category="p1">{formatTime()}</Text>
             <Text category="h2">{data.name}</Text>
             <View style={{ alignItems: "flex-end" }}>
               {data.taken ? (
@@ -139,7 +142,6 @@ const MedCard = (props) => {
   );
 };
 
-
 /**
  * generates the list of medications. uses react native's SectionList (a variation of FlatList) that has section headers. useful cuz we have time values
  * but made the data so complex i got lost trying to change the taken status
@@ -157,9 +159,8 @@ const MedList = ({ dayData, handleTaken }) => {
       renderItem={({ item }) => (
         <MedCard handleTaken={handleTaken} data={item} />
       )}
-      keyExtractor={(item) => item.id}
-      renderSectionHeader={({ section: { hour } }) => (
-        <Text category="p2">{hour}</Text>
+      renderSectionHeader={({ section: { title } }) => (
+        <Text category="p2">{title}</Text>
       )}
       ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: "bold" }}>My Medications</Text>}
       ListFooterComponent={<View style={{ height: 20 }} />}
@@ -184,53 +185,126 @@ const Important = (props) => (
 );
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 
-function getTime() {
-  const time = new Date().toLocaleTimeString();
-  return time.slice(0, -8).concat(" ".concat(time.slice(-4).toUpperCase()));
-}
-
 /**
  * main page component
  */
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
+  const [data, setData] = useState(null);
+
+  const [dayData, setDayData] = useState([]);
+  const [day, setDay] = useState(1);
 
   useEffect(() => {
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchData() {
+        const thisDay = await AsyncStorage.getItem("Day");
+        try {
+          const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+          
+          let meds = []
+          keys && keys.forEach(async (key) => {
+            let med = JSON.parse(await AsyncStorage.getItem(key)) ;
+            // setData((prev) => {
+            //   if (prev) return [...prev, med];
+            //   return [med];
+            meds.push(med);
+            }
+          )
+          setData(meds);
+        }
+        catch (e) {
+          console.log(e);
+        }
+      }
+      fetchData();
+    }, [])
+  )
+
+  useFocusEffect(
+    useCallback(() => {
+      const loadDay = async () => {
+        try {
+          const data = await AsyncStorage.getItem("Day");
+          if (data) {
+            setDay(JSON.parse(data));
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      loadDay();
+    }, [])
+  )
+
+  useEffect(() => {
+    const saveDay = async () => {
+      try {
+        await AsyncStorage.setItem("Day", JSON.stringify(day));
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    saveDay();
+  }, [day])
 
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const [dayData, setDayData] = useState({ data: [] });
-  const [day, setDay] = useState("Mon");
-
-  const [dataFilled, setDataFilled] = useState(false);
-  const handleDataFilled = () => {
-    setDataFilled(true);
-    setDayData(MED_DATA[day]);
-  };
-
   const handleSetDay = (day) => {
     setDay(day);
-    if (dataFilled) {
-      setDayData(MED_DATA[day]);
-    }
+    setDayData(() => {
+      console.log(data);
+      if (data) {
+        return data.filter((med) => { // array [med1, med2]
+          const date = new Date(med.date);
+          if (date.getDay() === day) {
+            return med;
+          };
+        })
+      } else return [];
+    });
   };
 
   const handleTaken = (id) => {
-    setDayData((previous) =>
-      previous.map((category) => ({
-        ...category,
-        data: category.data.map((med) =>
-          med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
-        ),
-      }))
-    );
+    // setDayData((previous) =>
+    //   previous.map((category) => ({
+    //     ...category,
+    //     data: category.data.map((med) =>
+    //       med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
+    //     ),
+    //   }))
+    // );
   };
+
+  function format(data) {
+    const groupedData = data.reduce((sections, item) => {
+      const time = new Date(item.time);
+      const hour = `${time.getHours()}:00`;
+      if (!sections[hour]) {
+        sections[hour] = [];
+      }
+      sections[hour].push(item);
+      return sections;
+    }, {});
+
+    const sections = Object.keys(groupedData).map((time) => {
+      return (
+        {
+          title: time,
+          data: groupedData[time]
+        }
+      )
+    })
+    return sections;
+  }
 
   return (
     <>
@@ -286,7 +360,7 @@ export const HomeScreen = ({ route, navigation }) => {
           </Modal>
 
           <View style={styles.rowContainer}>
-            <Text category="h2" style={{ color: colorTheme["persian-green"] }}>
+            <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
@@ -303,7 +377,7 @@ export const HomeScreen = ({ route, navigation }) => {
           {dayData.length > 0 ? (
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={dayData} handleTaken={handleTaken} />
+              <MedList dayData={format(dayData)} handleTaken={handleTaken} />
             </>
           ) : (
             <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
@@ -320,7 +394,7 @@ export const HomeScreen = ({ route, navigation }) => {
               <Button
                 size="giant"
                 style={{ ...styles.orangeButton, borderRadius: 16 }}
-                onPress={handleDataFilled}
+                onPress={() => navigation.navigate("Med Stack", { screen: "Add Med" })}
                 children={() => <Text category="h2">Add Medication</Text>}
               />
             </View>
