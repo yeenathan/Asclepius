@@ -170,7 +170,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
                 toggleArchiveBottomModal();
               }}
             >
-              &#65049;
             </Text>
           </View>
         )}
@@ -310,6 +309,8 @@ export const MedDescription = ({ navigation, route }) => {
           }}
           onPress={() => navigation.navigate("Info", {
             medication: medication,
+            handleArchive: route.params.handleArchive,
+            handleDelete: route.params.handleDelete,
           })
         }
         >
@@ -350,7 +351,7 @@ export const InfoScreen = ({ navigation, route }) => {
               handleDelete(medication);
             } else {
               handleArchive(medication);
-              navigation.goBack();
+              navigation.navigate(MedFolder);
             }
             setShowArchiveModal(false);
           }}
