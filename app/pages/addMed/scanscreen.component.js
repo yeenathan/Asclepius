@@ -56,6 +56,11 @@ export const ScanScreen = ({navigation}) => {
                 <CameraView style={{flex: 5}} ref={cameraRef}
                   onCameraReady={() => setCamReady(true)}
                 />
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
+                  <Text category='p2'> Instructions</Text>
+                  <Text category='p1'> Position your camera over the label</Text>
+                  <Text category='p1'> Ensure the label is clear and well-lit</Text>
+                </View>
                 <Button
                   style={{...styles.orangerButton}}
                   onPress={async () => {
@@ -71,21 +76,19 @@ export const ScanScreen = ({navigation}) => {
                 : <View style={{flex: 5, gap: 12, width: "100%"}}>
                     {/* <Text>{photo.uri}</Text> */}
                     <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
+                    {!uploading?
                     <View style={{flexDirection: "row", gap: 4}}>
                       <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
-                      <Button style={uploading?{...styles.orangeBorder, flex: 1, backgroundColor: colorTheme['princeton-orange-80']}:{...styles.orangerButton, flex: 1}} onPress={async () => {
+                      <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
                         setUploading(true);
                         const _imageData = await Upload(photo.base64, setUploading);
                         navigation.navigate("Confirm Scan", {results: _imageData});
                       }}>Confirm</Button>
                     </View>
+                    : <Text style={{textAlign: "center"}}>Loading...</Text>
+                    }
                   </View>
               }
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
-                <Text category='p2'> Instructions</Text>
-                <Text category='p1'> Position your camera over the label</Text>
-                <Text category='p1'> Ensure the label is clear and well-lit</Text>
-              </View>
             </View>
           }
       </Layout>
