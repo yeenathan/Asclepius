@@ -59,7 +59,6 @@ export const ConfirmScan = ({route, navigation}) => {
   })
 
 
-  const [value, setValue] = React.useState('');
   const [showBackModal, setShowBackModal] = useState(false);
   const results = route.params.results;
   console.log(results);

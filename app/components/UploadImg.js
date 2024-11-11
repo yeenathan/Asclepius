@@ -4,7 +4,7 @@ import { Button } from '@ui-kitten/components';
 
 export const Upload = async (data, setUploading) => {
 
-  const _url = await fetch("http://localhost:7071/api/generateSASUrl", {
+  const _url = await fetch("https://remedify-ocr.azurewebsites.net/api/generateSASUrl?", {
     method:"POST",
     body:JSON.stringify({
       imgname:"myimg.jpg"
@@ -24,7 +24,7 @@ export const Upload = async (data, setUploading) => {
     }
   })
 
-  const _ocr = await fetch("http://localhost:7071/api/doocr", {
+  const _ocr = await fetch("https://remedify-ocr.azurewebsites.net/api/doOCR?", {
     method:"POST",
     body:JSON.stringify({
       imgname:"myimg.jpg"
