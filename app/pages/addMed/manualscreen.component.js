@@ -203,7 +203,7 @@ export const StartDatePick = ({navigation, route}) => {
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.7}/>
           <Text category='h2'>Select the starting date and time</Text>
-          <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
+          {/* <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/> */}
           <DateTime />
         </View>
         <View style={{flex: 2, width: "100%"}}>

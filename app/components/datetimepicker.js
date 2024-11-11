@@ -4,12 +4,12 @@ import { useState } from "react";
 
 export default function DateTime() {
     const [date, setDate] = useState(new Date());
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [mode, setMode] = useState('date');
 
     const onChange = (e, selectedDate) => {
         setDate(selectedDate); 
-        setShow(false);
+        setShow(true);
     };
 
     const showMode = (modeToShow) => {
@@ -19,7 +19,6 @@ export default function DateTime() {
 
     return (
         <>
-        <Button title="Show Date Picker" onPress={() => showMode("date")} />
         {
             show && (
                 <DateTimePicker 
