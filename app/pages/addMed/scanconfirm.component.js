@@ -63,6 +63,12 @@ export const ConfirmScan = ({route, navigation}) => {
   const DIN = route.params.results;
   console.log("DIN", DIN);
 
+  async function getDrugInfo(DIN) {
+    const _drugInfo = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+    console.log(_drugInfo);
+    console.log(_drugInfo[0].brand_name);
+  }
+
   return (
     <>
     <Modal
@@ -104,6 +110,7 @@ export const ConfirmScan = ({route, navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <ProgressBar size='giant' style={{width: "100%", marginBottom: 80}} animating={false} progress={.5}/>
+        <Button onPress={() => getDrugInfo(DIN)}/>
         <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
           <Image source={require("@/assets/icons/Capsule.svg")}/>
           <Button 
@@ -118,7 +125,6 @@ export const ConfirmScan = ({route, navigation}) => {
             name='edit-2'
           /> */}
         </View>
-
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
           <InputPill label="Medication Name" text="Lisinopril" destination={"Edit Med"} navigation={navigation}/>
           <InputPill label="How Often" text="Once per day" destination={"Med Time"} navigation={navigation}/>

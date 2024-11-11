@@ -4,6 +4,8 @@ import { Button, Layout, ProgressBar, Text, Input, Modal, Icon, Datepicker} from
 import { MyButton } from "@/app/components/MyButton"
 import { DisplayDropdown } from "@/app/components/displayDropdown"
 import { InputPill } from '@/app/pages/addMed/scanconfirm.component';
+import DateTime from '@/app/components/datetimepicker'
+
 
 import { default as colorTheme } from "@/custom-theme.json"
 import {
@@ -204,7 +206,8 @@ export const StartDatePick = ({navigation, route}) => {
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.7}/>
           <Text category='h2'>Select the starting date and time</Text>
-          <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
+          {/* <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/> */}
+          <DateTime />
         </View>
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Next" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Extra Options", { obj: {
