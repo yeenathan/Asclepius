@@ -38,6 +38,7 @@ const MedCard = (props) => {
   async function handleTaken(data) {
     let newData = {...data, taken: true, timeTaken: formatTime()};
     await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
+    props.init();
   }
 
   const defaultView = (
@@ -156,13 +157,13 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({ dayData }) => {
+const MedList = ({ dayData, init }) => {
   return (
     <SectionList
       style={{ flex: 1, width: "100%" }}
       sections={dayData}
       renderItem={({ item }) => (
-        <MedCard data={item} />
+        <MedCard data={item} init={init}/>
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Text category="p2">{title}</Text>
@@ -196,7 +197,6 @@ const Important = (props) => (
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
-  const [data, setData] = useState(null);
 
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState(1);
@@ -226,7 +226,6 @@ export const HomeScreen = ({ route, navigation }) => {
   async function fetchData() {
     try {
       const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
-      
       let meds = []
       if (keys) {
         for (let key of keys) {
@@ -234,7 +233,6 @@ export const HomeScreen = ({ route, navigation }) => {
           meds.push(med);
         }
       }
-      
       return meds;
     }
     catch (e) {
@@ -361,7 +359,7 @@ export const HomeScreen = ({ route, navigation }) => {
           </Modal>
 
           <View style={styles.rowContainer}>
-            <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
+            <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
@@ -378,7 +376,7 @@ export const HomeScreen = ({ route, navigation }) => {
           {dayData.length > 0 ? (
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={format(dayData)} />
+              <MedList dayData={format(dayData)} init={init}/>
             </>
           ) : (
             <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
