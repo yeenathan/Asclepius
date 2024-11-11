@@ -76,7 +76,10 @@ export const ScanScreen = ({navigation}) => {
                 : <View style={{flex: 5, gap: 12, width: "100%"}}>
                     {/* <Text>{photo.uri}</Text> */}
                     <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
-                    <Button onPress={() => setPhotoTaken(false)}>Retake</Button>
+                    <View style={{flexDirection: "row"}}>
+                      <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
+                      <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
+                    </View>
                   </View>
               }
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>

@@ -19,7 +19,6 @@ import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import UploadImg from "@/app/components/UploadImg";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
  * look at MedList first
@@ -207,11 +206,16 @@ export const HomeScreen = ({ route, navigation }) => {
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
 
+  const init = async () => {
+    const _day = await loadDay() || 1;
+    const _data = await fetchData();
+    handleSetDay(Number(_day), _data);
+  }
+  
   useFocusEffect(
     useCallback(() => {
-      const init = async()=>{
-        const _day = await loadDay();
-        console.log("loaded day", _day)
+      const init = async () => {
+        const _day = await loadDay() || 1;
         const _data = await fetchData();
         handleSetDay(Number(_day), _data);
       }
@@ -219,25 +223,15 @@ export const HomeScreen = ({ route, navigation }) => {
     }, [])
   )
 
-  // useEffect((),[data])
-
   async function fetchData() {
-    const thisDay = await AsyncStorage.getItem("Day");
     try {
       const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
       
       let meds = []
       for (let key of keys) {
         let med = JSON.parse(await AsyncStorage.getItem(key)) ;
-        // setData((prev) => {
-        //   if (prev) return [...prev, med];
-        //   return [med];
-        // console.log("each med", med)
         meds.push(med);
-        // console.log("meds after push", meds)
       }
-      console.log("meds", meds, thisDay, keys);
-      setData([...meds]);
       return meds;
     }
     catch (e) {
@@ -246,11 +240,10 @@ export const HomeScreen = ({ route, navigation }) => {
   }
   const loadDay = async () => {
     try {
-      const data = await AsyncStorage.getItem("Day");
-      console.log("what is day", data)
-      if (data) {
-        setDay(JSON.parse(data));
-        return data;
+      const day = await AsyncStorage.getItem("Day");
+      if (day) {
+        setDay(JSON.parse(day));
+        return day;
       }
     } catch (e) {
       console.log(e);
@@ -258,22 +251,24 @@ export const HomeScreen = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    const saveDay = async () => {
+    saveDay();
+    init();
+  }, [day])
+  
+  const saveDay = async () => {
       try {
         await AsyncStorage.setItem("Day", JSON.stringify(day));
       } catch (e) {
         console.log(e);
       }
     }
-    saveDay();
-  }, [day])
 
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const handleSetDay = (day, data=[]) => {
+  const handleSetDay = (day, data=null) => {
     setDay(day);
     setDayData(() => {
       if (data) {
@@ -366,7 +361,6 @@ export const HomeScreen = ({ route, navigation }) => {
             <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
-            <UploadImg/>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
           </View>
 
