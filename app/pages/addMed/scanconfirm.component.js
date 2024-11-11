@@ -35,7 +35,7 @@ export const InputPill = ({label, text, navigation=null, destination=null, fromM
   )
 }
 
-export const ConfirmScan = ({navigation}) => {
+export const ConfirmScan = ({route, navigation}) => {
   const styles = StyleSheet.create({
     icon: {
       width: 100,
@@ -59,12 +59,10 @@ export const ConfirmScan = ({navigation}) => {
   })
 
 
-
   const [value, setValue] = React.useState('');
-
-  
-
   const [showBackModal, setShowBackModal] = useState(false);
+  const results = route.params.results;
+  console.log(results);
 
   return (
     <>

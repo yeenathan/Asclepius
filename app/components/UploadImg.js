@@ -2,7 +2,7 @@ import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from '@ui-kitten/components';
 
-export const Upload = async (data) => {
+export const Upload = async (data, setUploading) => {
 
   const _url = await fetch("http://localhost:7071/api/generateSASUrl", {
     method:"POST",
@@ -32,5 +32,6 @@ export const Upload = async (data) => {
   });
 
   const _result = await _ocr.json();
-  console.log("what is the result", _result);
+  setUploading(false);
+  return _result.analyzeResult.readResults;
 }

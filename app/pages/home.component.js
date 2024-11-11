@@ -234,6 +234,7 @@ export const HomeScreen = ({ route, navigation }) => {
           meds.push(med);
         }
       }
+      
       return meds;
     }
     catch (e) {

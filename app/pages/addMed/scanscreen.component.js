@@ -10,15 +10,18 @@ import { default as colorTheme } from "@/custom-theme.json"
 
 import { Header } from '@/app/components/header';
 
+import { Upload } from "@/app/components/UploadImg"
+
 export const ScanScreen = ({navigation}) => {
 
   const cameraRef = useRef();
   const [camReady, setCamReady] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState(null);
-  const [azureData, setAzureData] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
   const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
+
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     async function getMediaPermissions() {
@@ -27,13 +30,6 @@ export const ScanScreen = ({navigation}) => {
     }
     getMediaPermissions();
   }, [permission, cameraRef])
-
-  async function callAzure(photo) {
-    fetch("https://remedify-ocr-vision.azurewebsites.net/api/httpTrigger1")
-    .then(response => console.log(response))
-    .then(data => console.log(data));
-    return;
-  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -61,11 +57,10 @@ export const ScanScreen = ({navigation}) => {
                   onCameraReady={() => setCamReady(true)}
                 />
                 <Button
-                  style={{}}
+                  style={{...styles.orangerButton}}
                   onPress={async () => {
                     if (camReady) {
                       const _photo = await cameraRef.current.takePictureAsync()
-                      console.log("what is photo", _photo)
                       setPhoto(_photo);
                       setPhotoTaken(true);
                     }
@@ -76,9 +71,13 @@ export const ScanScreen = ({navigation}) => {
                 : <View style={{flex: 5, gap: 12, width: "100%"}}>
                     {/* <Text>{photo.uri}</Text> */}
                     <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
-                    <View style={{flexDirection: "row"}}>
+                    <View style={{flexDirection: "row", gap: 4}}>
                       <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
-                      <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
+                      <Button style={uploading?{...styles.orangeBorder, flex: 1, backgroundColor: colorTheme['princeton-orange-80']}:{...styles.orangerButton, flex: 1}} onPress={async () => {
+                        setUploading(true);
+                        const _imageData = await Upload(photo.base64, setUploading);
+                        navigation.navigate("Confirm Scan", {results: _imageData});
+                      }}>Confirm</Button>
                     </View>
                   </View>
               }
@@ -87,7 +86,6 @@ export const ScanScreen = ({navigation}) => {
                 <Text category='p1'> Position your camera over the label</Text>
                 <Text category='p1'> Ensure the label is clear and well-lit</Text>
               </View>
-              <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={async () => setAzureData(await callAzure(photo))} />
             </View>
           }
       </Layout>
