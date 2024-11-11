@@ -228,9 +228,11 @@ export const HomeScreen = ({ route, navigation }) => {
       const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
       
       let meds = []
-      for (let key of keys) {
-        let med = JSON.parse(await AsyncStorage.getItem(key)) ;
-        meds.push(med);
+      if (keys) {
+        for (let key of keys) {
+          let med = JSON.parse(await AsyncStorage.getItem(key)) ;
+          meds.push(med);
+        }
       }
       return meds;
     }
