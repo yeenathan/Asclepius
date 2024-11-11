@@ -60,8 +60,8 @@ export const ConfirmScan = ({route, navigation}) => {
 
 
   const [showBackModal, setShowBackModal] = useState(false);
-  const results = route.params.results;
-  console.log(results);
+  const DIN = route.params.results;
+  console.log("DIN", DIN);
 
   return (
     <>

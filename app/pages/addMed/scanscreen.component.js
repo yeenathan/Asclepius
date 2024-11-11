@@ -31,6 +31,17 @@ export const ScanScreen = ({navigation}) => {
     getMediaPermissions();
   }, [permission, cameraRef])
 
+  function getDIN(imageData) {
+    const _DIN_REGEX = /^[0-9]{8}$/;
+    // console.log(_DIN_REGEX.test("12345678"));
+    const _lines = imageData[0].lines;
+    for (const line of _lines) {
+      for (const word of line.words) {
+        if (_DIN_REGEX.test(word.text)) return word.text;
+      }
+    }
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
@@ -82,7 +93,7 @@ export const ScanScreen = ({navigation}) => {
                       <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
                         setUploading(true);
                         const _imageData = await Upload(photo.base64, setUploading);
-                        navigation.navigate("Confirm Scan", {results: _imageData});
+                        navigation.navigate("Confirm Scan", {results: getDIN(_imageData)});
                       }}>Confirm</Button>
                     </View>
                     : <Text style={{textAlign: "center"}}>Loading...</Text>
