@@ -290,6 +290,7 @@ export const MedDescription = ({ navigation, route }) => {
 
   return(
 <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
+      <Header navigation={navigation} />
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
         <Text category="h1" style={{ color: "white", marginBottom: 8 }}>
           Dosage
@@ -313,8 +314,8 @@ export const MedDescription = ({ navigation, route }) => {
             handleDelete: route.params.handleDelete,
           })
         }
-        >
-          <Text category="h2" style={{ color: "green" }}>View & Edit Details</Text>
+        >d
+          <Text style={{ color: "green" }}>View & Edit Details</Text>
         </Button>
       </View>
     </SafeAreaView>
