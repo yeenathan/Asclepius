@@ -288,17 +288,20 @@ export const MedFolder = ({ navigation }) => {
 export const MedDescription = ({ navigation, route }) => {
   const medication = route.params.medication;
 
-  return(
-<SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <Header navigation={navigation} />
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
-        <Text category="h1" style={{ color: "white", marginBottom: 8 }}>
+        <Text style={{ color: "white", marginBottom: 30 }}>
           Dosage
         </Text>
-        <Text style={{ color: "white", marginBottom: 24 }}>
+        <Text style={{ color: "white", marginBottom: 30 }}>
           ins
         </Text>
-        <Text style={{ color: "white", marginBottom: 24 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
+          {medication.icon}
+        </View>
+        <Text style={{ color: "white", marginBottom: 30 }}>
           description
         </Text>
         <Button
@@ -312,15 +315,15 @@ export const MedDescription = ({ navigation, route }) => {
             medication: medication,
             handleArchive: route.params.handleArchive,
             handleDelete: route.params.handleDelete,
-          })
-        }
-        >d
+          })}
+        >.
           <Text style={{ color: "green" }}>View & Edit Details</Text>
         </Button>
       </View>
     </SafeAreaView>
   );
 };
+
 
 export const InfoScreen = ({ navigation, route }) => {
   const [showArchiveModal, setShowArchiveModal] = useState(false);
