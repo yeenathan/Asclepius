@@ -9,7 +9,6 @@ export const DisplayDropdown = ({data, setUnit}) => {
     setSelectedIndex(index);
     setUnit(data[index-1]);
   }
-
   return (
     <Select
       selectedIndex={selectedIndex}

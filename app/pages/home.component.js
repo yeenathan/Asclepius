@@ -35,6 +35,12 @@ const MedCard = (props) => {
 
   const [reschedule, setReschedule] = useState(false);
 
+  async function handleTaken(data) {
+    let newData = {...data, taken: true, timeTaken: formatTime()};
+    await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
+    props.init();
+  }
+
   const defaultView = (
     <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
       <Button style={{ flex: 3 }} size="small">
@@ -47,7 +53,7 @@ const MedCard = (props) => {
         style={{ flex: 4 }}
         size="small"
         onPress={() => {
-          props.handleTaken(data.id);
+          handleTaken(data);
           toggleMenuVisible();
         }}
       >
@@ -91,18 +97,21 @@ const MedCard = (props) => {
             !data.taken
               ? {
                   ...styles.rowContainer,
-                  padding: 16,
+                  padding: 12,
+                  paddingBottom: 18,
                   borderRadius: 32,
                   justifyContent: "center",
-                  marginVertical: 24,
+                  marginTop: 12,
+                  marginBottom: 24,
                   backgroundColor: colorTheme["light-blue"],
                 }
               : {
                   ...styles.rowContainer,
                   padding: 16,
+                  paddingBottom: 4,
                   borderRadius: 32,
                   justifyContent: "center",
-                  marginVertical: 8,
+                  marginVertical: 12,
                   backgroundColor: colorTheme["light-blue-80"],
                 }
           }
@@ -111,16 +120,16 @@ const MedCard = (props) => {
             {/* <Image source={data.icon} /> */}
             {/* {data.icon} */}
           </View>
-          <View style={{ flex: 7, paddingVertical: 16 }}>
+          <View style={{ flex: 7, paddingVertical: 8 }}>
             <Text category="p1">{formatTime()}</Text>
             <Text category="h2">{data.name}</Text>
-            <View style={{ alignItems: "flex-end" }}>
+            <View style={{ alignItems: "flex-end", marginTop: 4 }}>
               {data.taken ? (
                 <Text category="p1">Taken at {data.timeTaken}</Text>
               ) : (
                 <Button
                   size="small"
-                  onPress={() => props.handleTaken(data.id)}
+                  onPress={() => handleTaken(data)}
                   style={{
                     ...styles.orangeButton,
                     borderRadius: 64,
@@ -151,13 +160,13 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({ dayData, handleTaken }) => {
+const MedList = ({ dayData, init }) => {
   return (
     <SectionList
       style={{ flex: 1, width: "100%" }}
       sections={dayData}
       renderItem={({ item }) => (
-        <MedCard handleTaken={handleTaken} data={item} />
+        <MedCard data={item} init={init}/>
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Text category="p2">{title}</Text>
@@ -191,77 +200,81 @@ const Important = (props) => (
 export const HomeScreen = ({ route, navigation }) => {
   const [addedMedModalVisible, setAddedMedModalVisible] = useState(route.params.justAdded);
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
-  const [data, setData] = useState(null);
 
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState(1);
 
   useEffect(() => {
+    // fetchData()
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
 
+  const init = async () => {
+    const _day = await loadDay() || 1;
+    const _data = await fetchData();
+    handleSetDay(Number(_day), _data);
+  }
+  
   useFocusEffect(
     useCallback(() => {
-      async function fetchData() {
-        const thisDay = await AsyncStorage.getItem("Day");
-        try {
-          const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
-          
-          let meds = []
-          keys && keys.forEach(async (key) => {
-            let med = JSON.parse(await AsyncStorage.getItem(key)) ;
-            // setData((prev) => {
-            //   if (prev) return [...prev, med];
-            //   return [med];
-            meds.push(med);
-            }
-          )
-          setData(meds);
-        }
-        catch (e) {
-          console.log(e);
-        }
+      const init = async () => {
+        const _day = await loadDay() || 1;
+        const _data = await fetchData();
+        handleSetDay(Number(_day), _data);
       }
-      fetchData();
+      init();
     }, [])
   )
 
-  useFocusEffect(
-    useCallback(() => {
-      const loadDay = async () => {
-        try {
-          const data = await AsyncStorage.getItem("Day");
-          if (data) {
-            setDay(JSON.parse(data));
-          }
-        } catch (e) {
-          console.log(e);
+  async function fetchData() {
+    try {
+      const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+      let meds = []
+      if (keys) {
+        for (let key of keys) {
+          let med = JSON.parse(await AsyncStorage.getItem(key)) ;
+          meds.push(med);
         }
       }
-      loadDay();
-    }, [])
-  )
+      return meds;
+    }
+    catch (e) {
+      console.log("error", e.message);
+    }
+  }
+  const loadDay = async () => {
+    try {
+      const day = await AsyncStorage.getItem("Day");
+      if (day) {
+        setDay(JSON.parse(day));
+        return day;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   useEffect(() => {
-    const saveDay = async () => {
+    saveDay();
+    init();
+  }, [day])
+  
+  const saveDay = async () => {
       try {
         await AsyncStorage.setItem("Day", JSON.stringify(day));
       } catch (e) {
         console.log(e);
       }
     }
-    saveDay();
-  }, [day])
 
   const [overlayVisible, setOverlayVisible] = useState(false);
   const toggleOverlayVisible = () => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const handleSetDay = (day) => {
+  const handleSetDay = (day, data=null) => {
     setDay(day);
     setDayData(() => {
-      console.log(data);
       if (data) {
         return data.filter((med) => { // array [med1, med2]
           const date = new Date(med.date);
@@ -271,17 +284,6 @@ export const HomeScreen = ({ route, navigation }) => {
         })
       } else return [];
     });
-  };
-
-  const handleTaken = (id) => {
-    // setDayData((previous) =>
-    //   previous.map((category) => ({
-    //     ...category,
-    //     data: category.data.map((med) =>
-    //       med.id === id ? { ...med, taken: true, timeTaken: getTime() } : med
-    //     ),
-    //   }))
-    // );
   };
 
   function format(data) {
@@ -360,7 +362,7 @@ export const HomeScreen = ({ route, navigation }) => {
           </Modal>
 
           <View style={styles.rowContainer}>
-            <Text onPress={() => AsyncStorage.clear()} category="h2" style={{ color: colorTheme["persian-green"] }}>
+            <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
               Good morning, Nathan.
             </Text>
             <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
@@ -377,7 +379,7 @@ export const HomeScreen = ({ route, navigation }) => {
           {dayData.length > 0 ? (
             <>
               <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={format(dayData)} handleTaken={handleTaken} />
+              <MedList dayData={format(dayData)} init={init}/>
             </>
           ) : (
             <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>

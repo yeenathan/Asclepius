@@ -29,7 +29,9 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
         }
     }
     return (
-        <TouchableOpacity onPress={() => handleSetDay(day)}>
+        <TouchableOpacity onPress={() => {
+            handleSetDay(day);
+        }}>
             <View
                 style={{
                     marginHorizontal: 8, // Column gap between days

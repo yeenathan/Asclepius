@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View} from "react-native";
 import { Text, Layout, Button, } from "@ui-kitten/components";
 import { Header } from '@/app/components/header';
@@ -10,6 +10,8 @@ import { styles } from '@/app/stylesheet';
 
 export const EditScreen = ({navigation, route}) => {
   const fromManual=route.params.fromManual;
+  const obj = route.params.obj;
+  const [name, setName] = useState("");
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
@@ -20,12 +22,12 @@ export const EditScreen = ({navigation, route}) => {
         </View>
 
         <View style={{ flex: 8, width: '70%'}}>
-          <SuggestionSearch />
+          <SuggestionSearch value={name} setValue={setName}/>
         </View>
         <View style={{ flex: 3, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
-              if (fromManual) navigation.navigate("Med Confirm");
-              else navigation.navigate('Confirm Med');
+              if (fromManual) navigation.navigate("Med Confirm", {obj: {...obj, name: name}});
+              else navigation.navigate('Confirm Scan', {obj: {...obj, name: name}});
             }} />
         </View>
       </Layout>

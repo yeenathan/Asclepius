@@ -5,6 +5,7 @@ import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 import { DisplayDropdown } from '../../components/displayDropdown';
 import { DoseMonth } from '@/app/components/dateNextDose';
+import { Datepicker } from '@ui-kitten/components';
 
 
 import { default as colorTheme } from "@/custom-theme.json"
@@ -19,15 +20,17 @@ export const SetDuration = ({navigation}) => {
   const [value3, setValue3] = React.useState('');
   const [value4, setValue4] = React.useState('');
 
+  const [date, setDate] = React.useState(new Date());
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text category='h6'>Set date Duration</Text>
+          <Text category='h6'>Set date</Text>
         </View>
 
-        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 16}}>
+        {/* <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 16}}>
           <Input
             placeholder='#'
             value={value}
@@ -42,7 +45,6 @@ export const SetDuration = ({navigation}) => {
             onChangeText={nextValue => setValue2(nextValue)}
             style={{width: 80}}
           />   
-          {/* <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/> */}
         </View>
 
         <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
@@ -63,8 +65,8 @@ export const SetDuration = ({navigation}) => {
                 onChangeText={nextValue => setValue4(nextValue)}
                 style={{width: 80}}
             />
-            {/* <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/> */}
-        </View>
+        </View> */}
+        <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Extra Options')} />
