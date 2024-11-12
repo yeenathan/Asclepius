@@ -97,18 +97,21 @@ const MedCard = (props) => {
             !data.taken
               ? {
                   ...styles.rowContainer,
-                  padding: 16,
+                  padding: 12,
+                  paddingBottom: 18,
                   borderRadius: 32,
                   justifyContent: "center",
-                  marginVertical: 24,
+                  marginTop: 12,
+                  marginBottom: 24,
                   backgroundColor: colorTheme["light-blue"],
                 }
               : {
                   ...styles.rowContainer,
                   padding: 16,
+                  paddingBottom: 4,
                   borderRadius: 32,
                   justifyContent: "center",
-                  marginVertical: 8,
+                  marginVertical: 12,
                   backgroundColor: colorTheme["light-blue-80"],
                 }
           }
@@ -117,10 +120,10 @@ const MedCard = (props) => {
             {/* <Image source={data.icon} /> */}
             {/* {data.icon} */}
           </View>
-          <View style={{ flex: 7, paddingVertical: 16 }}>
+          <View style={{ flex: 7, paddingVertical: 8 }}>
             <Text category="p1">{formatTime()}</Text>
             <Text category="h2">{data.name}</Text>
-            <View style={{ alignItems: "flex-end" }}>
+            <View style={{ alignItems: "flex-end", marginTop: 4 }}>
               {data.taken ? (
                 <Text category="p1">Taken at {data.timeTaken}</Text>
               ) : (
