@@ -31,9 +31,9 @@ export const MedNavigator = () => {
     
       <Stack.Screen name="Confirm Scan" component={ConfirmScan} options={{headerShown: false}}/>
 
-      <Stack.Screen name="Edit Med" component={EditScreen} initialParams={{fromManual: false}} options={{headerShown: false}}/>
-      <Stack.Screen name="Med Time" component={SetTime} initialParams={{fromManual: false}} options={{headerShown: false}} />
-      <Stack.Screen name="Dose Time" component={DosePerTime} initialParams={{fromManual: false}} options={{headerShown: false}} />
+      <Stack.Screen name="Edit Name" component={EditScreen} initialParams={{fromManual: false}} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Time" component={SetTime} initialParams={{fromManual: false}} options={{headerShown: false}} />
+      <Stack.Screen name="Edit Dose" component={DosePerTime} initialParams={{fromManual: false}} options={{headerShown: false}} />
 
       <Stack.Screen name="Next Dose" component={NextDose} options={{headerShown: false}} />
       <Stack.Screen name="Time Dose" component={TimeDose} options={{headerShown: false}} />

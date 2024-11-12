@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { SafeAreaView, View, ScrollView, } from 'react-native';
 import { Button, Input, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
@@ -14,7 +14,9 @@ import { Header } from '@/app/components/header';
 
 export const SetTime = ({navigation, route}) => {
   const fromManual=route.params.fromManual;
-  const [value, setValue] = React.useState('');
+  const obj = route.params.obj;
+  const [intervalNumber, setIntervalNumber] = useState(0);
+  const [intervalUnit, setIntervalUnit] = useState("Hours");
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
@@ -27,17 +29,17 @@ export const SetTime = ({navigation, route}) => {
           <Text category='p2'>Every</Text>
           <Input
             placeholder='#'
-            value={value}
-            onChangeText={nextValue => setValue(nextValue)}
+            value={intervalNumber}
+            onChangeText={nextValue => setIntervalNumber(nextValue)}
             style={{width: 80}}
           />
-          <DisplayDropdown data={["Hours", "Days", "Months", "Years"]}/>
+          <DisplayDropdown setUnit={setIntervalUnit} data={["Hours", "Days", "Months", "Years"]}/>
         </View>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
-            if (fromManual) navigation.navigate("Med Confirm");
-            else navigation.navigate('Confirm Med');
+            if (fromManual) navigation.navigate("Med Confirm", {obj: {...obj, interval: {number: intervalNumber, unit: intervalUnit}}});
+            else navigation.navigate('Confirm Scan', {obj: {...obj, interval: {number: intervalNumber, unit: intervalUnit}}});
           }} />
         </View>
 
