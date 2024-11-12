@@ -10,15 +10,18 @@ import { default as colorTheme } from "@/custom-theme.json"
 
 import { Header } from '@/app/components/header';
 
+import { Upload } from "@/app/components/UploadImg"
+
 export const ScanScreen = ({navigation}) => {
 
   const cameraRef = useRef();
   const [camReady, setCamReady] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState(null);
-  const [azureData, setAzureData] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
   const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
+
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     async function getMediaPermissions() {
@@ -28,11 +31,15 @@ export const ScanScreen = ({navigation}) => {
     getMediaPermissions();
   }, [permission, cameraRef])
 
-  async function callAzure(photo) {
-    fetch("https://remedify-ocr-vision.azurewebsites.net/api/httpTrigger1")
-    .then(response => console.log(response))
-    .then(data => console.log(data));
-    return;
+  function getDIN(imageData) {
+    const _DIN_REGEX = /^[0-9]{8}$/;
+    // console.log(_DIN_REGEX.test("12345678"));
+    const _lines = imageData[0].lines;
+    for (const line of _lines) {
+      for (const word of line.words) {
+        if (_DIN_REGEX.test(word.text)) return word.text;
+      }
+    }
   }
 
   return (
@@ -60,11 +67,17 @@ export const ScanScreen = ({navigation}) => {
                 <CameraView style={{flex: 5}} ref={cameraRef}
                   onCameraReady={() => setCamReady(true)}
                 />
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
+                  <Text category='p2'> Instructions</Text>
+                  <Text category='p1'> Position your camera over the label</Text>
+                  <Text category='p1'> Ensure the label is clear and well-lit</Text>
+                </View>
                 <Button
-                  style={{}}
+                  style={{...styles.orangerButton}}
                   onPress={async () => {
                     if (camReady) {
-                      setPhoto(await cameraRef.current.takePictureAsync());
+                      const _photo = await cameraRef.current.takePictureAsync()
+                      setPhoto(_photo);
                       setPhotoTaken(true);
                     }
                   }}
@@ -74,15 +87,19 @@ export const ScanScreen = ({navigation}) => {
                 : <View style={{flex: 5, gap: 12, width: "100%"}}>
                     {/* <Text>{photo.uri}</Text> */}
                     <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
-                    <Button onPress={() => setPhotoTaken(false)}>Retake</Button>
+                    {!uploading?
+                    <View style={{flexDirection: "row", gap: 4}}>
+                      <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
+                      <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
+                        // setUploading(true);
+                        // const _imageData = await Upload(photo.base64, setUploading);
+                        navigation.navigate("Confirm Scan", {results: "02245524"});
+                      }}>Confirm</Button>
+                    </View>
+                    : <Text style={{textAlign: "center"}}>Loading...</Text>
+                    }
                   </View>
               }
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
-                <Text category='p2'> Instructions</Text>
-                <Text category='p1'> Position your camera over the label</Text>
-                <Text category='p1'> Ensure the label is clear and well-lit</Text>
-              </View>
-              <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={async () => setAzureData(await callAzure(photo))} />
             </View>
           }
       </Layout>
