@@ -73,11 +73,11 @@ export const ConfirmScan = ({route, navigation}) => {
         name: _name,
         interval: {
           number: "Not",
-          interval: "detected"
+          unit: "detected"
         },
         dose: {
           number: "Not",
-          interval: "detected"
+          unit: "detected"
         },
       }
     }
@@ -85,11 +85,11 @@ export const ConfirmScan = ({route, navigation}) => {
       name: "DIN not detected",
       interval: {
         number: "Not",
-        interval: "detected"
+        unit: "detected"
       },
       dose: {
         number: "Not",
-        interval: "detected"
+        unit: "detected"
       },
     }
   }
@@ -185,7 +185,7 @@ export const ConfirmScan = ({route, navigation}) => {
           <InputPill label="Dose" text={`${drug.dose.number} ${drug.dose.unit}`} destination={"Edit Dose"} navigation={navigation} drugObj={drug}/>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, gap: 10, width: '100%'}}>
-          <MyButton text="Next" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate("Extra Options", {obj: drug})} />
+          <MyButton text="Next" styles={{...buttonStyles.orangerButton, ...buttonStyles.baseBigButton}} press={() => navigation.navigate("Start Date", {obj: drug})} />
           <MyButton text="Scan Again" styles={{...buttonStyles.orangeBorder, ...buttonStyles.baseBigButton, backgroundColor: '#FFFFFF'}} press={() => setShowBackModal(true)}/>
         </View>
       </Layout>

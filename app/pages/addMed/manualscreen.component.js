@@ -94,11 +94,11 @@ export const MedConfirm = ({navigation, route}) => {
           />
         </View> */}
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
-          <InputPill destination={"Edit Med"} navigation={navigation} label="Name" text={obj.name} fromManual={true}/>
-          <InputPill destination={"Med Time"} navigation={navigation} label="Interval" text={`${obj.interval.number} ${obj.interval.unit}`} fromManual={true}/>
-          <InputPill destination={"Dose Time"} navigation={navigation} label="Dose" text={`${obj.dose.number} ${obj.dose.unit}`} fromManual={true}/>
-          <InputPill destination={"Duration"} navigation={navigation} label="Date" text={`${obj.date}`}/>
-          <InputPill label="Refill Reminder" text="10 pill(s) left"/>
+          <InputPill destination={"Edit Name"} navigation={navigation} label="Name" text={obj.name} fromManual={true} drugObj={obj}/>
+          <InputPill destination={"Edit Time"} navigation={navigation} label="Interval" text={`${obj.interval.number} ${obj.interval.unit}`} fromManual={true} drugObj={obj}/>
+          <InputPill destination={"Edit Dose"} navigation={navigation} label="Dose" text={`${obj.dose.number} ${obj.dose.unit}`} fromManual={true} drugObj={obj}/>
+          <InputPill destination={"Duration"} navigation={navigation} label="Start Date" text={`${obj.date.substr(0, 10)}`} drugObj={obj}/>
+          {/* <InputPill label="Refill Reminder" text="10 pill(s) left"/> */}
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%'}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
@@ -205,8 +205,8 @@ export const StartDatePick = ({navigation, route}) => {
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.7}/>
-          <Text category='h2'>Select the starting date and time</Text>
-          {/* <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/> */}
+          <Text category='h2'>Select the starting date</Text>
+          <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
           <DateTime />
         </View>
         <View style={{flex: 2, width: "100%"}}>
