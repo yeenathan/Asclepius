@@ -203,7 +203,7 @@ export const StartDatePick = ({navigation, route}) => {
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.7}/>
           <Text category='h2'>Select the starting date</Text>
           <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
-          <DateTime />
+          {/* <DateTime /> */}
         </View>
         <View style={{flex: 2, width: "100%"}}>
           <MyButton text="Next" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Icon Pick", { obj: {
