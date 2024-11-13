@@ -202,7 +202,7 @@ export const HomeScreen = ({ route, navigation }) => {
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
 
   const [dayData, setDayData] = useState([]);
-  const [day, setDay] = useState(1);
+  const [day, setDay] = useState();
 
   useEffect(() => {
     // fetchData()
@@ -277,6 +277,7 @@ export const HomeScreen = ({ route, navigation }) => {
     setDayData(() => {
       if (data) {
         return data.filter((med) => { // array [med1, med2]
+          if (med === null) return; 
           const date = new Date(med.date);
           if (date.getDay() === day) {
             return med;
