@@ -7,8 +7,6 @@ import { styles as buttonStyles } from '@/app/stylesheet';
 import { useFocusEffect } from '@react-navigation/native';
 import { Header } from '@/app/components/header';
 
-
-
 const EditIcon = (props) => (
   <Icon {...props} name='edit-2' fill='#8F9BB3' style={{ width: 30, height: 30, justifyContent: 'center', alignItems: 'end'}} />
 );
@@ -64,13 +62,11 @@ export const ConfirmScan = ({route, navigation}) => {
   const editedData = route.params.obj;
 
   async function getDrugInfo(DIN) {
-    if (DIN) {
-      const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
-      // const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=0021`).then(resp => resp.json());
-      const _code = _drugProduct[0].drug_code;
-      const _name = _drugProduct[0].brand_name;
+    const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+    // const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=0021`).then(resp => resp.json());
+    if (!_drugProduct[0]) {
       return {
-        name: _name,
+        name: "DIN not detected",
         interval: {
           number: "Not",
           unit: "detected"
@@ -78,11 +74,13 @@ export const ConfirmScan = ({route, navigation}) => {
         dose: {
           number: "Not",
           unit: "detected"
-        },
+        }
       }
     }
+    const _code = _drugProduct[0].drug_code;
+    const _name = _drugProduct[0].brand_name;
     return {
-      name: "DIN not detected",
+      name: _name,
       interval: {
         number: "Not",
         unit: "detected"
@@ -93,6 +91,7 @@ export const ConfirmScan = ({route, navigation}) => {
       },
     }
   }
+  
 
   
   useEffect(() => {
@@ -165,20 +164,15 @@ export const ConfirmScan = ({route, navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <ProgressBar size='giant' style={{width: "100%", marginBottom: 80}} animating={false} progress={.5}/>
-        <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
-          <Image source={require("@/assets/icons/Capsule.svg")}/>
+        {/* <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
+          <Image source={drug.icon || CAPSULE_ICON} resizeMode='contain' style={{height: 90, width: 90}}/>
           <Button 
             style={butstyles.button}
             appearance='ghost'
             accessoryLeft={EditIcon}
-            onPress={() => navigation.navigate("Icon Pick")}
+            onPress={() => navigation.navigate("Icon Pick", {obj: drug})}
           />
-          {/* <Icon 
-            style={editstyles.icon}
-            fill='#8F9BB3'
-            name='edit-2'
-          /> */}
-        </View>
+        </View> */}
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
           <InputPill label="Medication Name" text={drug.name} destination={"Edit Name"} navigation={navigation} drugObj={drug}/>
           <InputPill label="How Often" text={`${drug.interval.number} ${drug.interval.unit}`} destination={"Edit Time"} navigation={navigation} drugObj={drug}/>

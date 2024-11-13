@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, SafeAreaView, Image } from 'react-native';
+import { View, SafeAreaView, Image, Pressable } from 'react-native';
 import { Button, Layout, ProgressBar, Text, Input, Modal, Icon, Datepicker} from '@ui-kitten/components';
 import { MyButton } from "@/app/components/MyButton"
 import { DisplayDropdown } from "@/app/components/displayDropdown"
@@ -86,21 +86,20 @@ export const MedConfirm = ({navigation, route}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
       <Layout style={{...styles.masterLayoutNoNav}}>
-        {/* <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end' }}>
-          <Image source={require("@/assets/icons/Capsule.svg")}/>
-          <Icon 
-            fill='#8F9BB3'
-            name='edit-2'
-          />
-        </View> */}
-        <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
+        
+          <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end', flex: 1 }}>
+            <Pressable onPress={() => navigation.navigate("Icon Pick", {obj: obj})}>
+              <Image source={obj.icon} style={{width: 100, height: 100}} resizeMode='contain'/>
+            </Pressable>
+          </View>
+        <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%", flex: 5}}>
           <InputPill destination={"Edit Name"} navigation={navigation} label="Name" text={obj.name} fromManual={true} drugObj={obj}/>
           <InputPill destination={"Edit Time"} navigation={navigation} label="Interval" text={`${obj.interval.number} ${obj.interval.unit}`} fromManual={true} drugObj={obj}/>
           <InputPill destination={"Edit Dose"} navigation={navigation} label="Dose" text={`${obj.dose.number} ${obj.dose.unit}`} fromManual={true} drugObj={obj}/>
           <InputPill destination={"Duration"} navigation={navigation} label="Start Date" text={`${obj.date.substr(0, 10)}`} drugObj={obj}/>
           {/* <InputPill label="Refill Reminder" text="10 pill(s) left"/> */}
         </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%', flex: 2}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
             storeData(obj.name, obj)
             navigation.navigate("Home")
@@ -122,9 +121,8 @@ export const IconPick = ({navigation, route}) => {
       <Layout style={styles.masterLayout}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.90}/>
-
           <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
-            <Image style={{marginTop: 32, height: 90, width: 90}} source={icons[index]} resizeMode='contain'/>
+            <Image style={{marginTop: 32, height: 60, width: 60}} source={icons[index]} resizeMode='contain'/>
             <Text category='h2'>Pick icon</Text>
           </View>
 
@@ -209,7 +207,7 @@ export const StartDatePick = ({navigation, route}) => {
           <DateTime />
         </View>
         <View style={{flex: 2, width: "100%"}}>
-          <MyButton text="Next" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Extra Options", { obj: {
+          <MyButton text="Next" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Icon Pick", { obj: {
             ...obj,
             date: date.toISOString(),
             time: Date.now()
