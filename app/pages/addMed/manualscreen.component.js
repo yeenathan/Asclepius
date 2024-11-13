@@ -96,7 +96,7 @@ export const MedConfirm = ({navigation, route}) => {
           <InputPill destination={"Edit Name"} navigation={navigation} label="Name" text={obj.name} fromManual={true} drugObj={obj}/>
           <InputPill destination={"Edit Time"} navigation={navigation} label="Interval" text={`${obj.interval.number} ${obj.interval.unit}`} fromManual={true} drugObj={obj}/>
           <InputPill destination={"Edit Dose"} navigation={navigation} label="Dose" text={`${obj.dose.number} ${obj.dose.unit}`} fromManual={true} drugObj={obj}/>
-          <InputPill destination={"Duration"} navigation={navigation} label="Start Date" text={`${obj.date.substr(0, 10)}`} drugObj={obj}/>
+          <InputPill destination={"Duration"} navigation={navigation} label="Start Date" text={`${obj.date.substr(0, 10)}`} drugObj={obj} fromManual={true}/>
           {/* <InputPill label="Refill Reminder" text="10 pill(s) left"/> */}
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%', flex: 2}}>
@@ -132,13 +132,12 @@ export const IconPick = ({navigation, route}) => {
                 return (
                   <Button style={{
                     backgroundColor: "#ffffff",
-                    maxHeight: "30%"
                   }}
                   key={index}
                   onPress={() => setIndex(index)}
                   children={() => {
                     return (
-                      <Image style={{width: 90, height: 90}} source={icon} resizeMode='contain'/>
+                      <Image style={{width: 70, height: 70}} source={icon} resizeMode='contain'/>
                     )
                   }}
                   />
