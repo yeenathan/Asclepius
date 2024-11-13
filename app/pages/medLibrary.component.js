@@ -11,6 +11,7 @@ import {
   Modal,
   Input,
   Datepicker,
+  TopNavigationAction
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
 
@@ -287,10 +288,22 @@ export const MedFolder = ({ navigation }) => {
 
 export const MedDescription = ({ navigation, route }) => {
   const medication = route.params.medication;
+  const BackAction = () => (
+    <TopNavigationAction
+      onPress={() => navigation.goBack()}
+      icon={(props) => <Icon {...props} name="arrow-back" />}
+      style={{
+        width: "100%",
+        color: colorTheme["white"],
+        paddingVertical: 32,
+        paddingHorizontal: 24,
+      }}
+    />
+  );
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
-      <Header navigation={navigation} />
+      <BackAction/>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
         <Text style={{ color: "white", marginBottom: 30 }}>
           Dosage
@@ -306,9 +319,9 @@ export const MedDescription = ({ navigation, route }) => {
         </Text>
         <Button
           style={{
-            backgroundColor: colorTheme["white"],
-            borderColor: colorTheme["green"],
-            borderRadius: 20,
+            backgroundColor: colorTheme["green"],
+            borderColor: colorTheme["white"],
+            borderRadius: 10,
             width: "80%",
           }}
           onPress={() => navigation.navigate("Info", {
@@ -316,7 +329,7 @@ export const MedDescription = ({ navigation, route }) => {
             handleArchive: route.params.handleArchive,
             handleDelete: route.params.handleDelete,
           })}
-        >.
+        >
           <Text style={{ color: "green" }}>View & Edit Details</Text>
         </Button>
       </View>
