@@ -4,14 +4,24 @@ import { Text } from "@ui-kitten/components";
 import { default as colorTheme } from "@/custom-theme.json";
 
 const DATA = [
-    { date: 7, day: 1, id: 1, status: true },
-    { date: 8, day: 2, id: 2, status: false },
-    { date: 9, day: 3, id: 3, status: false },
-    { date: 10, day: 4, id: 4, status: false },
-    { date: 11, day: 5, id: 5, status: false },
-    { date: 12, day: 6, id: 6, status: false },
-    { date: 13, day: 0, id: 7, status: false },
+    { date: getDateOfWeekday(1), day: 1, id: 1, status: true },
+    { date: getDateOfWeekday(2), day: 2, id: 2, status: false },
+    { date: getDateOfWeekday(3), day: 3, id: 3, status: false },
+    { date: getDateOfWeekday(4), day: 4, id: 4, status: false },
+    { date: getDateOfWeekday(5), day: 5, id: 5, status: false },
+    { date: getDateOfWeekday(6), day: 6, id: 6, status: false },
+    { date: getDateOfWeekday(7), day: 0, id: 7, status: false },
 ];
+
+//thanks gpt
+function getDateOfWeekday(dayOfWeek) {
+    const today = new Date();
+    const currentDay = today.getDay(); // Get the current day of the week (0-6, where 0 is Sunday)
+    const diff = dayOfWeek - currentDay; // Calculate the difference to the target day
+    const targetDate = new Date(today); // Clone today's date
+    targetDate.setDate(today.getDate() + diff); // Adjust to the target date
+    return targetDate.getDate(); // Return the date number
+}
 
 /**
  * Individual calendar item component
