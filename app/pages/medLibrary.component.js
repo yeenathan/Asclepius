@@ -291,10 +291,10 @@ export const MedDescription = ({ navigation, route }) => {
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
-      icon={(props) => <Icon {...props} name="arrow-back" />}
+      icon={(props) => <Icon style={{color: "white"}}{...props} name="arrow-back" />}
       style={{
         width: "100%",
-        color: colorTheme["white"],
+        Color: colorTheme["white"],
         paddingVertical: 32,
         paddingHorizontal: 24,
       }}
@@ -305,11 +305,11 @@ export const MedDescription = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
-        <Text style={{ color: "white", marginBottom: 30 }}>
-          Dosage
+        <Text style={{ color: "white", marginBottom: 10 }}>
+        {medication.name}
         </Text>
-        <Text style={{ color: "white", marginBottom: 30 }}>
-          ins
+        <Text style={{ color: "white", marginBottom: 10 }}>
+        Once daily before a meal
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
           {medication.icon}
@@ -317,6 +317,7 @@ export const MedDescription = ({ navigation, route }) => {
         <Text style={{ color: "white", marginBottom: 30 }}>
           description
         </Text>
+        <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center" }}>{medication.description}</Text>
         <Button
           style={{
             backgroundColor: colorTheme["green"],
@@ -557,8 +558,8 @@ export const InfoScreen = ({ navigation, route }) => {
               size="giant"
               onPress={onPress}
               style={{
-                backgroundColor: colorTheme["white"],
-                borderColor: colorTheme["green"],
+                backgroundColor: colorTheme["princeton-orange"],
+                borderColor: colorTheme["white"],
                 borderRadius: 20,
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
