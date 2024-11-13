@@ -14,13 +14,14 @@ import { Header } from '@/app/components/header';
 
 
 
-export const SetDuration = ({navigation}) => {
+export const SetDuration = ({navigation, route}) => {
   const [value, setValue] = React.useState('');
   const [value2, setValue2] = React.useState('');
   const [value3, setValue3] = React.useState('');
   const [value4, setValue4] = React.useState('');
 
   const [date, setDate] = React.useState(new Date());
+  const obj = route.params.obj;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -69,7 +70,7 @@ export const SetDuration = ({navigation}) => {
         <Datepicker date={date} onSelect={nextDate => setDate(nextDate)}/>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Extra Options')} />
+          <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Extra Options', {obj: obj})} />
         </View>
 
       </Layout>

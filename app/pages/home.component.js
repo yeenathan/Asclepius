@@ -117,7 +117,7 @@ const MedCard = (props) => {
           }
         >
           <View style={{ flex: 3, alignItems: "center" }}>
-            {/* <Image source={data.icon} /> */}
+            <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
             {/* {data.icon} */}
           </View>
           <View style={{ flex: 7, paddingVertical: 8 }}>

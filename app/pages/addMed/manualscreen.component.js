@@ -16,7 +16,7 @@ import {
   OINTMENT_ICON,
   SPRAY_ICON,
   TABLETS_ICON,
-} from "@/app/images";
+} from "@/assets/images";
 
 const icons = [CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON];
 
@@ -124,24 +124,23 @@ export const IconPick = ({navigation, route}) => {
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.90}/>
 
           <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
-            <Image style={{marginTop: 32}} source={icons[index]}/>
+            <Image style={{marginTop: 32, height: 90, width: 90}} source={icons[index]} resizeMode='contain'/>
             <Text category='h2'>Pick icon</Text>
           </View>
 
-          <View style={{flexDirection: "row", flexWrap: "wrap", width: "100%", gap: 16, marginTop: 48, flex: 7, paddingBottom: 64}}>
+          <View style={{flexDirection: "row", justifyContent: "center", flexWrap: "wrap", width: "100%", gap: 16, marginTop: 48, flex: 7, paddingBottom: 64}}>
             {
               icons.map((icon, index) => {
                 return (
                   <Button style={{
                     backgroundColor: "#ffffff",
-                    width: "30%",
-                    minHeight: "30%"
+                    maxHeight: "30%"
                   }}
                   key={index}
                   onPress={() => setIndex(index)}
                   children={() => {
                     return (
-                      <Image source={icon} resizeMode='contain'/>
+                      <Image style={{width: 90, height: 90}} source={icon} resizeMode='contain'/>
                     )
                   }}
                   />
@@ -154,8 +153,8 @@ export const IconPick = ({navigation, route}) => {
           <MyButton text="Confirm" styles={{...styles.baseBigButton, ...styles.orangerButton}} press={() => navigation.navigate("Med Confirm", {obj: {
             ...obj,
             taken: false,
-            timeTaken: null
-            // icon: icons[index]
+            timeTaken: null,
+            icon: icons[index]
           }})}/>
         </View>
       </Layout>
