@@ -91,9 +91,9 @@ export const ScanScreen = ({navigation}) => {
                     <View style={{flexDirection: "row", gap: 4}}>
                       <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
                       <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
-                        // setUploading(true);
-                        // const _imageData = await Upload(photo.base64, setUploading);
-                        navigation.navigate("Confirm Scan", {results: "02245524"});
+                        setUploading(true);
+                        const _imageData = await Upload(photo.base64, setUploading);
+                        navigation.navigate("Confirm Scan", {results: getDIN(_imageData)});
                       }}>Confirm</Button>
                     </View>
                     : <Text style={{textAlign: "center"}}>Loading...</Text>
