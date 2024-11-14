@@ -9,10 +9,10 @@
     "text-heading-2-font-family": "PublicSans-SemiBold",
 
     "text-paragraph-1-font-size": 16,
-    "text-paragraph-1-font-family": "PublicSans-Bold",
+    "text-paragraph-1-font-family": "PublicSans-SemiBold",
 
     "text-paragraph-2-font-size": 16,
-    "text-paragraph-2-font-family": "Poppins-Bold",
+    "text-paragraph-2-font-family": "PublicSans-Bold",
 
     "text-caption-1-font-size": 14,
     "text-caption-1-font-family": "Poppins-Regular",

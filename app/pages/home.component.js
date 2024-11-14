@@ -8,10 +8,12 @@ import {
   Modal,
   ModalService,
   Input,
+  CheckBox,
 } from "@ui-kitten/components";
 import { View, Image, ScrollView } from "react-native";
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer";
+import { MedReminder } from "@/app/components/medReminder"
 import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
@@ -60,8 +62,10 @@ const MedCard = (props) => {
       </Button>
     </View>
   );
-  const formatTime = () => {
-    const t = new Date(data.time);
+  const formatTime = (time=null) => {
+    let t;
+    if (time) t = new Date(time);
+    else t = new Date();
     let minutes = t.getMinutes().toString().length < 2 ? `0${t.getMinutes()}` : t.getMinutes();
     return `${t.getHours()}:${minutes}`;
   } 
@@ -97,21 +101,19 @@ const MedCard = (props) => {
               ? {
                   ...styles.rowContainer,
                   padding: 12,
-                  paddingBottom: 18,
-                  borderRadius: 32,
+                  borderRadius: 8,
                   justifyContent: "center",
                   marginTop: 12,
                   marginBottom: 24,
-                  backgroundColor: colorTheme["light-blue"],
+                  backgroundColor: colorTheme["light-orange"],
                 }
               : {
                   ...styles.rowContainer,
                   padding: 16,
-                  paddingBottom: 4,
-                  borderRadius: 32,
+                  borderRadius: 8,
                   justifyContent: "center",
                   marginVertical: 12,
-                  backgroundColor: colorTheme["light-blue-80"],
+                  backgroundColor: colorTheme["light-orange-80"],
                 }
           }
         >
@@ -119,30 +121,12 @@ const MedCard = (props) => {
             <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
             {/* {data.icon} */}
           </View>
-          <View style={{ flex: 7, paddingVertical: 8 }}>
-            <Text category="p1">{formatTime()}</Text>
-            <Text category="h2">{data.name}</Text>
-            <View style={{ alignItems: "flex-end", marginTop: 4 }}>
-              {data.taken ? (
-                <Text category="p1">Taken at {data.timeTaken}</Text>
-              ) : (
-                <Button
-                  size="small"
-                  onPress={() => handleTaken(data)}
-                  style={{
-                    ...styles.orangeButton,
-                    borderRadius: 64,
-                    marginTop: 8,
-                    position: "absolute",
-                  }}
-                  children={() => (
-                    <Text style={{ margin: "none", paddingHorizontal: 8 }} category="p2">
-                      Mark as Taken
-                    </Text>
-                  )}
-                />
-              )}
-            </View>
+          <View style={{ flex: 6 }}>
+            <Text category="p1">{data.name}</Text>
+            <Text category="c1">{data.taken?`Taken at ${formatTime()}`:formatTime(data.time)}</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <CheckBox onChange={() => handleTaken(data)} disabled={data.taken} checked={data.taken}/>
           </View>
         </View>
       </TouchableOpacity>
@@ -161,10 +145,10 @@ const MedCard = (props) => {
  */
 const MedList = ({ dayData, init }) => {
   return (
-    <View style={{width: "100%"}}>
+    <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8}}>
       {
-        dayData? <SectionList
-          style={{ flex: 1, width: "100%" }}
+        dayData.length>0? <SectionList
+          style={{ flex: 1, width: "100%", padding: 8}}
           sections={dayData}
           renderItem={({ item }) => (
             <MedCard data={item} init={init}/>
@@ -172,11 +156,12 @@ const MedList = ({ dayData, init }) => {
           renderSectionHeader={({ section: { title } }) => (
             <Text category="p2">{title}</Text>
           )}
-          ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: "bold" }}>My Medications</Text>}
-          ListFooterComponent={<View style={{ height: 20 }} />}
           contentContainerStyle={{ padding: 10 }}
         />
-        : null
+        :
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+          <Text category="h2" style={{color: colorTheme["text-gray"]}}>No medication details for this day.</Text>
+        </View>
       }
     </View>
     
@@ -379,29 +364,9 @@ export const HomeScreen = ({ route, navigation }) => {
             <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day} />
           </View>
           <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
-            <Text category="h2" style={{marginBottom: 8}}>Next Medication</Text>
-            <View style={styles.customShape}>
-              <Text category="h2" style={{ color: 'white' }}>
-                No Medications Added Yet.
-              </Text>
-              <Text category="c1" style={{ color: 'white'}}>
-                Tap below to start managing your reminders.
-              </Text>
-              <View style={{width: "100%", alignItems: "flex-end"}}>
-                <Button
-                  size="small"
-                  style={{
-                    ...styles.whiteButton,
-                    borderRadius: 16,
-                    maxWidth: "fit-content",
-                    position: "absolute",
-                    marginTop: 8
-                  }}
-                  onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
-                  children={() => <Text category="p3" style={{paddingHorizontal: 8}}>Add Medication</Text>}
-                />
-              </View>
-            </View>
+            <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
+            <MedReminder/>
+            <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
             <MedList dayData={format(dayData)} init={init}/>
           </View>
         </Layout>

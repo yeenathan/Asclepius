@@ -47,20 +47,38 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
                     marginHorizontal: 8, // Column gap between days
                     borderWidth: 1,
                     borderColor: "black",
-                    borderRadius: 25,
-                    width: 72,
+                    borderRadius: 4,
+                    width: 60,
                     paddingHorizontal: 8,
                     paddingVertical: 16,
                     alignItems: "center",
-                    backgroundColor: day === currentDay ? colorTheme["light-green"] : null,
+                    backgroundColor: day === currentDay ? colorTheme["dark-green"] : "#fff",
+                    border: "0"
                 }}
             >
-                <Text category="h2">{date}</Text>
-                <Text category="h2">{getDayString(day)}</Text>
+                <Text category="c1" style={{color: day === currentDay ? "#fff" : "000"}}>{date}</Text>
+                <Text category="h2" style={{color: day === currentDay ? "#fff" : "000"}}>{getDayString(day)}</Text>
             </View>
         </TouchableOpacity>
     );
 };
+
+function parseMonth(monthNum) {
+    switch (monthNum) {
+        case 0 : return "January";
+        case 1 : return "February";
+        case 2 : return "March";
+        case 3 : return "April";
+        case 4 : return "May";
+        case 5 : return "June";
+        case 6 : return "July";
+        case 7 : return "August";
+        case 8 : return "September";
+        case 9 : return "October";
+        case 10 : return "November";
+        case 11 : return "December";
+    }
+}
 
 /**
  * Horizontal calendar component
@@ -68,7 +86,7 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
 export function HorizontalCalendar({ handleSetDay, currentDay }) {
     return (
         <>
-            <Text category="p2">October</Text>
+            <Text category="p2" style={{color: colorTheme["text-off-black"]}}>{parseMonth(new Date().getMonth())}</Text>
             <FlatList
                 data={DATA}
                 renderItem={({ item }) => (
