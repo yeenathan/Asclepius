@@ -23,14 +23,13 @@ export const Upload = async (data, setUploading) => {
       "x-ms-blob-type":"BlockBlob"
     }
   })
-
+  console.log("uploaded");
   const _ocr = await fetch("https://remedify-ocr.azurewebsites.net/api/doOCR?", {
     method:"POST",
     body:JSON.stringify({
       imgname:"myimg.jpg"
     })
   });
-
   const _result = await _ocr.json();
   setUploading(false);
   return _result.analyzeResult.readResults;

@@ -249,6 +249,7 @@ export const HomeScreen = ({ route, navigation }) => {
         setDay(JSON.parse(day));
         return day;
       }
+      return (1);
     } catch (e) {
       console.log(e);
     }
@@ -261,7 +262,7 @@ export const HomeScreen = ({ route, navigation }) => {
   
   const saveDay = async () => {
       try {
-        await AsyncStorage.setItem("Day", JSON.stringify(day));
+        await AsyncStorage.setItem("Day", JSON.stringify(day || 1));
       } catch (e) {
         console.log(e);
       }

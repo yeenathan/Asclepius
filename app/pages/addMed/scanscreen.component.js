@@ -92,7 +92,7 @@ export const ScanScreen = ({navigation}) => {
                       <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
                       <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
                         setUploading(true);
-                        const _imageData = await Upload(photo.base64, setUploading);
+                        const _imageData = await Upload(photo.uri || photo.base64, setUploading);
                         navigation.navigate("Confirm Scan", {results: getDIN(_imageData)});
                       }}>Confirm</Button>
                     </View>
