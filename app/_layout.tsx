@@ -34,9 +34,7 @@ export default () => {
         theme={{ ...eva.light, ...colorTheme, }}
         customMapping={{ ...eva.mapping, ...mapping }}
       >
-        <NavigationContainer independent={true}>
-          <MainNavigator />
-        </NavigationContainer>
+        <MainNavigator />
       </ApplicationProvider>
     </>
   )

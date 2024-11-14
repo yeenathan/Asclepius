@@ -70,7 +70,7 @@ export const MedConfirm = ({navigation, route}) => {
               size="medium"
               onPress={() => {
                 setShowBackModal(false);
-                navigation.navigate("Home");
+                navigation.navigate("Home Stack");
               }}
               style={{
                 flex: 1,
@@ -102,7 +102,7 @@ export const MedConfirm = ({navigation, route}) => {
         <View style={{ justifyContent: 'center', alignItems: 'center', gap: 10, width: '100%', flex: 2}}>
           <MyButton text="Confirm" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => {
             storeData(obj.name, obj)
-            navigation.navigate("Home")
+            navigation.navigate("Home Stack")
           }}/>
           <Text category='p2' onPress={() => setShowBackModal(true)}>Discard Input</Text>
         </View>
