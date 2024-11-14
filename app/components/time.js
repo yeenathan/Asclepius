@@ -23,7 +23,7 @@ export default function DateTime() {
             show && (
                 <DateTimePicker 
                 value={date}
-                mode={mode}
+                mode="time"
                 is24Hour={true}
                 onChange={onChange}
                 />
