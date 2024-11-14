@@ -148,7 +148,7 @@ const MedList = ({ dayData, init }) => {
     <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8}}>
       {
         dayData.length>0? <SectionList
-          style={{ flex: 1, width: "100%", padding: 8}}
+          style={{ flex: 1, width: "100%", padding: 8, paddingBottom: 0}}
           sections={dayData}
           renderItem={({ item }) => (
             <MedCard data={item} init={init}/>
@@ -234,12 +234,11 @@ export const HomeScreen = ({ route, navigation }) => {
   }
   const loadDay = async () => {
     try {
-      const day = await AsyncStorage.getItem("Day");
+      const day = await AsyncStorage.getItem("Day") || 1;
       if (day) {
         setDay(JSON.parse(day));
         return day;
       }
-      return (1);
     } catch (e) {
       console.log(e);
     }
@@ -365,7 +364,7 @@ export const HomeScreen = ({ route, navigation }) => {
           </View>
           <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
             <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
-            <MedReminder/>
+            <MedReminder navigation={navigation}/>
             <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
             <MedList dayData={format(dayData)} init={init}/>
           </View>

@@ -2,7 +2,7 @@ import {styles} from "@/app/stylesheet"
 import { View } from "react-native"
 import { Button, Text } from "@ui-kitten/components"
 
-export function MedReminder() {
+export function MedReminder({navigation}) {
   return(
     <View style={styles.customShape}>
       <Text category="h2" style={{ color: 'white' }}>
@@ -22,7 +22,7 @@ export function MedReminder() {
             marginTop: 8
           }}
           onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
-          children={() => <Text category="p3" style={{paddingHorizontal: 8}}>Add Medication</Text>}
+          children={() => <Text category="c1" style={{paddingHorizontal: 8}}>Add Medication</Text>}
         />
       </View>
     </View>
