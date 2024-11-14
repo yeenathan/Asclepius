@@ -56,23 +56,23 @@ export const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
-        backgroundColor: '#f5f5f5', // Background color to make the shape visible
+        width: "100%"
       },
       customShape: {
-        width: 300, // Width of the main shape
-        height: 100, // Height of the main shape
+        // width: 300, // Width of the main shape
+        // height: 100, // Height of the main shape
         backgroundColor: '#00796B', // Shape color
         borderRadius: 20, // Rounds the top corners
         alignItems: 'flex-start',
         justifyContent:'center',
         padding: 30,
+        paddingBottom: 36
       },
       cutout: {
         position: 'absolute',
         bottom: -10, // Position the cutout outside the main shape
-        width: 80, // Width of the cutout
-        height: 20, // Height of the cutout
+        // width: 80, // Width of the cutout
+        // height: 20, // Height of the cutout
         backgroundColor: '#f5f5f5', // Matches the background color to create the illusion of a cut-out
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,

@@ -384,48 +384,31 @@ export const HomeScreen = ({ route, navigation }) => {
               <MedList dayData={format(dayData)} init={init}/>
             </>
           ) : (
-            // <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
-            //   <View
-            //     style={{
-            //       alignItems: "center",
-            //       backgroundColor: "#ffffff",
-            //       borderRadius: 16,
-            //       padding: 48,
-            //     }}
-            //   >
-            //     <Text category="p1">Input your medication to view schedule</Text>
-            //   </View>
-            //   <Button
-            //     size="giant"
-            //     style={{ ...styles.orangeButton, borderRadius: 16 }}
-            //     onPress={() => navigation.navigate("Med Stack", { screen: "Add Med" })}
-            //     children={() => <Text category="h2">Add Medication</Text>}
-            //   />
-            // </View>
-              <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
+            <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
               <View style={styles.customShape}>
-                <Text category="p1" style={{ color: 'white' }}>
+                <Text category="h2" style={{ color: 'white' }}>
                   No Medications Added Yet.
                 </Text>
-                <Text category="p1" style={{ color: 'white'}}>
+                <Text category="p3" style={{ color: 'white'}}>
                   Tap below to start managing your reminders.
                 </Text>
+                <View style={{width: "100%", alignItems: "flex-end"}}>
                   <Button
                     size="small"
                     style={{
                       ...styles.whiteButton,
                       borderRadius: 16,
-                      position: 'absolute', // Position it absolutely within the custom shape
-                      bottom: -10, // Align it with the cutout's bottom
-                      left: '50%', // Center it horizontally
-                      transform: [{ translateX: -10 }], // Adjust to align it correctly based on button width
+                      maxWidth: "fit-content",
+                      position: "absolute",
+                      marginTop: 8
                     }}
                     onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
-                    children={() => <Text category="p1">Add Medication</Text>}
-                  >
-                  </Button>
+                    children={() => <Text category="p3" style={{paddingHorizontal: 8}}>Add Medication</Text>}
+                  />
                 </View>
+                
               </View>
+            </View>
           )}
         </Layout>
       </SafeAreaView>
