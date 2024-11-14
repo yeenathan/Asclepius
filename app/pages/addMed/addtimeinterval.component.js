@@ -20,7 +20,7 @@ export const SetTime = ({navigation, route}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24, backgroundColor: colorTheme['silver-white'], gap: 10}}>
         <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h6'>Set time interval</Text>
         </View>
@@ -31,9 +31,9 @@ export const SetTime = ({navigation, route}) => {
             placeholder='#'
             value={intervalNumber}
             onChangeText={nextValue => setIntervalNumber(nextValue)}
-            style={{width: 80}}
+            style={{width: 60}}
           />
-          <DisplayDropdown setUnit={setIntervalUnit} data={["Hours", "Days", "Months", "Years"]}/>
+          <DisplayDropdown setUnit={setIntervalUnit} data={["Hours", "Days", "Weeks", "Months", "Years"]}/>
         </View>
         
         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', width: '100%' }}>

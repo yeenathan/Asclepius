@@ -14,6 +14,7 @@ export const DisplayDropdown = ({data, setUnit}) => {
       selectedIndex={selectedIndex}
       onSelect={index => handleSelect(index)}
       value={data[selectedIndex-1]}
+      style={{width: 100}}
     >
       {data.map((options, index) => {
         return <SelectItem key={index} title={options}></SelectItem>

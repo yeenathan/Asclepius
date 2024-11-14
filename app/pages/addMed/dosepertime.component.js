@@ -22,7 +22,7 @@ export const DosePerTime = ({navigation, route}) => {
         <Header navigation={navigation} />
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, backgroundColor: colorTheme['silver-white'], gap: 10}}>
             <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                <Text category='h6'>Dose per tiem interval?</Text>
+                <Text category='h6'>Dose per time interval?</Text>
             </View>
 
             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
