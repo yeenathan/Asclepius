@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, } from "react";
-import { SafeAreaView, SectionList, TouchableOpacity } from "react-native";
+import { Pressable, SafeAreaView, SectionList } from "react-native";
 import {
   Button,
   Icon,
@@ -44,21 +44,11 @@ const MedCard = (props) => {
 
   const defaultView = (
     <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
-      <Button style={{ flex: 3 }} size="small">
+      <Button style={{ flex: 1 }} size="small">
         Skip
       </Button>
-      <Button style={{ flex: 8 }} size="medium" onPress={() => setReschedule(true)}>
+      <Button style={{ flex: 1 }} size="medium" onPress={() => setReschedule(true)}>
         Reschedule
-      </Button>
-      <Button
-        style={{ flex: 4 }}
-        size="small"
-        onPress={() => {
-          handleTaken(data);
-          toggleMenuVisible();
-        }}
-      >
-        Take
       </Button>
     </View>
   );
@@ -94,7 +84,7 @@ const MedCard = (props) => {
           {!reschedule ? defaultView : null}
         </View>
       </Modal>
-      <TouchableOpacity onPress={!data.taken ? () => toggleMenuVisible() : null}>
+      <Pressable onPress={() => toggleMenuVisible()}>
         <View
           style={
             !data.taken
@@ -129,7 +119,7 @@ const MedCard = (props) => {
             <CheckBox onChange={() => handleTaken(data)} disabled={data.taken} checked={data.taken}/>
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     </>
   );
 };

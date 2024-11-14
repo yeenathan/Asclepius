@@ -53,7 +53,7 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
                     paddingVertical: 16,
                     alignItems: "center",
                     backgroundColor: day === currentDay ? colorTheme["dark-green"] : "#fff",
-                    border: "0"
+                    borderColor: "transparent"
                 }}
             >
                 <Text category="c1" style={{color: day === currentDay ? "#fff" : "000"}}>{date}</Text>
