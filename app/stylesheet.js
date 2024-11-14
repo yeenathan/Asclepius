@@ -22,6 +22,12 @@ export const styles = StyleSheet.create({
         backgroundColor: colorTheme["princeton-orange"],
         borderColor: colorTheme["princeton-orange"],
     },
+    whiteButton:{
+        backgroundColor: '#f5f5f5',
+    },
+    blackText:{
+        Color: '#000000',
+    },
     invisBorder: {
         border: "transparent",
         borderTopColor: "transparent",
@@ -46,5 +52,29 @@ export const styles = StyleSheet.create({
     baseBigButton: {
         width: "100%",
         borderRadius: 16
-    }
-});
+    },
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#f5f5f5', // Background color to make the shape visible
+      },
+      customShape: {
+        width: 300, // Width of the main shape
+        height: 100, // Height of the main shape
+        backgroundColor: '#00796B', // Shape color
+        borderRadius: 20, // Rounds the top corners
+        alignItems: 'flex-start',
+        justifyContent:'center',
+        padding: 30,
+      },
+      cutout: {
+        position: 'absolute',
+        bottom: -10, // Position the cutout outside the main shape
+        width: 80, // Width of the cutout
+        height: 20, // Height of the cutout
+        backgroundColor: '#f5f5f5', // Matches the background color to create the illusion of a cut-out
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+      },
+    });

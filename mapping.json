@@ -13,6 +13,9 @@
 
     "text-paragraph-2-font-size": 16,
     "text-paragraph-2-font-family": "Poppins-Bold",
+
+    "text-paragraph-3-font-size": 14,
+    "text-paragraph-3-font-family": "Poppins-Medium",
     
     "components": {
         "ProgressBar": {
