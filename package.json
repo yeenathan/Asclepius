@@ -14,8 +14,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.25.0",
     "@eva-design/eva": "^2.2.0",
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/datetimepicker": "8.0.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.4.1",
@@ -26,6 +29,7 @@
     "expo-camera": "~15.0.16",
     "expo-constants": "~16.0.2",
     "expo-font": "~12.0.10",
+    "expo-image-picker": "~15.0.7",
     "expo-linking": "~6.3.1",
     "expo-media-library": "~16.0.5",
     "expo-router": "~3.5.23",
@@ -42,10 +46,7 @@
     "react-native-screens": "3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
-    "react-navigation-stack": "^2.10.4",
-    "@react-native-async-storage/async-storage": "1.23.1",
-    "expo-image-picker": "~15.0.7",
-    "@react-native-community/datetimepicker": "8.0.1"
+    "react-navigation-stack": "^2.10.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

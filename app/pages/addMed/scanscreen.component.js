@@ -76,7 +76,7 @@ export const ScanScreen = ({navigation}) => {
                   style={{...styles.orangerButton}}
                   onPress={async () => {
                     if (camReady) {
-                      const _photo = await cameraRef.current.takePictureAsync()
+                      const _photo = await cameraRef.current.takePictureAsync({quality: 0.2})
                       setPhoto(_photo);
                       setPhotoTaken(true);
                     }
