@@ -66,7 +66,8 @@ export const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent:'center',
         padding: 30,
-        paddingBottom: 36
+        paddingBottom: 36,
+        width: "100%"
       },
       cutout: {
         position: 'absolute',

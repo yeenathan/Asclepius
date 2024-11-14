@@ -12,7 +12,6 @@ import {
 import { View, Image, ScrollView } from "react-native";
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
 import { ModalContainer } from "@/app/components/modalContainer";
-import { Scroll } from "@/app/components/scrollPicker";
 import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
@@ -162,19 +161,25 @@ const MedCard = (props) => {
  */
 const MedList = ({ dayData, init }) => {
   return (
-    <SectionList
-      style={{ flex: 1, width: "100%" }}
-      sections={dayData}
-      renderItem={({ item }) => (
-        <MedCard data={item} init={init}/>
-      )}
-      renderSectionHeader={({ section: { title } }) => (
-        <Text category="p2">{title}</Text>
-      )}
-      ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: "bold" }}>My Medications</Text>}
-      ListFooterComponent={<View style={{ height: 20 }} />}
-      contentContainerStyle={{ padding: 10 }}
-    />
+    <View style={{width: "100%"}}>
+      {
+        dayData? <SectionList
+          style={{ flex: 1, width: "100%" }}
+          sections={dayData}
+          renderItem={({ item }) => (
+            <MedCard data={item} init={init}/>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text category="p2">{title}</Text>
+          )}
+          ListHeaderComponent={<Text style={{ fontSize: 20, fontWeight: "bold" }}>My Medications</Text>}
+          ListFooterComponent={<View style={{ height: 20 }} />}
+          contentContainerStyle={{ padding: 10 }}
+        />
+        : null
+      }
+    </View>
+    
   );
 };
 
@@ -373,43 +378,32 @@ export const HomeScreen = ({ route, navigation }) => {
           <View style={{ width: "100%" }}>
             <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day} />
           </View>
-
-          <Text category="h1" style={{ justifyContent: "flex-start", width: "100%" }}>
-            Today's Meds
-          </Text>
-
-          {dayData.length > 0 ? (
-            <>
-              <Important toggleOverlayVisible={toggleOverlayVisible} />
-              <MedList dayData={format(dayData)} init={init}/>
-            </>
-          ) : (
-            <View style={{ ...styles.container, flex: 1, justifyContent: "center", gap: 32 }}>
-              <View style={styles.customShape}>
-                <Text category="h2" style={{ color: 'white' }}>
-                  No Medications Added Yet.
-                </Text>
-                <Text category="p3" style={{ color: 'white'}}>
-                  Tap below to start managing your reminders.
-                </Text>
-                <View style={{width: "100%", alignItems: "flex-end"}}>
-                  <Button
-                    size="small"
-                    style={{
-                      ...styles.whiteButton,
-                      borderRadius: 16,
-                      maxWidth: "fit-content",
-                      position: "absolute",
-                      marginTop: 8
-                    }}
-                    onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
-                    children={() => <Text category="p3" style={{paddingHorizontal: 8}}>Add Medication</Text>}
-                  />
-                </View>
-                
+          <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
+            <Text category="h2" style={{marginBottom: 8}}>Next Medication</Text>
+            <View style={styles.customShape}>
+              <Text category="h2" style={{ color: 'white' }}>
+                No Medications Added Yet.
+              </Text>
+              <Text category="c1" style={{ color: 'white'}}>
+                Tap below to start managing your reminders.
+              </Text>
+              <View style={{width: "100%", alignItems: "flex-end"}}>
+                <Button
+                  size="small"
+                  style={{
+                    ...styles.whiteButton,
+                    borderRadius: 16,
+                    maxWidth: "fit-content",
+                    position: "absolute",
+                    marginTop: 8
+                  }}
+                  onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
+                  children={() => <Text category="p3" style={{paddingHorizontal: 8}}>Add Medication</Text>}
+                />
               </View>
             </View>
-          )}
+            <MedList dayData={format(dayData)} init={init}/>
+          </View>
         </Layout>
       </SafeAreaView>
     </>
