@@ -11,6 +11,7 @@ import { NextDose } from "@/app/pages/addMed/nextdose.component"
 import { TimeDose } from "@/app/pages/addMed/timenextdose.component"
 import { Onboarding } from '../pages/home.component';
 import { SetDuration } from "@/app/pages/addMed/duration.component"
+import { ScheduleDose } from "@/app/pages/addMed/time.component"
 
 
 const Stack = createStackNavigator();
@@ -41,6 +42,7 @@ export const MedNavigator = () => {
 
       <Stack.Screen name="Edit Info" component={EditInfoScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Schedule" component={ScheduleDose} options={{headerShown:false}} />
 
       <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
     </Stack.Navigator>
