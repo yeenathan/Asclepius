@@ -12,6 +12,9 @@ import { TimeDose } from "@/app/pages/addMed/timenextdose.component"
 import { Onboarding } from '../pages/home.component';
 import { SetDuration } from "@/app/pages/addMed/duration.component"
 
+import { FormScreen } from "@/app/pages/new-hifi/FormScreen"
+import { EditName } from "@/app/pages/new-hifi/EditScreens"
+
 
 const Stack = createStackNavigator();
 
@@ -20,7 +23,7 @@ export const MedNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Add Med" component={AddScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Scan" component={ScanScreen} options={{headerShown: false}}/>
-
+{/* 
       <Stack.Screen name="Manual Name" component={ManualNameEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Manual Interval" component={ManualIntervalEdit} options={{headerShown: false}}/>
       <Stack.Screen name="Manual Dose" component={ManualDoseEdit} options={{headerShown: false}}/>
@@ -40,9 +43,12 @@ export const MedNavigator = () => {
       <Stack.Screen name="Duration" component={SetDuration} options={{headerShown: false}} />
 
       <Stack.Screen name="Edit Info" component={EditInfoScreen} options={{headerShown: false}}/>
-      <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Reminder" component={EditReminderScreen} options={{headerShown: false}}/> */}
 
       <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
+
+      <Stack.Screen name="Form" component={FormScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Name" component={EditName} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }

@@ -84,7 +84,7 @@ const MedCard = (props) => {
           {!reschedule ? defaultView : null}
         </View>
       </Modal>
-      <Pressable onPress={() => toggleMenuVisible()}>
+      <Pressable pointerEvents={data.taken?"none":null} onPress={() => toggleMenuVisible()}>
         <View
           style={
             !data.taken
@@ -290,77 +290,26 @@ export const HomeScreen = ({ route, navigation }) => {
   }
 
   return (
-    <>
-      <Modal
-        visible={addedMedModalVisible}
-        backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-        onBackdropPress={() => setAddedMedModalVisible(false)}
-      >
-        <View
-          style={{
-            backgroundColor: "#ffffff",
-            justifyContent: "center",
-            padding: 40,
-            paddingTop: 48,
-            width: "100vw",
-            position: "fixed",
-            bottom: "0",
-            left: "0",
-            borderTopLeftRadius: 80,
-            borderTopRightRadius: 80,
-          }}
-        >
-          <Text style={{ marginBottom: 32, paddingHorizontal: 32 }} category="h2">
-            {route.params.medication}
+    <SafeAreaView style={{ flex: 1 }}>
+      <Layout style={styles.masterLayout}>
+        <View style={styles.rowContainer}>
+          <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
+            Good morning, Nathan.
           </Text>
+          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
-      </Modal>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Layout style={styles.masterLayout}>
-          <Modal
-            visible={overlayVisible}
-            backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-            onBackdropPress={toggleOverlayVisible}
-          >
-            <ModalContainer
-              title="1 serious drug interaction"
-              body={
-                <>
-                  <View style={{ alignItems: "center", marginVertical: 32 }}>
-                    <Text category="p2">Medication 1</Text>
-                    <Text category="p2">Medication 2</Text>
-                    <Text style={{ marginVertical: 16 }} category="p1">
-                      has a drug interaction with
-                    </Text>
-                    <Text style={{ marginVertical: 16 }} category="p1">
-                      Consult your doctor or pharmacist.
-                    </Text>
-                  </View>
-                </>
-              }
-              toggleOverlayVisible={toggleOverlayVisible}
-            />
-          </Modal>
 
-          <View style={styles.rowContainer}>
-            <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
-              Good morning, Nathan.
-            </Text>
-            <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
-          </View>
-
-          <View style={{ width: "100%" }}>
-            <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day} />
-          </View>
-          <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
-            <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
-            <MedReminder navigation={navigation}/>
-            <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
-            <MedList dayData={format(dayData)} init={init}/>
-          </View>
-        </Layout>
-      </SafeAreaView>
-    </>
+        <View style={{ width: "100%" }}>
+          <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day} />
+        </View>
+        <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
+          <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
+          <MedReminder navigation={navigation}/>
+          <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
+          <MedList dayData={format(dayData)} init={init}/>
+        </View>
+      </Layout>
+    </SafeAreaView>
   );
 };
 

@@ -9,7 +9,7 @@
     "text-heading-2-font-family": "PublicSans-SemiBold",
 
     "text-paragraph-1-font-size": 16,
-    "text-paragraph-1-font-family": "PublicSans-SemiBold",
+    "text-paragraph-1-font-family": "PublicSans-Regular",
 
     "text-paragraph-2-font-size": 16,
     "text-paragraph-2-font-family": "PublicSans-Bold",
@@ -21,9 +21,6 @@
       "Button": {
         "appearances": {
           "filled": {
-            "mapping": {
-              "text-font-family": "Poppins-SemiBold"
-            },
             "variantGroups": {
               "size": {
                 "medium": {
@@ -41,7 +38,7 @@
             "variantGroups": {
               "status": {
                 "primary": {
-                  "backgroundColor": "#ffffff"
+                  "backgroundColor": "transparent"
                 }
               },
               "size": {

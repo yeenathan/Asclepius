@@ -52,15 +52,15 @@ export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayoutNoNav}>
-      <ScanSVG />
+      <Layout style={{...styles.masterLayoutNoNav, gap: 32}}>
+        <ScanSVG />
         <View>
-          <Text style={{marginBottom: 16 }} category='h2'>Scan your medication</Text>
+          <Text style={{marginBottom: 16, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
-        <View style={{gap: 12, width: "100%"}}>
-          <MyButton text="Scan" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Scan')}/>
-          <MyButton text="or Manual Input" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: "#ffffff"}} press={() => navigation.navigate('Manual Name')}/>
+        <View style={{gap: 12, width: "100%", alignItems: "center"}}>
+          <Button style={{width: "100%"}} onPress={() => navigation.navigate("Scan")} size='large'>Scan</Button>
+          <Text style={{fontSize: 18, color: colorTheme['persian-green']}} onPress={() => navigation.navigate('Form', {drug: {}})}>Manual Input</Text>
         </View>
       </Layout>
     </SafeAreaView>

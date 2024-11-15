@@ -56,8 +56,8 @@ export const ScanScreen = ({navigation}) => {
               <Text category='p2'>Allow Camera Access?</Text>
               <Text category='s1' style={{textAlign: "center"}}>We need camera access to scan your medication details quickly and accurately.</Text>
               <View style={{gap: 16}}>
-                <Button onPress={requestPermission} size="large" style={{borderRadius: 20}} children={() => <Text category="h2" style={{color: colorTheme['silver-white']}}>Allow Access</Text>}></Button>
-                <Button onPress={() => navigation.goBack()} size="large" style={{ borderRadius: 20, backgroundColor: colorTheme['silver-white']}} children={() => <Text category="h2">Not Now</Text>}></Button>
+                <Button onPress={requestPermission} size="medium">Allow Access</Button>
+                <Button onPress={() => navigation.goBack()} appearance='outline' size='medium'>Go Back</Button>
               </View>
             </View>
           //Camera permissions are granted.
