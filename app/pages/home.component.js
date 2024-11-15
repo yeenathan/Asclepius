@@ -44,10 +44,10 @@ const MedCard = (props) => {
 
   const defaultView = (
     <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
-      <Button style={{ flex: 1 }} size="small">
+      <Button style={{ flex: 1 }} appearance="outline" size="medium">
         Skip
       </Button>
-      <Button style={{ flex: 1 }} size="medium" onPress={() => setReschedule(true)}>
+      <Button style={{ flex: 1 }} status="primary" size="medium" onPress={() => setReschedule(true)}>
         Reschedule
       </Button>
     </View>
@@ -113,7 +113,7 @@ const MedCard = (props) => {
           </View>
           <View style={{ flex: 6 }}>
             <Text category="p1">{data.name}</Text>
-            <Text category="c1">{data.taken?`Taken at ${formatTime()}`:formatTime(data.time)}</Text>
+            <Text category="c1">{data.taken?`Taken at ${data.timeTaken}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
             <CheckBox onChange={() => handleTaken(data)} disabled={data.taken} checked={data.taken}/>

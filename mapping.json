@@ -1,6 +1,6 @@
 {
   "strict": {
-    "text-font-family": "Poppins-Medium",
+    "text-font-family": "Poppins-SemiBold",
 
     "text-heading-1-font-size": 32,
     "text-heading-1-font-family": "Poppins-Bold",
@@ -15,18 +15,50 @@
     "text-paragraph-2-font-family": "PublicSans-Bold",
 
     "text-caption-1-font-size": 14,
-    "text-caption-1-font-family": "Poppins-Regular",
-    
-    "components": {
-        "ProgressBar": {
-          "appearances": {
-            "default": {
-              "mapping": {
-                "progressBarBackgroundColor": "pink"
+    "text-caption-1-font-family": "Poppins-Regular"
+  },
+  "components": {
+      "Button": {
+        "appearances": {
+          "filled": {
+            "mapping": {
+              "text-font-family": "Poppins-SemiBold"
+            },
+            "variantGroups": {
+              "size": {
+                "medium": {
+                  "borderRadius": 20,
+                  "textFontSize": 16
+                },
+                "large": {
+                  "borderRadius": 20,
+                  "textFontSize": 20
+                }
+              }
+            } 
+          },
+          "outline": {
+            "variantGroups": {
+              "status": {
+                "primary": {
+                  "backgroundColor": "#ffffff"
+                }
+              },
+              "size": {
+                "medium": {
+                  "borderRadius": 20,
+                  "borderWidth": 2,
+                  "textFontSize": 16
+                },
+                "large": {
+                  "borderRadius": 20,
+                  "borderWidth": 3,
+                  "textFontSize": 20
+                }
               }
             }
           }
         }
       }
-  }
+    }
 }

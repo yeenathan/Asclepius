@@ -32,7 +32,7 @@ export default () => {
       <ApplicationProvider
         {...eva}
         theme={{ ...eva.light, ...colorTheme, }}
-        customMapping={{ ...eva.mapping, ...mapping }}
+        customMapping={mapping}
       >
         <MainNavigator />
       </ApplicationProvider>
