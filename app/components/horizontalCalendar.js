@@ -26,7 +26,7 @@ function getDateOfWeekday(dayOfWeek) {
 /**
  * Individual calendar item component
  */
-const Item = ({ date, day, handleSetDay, currentDay }) => {
+const Item = ({ date, day, setDay, currentDay }) => {
     function getDayString(dayNum) {
         switch (dayNum) {
             case 0 : return "Sun";
@@ -40,7 +40,7 @@ const Item = ({ date, day, handleSetDay, currentDay }) => {
     }
     return (
         <TouchableOpacity onPress={() => {
-            handleSetDay(day);
+            setDay(day);
         }}>
             <View
                 style={{
@@ -83,7 +83,7 @@ function parseMonth(monthNum) {
 /**
  * Horizontal calendar component
  */
-export function HorizontalCalendar({ handleSetDay, currentDay }) {
+export function HorizontalCalendar({ setDay, currentDay }) {
     return (
         <>
             <Text category="p2" style={{color: colorTheme["text-off-black"]}}>{parseMonth(new Date().getMonth())}</Text>
@@ -93,7 +93,7 @@ export function HorizontalCalendar({ handleSetDay, currentDay }) {
                     <Item
                         date={item.date}
                         day={item.day}
-                        handleSetDay={handleSetDay}
+                        setDay={setDay}
                         currentDay={currentDay}
                     />
                 )}

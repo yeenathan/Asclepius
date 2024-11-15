@@ -22,6 +22,7 @@ export const ScanScreen = ({navigation}) => {
   const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
 
   const [uploading, setUploading] = useState(false);
+  const [drug, setDrug] = useState();
 
   useEffect(() => {
     async function getMediaPermissions() {
@@ -39,6 +40,21 @@ export const ScanScreen = ({navigation}) => {
       for (const word of line.words) {
         if (_DIN_REGEX.test(word.text)) return word.text;
       }
+    }
+  }
+
+  async function getDrugInfo(DIN) {
+    const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+    // const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=0021`).then(resp => resp.json());
+    if (!_drugProduct[0]) {
+      return {
+        name: "DIN not detected",
+      }
+    }
+    const _code = _drugProduct[0].drug_code;
+    const _name = _drugProduct[0].brand_name;
+    return {
+      name: _name,
     }
   }
 
@@ -63,43 +79,27 @@ export const ScanScreen = ({navigation}) => {
           //Camera permissions are granted.
           : <View style={{gap: 12, flex: 1, width: "100%"}}>
               { !photoTaken?
-                <>
                 <CameraView style={{flex: 5}} ref={cameraRef}
                   onCameraReady={() => setCamReady(true)}
-                />
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 16, backgroundColor: '#D9EDFF', borderRadius: 20}}>
-                  <Text category='p2'> Instructions</Text>
-                  <Text category='p1'> Position your camera over the label</Text>
-                  <Text category='p1'> Ensure the label is clear and well-lit</Text>
-                </View>
+                /> :
+                <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
+              }
                 <Button
-                  style={{...styles.orangerButton}}
+                  size='large'
                   onPress={async () => {
-                    if (camReady) {
+                    if (uploading) return;
+                    if (!uploading && photoTaken) navigation.navigate("Form", {drug: drug});
+                    if (camReady && !photoTaken) {
                       const _photo = await cameraRef.current.takePictureAsync({quality: 0.2})
                       setPhoto(_photo);
                       setPhotoTaken(true);
+                      setUploading(true);
+                      const _imageData = await Upload(_photo.uri || _photo.base64, setUploading);
+                      setDrug(await getDrugInfo(getDIN(_imageData)));
                     }
                   }}
-                  children={() => <Text>Take Photo</Text>}
-                />
-                </>
-                : <View style={{flex: 5, gap: 12, width: "100%"}}>
-                    {/* <Text>{photo.uri}</Text> */}
-                    <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
-                    {!uploading?
-                    <View style={{flexDirection: "row", gap: 4}}>
-                      <Button style={{flex: 1}} onPress={() => setPhotoTaken(false)}>Retake</Button>
-                      <Button style={{...styles.orangerButton, flex: 1}} onPress={async () => {
-                        setUploading(true);
-                        const _imageData = await Upload(photo.uri || photo.base64, setUploading);
-                        navigation.navigate("Confirm Scan", {results: getDIN(_imageData)});
-                      }}>Confirm</Button>
-                    </View>
-                    : <Text style={{textAlign: "center"}}>Loading...</Text>
-                    }
-                  </View>
-              }
+                >{photoTaken? (uploading? "Loading...": drug.name) : "Take Photo"}</Button>
+                {photoTaken && <Text category='p2' style={{textAlign: "center", color: colorTheme['persian-green']}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
             </View>
           }
       </Layout>

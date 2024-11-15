@@ -1,5 +1,5 @@
 import { Layout, Text, Button, Datepicker } from "@ui-kitten/components";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Image } from "react-native";
 import { Header } from '@/app/components/header';
 import { useState } from "react";
 import { SuggestionSearch } from "@/app/components/suggestionSearch";
@@ -7,6 +7,79 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
+
+import {
+  CAPSULE_ICON,
+  DROPPER_ICON,
+  INJECTION_ICON,
+  LIQUID_ICON,
+  OINTMENT_ICON,
+  SPRAY_ICON,
+  TABLETS_ICON,
+} from "@/assets/images";
+const icons = [CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON];
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+export function EditIcon ({navigation, route}) {
+  const storeData = async (key, value) => {
+    try {
+      let newKeys = [key];
+      const prevKeys = await AsyncStorage.getItem("KEYS");
+      if (prevKeys) {
+        newKeys = [...JSON.parse(prevKeys), key];
+      }
+      let valueWithKey = {...value, key: key}
+      await AsyncStorage.setItem("KEYS", JSON.stringify(newKeys));
+      await AsyncStorage.setItem(key, JSON.stringify(valueWithKey));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  
+  const [index, setIndex] = useState(0);
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <Header navigation={navigation} />
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
+          <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
+            <Image style={{marginTop: 32, height: 60, width: 60}} source={icons[index]} resizeMode='contain'/>
+            <Text category='h2'>Pick icon</Text>
+          </View>
+
+          <View style={{flexDirection: "row", justifyContent: "center", flexWrap: "wrap", width: "100%", gap: 16, marginTop: 48, flex: 7, paddingBottom: 64}}>
+            {
+              icons.map((icon, index) => {
+                return (
+                  <Button style={{
+                    backgroundColor: "#ffffff",
+                  }}
+                  key={index}
+                  onPress={() => setIndex(index)}
+                  children={() => {
+                    return (
+                      <Image style={{width: 70, height: 70}} source={icon} resizeMode='contain'/>
+                    )
+                  }}
+                  />
+                )
+              })
+            }
+          </View>
+        </View>
+        <View style={{flex: 2, width: "100%"}}>
+          <Button size="large" onPress={() => {
+            const _drug = {...drug, icon: icons[index]};
+            storeData(drug.name, _drug);
+            navigation.navigate("Home Stack", {screen: "Home", params: {drug: _drug}});
+          }}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
 
 export function EditSchedule({navigation, route}) {
   const drug = route.params.drug;
@@ -16,7 +89,6 @@ export function EditSchedule({navigation, route}) {
   const [showPicker, setShowPicker] = useState(false);
 
   function handlePickTime(e, selected) {
-    console.log(selected);
     setTime(selected);
     setShowPicker(false);
   }

@@ -24,21 +24,6 @@ function getTime(time) {
 }
 
 export function FormScreen({navigation, route}) {
-  const storeData = async (key, value) => {
-    try {
-      let newKeys = [key];
-      const prevKeys = await AsyncStorage.getItem("KEYS");
-      if (prevKeys) {
-        newKeys = [...JSON.parse(prevKeys), key];
-      }
-      let valueWithKey = {...value, key: key}
-      await AsyncStorage.setItem("KEYS", JSON.stringify(newKeys));
-      await AsyncStorage.setItem(key, JSON.stringify(valueWithKey));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const drug = route.params.drug;
   const [showAlert, setShowAlert] = useState(false);
   return(
@@ -72,9 +57,8 @@ export function FormScreen({navigation, route}) {
               setShowAlert(true);
               return;
             }
-            storeData(drug.name, drug);
-            navigation.navigate("Home Stack");
-          }}>Confirm</Button>
+            navigation.navigate("Edit Icon", {drug: drug});
+          }}>Continue</Button>
         </View>
       </Layout>
     </SafeAreaView>

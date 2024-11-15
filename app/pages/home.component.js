@@ -12,12 +12,12 @@ import {
 } from "@ui-kitten/components";
 import { View, Image, ScrollView } from "react-native";
 import { HorizontalCalendar } from "@/app/components/horizontalCalendar";
-import { ModalContainer } from "@/app/components/modalContainer";
 import { MedReminder } from "@/app/components/medReminder"
 import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
@@ -41,17 +41,17 @@ const MedCard = (props) => {
     await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
     props.init();
   }
+  
+  // scuffed code because android and ios have different requirements for this datepicker
+  const [time, setTime] = useState(new Date());
+  async function handlePickTime(e, selected) {
+    if (e.type === "set") setReschedule(false);
+    setTime(selected);
+    let newData = {...data, time: selected}
+    await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
+    props.init();
+  }
 
-  const defaultView = (
-    <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
-      <Button style={{ flex: 1 }} appearance="outline" size="medium">
-        Skip
-      </Button>
-      <Button style={{ flex: 1 }} status="primary" size="medium" onPress={() => setReschedule(true)}>
-        Reschedule
-      </Button>
-    </View>
-  );
   const formatTime = (time=null) => {
     let t;
     if (time) t = new Date(time);
@@ -81,7 +81,17 @@ const MedCard = (props) => {
           <Text style={{ marginBottom: 32, paddingHorizontal: 32 }} category="h2">
             {data.name}
           </Text>
-          {!reschedule ? defaultView : null}
+          <View style={{alignItems: "flex-end", gap: 8}}>
+            <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
+              <Button style={{ flex: 1 }} appearance="outline" size="medium">
+                Skip
+              </Button>
+              <Button style={{ flex: 1 }} status="primary" size="medium" onPress={() => setReschedule(true)}>
+                Reschedule
+              </Button>
+            </View>
+            {reschedule && <DateTimePicker mode="time" value={time} onChange={handlePickTime}/>}
+          </View>
         </View>
       </Modal>
       <Pressable pointerEvents={data.taken?"none":null} onPress={() => toggleMenuVisible()}>
@@ -184,25 +194,24 @@ export const HomeScreen = ({ route, navigation }) => {
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState();
 
+  const [addedDrug, setAddedDrug] = useState(route.params.drug);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     // fetchData()
     if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
   }, []);
 
   const init = async () => {
-    const _day = await loadDay() || 1;
+    const _day = await loadDay();
     const _data = await fetchData();
     handleSetDay(Number(_day), _data);
   }
   
   useFocusEffect(
     useCallback(() => {
-      const init = async () => {
-        const _day = await loadDay() || 1;
-        const _data = await fetchData();
-        handleSetDay(Number(_day), _data);
-      }
       init();
+      if (addedDrug) setShowModal(true);
     }, [])
   )
 
@@ -247,13 +256,7 @@ export const HomeScreen = ({ route, navigation }) => {
       }
     }
 
-  const [overlayVisible, setOverlayVisible] = useState(false);
-  const toggleOverlayVisible = () => {
-    setOverlayVisible(!overlayVisible);
-  };
-
   const handleSetDay = (day, data=null) => {
-    setDay(day);
     setDayData(() => {
       if (data) {
         return data.filter((med) => { // array [med1, med2]
@@ -289,8 +292,26 @@ export const HomeScreen = ({ route, navigation }) => {
     return sections;
   }
 
+  function handleCloseModal() {
+    setShowModal(false);
+    setAddedDrug(null);
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {addedDrug && <Modal
+        visible={showModal}
+        backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        onBackdropPress={handleCloseModal}
+      >
+        <View style={{backgroundColor: "#ffffff", padding: 32, borderRadius: 20, gap: 16}}>
+          <Text category="p1">{addedDrug.name} has been added to your schedule.</Text>
+          <Button size="medium" onPress={() => {
+            setDay(new Date(addedDrug.date).getDay());
+            handleCloseModal()
+          }}>Go Now</Button>
+        </View>
+      </Modal> }
       <Layout style={styles.masterLayout}>
         <View style={styles.rowContainer}>
           <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
@@ -298,9 +319,8 @@ export const HomeScreen = ({ route, navigation }) => {
           </Text>
           <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
-
         <View style={{ width: "100%" }}>
-          <HorizontalCalendar handleSetDay={handleSetDay} currentDay={day} />
+          <HorizontalCalendar setDay={setDay} currentDay={day} />
         </View>
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
           <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
