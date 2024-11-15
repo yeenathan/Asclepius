@@ -267,7 +267,7 @@ export const MedFolder = ({ navigation }) => {
         >
           {data.map((med, index) => (
             <MedButton
-              key={med.name || "default"+index}
+              key={med.name}
               med={med}
               index={index}
               onPress={() =>
