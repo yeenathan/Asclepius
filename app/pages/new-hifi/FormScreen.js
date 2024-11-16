@@ -23,6 +23,19 @@ function getTime(time) {
   return `${time.getHours()}:${minutes}`;
 }
 
+function getDates(startDate, interval=0, numDays=7) {
+  console.log("params", startDate, interval, numDays)
+  if (interval === 0) return [startDate];
+  let dates = [];
+  let currentDate = new Date(startDate);
+  for (let i=0; i<numDays; i++) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + interval);
+  }
+  console.log("dates", dates);
+  return dates;
+}
+
 export function FormScreen({navigation, route}) {
   const drug = route.params.drug;
   const [showAlert, setShowAlert] = useState(false);
@@ -43,9 +56,9 @@ export function FormScreen({navigation, route}) {
           <Text category="h2" style={{color: colorTheme["text-off-black"]}}>General Information</Text>
           <View style={{width: "100%", gap: 8}}>
             <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Schedule"} label="*Schedule:" placeholder="Edit Schedule" value={getTime(drug.time)} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Schedule"} label="*Schedule:" placeholder="Edit Schedule" value={drug.dates?getTime(drug.time):null} drugObj={drug}/>
             <FormField navigation={navigation} destination={"Edit Name"} label="Duration:" placeholder="Edit Duration" value={drug.duration} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Name"} label="Frequency:" placeholder="Edit Frequency" value={drug.interval} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Frequency"} label="Frequency:" placeholder="Edit Frequency" value={`Every ${drug.frequency} day(s)`} drugObj={drug}/>
             <FormField navigation={navigation} destination={"Edit Name"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
           </View>
           <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 16}}>Prescription Information</Text>
@@ -53,11 +66,14 @@ export function FormScreen({navigation, route}) {
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {
-            if (!(drug.date && drug.name)) {
+            if (!(drug.dates && drug.name)) {
               setShowAlert(true);
               return;
             }
-            navigation.navigate("Edit Icon", {drug: drug});
+            navigation.navigate("Edit Icon", {drug: {
+              ...drug,
+              dates: getDates(drug.dates[0], drug.frequency)
+            }});
           }}>Continue</Button>
         </View>
       </Layout>

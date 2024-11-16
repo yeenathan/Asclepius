@@ -257,20 +257,23 @@ export const HomeScreen = ({ route, navigation }) => {
     }
 
   const handleSetDay = (day, data=null) => {
+    console.log(data);
     setDayData(() => {
       if (data) {
         return data.filter((med) => { // array [med1, med2]
           if (med === null) return; 
-          const date = new Date(med.date);
-          if (date.getDay() === day) {
-            return med;
-          };
+          for (const date of med.dates) {
+            if (new Date(date).getDay() === day) {
+              return med;
+            }
+          }
         })
       } else return [];
     });
   };
 
   function format(data) {
+    console.log(data);
     const groupedData = data.reduce((sections, item) => {
       const time = new Date(item.time);
       const hour = `${time.getHours()}:00`;
@@ -307,7 +310,7 @@ export const HomeScreen = ({ route, navigation }) => {
         <View style={{backgroundColor: "#ffffff", padding: 32, borderRadius: 20, gap: 16}}>
           <Text category="p1">{addedDrug.name} has been added to your schedule.</Text>
           <Button size="medium" onPress={() => {
-            setDay(new Date(addedDrug.date).getDay());
+            setDay(new Date(addedDrug.dates[0]).getDay());
             handleCloseModal()
           }}>Go Now</Button>
         </View>

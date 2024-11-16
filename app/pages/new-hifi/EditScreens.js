@@ -1,5 +1,5 @@
 import { Layout, Text, Button, Datepicker } from "@ui-kitten/components";
-import { SafeAreaView, View, Image } from "react-native";
+import { SafeAreaView, View, Image, Pressable } from "react-native";
 import { Header } from '@/app/components/header';
 import { useState } from "react";
 import { SuggestionSearch } from "@/app/components/suggestionSearch";
@@ -81,6 +81,39 @@ export function EditIcon ({navigation, route}) {
   )
 }
 
+export function EditFrequency({navigation, route}) {
+  function FrequencyField({label, value, masterValue, setMasterValue}) {
+    return(
+      <Pressable onPress={() => setMasterValue(value)}>
+        <View style={{backgroundColor: value === masterValue? colorTheme["light-blue-80"]: "#ffffff", padding: 16, width: "100%", borderRadius: 8, borderColor: colorTheme["text-gray"], borderWidth: .5}}>
+          <Text category="p1">{label}</Text>
+        </View>
+      </Pressable>
+    )
+  }
+  const [frequency, setFrequency] = useState();
+  const drug = route.params.drug;
+  return(
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Frequency"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, width: "100%", gap: 16}}>
+          <View style={{width: "100%", gap: 4}}>
+            <FrequencyField label={"One time thing"} value={0} masterValue={frequency} setMasterValue={setFrequency}/>
+            <FrequencyField label={"Daily"} value={1} masterValue={frequency} setMasterValue={setFrequency}/>
+            <FrequencyField label={"Weekly"} value={7} masterValue={frequency} setMasterValue={setFrequency}/>
+            <FrequencyField label={"Biweekly"} value={14} masterValue={frequency} setMasterValue={setFrequency}/>
+            <FrequencyField label={"Monthly"} value={30} masterValue={frequency} setMasterValue={setFrequency}/>
+          </View>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, frequency: frequency}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
 export function EditSchedule({navigation, route}) {
   const drug = route.params.drug;
   const [date, setDate] = useState(new Date());
@@ -122,7 +155,9 @@ export function EditSchedule({navigation, route}) {
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {
             ...drug,
-            date: date.toISOString(),
+            dates: [
+              date
+            ],
             time: time
           }})}>Confirm</Button>
         </View>
