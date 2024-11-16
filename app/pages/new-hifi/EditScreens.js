@@ -101,6 +101,7 @@ export function EditFrequency({navigation, route}) {
           <View style={{width: "100%", gap: 4}}>
             <FrequencyField label={"One time thing"} value={0} masterValue={frequency} setMasterValue={setFrequency}/>
             <FrequencyField label={"Daily"} value={1} masterValue={frequency} setMasterValue={setFrequency}/>
+            <FrequencyField label={"Every other day"} value={2} masterValue={frequency} setMasterValue={setFrequency}/>
             <FrequencyField label={"Weekly"} value={7} masterValue={frequency} setMasterValue={setFrequency}/>
             <FrequencyField label={"Biweekly"} value={14} masterValue={frequency} setMasterValue={setFrequency}/>
             <FrequencyField label={"Monthly"} value={30} masterValue={frequency} setMasterValue={setFrequency}/>

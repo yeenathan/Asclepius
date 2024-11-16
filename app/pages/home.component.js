@@ -205,7 +205,7 @@ export const HomeScreen = ({ route, navigation }) => {
   const init = async () => {
     const _day = await loadDay();
     const _data = await fetchData();
-    handleSetDay(Number(_day), _data);
+    handleSetDay(JSON.parse(_day), _data);
   }
   
   useFocusEffect(
@@ -233,7 +233,7 @@ export const HomeScreen = ({ route, navigation }) => {
   }
   const loadDay = async () => {
     try {
-      const day = await AsyncStorage.getItem("Day") || 1;
+      const day = await AsyncStorage.getItem("Day") || new Date();
       if (day) {
         setDay(JSON.parse(day));
         return day;
@@ -250,20 +250,20 @@ export const HomeScreen = ({ route, navigation }) => {
   
   const saveDay = async () => {
       try {
-        await AsyncStorage.setItem("Day", JSON.stringify(day || 1));
+        await AsyncStorage.setItem("Day", JSON.stringify(day || new Date()));
       } catch (e) {
         console.log(e);
       }
     }
 
   const handleSetDay = (day, data=null) => {
-    console.log(data);
+    const _day = new Date(day);
     setDayData(() => {
       if (data) {
         return data.filter((med) => { // array [med1, med2]
-          if (med === null) return; 
+          if (med === null) return;
           for (const date of med.dates) {
-            if (new Date(date).getDay() === day) {
+            if (new Date(date).getDate() === _day.getDate()) {
               return med;
             }
           }
@@ -273,7 +273,6 @@ export const HomeScreen = ({ route, navigation }) => {
   };
 
   function format(data) {
-    console.log(data);
     const groupedData = data.reduce((sections, item) => {
       const time = new Date(item.time);
       const hour = `${time.getHours()}:00`;
@@ -310,7 +309,7 @@ export const HomeScreen = ({ route, navigation }) => {
         <View style={{backgroundColor: "#ffffff", padding: 32, borderRadius: 20, gap: 16}}>
           <Text category="p1">{addedDrug.name} has been added to your schedule.</Text>
           <Button size="medium" onPress={() => {
-            setDay(new Date(addedDrug.dates[0]).getDay());
+            setDay(new Date(addedDrug.dates[0]));
             handleCloseModal()
           }}>Go Now</Button>
         </View>

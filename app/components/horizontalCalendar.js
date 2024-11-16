@@ -3,30 +3,21 @@ import { FlatList, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { default as colorTheme } from "@/custom-theme.json";
 
-const DATA = [
-    { date: getDateOfWeekday(1), day: 1, id: 1, status: true },
-    { date: getDateOfWeekday(2), day: 2, id: 2, status: false },
-    { date: getDateOfWeekday(3), day: 3, id: 3, status: false },
-    { date: getDateOfWeekday(4), day: 4, id: 4, status: false },
-    { date: getDateOfWeekday(5), day: 5, id: 5, status: false },
-    { date: getDateOfWeekday(6), day: 6, id: 6, status: false },
-    { date: getDateOfWeekday(7), day: 0, id: 7, status: false },
-];
-
-//thanks gpt
-function getDateOfWeekday(dayOfWeek) {
-    const today = new Date();
-    const currentDay = today.getDay(); // Get the current day of the week (0-6, where 0 is Sunday)
-    const diff = dayOfWeek - currentDay; // Calculate the difference to the target day
-    const targetDate = new Date(today); // Clone today's date
-    targetDate.setDate(today.getDate() + diff); // Adjust to the target date
-    return targetDate.getDate(); // Return the date number
+function getWeek() {
+    let _week = [];
+    let currentDate = new Date();
+    for (let i=0; i<7; i++) {
+        _week.push({date: new Date(currentDate), id: i, status: false});
+        currentDate.setDate(new Date(currentDate.getDate()+1));
+    }
+    _week[0].status = true;
+    return _week;
 }
 
 /**
  * Individual calendar item component
  */
-const Item = ({ date, day, setDay, currentDay }) => {
+const Item = ({ date, setDay, currentDay }) => {
     function getDayString(dayNum) {
         switch (dayNum) {
             case 0 : return "Sun";
@@ -38,9 +29,11 @@ const Item = ({ date, day, setDay, currentDay }) => {
             case 6 : return "Sat";
         }
     }
+    const day = new Date(date).getDay();
+    const current = new Date(currentDay).getDay();
     return (
         <TouchableOpacity onPress={() => {
-            setDay(day);
+            setDay(new Date(date));
         }}>
             <View
                 style={{
@@ -52,12 +45,12 @@ const Item = ({ date, day, setDay, currentDay }) => {
                     paddingHorizontal: 8,
                     paddingVertical: 16,
                     alignItems: "center",
-                    backgroundColor: day === currentDay ? colorTheme["dark-green"] : "#fff",
+                    backgroundColor: day === current ? colorTheme["dark-green"] : "#fff",
                     borderColor: "transparent"
                 }}
             >
-                <Text category="c1" style={{color: day === currentDay ? "#fff" : "000"}}>{date}</Text>
-                <Text category="h2" style={{color: day === currentDay ? "#fff" : "000"}}>{getDayString(day)}</Text>
+                <Text category="c1" style={{color: day === current ? "#fff" : "000"}}>{date.getDate()}</Text>
+                <Text category="h2" style={{color: day === current ? "#fff" : "000"}}>{getDayString(day)}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -88,15 +81,14 @@ export function HorizontalCalendar({ setDay, currentDay }) {
         <>
             <Text category="p2" style={{color: colorTheme["text-off-black"]}}>{parseMonth(new Date().getMonth())}</Text>
             <FlatList
-                data={DATA}
-                renderItem={({ item }) => (
-                    <Item
+                data={getWeek()}
+                renderItem={({ item }) => {
+                    return <Item
                         date={item.date}
-                        day={item.day}
                         setDay={setDay}
                         currentDay={currentDay}
                     />
-                )}
+                }}
                 keyExtractor={(item) => item.id.toString()} // Ensure key is a string
                 horizontal
                 showsHorizontalScrollIndicator={false}
