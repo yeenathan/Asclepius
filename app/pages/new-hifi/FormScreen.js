@@ -24,15 +24,17 @@ function getTime(time) {
 }
 
 function getDates(startDate, interval=0, numDays=7) {
-  console.log("params", startDate, interval, numDays)
   if (interval === 0) return [startDate];
   let dates = [];
   let currentDate = new Date(startDate);
   for (let i=0; i<numDays; i++) {
-    dates.push(new Date(currentDate));
+    dates.push({
+      date: new Date(currentDate),
+      taken: false,
+      timeTaken: null
+    });
     currentDate.setDate(currentDate.getDate() + interval);
   }
-  console.log("dates", dates);
   return dates;
 }
 
