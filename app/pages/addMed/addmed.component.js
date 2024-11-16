@@ -60,7 +60,7 @@ export const AddScreen = ({navigation}) => {
         </View>
         <View style={{gap: 12, width: "100%", alignItems: "center"}}>
           <Button style={{width: "100%"}} onPress={() => navigation.navigate("Scan")} size='large'>Scan</Button>
-          <Text style={{fontSize: 18, color: colorTheme['persian-green']}} onPress={() => navigation.navigate('Form', {drug: {}})}>Manual Input</Text>
+          <Text style={{fontSize: 18, color: colorTheme['persian-green']}} onPress={() => navigation.navigate('Form', {drug: {frequency: 0, duration: 0}})}>Manual Input</Text>
         </View>
       </Layout>
     </SafeAreaView>

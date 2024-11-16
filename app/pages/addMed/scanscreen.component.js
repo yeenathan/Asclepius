@@ -55,6 +55,8 @@ export const ScanScreen = ({navigation}) => {
     const _name = _drugProduct[0].brand_name;
     return {
       name: _name,
+      duration: 0,
+      frequency: 0
     }
   }
 

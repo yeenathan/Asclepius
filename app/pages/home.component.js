@@ -93,7 +93,6 @@ const MedCard = (props) => {
     let minutes = t.getMinutes().toString().length < 2 ? `0${t.getMinutes()}` : t.getMinutes();
     return `${t.getHours()}:${minutes}`;
   }
-  console.log(data);
   return (
     <>
       <Modal
@@ -129,7 +128,7 @@ const MedCard = (props) => {
           </View>
         </View>
       </Modal>
-      <Pressable pointerEvents={isTaken()?"none":null} onPress={() => {console.log(isTaken());toggleMenuVisible()}}>
+      <Pressable pointerEvents={isTaken()?"none":null} onPress={() => {toggleMenuVisible()}}>
         <View
           style={
             !isTaken()
@@ -330,7 +329,6 @@ export const HomeScreen = ({ route, navigation }) => {
     setShowModal(false);
     setAddedDrug(null);
   }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {addedDrug && <Modal
