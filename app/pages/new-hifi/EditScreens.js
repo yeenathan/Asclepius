@@ -81,16 +81,44 @@ export function EditIcon ({navigation, route}) {
   )
 }
 
-export function EditFrequency({navigation, route}) {
-  function FrequencyField({label, value, masterValue, setMasterValue}) {
-    return(
-      <Pressable onPress={() => setMasterValue(value)}>
-        <View style={{backgroundColor: value === masterValue? colorTheme["light-blue-80"]: "#ffffff", padding: 16, width: "100%", borderRadius: 8, borderColor: colorTheme["text-gray"], borderWidth: .5}}>
-          <Text category="p1">{label}</Text>
+function FrequencyField({label, value, masterValue, setMasterValue}) {
+  return(
+    <Pressable onPress={() => setMasterValue(value)}>
+      <View style={{backgroundColor: value === masterValue? colorTheme["light-blue-80"]: "#ffffff", padding: 16, width: "100%", borderRadius: 8, borderColor: colorTheme["text-gray"], borderWidth: .5}}>
+        <Text category="p1">{label}</Text>
+      </View>
+    </Pressable>
+  )
+}
+
+export function EditDuration({navigation, route}) {
+  const [duration, setDuration] = useState();
+  const drug = route.params.drug;
+  return(
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Duration"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, width: "100%", gap: 16}}>
+          <View style={{width: "100%", gap: 4}}>
+            <FrequencyField label={"One time thing"} value={0} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"1 week"} value={7} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"2 weeks"} value={14} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"3 weeks"} value={21} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"1 month"} value={30} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"3 months"} value={90} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"6 months"} value={180} masterValue={duration} setMasterValue={setDuration}/>
+            <FrequencyField label={"1 year"} value={365} masterValue={duration} setMasterValue={setDuration}/>
+          </View>
         </View>
-      </Pressable>
-    )
-  }
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, duration: duration}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditFrequency({navigation, route}) {
   const [frequency, setFrequency] = useState();
   const drug = route.params.drug;
   return(
