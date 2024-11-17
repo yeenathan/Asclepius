@@ -69,7 +69,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
       }
       <View style={{width: "100%", alignItems: "flex-end"}}>
         {
-          data && data.length<0?
+          !data || data && data.length<1?
           <Button
             size="small"
             style={{
