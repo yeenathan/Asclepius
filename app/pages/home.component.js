@@ -316,12 +316,12 @@ export const HomeScreen = ({ route, navigation }) => {
     return sections;
   }
 
-  async function handleTaken(data) {
+  async function handleTaken(data, targetDay=day) {
     let newData = {
       ...data,
       dates: data.dates.map((date) => {
         const _medDay = new Date(date.date).getDate();
-        const _currentDay = new Date(day).getDate();
+        const _currentDay = new Date(targetDay).getDate();
         if (_medDay === _currentDay) {
           return {...date, taken: true, timeTaken: new Date()};
         }
