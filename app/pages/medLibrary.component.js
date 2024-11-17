@@ -463,8 +463,8 @@ export const InfoScreen = ({ navigation, route }) => {
                 <Text>{medication.reminder}</Text>
               </View>
             </View>
-            <View style={{ flexDirection: "column", gap: 6 }}>
-              <View
+
+            <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
                 <Icon style={{ width: 40 }} name="edit"></Icon>
@@ -472,21 +472,28 @@ export const InfoScreen = ({ navigation, route }) => {
                   Medication Info
                 </Text>
               </View>
+
+            
+            <View style={{ flexDirection: "row", gap: 6 }}>
+              
               <View
                 style={{
-                  backgroundColor: "#fff",
+                  // backgroundColor: "#fff",
                   padding: 32,
                   borderRadius: 20,
                   gap: 16,
+                  flexDirection: "row"
                 }}
               >
-                <View>
+                {/* <View>
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Description
                   </Text>
                   <Text>{medication.description}</Text>
-                </View>
-                <View>
+                </View> */}
+
+                
+                <View style={{ flexDirection: "column", backgroundColor: "#fff", padding: 20, borderRadius: 20}}>
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Side Effects
                   </Text>
@@ -494,13 +501,15 @@ export const InfoScreen = ({ navigation, route }) => {
                     <Text key={index}>• {effect}</Text>
                   ))}
                 </View>
-                <View>
+
+              <View style={{ flexDirection: "column", width: "54%", gap: 20 }}>    
+                <View style={{ backgroundColor: "#007972", padding: 20, borderRadius: 20}}>
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Directions for Use
                   </Text>
                   <Text>{medication.directions}</Text>
                 </View>
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -508,12 +517,15 @@ export const InfoScreen = ({ navigation, route }) => {
                     gap: 6,
                   }}
                 >
+
+                  
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Drug Strength
                   </Text>
                   <Text>{medication.strength}</Text>
-                </View>
-                <View
+                </View> */}
+
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -525,13 +537,17 @@ export const InfoScreen = ({ navigation, route }) => {
                     Dosage Type
                   </Text>
                   <Text>{medication.type}</Text>
-                </View>
+                </View> */}
+
+                
                 <View
                   style={{
-                    flexDirection: "row",
+                    flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: 6,
+                    backgroundColor: '#fff',
+                    borderRadius: 20
                   }}
                 >
                   <Text style={{ color: colorTheme["persian-green"] }}>
@@ -539,7 +555,11 @@ export const InfoScreen = ({ navigation, route }) => {
                   </Text>
                   <Text>{medication.quantity}</Text>
                 </View>
-                <View
+
+              </View>
+
+                
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -551,7 +571,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     Number of Refills
                   </Text>
                   <Text>{medication.refills}</Text>
-                </View>
+                </View> */}
               </View>
             </View>
             <Button

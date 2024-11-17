@@ -58,7 +58,7 @@ export const AddScreen = ({navigation}) => {
           <Text style={{marginBottom: 16 }} category='h2'>Scan your medication</Text>
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
-        <View style={{gap: 12, width: "100%"}}>
+        <View style={{gap: 12, width: "100%",  }}>
           <MyButton text="Scan" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Scan')}/>
           <MyButton text="or Manual Input" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: "#ffffff"}} press={() => navigation.navigate('Manual Name')}/>
         </View>
