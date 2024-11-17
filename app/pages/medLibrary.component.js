@@ -493,7 +493,16 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View> */}
 
                 
-                <View style={{ flexDirection: "column", backgroundColor: "#fff", padding: 20, borderRadius: 20}}>
+                <View style={{  flexDirection: "column",
+                  backgroundColor: "#fff",
+                  padding: 20,
+                  borderRadius: 20,
+                  shadowColor: "#000", // Shadow color
+                  shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
+                  shadowOpacity: 0.25, // Shadow transparency
+                  shadowRadius: 3.84, // Shadow blur radius
+                  elevation: 5,
+                }}>
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Side Effects
                   </Text>
@@ -507,7 +516,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Directions for Use
                   </Text>
-                  <Text>{medication.directions}</Text>
+                  <Text style={{ color: "white" }}>{medication.directions}</Text>
                 </View>
                 {/* <View
                   style={{
@@ -547,7 +556,13 @@ export const InfoScreen = ({ navigation, route }) => {
                     alignItems: "center",
                     gap: 6,
                     backgroundColor: '#fff',
-                    borderRadius: 20
+                    borderRadius: 20,
+                    padding: 20,
+                    shadowColor: "#000", // Shadow color
+                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
+                    shadowOpacity: 0.25, // Shadow transparency
+                    shadowRadius: 3.84, // Shadow blur radius
+                    elevation: 5,
                   }}
                 >
                   <Text style={{ color: colorTheme["persian-green"] }}>
