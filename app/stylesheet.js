@@ -65,8 +65,8 @@ export const styles = StyleSheet.create({
         borderRadius: 20, // Rounds the top corners
         alignItems: 'flex-start',
         justifyContent:'center',
-        padding: 30,
-        paddingBottom: 36,
+        paddingVertical: 24,
+        paddingHorizontal: 30,
         width: "100%"
       },
       cutout: {

@@ -60,22 +60,6 @@ const MedCard = (props) => {
     return _taken;
   }
 
-  async function handleTaken(data) {
-    let newData = {
-      ...data,
-      dates: data.dates.map((date) => {
-        const _medDay = new Date(date.date).getDate();
-        const _currentDay = new Date(props.currentDay).getDate();
-        if (_medDay === _currentDay) {
-          return {...date, taken: true, timeTaken: new Date()};
-        }
-        return date;
-      })
-    };
-    await AsyncStorage.setItem(data.key, JSON.stringify(newData));
-    props.init();
-  }
-  
   // scuffed code because android and ios have different requirements for this datepicker
   const [time, setTime] = useState(new Date());
   async function handlePickTime(e, selected) {
@@ -93,6 +77,7 @@ const MedCard = (props) => {
     let minutes = t.getMinutes().toString().length < 2 ? `0${t.getMinutes()}` : t.getMinutes();
     return `${t.getHours()}:${minutes}`;
   }
+  
   return (
     <>
       <Modal
@@ -115,8 +100,8 @@ const MedCard = (props) => {
           <Text style={{ marginBottom: 32, paddingHorizontal: 32 }} category="h2">
             {data.name}
           </Text>
-          <View style={{alignItems: "flex-end", gap: 8}}>
-            <View style={{ flexDirection: "row", gap: 8, justifyContent: "center" }}>
+          <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
+            <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
               <Button style={{ flex: 1 }} appearance="outline" size="medium">
                 Skip
               </Button>
@@ -160,7 +145,7 @@ const MedCard = (props) => {
             <Text category="c1">{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
-            <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
+            <CheckBox onChange={() => props.handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
           </View>
         </View>
       </Pressable>
@@ -177,7 +162,7 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({ dayData, init, currentDay }) => {
+const MedList = ({ dayData, init, currentDay, handleTaken }) => {
   return (
     <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8}}>
       {
@@ -185,7 +170,7 @@ const MedList = ({ dayData, init, currentDay }) => {
           style={{ flex: 1, width: "100%", padding: 8, paddingBottom: 0}}
           sections={dayData}
           renderItem={({ item }) => (
-            <MedCard data={item} init={init} currentDay={currentDay}/>
+            <MedCard data={item} init={init} currentDay={currentDay} handleTaken={handleTaken}/>
           )}
           renderSectionHeader={({ section: { title } }) => (
             <Text category="p2">{title}</Text>
@@ -224,7 +209,8 @@ export const HomeScreen = ({ route, navigation }) => {
   const [onboarding, setOnboarding] = useState(route.params.onboarding);
 
   const [dayData, setDayData] = useState([]);
-  const [day, setDay] = useState();
+  const [day, setDay] = useState(new Date());
+  const [data, setData] = useState(null);
 
   const [addedDrug, setAddedDrug] = useState(route.params.drug);
   const [showModal, setShowModal] = useState(false);
@@ -287,20 +273,25 @@ export const HomeScreen = ({ route, navigation }) => {
       }
     }
 
-  const handleSetDay = (day, data=null) => {
+  function getDayData(day, data=null) {
     const _day = new Date(day);
-    setDayData(() => {
-      if (data) {
-        return data.filter((med) => { // array [med1, med2]
-          if (med === null) return;
-          for (const date of med.dates) {
-            if (new Date(date.date).getDate() === _day.getDate()) {
-              return med;
-            }
+    if (data) {
+      return data.filter((med) => { // array [med1, med2]
+        if (med === null) return;
+        for (const date of med.dates) {
+          if (new Date(date.date).getDate() === _day.getDate()) {
+            return med;
           }
-        })
-      } else return [];
-    });
+        }
+      }).sort((a, b) => {
+        return new Date(a.time).getTime() - new Date(b.time).getTime();
+      })
+    } else return [];
+  }
+
+  const handleSetDay = (day, data=null) => {
+    setData(data);
+    setDayData(getDayData(day, data));
   };
 
   function format(data) {
@@ -325,10 +316,27 @@ export const HomeScreen = ({ route, navigation }) => {
     return sections;
   }
 
+  async function handleTaken(data) {
+    let newData = {
+      ...data,
+      dates: data.dates.map((date) => {
+        const _medDay = new Date(date.date).getDate();
+        const _currentDay = new Date(day).getDate();
+        if (_medDay === _currentDay) {
+          return {...date, taken: true, timeTaken: new Date()};
+        }
+        return date;
+      })
+    };
+    await AsyncStorage.setItem(data.key, JSON.stringify(newData));
+    init();
+  }
+
   function handleCloseModal() {
     setShowModal(false);
     setAddedDrug(null);
   }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {addedDrug && <Modal
@@ -356,9 +364,9 @@ export const HomeScreen = ({ route, navigation }) => {
         </View>
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
           <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
-          <MedReminder navigation={navigation}/>
+          <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken}/>
           <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
-          <MedList dayData={format(dayData)} init={init} currentDay={day}/>
+          <MedList dayData={format(dayData)} init={init} currentDay={day} handleTaken={handleTaken}/>
         </View>
       </Layout>
     </SafeAreaView>
