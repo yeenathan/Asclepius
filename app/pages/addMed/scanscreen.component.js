@@ -21,7 +21,7 @@ export const ScanScreen = ({navigation}) => {
   const [photoTaken, setPhotoTaken] = useState(false);
   const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
 
-  const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [drug, setDrug] = useState();
 
   useEffect(() => {
@@ -43,12 +43,14 @@ export const ScanScreen = ({navigation}) => {
     }
   }
 
-  async function getDrugInfo(DIN) {
+  async function getDrugInfo(DIN=null) {
     const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
     // const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=0021`).then(resp => resp.json());
     if (!_drugProduct[0]) {
       return {
         name: "DIN not detected",
+        duration: 0,
+        frequency: 0
       }
     }
     const _code = _drugProduct[0].drug_code;
@@ -89,18 +91,21 @@ export const ScanScreen = ({navigation}) => {
                 <Button
                   size='large'
                   onPress={async () => {
-                    if (uploading) return;
-                    if (!uploading && photoTaken) navigation.navigate("Form", {drug: drug});
+                    if (loading) return;
+                    if (!loading && photoTaken) navigation.navigate("Form", {drug: drug});
                     if (camReady && !photoTaken) {
                       const _photo = await cameraRef.current.takePictureAsync({quality: 0.2})
                       setPhoto(_photo);
                       setPhotoTaken(true);
-                      setUploading(true);
-                      const _imageData = await Upload(_photo.uri || _photo.base64, setUploading);
-                      setDrug(await getDrugInfo(getDIN(_imageData)));
+                      setLoading(true);
+                      const _imageData = await Upload(_photo.uri || _photo.base64);
+                      setDrug(await getDrugInfo(
+                        getDIN(_imageData)
+                      ));
+                      setLoading(false);
                     }
                   }}
-                >{photoTaken? (uploading? "Loading...": drug.name) : "Take Photo"}</Button>
+                >{photoTaken? (loading? "Loading...": drug.name) : "Take Photo"}</Button>
                 {photoTaken && <Text category='p2' style={{textAlign: "center", color: colorTheme['persian-green']}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
             </View>
           }

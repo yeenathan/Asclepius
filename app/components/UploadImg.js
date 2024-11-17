@@ -2,7 +2,7 @@ import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from '@ui-kitten/components';
 
-export const Upload = async (data, setUploading) => {
+export const Upload = async (data) => {
 
   const _url = await fetch("https://remedify-ocr.azurewebsites.net/api/generateSASUrl?", {
     method:"POST",
@@ -32,6 +32,5 @@ export const Upload = async (data, setUploading) => {
   });
   
   const _result = await _ocr.json();
-  setUploading(false);
   return _result.analyzeResult.readResults;
 }
