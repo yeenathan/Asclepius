@@ -29,9 +29,8 @@ export function EditIcon ({navigation, route}) {
       if (prevKeys) {
         newKeys = [...JSON.parse(prevKeys), key];
       }
-      let valueWithKey = {...value, key: key}
       await AsyncStorage.setItem("KEYS", JSON.stringify(newKeys));
-      await AsyncStorage.setItem(key, JSON.stringify(valueWithKey));
+      await AsyncStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
       console.log(e);
     }
