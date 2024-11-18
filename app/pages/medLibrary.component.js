@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Image, ScrollView } from "react-native";
+import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView } from "react-native";
 import {
   Button,
   Layout,
@@ -11,7 +11,8 @@ import {
   Modal,
   Input,
   Datepicker,
-  TopNavigationAction
+  TopNavigationAction,
+  Card
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
 
@@ -355,6 +356,27 @@ export const InfoScreen = ({ navigation, route }) => {
     setShowArchiveModal(true);
   };
 
+  const medHeader = (props: ViewProps): React.ReactElement => (
+    <View {...props}>
+      {medication.icon}
+      <Text category='h6'>
+      {medication.name}, 5 units
+      </Text>
+      <Text category='h10'>
+      Once daily before a meal
+      </Text>
+    </View>
+  );
+  
+  const Footer = (props: ViewProps): React.ReactElement => (
+    <View
+      {...props}
+      // eslint-disable-next-line react/prop-types
+      style={[props.style, styles.footerContainer]}
+    >
+    </View>
+  );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
@@ -385,8 +407,7 @@ export const InfoScreen = ({ navigation, route }) => {
             }}
           >
             <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
-              {medication.icon}
-              <Text>{medication.name} Info</Text>
+              <Text>Insulin {medication.name}</Text>
             </View>
             {/* <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Reminder", medication: medication})}>Edit Reminder</Button>
@@ -404,9 +425,18 @@ export const InfoScreen = ({ navigation, route }) => {
                 source={medication.icon}
                 style={{ width: 40, height: 40, marginRight: 16 }}
               /> */}
-              <Text category="h2">{medication.name}</Text>
             </View>
-
+            <View style={{ flexDirection: "column", gap: 6 }}>
+  <Layout style={styles.topContainer} level="1">
+    <Card style={styles.card} header={medHeader}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+        <Text style={{ color: colorTheme["gray"] }}>Duration</Text>
+        <Text style={{ color: colorTheme["gray"] }}>Dose</Text>
+        <Text style={{ color: colorTheme["gray"] }}>Frequency</Text>
+      </View>
+    </Card>
+  </Layout>
+</View>
             {/* Edit Buttons */}
             <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
               <Button
@@ -443,25 +473,6 @@ export const InfoScreen = ({ navigation, route }) => {
               >
                 Info
               </Button>
-            </View>
-            <View style={{ flexDirection: "column", gap: 6 }}>
-              <View
-                style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
-              >
-                <Icon style={{ width: 40 }} name="clock"></Icon>
-                <Text style={{ color: colorTheme["green"] }}>
-                  Reminder
-                </Text>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "#fff",
-                  padding: 32,
-                  borderRadius: 20,
-                }}
-              >
-                <Text>{medication.reminder}</Text>
-              </View>
             </View>
             <View style={{ flexDirection: "column", gap: 6 }}>
               <View
