@@ -355,7 +355,9 @@ export const InfoScreen = ({ navigation, route }) => {
     // Handle archiving logic here
     setShowArchiveModal(true);
   };
+
   const [visible, setVisible] = useState(false);
+  const [directionsVisible, setDirectionsVisible] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -502,10 +504,10 @@ export const InfoScreen = ({ navigation, route }) => {
                     backgroundColor: "#fff",
                     padding: 20,
                     borderRadius: 20,
-                    shadowColor: "#000", // Shadow color
-                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
-                    shadowOpacity: 0.25, // Shadow transparency
-                    shadowRadius: 3.84, // Shadow blur radius
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
                     elevation: 5,
                   }}
                 >
@@ -554,12 +556,56 @@ export const InfoScreen = ({ navigation, route }) => {
               </View>
 
               <View style={{ flexDirection: "column", width: "54%", gap: 20 }}>    
-                <View style={{ backgroundColor: "#007972", padding: 20, borderRadius: 20}}>
-                  <Text style={{ color: colorTheme["persian-green"] }}>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    backgroundColor: "#007972",
+                    padding: 20,
+                    borderRadius: 20,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 4, height: 4 },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 5,
+                  }}
+                >
+                  <Text
+                    style={{ color: colorTheme["persian-green"], fontWeight: "bold" }}
+                    onPress={() => setDirectionsVisible(true)}
+                  >
                     Directions for Use
                   </Text>
-                  <Text style={{ color: "white" }}>{medication.directions}</Text>
+
                 </View>
+                  <Modal
+                    visible={directionsVisible}
+                    backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                    onBackdropPress={() => setDirectionsVisible(false)}
+                  >
+                    <Card 
+                      disabled={true}
+                      style={{
+                        width: 300,
+                        borderRadius: 20,
+                      }}
+                    >
+                      <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                        Directions for Use
+                      </Text>
+                      <Text style={{ marginBottom: 10 }}>{medication.directions}</Text>
+                      <Button
+                        style={{
+                          marginTop: 20,
+                          backgroundColor: colorTheme["persian-green"],
+                          borderColor: colorTheme["persian-green"],
+                          }}
+                          onPress={() => setDirectionsVisible(false)}
+                      >
+                        Close
+                      </Button>
+                    </Card>
+
+                  </Modal>
 
                 <View
                   style={{
@@ -570,10 +616,10 @@ export const InfoScreen = ({ navigation, route }) => {
                     backgroundColor: '#fff',
                     borderRadius: 20,
                     padding: 20,
-                    shadowColor: "#000", // Shadow color
-                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
-                    shadowOpacity: 0.25, // Shadow transparency
-                    shadowRadius: 3.84, // Shadow blur radius
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
                     elevation: 5,
                   }}
                 >
@@ -584,7 +630,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View>
                 
                 </View>
-                
+
                 {/* <View
                   style={{
                     flexDirection: "row",
