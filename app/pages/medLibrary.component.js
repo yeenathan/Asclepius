@@ -11,7 +11,8 @@ import {
   Modal,
   Input,
   Datepicker,
-  TopNavigationAction
+  TopNavigationAction,
+  Card
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
 
@@ -354,6 +355,7 @@ export const InfoScreen = ({ navigation, route }) => {
     // Handle archiving logic here
     setShowArchiveModal(true);
   };
+  const [visible, setVisible] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -482,7 +484,8 @@ export const InfoScreen = ({ navigation, route }) => {
                   padding: 32,
                   borderRadius: 20,
                   gap: 16,
-                  flexDirection: "row"
+                  flexDirection: "row",
+
                 }}
               >
                 {/* <View>
@@ -492,24 +495,63 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text>{medication.description}</Text>
                 </View> */}
 
-                
-                <View style={{  flexDirection: "column",
-                  backgroundColor: "#fff",
-                  padding: 20,
-                  borderRadius: 20,
-                  shadowColor: "#000", // Shadow color
-                  shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
-                  shadowOpacity: 0.25, // Shadow transparency
-                  shadowRadius: 3.84, // Shadow blur radius
-                  elevation: 5,
-                }}>
-                  <Text style={{ color: colorTheme["persian-green"] }}>
+
+                <View
+                  style={{
+                    flexDirection: "column",
+                    backgroundColor: "#fff",
+                    padding: 20,
+                    borderRadius: 20,
+                    shadowColor: "#000", // Shadow color
+                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
+                    shadowOpacity: 0.25, // Shadow transparency
+                    shadowRadius: 3.84, // Shadow blur radius
+                    elevation: 5,
+                  }}
+                >
+
+                  <Text
+                    style={{ color: colorTheme["persian-green"] }}
+                    onPress={() => setVisible(true)}
+                  >
+                    Side Effects
+                  </Text>
+
+                <Modal
+                  visible={visible}
+                  backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                  onBackdropPress={() => setVisible(false)} 
+                >
+
+                <Card
+                  disabled={true}
+                  style={{
+                  width: 300,
+                  borderRadius: 20}}
+                >
+                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
                     Side Effects
                   </Text>
                   {medication.sideEffects.map((effect, index) => (
-                    <Text key={index}>• {effect}</Text>
+                    <Text key={index} style={{ marginBottom: 5 }}>
+                      • {effect}
+                    </Text>
                   ))}
-                </View>
+
+                  <Button
+                    style={{
+                      marginTop: 20,
+                      backgroundColor: colorTheme["persian-green"],
+                      borderColor: colorTheme["persian-green"],
+                    }}
+                    onPress={() => setVisible(false)}
+                  >
+                    Close
+                  </Button> 
+                </Card>
+
+                </Modal>
+              </View>
 
               <View style={{ flexDirection: "column", width: "54%", gap: 20 }}>    
                 <View style={{ backgroundColor: "#007972", padding: 20, borderRadius: 20}}>
@@ -518,6 +560,31 @@ export const InfoScreen = ({ navigation, route }) => {
                   </Text>
                   <Text style={{ color: "white" }}>{medication.directions}</Text>
                 </View>
+
+                <View
+                  style={{
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 6,
+                    backgroundColor: '#fff',
+                    borderRadius: 20,
+                    padding: 20,
+                    shadowColor: "#000", // Shadow color
+                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
+                    shadowOpacity: 0.25, // Shadow transparency
+                    shadowRadius: 3.84, // Shadow blur radius
+                    elevation: 5,
+                  }}
+                >
+                  <Text style={{ color: colorTheme["persian-green"] }}>
+                    Quantity Prescribed
+                  </Text>
+                  <Text>{medication.quantity}</Text>
+                </View>
+                
+                </View>
+                
                 {/* <View
                   style={{
                     flexDirection: "row",
@@ -549,29 +616,6 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View> */}
 
                 
-                <View
-                  style={{
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 6,
-                    backgroundColor: '#fff',
-                    borderRadius: 20,
-                    padding: 20,
-                    shadowColor: "#000", // Shadow color
-                    shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
-                    shadowOpacity: 0.25, // Shadow transparency
-                    shadowRadius: 3.84, // Shadow blur radius
-                    elevation: 5,
-                  }}
-                >
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Quantity Prescribed
-                  </Text>
-                  <Text>{medication.quantity}</Text>
-                </View>
-
-              </View>
 
                 
                 {/* <View
