@@ -454,7 +454,7 @@ export const InfoScreen = ({ navigation, route }) => {
   </Layout>
 </View>
             {/* Edit Buttons */}
-            <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
+            {/* <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
               <Button
                 onPress={() =>
                   navigation.navigate("Med Stack", {
@@ -489,7 +489,7 @@ export const InfoScreen = ({ navigation, route }) => {
               >
                 Info
               </Button>
-            </View>
+            </View> */}
             <View style={{ flexDirection: "column", gap: 6 }}>
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
