@@ -357,16 +357,30 @@ export const InfoScreen = ({ navigation, route }) => {
   };
 
   const medHeader = (props: ViewProps): React.ReactElement => (
-    <View {...props}>
-      {medication.icon}
-      <Text category='h6'>
-      {medication.name}, 5 units
-      </Text>
-      <Text category='h10'>
-      Once daily before a meal
-      </Text>
+    <View {...props} style={{ flexDirection: "row", gap: 10, alignItems: "center", padding: 10, borderRadius: 15 }}>
+      <View
+        style={{
+          backgroundColor: colorTheme["green"],
+          borderRadius: 50,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 10,
+        }}
+      >
+        {React.cloneElement(medication.icon, { ...medication.icon.props, style: { ...medication.icon.props.style, width: 30, height: 30 } })}
+      </View>
+      <View style={{ flexDirection: "column", flex: 1, marginLeft: 10 }}>
+        <Text category='h6'>
+          {medication.name}, {medication.refills} units
+        </Text>
+        <Text category='h10' appearance='hint'>
+          {medication.directions}
+        </Text>
+      </View>
+      <Text style={{ color: colorTheme["green"], position: "absolute", top: 10, right: 10 }}>Edit Info</Text>
     </View>
   );
+  
   
   const Footer = (props: ViewProps): React.ReactElement => (
     <View
@@ -454,7 +468,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Icon {...props} name="edit-outline" />
                 )}
               >
-                Reminder
+                Edit info
               </Button>
               <Button
                 onPress={() =>

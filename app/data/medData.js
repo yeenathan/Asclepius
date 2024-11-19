@@ -116,10 +116,7 @@ export const LIBRARY_DATA = [
       "Lisinopril is used to treat high blood pressure (hypertension) and heart failure. It helps relax blood vessels, making it easier for your heart to pump blood, thereby lowering blood pressure.",
     sideEffects: ["Dizziness", "Cough", "Headache", "Fatigue", "Nausea"],
     directions: [
-      "Take one tablet by mouth once daily, preferably at the same time each day.",
-      "Can be taken with or without food.",
-      "Drink plenty of water while on this medication.",
-      "Do not stop taking unless directed by your doctor.",
+      "Once daily before a meal",
     ],
     strength: "10 mg per tablet",
     type: "Oral Tablet",
