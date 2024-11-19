@@ -373,7 +373,7 @@ export const InfoScreen = ({ navigation, route }) => {
         <Text category='h6'>
           {medication.name}, {medication.refills} units
         </Text>
-        <Text category='h10' appearance='hint'>
+        <Text category='h10' appearance='hint' style={{ color: "gray"}}>
           {medication.directions}
         </Text>
       </View>
@@ -420,8 +420,10 @@ export const InfoScreen = ({ navigation, route }) => {
               marginBottom: 60,
             }}
           >
-            <View style={{flexDirection: "row", alignItems:'center', gap: 6}}>
-              <Text>Insulin {medication.name}</Text>
+            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', gap: 6}}>
+            <Text category='h6'>
+              Insulin <Text category='h6' style={{ color: colorTheme["green"] }}>{medication.name}</Text>
+            </Text>
             </View>
             {/* <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
               <Button onPress={() => navigation.navigate("Med Stack", {screen: "Edit Reminder", medication: medication})}>Edit Reminder</Button>
@@ -444,9 +446,9 @@ export const InfoScreen = ({ navigation, route }) => {
   <Layout style={styles.topContainer} level="1">
     <Card style={styles.card} header={medHeader}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-        <Text style={{ color: colorTheme["gray"] }}>Duration</Text>
-        <Text style={{ color: colorTheme["gray"] }}>Dose</Text>
-        <Text style={{ color: colorTheme["gray"] }}>Frequency</Text>
+        <Text style={{ color: "gray" }}>Duration</Text>
+        <Text style={{ color: "gray" }}>Dose</Text>
+        <Text style={{ color: "gray" }}>Frequency</Text>
       </View>
     </Card>
   </Layout>
