@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView } from "react-native";
+import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView, TouchableOpacity } from "react-native";
 import {
   Button,
   Layout,
@@ -377,7 +377,17 @@ export const InfoScreen = ({ navigation, route }) => {
           {medication.directions}
         </Text>
       </View>
-      <Text style={{ color: colorTheme["green"], position: "absolute", top: 10, right: 10 }}>Edit Info</Text>
+      <TouchableOpacity
+  onPress={() =>
+    navigation.navigate("Med Stack", {
+      screen: "Edit Reminder",
+      medication,
+    })
+  }
+  style={{ position: "absolute", top: 10, right: 10 }}
+>
+  <Text style={{ color: colorTheme["green"] }}>Edit Info</Text>
+</TouchableOpacity>
     </View>
   );
   
