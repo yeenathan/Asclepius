@@ -328,7 +328,7 @@ export const HomeScreen = ({ route, navigation }) => {
         return date;
       })
     };
-    await AsyncStorage.setItem(data.key, JSON.stringify(newData));
+    await AsyncStorage.setItem(data.name, JSON.stringify(newData));
     init();
   }
 
