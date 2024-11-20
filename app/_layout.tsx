@@ -5,7 +5,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { default as colorTheme } from '../custom-theme.json';
 import { default as mapping } from "../mapping.json"
 import { useFonts } from 'expo-font';
-import { SafeAreaView, Text } from 'react-native';
+import { Image, SafeAreaView, Text } from 'react-native';
 import { MainNavigator } from "@/app/navigators/mainnavigator.component"
 
 export default () => {
@@ -21,9 +21,11 @@ export default () => {
 
 
   if(!loaded){
-    return <SafeAreaView>
-      <Text>Loading Fonts...</Text>
-    </SafeAreaView>
+    return (
+      <SafeAreaView style={{flex: 1, justifyContent: "center", alignItems: "center", padding: 32}}>
+        <Image style={{maxWidth: "100%"}} source={require("@/assets/graphics/logomark.png")} resizeMode='contain'/>
+      </SafeAreaView>
+    )
   }
   return (
     <>
