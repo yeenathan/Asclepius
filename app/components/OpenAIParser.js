@@ -20,7 +20,7 @@ export const OpenAIParser = async (inputText) => {
             content: `
               this is scanned OCR text from a medication label: ${inputText}. parse into json with properties "name", "dose", "frequency", "duration", "strength" according to the following descriptions:
               "name": return the medication name
-              "dose": return a dosage amount. example: 2mL
+              "dose": return a dosage amount. example: 1 tablet
               "frequency": return a number in days. default to 0
               "duration": return a number in weeks. default to 0
               "strength": return strength per dose. example: 500mg
