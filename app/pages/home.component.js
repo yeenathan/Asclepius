@@ -141,7 +141,7 @@ const MedCard = (props) => {
             {/* {data.icon} */}
           </View>
           <View style={{ flex: 6 }}>
-            <Text category="p1">{data.name}</Text>
+            <Text category="p1">{`${data.name} ${data.strength || ""}`}</Text>
             <Text category="c1">{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
