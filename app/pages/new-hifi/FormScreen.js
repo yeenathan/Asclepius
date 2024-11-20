@@ -79,12 +79,13 @@ export function FormScreen({navigation, route}) {
           <View style={{width: "100%", gap: 8}}>
             <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug}/>
             <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Duration"} label="Duration:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Frequency"} label="Frequency:" placeholder="Edit Frequency" value={drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once"} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Name"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Duration"} label="Duration:" placeholder="Edit Duration" value={drug.duration && (drug.duration !==0 ?`${drug.duration} days`:"Just once")} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Frequency"} label="Frequency:" placeholder="Edit Frequency" value={drug.frequency && (drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once")} drugObj={drug}/>
+            <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
           </View>
-          <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 16}}>Prescription Information</Text>
-          <FormField navigation={navigation} destination={"Edit Name"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
+          {/* <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 16}}>Prescription Information</Text>
+          <FormField navigation={navigation} destination={"Edit Name"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/> */}
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {

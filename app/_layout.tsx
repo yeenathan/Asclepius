@@ -7,7 +7,6 @@ import { default as mapping } from "../mapping.json"
 import { useFonts } from 'expo-font';
 import { SafeAreaView, Text } from 'react-native';
 import { MainNavigator } from "@/app/navigators/mainnavigator.component"
-import { NavigationContainer } from '@react-navigation/native';
 
 export default () => {
   const [loaded, error] = useFonts({

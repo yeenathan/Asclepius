@@ -11,6 +11,7 @@ import { default as colorTheme } from "@/custom-theme.json"
 import { Header } from '@/app/components/header';
 
 import { Upload } from "@/app/components/UploadImg"
+import { OpenAIParser } from "@/app/components/OpenAIParser"
 
 export const ScanScreen = ({navigation}) => {
 
@@ -41,6 +42,17 @@ export const ScanScreen = ({navigation}) => {
         if (_DIN_REGEX.test(word.text)) return word.text;
       }
     }
+  }
+
+  function parseText(imageData) {
+    let _text = "";
+    const _lines = imageData[0].lines;
+    for (const line of _lines) {
+      for (const word of line.words) {
+        _text += " "+word.text;
+      }
+    }
+    return _text;
   }
 
   async function getDrugInfo(DIN=null) {
@@ -99,9 +111,10 @@ export const ScanScreen = ({navigation}) => {
                       setPhotoTaken(true);
                       setLoading(true);
                       const _imageData = await Upload(_photo.uri || _photo.base64);
-                      setDrug(await getDrugInfo(
-                        getDIN(_imageData)
-                      ));
+                      // setDrug(await getDrugInfo(
+                      //   getDIN(_imageData)
+                      // ));
+                      setDrug(await OpenAIParser(parseText(_imageData)));
                       setLoading(false);
                     }
                   }}
