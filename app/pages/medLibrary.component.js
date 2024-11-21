@@ -81,7 +81,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   );
 };
 
-const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
+const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) => {
   const [showArchiveBottomModal, setShowArchiveBottomModal] = useState(false);
   const [showArchiveModal, setShowArchiveModal] = useState(false);
   const toggleArchiveBottomModal = () => {
@@ -164,7 +164,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete }) => {
               alignItems: "center",
             }}
           >
-            {/* <Image source={med.icon} /> */}
+            {med.icon}
             <Text category="h2">{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
@@ -186,11 +186,7 @@ export const MedFolder = ({ navigation }) => {
   const [selectedTab, setSelectedTab] = useState(1);
 
   function handleSwitch(value) {
-    if (value) {
-      setData(LIBRARY_DATA.filter((data) => !data.isArchive));
-    } else {
-      setData(LIBRARY_DATA.filter((data) => data.isArchive));
-    }
+
     setSelectedTab(value);
   }
 
@@ -247,15 +243,16 @@ export const MedFolder = ({ navigation }) => {
   const handleArchive = (med) => {
     setData((prev) => {
       const newData = prev.map((m) => {
-        if (m.name === med.name) {
-          m.isArchive = true;
+        const c = {...m}
+        if(m.name === med.name) {
+        c.isArchive = true;
         }
-        return m;
+        return c;
       });
-      return newData.filter((m) => !m.isArchive);
+      return newData
     });
   };
-
+  console.log(data)
   return (
     <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
       <TabSwitch />
@@ -266,11 +263,18 @@ export const MedFolder = ({ navigation }) => {
             gap: 16,
           }}
         >
-          {data.map((med, index) => (
+          {data.filter((med)=> {
+            if(selectedTab === 1) {
+              return !med.isArchive
+            } else {
+              return med.isArchive === true
+            }
+          }).map((med, index) => (
             <MedButton
               key={med.name}
               med={med}
               index={index}
+              icon={med.icon}
               onPress={() =>
                 navigation.navigate("Med Detail", {
                   medication: med,
@@ -301,21 +305,21 @@ export const MedDescription = ({ navigation, route }) => {
       }}
     />
   );
-
+  console.log(1,medication)
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
         <Text style={{ color: "white", marginBottom: 10 }}>
-        {medication.name}
+        {medication.name}, {medication.refills}
         </Text>
         <Text style={{ color: "white", marginBottom: 10 }}>
-        Once daily before a meal
+        {medication.directions}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
           {medication.icon}
         </View>
-        <Text style={{ color: "white", marginBottom: 30 }}>
+        <Text style={{ color: "white", marginBottom: 8 }}>
           description
         </Text>
         <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center" }}>{medication.description}</Text>
@@ -391,16 +395,6 @@ export const InfoScreen = ({ navigation, route }) => {
     </View>
   );
   
-  
-  const Footer = (props: ViewProps): React.ReactElement => (
-    <View
-      {...props}
-      // eslint-disable-next-line react/prop-types
-      style={[props.style, styles.footerContainer]}
-    >
-    </View>
-  );
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
