@@ -364,9 +364,9 @@ export const InfoScreen = ({ navigation, route }) => {
   const renderViewMore = (onPress) => (
     <TouchableOpacity onPress={() => {
       setFullText('This is the full text to display in the overlay.');
-      setModalVisible(true);
+      setDirectionsVisible(true);
     }}>
-      <Text>View More</Text>
+      <Text category="s1" style={{ color: "white", marginTop: 20 }}>View More</Text>
     </TouchableOpacity>
   );
 
@@ -525,7 +525,6 @@ export const InfoScreen = ({ navigation, route }) => {
 
                   <Text
                     style={{ color: colorTheme["persian-green"] }}
-                    onPress={() => setVisible(true)}
                   >
                     Side Effects
                   </Text>
@@ -534,15 +533,23 @@ export const InfoScreen = ({ navigation, route }) => {
                     numberOfLines={3}
                     renderViewMore={renderViewMore}
                   >
-                  <View style={{ flexDirection: "column" }}>
-                  {medication.sideEffects.slice(0, 3).map((effect, index) => (
-                    <Text key={index} style={{ marginBottom: 5 }}>
-                      • {effect}
-                    </Text>
-                  ))}
+                    <View style={{ flexDirection: "column" }}>
+                      {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                      <Text key={index} style={{ marginBottom: 5 }}>
+                        • {effect}
+                      </Text>
+                      ))}
                     </View>
 
                   </ViewMoreText>
+
+                  <Text 
+                    onPress={() => setVisible(true)}
+                    style={{ display: 'flex', marginTop: 20}}
+                    category="s1"
+                  >
+                    View more
+                  </Text>
 
                 <Modal
                   visible={visible}
@@ -604,6 +611,13 @@ export const InfoScreen = ({ navigation, route }) => {
                   >
                     Directions for Use
                   </Text>
+
+                  <ViewMoreText
+                    numberOfLines={3}
+                    renderViewMore={renderViewMore}
+                  >
+                  <Text style={{ marginBottom: 10 }}>{medication.directions}</Text>
+                  </ViewMoreText>
 
                 </View>
                   <Modal
