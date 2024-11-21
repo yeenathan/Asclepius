@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Image, ScrollView } from "react-native";
+import { SafeAreaView, View, Image, ScrollView, TouchableOpacity } from "react-native";
 import {
   Button,
   Layout,
@@ -15,6 +15,7 @@ import {
   Card
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
+import ViewMoreText from 'react-native-view-more-text'
 
 import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
@@ -358,6 +359,16 @@ export const InfoScreen = ({ navigation, route }) => {
 
   const [visible, setVisible] = useState(false);
   const [directionsVisible, setDirectionsVisible] = useState(false);
+  const [fullText, setFullText] = useState('');
+
+  const renderViewMore = (onPress) => (
+    <TouchableOpacity onPress={() => {
+      setFullText('This is the full text to display in the overlay.');
+      setModalVisible(true);
+    }}>
+      <Text>View More</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -519,6 +530,20 @@ export const InfoScreen = ({ navigation, route }) => {
                     Side Effects
                   </Text>
 
+                  <ViewMoreText
+                    numberOfLines={3}
+                    renderViewMore={renderViewMore}
+                  >
+                  <View style={{ flexDirection: "column" }}>
+                  {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                    <Text key={index} style={{ marginBottom: 5 }}>
+                      • {effect}
+                    </Text>
+                  ))}
+                    </View>
+
+                  </ViewMoreText>
+
                 <Modal
                   visible={visible}
                   backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
@@ -534,11 +559,14 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
                     Side Effects
                   </Text>
+
+
                   {medication.sideEffects.map((effect, index) => (
                     <Text key={index} style={{ marginBottom: 5 }}>
                       • {effect}
                     </Text>
                   ))}
+
 
                   <Button
                     style={{
@@ -572,6 +600,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text
                     style={{ color: colorTheme["persian-green"], fontWeight: "bold" }}
                     onPress={() => setDirectionsVisible(true)}
+                    category="h2"
                   >
                     Directions for Use
                   </Text>
