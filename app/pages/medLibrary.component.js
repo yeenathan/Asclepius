@@ -489,7 +489,7 @@ export const InfoScreen = ({ navigation, route }) => {
               </View>
 
             
-            <View style={{ flexDirection: "row", gap: 6}}>
+            <View style={{ flexDirection: "row", gap: 6 }}>
               
               <View
                 style={{
@@ -591,17 +591,17 @@ export const InfoScreen = ({ navigation, route }) => {
                 </Modal>
               </View>
 
-              <View style={{ flexDirection: "column", width: "60%", gap: 20 }}>    
+              <View style={{ flexDirection: "column", width: "60%", gap: 20, paddingRight: 9 }}>    
                 <View
                   style={{
                     flexDirection: "column",
                     backgroundColor: "#007972",
                     padding: 20,
                     borderRadius: 20,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 4, height: 4 },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
                     elevation: 5,
                   }}
                 >
