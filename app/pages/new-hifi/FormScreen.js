@@ -1,5 +1,5 @@
-import { Layout, Text, Button, Modal } from "@ui-kitten/components";
-import { Pressable, SafeAreaView, View } from "react-native";
+import { Layout, Text, Button, Modal, CheckBox } from "@ui-kitten/components";
+import { Pressable, SafeAreaView, View, ScrollView } from "react-native";
 import { Header } from '@/app/components/header';
 
 import { styles } from "@/app/stylesheet";
@@ -74,18 +74,24 @@ export function FormScreen({navigation, route}) {
       <Header navigation={navigation} title={"New Medication"}/>
       <Layout style={{...styles.masterLayoutNoNav, alignItems: "flex-start"}}>
         <View style={{flex: 4, width: "100%", gap: 12}}>
-          <Text category="h2" style={{color: colorTheme["text-off-black"]}}>General Information</Text>
-          <View style={{width: "100%", gap: 8}}>
-            <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug} required={true}/>
-            <FormField navigation={navigation} destination={"Edit Nickname"} label="Nickname:" placeholder="Add Nickname" value={drug.nickname} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug} required={true}/>
-            <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Frequency"} label="Take every:" placeholder="Edit Frequency" value={drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once"} drugObj={drug}/>
-            <FormField navigation={navigation} destination={"Edit Duration"} label="Time period:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
-          </View>
-          {/* <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 16}}>Prescription Information</Text>
-          <FormField navigation={navigation} destination={"Edit Name"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/> */}
+          <ScrollView>
+            <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 16}}>General Information</Text>
+            <View style={{width: "100%", gap: 8}}>
+              <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug} required={true}/>
+              <FormField navigation={navigation} destination={"Edit Nickname"} label="Nickname:" placeholder="Add Nickname" value={drug.nickname} drugObj={drug}/>
+              <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
+              <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
+            </View>
+            <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 24, marginBottom: 16}}>General Information</Text>
+            <View style={{width: "100%", gap: 8}}>
+              <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug} required={true}/>
+              <FormField navigation={navigation} destination={"Edit Frequency"} label="Take every:" placeholder="Edit Frequency" value={drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once"} drugObj={drug}/>
+              <FormField navigation={navigation} destination={"Edit Duration"} label="Treatment duration:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
+            </View>
+            <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 24, marginBottom: 16}}>Set Refill Reminder</Text>
+            <FormField navigation={navigation} destination={"Edit Name"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
+            <CheckBox style={{marginTop: 16}}>Alert when low on refills</CheckBox>
+          </ScrollView>
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {
