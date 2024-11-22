@@ -162,10 +162,32 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
               justifyContent: "space-between",
               width: "90%",
               alignItems: "center",
+              paddingVertical: 10,  
+              paddingHorizontal: 15,
+              padding: 10,
+              borderRadius: 15,
+            }}
+          >
+            <View
+            style={{
+              backgroundColor: colorTheme["white"],
+              borderRadius: 50,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 90,  
+              height: 90,
+              marginRight: 15,  
+            }}
+            ><View
+            style={{
+              width: 60, 
+              height: 59,  
             }}
           >
             {med.icon}
-            <Text category="h2">{med.name}</Text>
+          </View>
+        </View>
+            <Text category="h5">{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
               onPress={() => {
@@ -252,7 +274,7 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
-  console.log(data)
+
   return (
     <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
       <TabSwitch />
@@ -305,12 +327,12 @@ export const MedDescription = ({ navigation, route }) => {
       }}
     />
   );
-  console.log(1,medication)
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
-        <Text style={{ color: "white", marginBottom: 10 }}>
+        <Text category="h4" style={{ color: "white", marginBottom: 10 }}>
         {medication.name}, {medication.refills}
         </Text>
         <Text style={{ color: "white", marginBottom: 10 }}>
@@ -319,7 +341,7 @@ export const MedDescription = ({ navigation, route }) => {
         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
           {medication.icon}
         </View>
-        <Text style={{ color: "white", marginBottom: 8 }}>
+        <Text category="h6" style={{ color: "white", marginBottom: 8 }}>
           description
         </Text>
         <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center" }}>{medication.description}</Text>
@@ -327,8 +349,9 @@ export const MedDescription = ({ navigation, route }) => {
           style={{
             backgroundColor: colorTheme["green"],
             borderColor: colorTheme["white"],
-            borderRadius: 10,
+            borderRadius: 20,
             width: "80%",
+            borderWidth: 3
           }}
           onPress={() => navigation.navigate("Info", {
             medication: medication,
@@ -373,8 +396,8 @@ export const InfoScreen = ({ navigation, route }) => {
       >
         {React.cloneElement(medication.icon, { ...medication.icon.props, style: { ...medication.icon.props.style, width: 30, height: 30 } })}
       </View>
-      <View style={{ flexDirection: "column", flex: 1, marginLeft: 10 }}>
-        <Text category='h6'>
+      <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
+        <Text category='h10'>
           {medication.name}, {medication.refills} units
         </Text>
         <Text category='h10' appearance='hint' style={{ color: "gray"}}>
@@ -390,7 +413,7 @@ export const InfoScreen = ({ navigation, route }) => {
   }
   style={{ position: "absolute", top: 10, right: 10 }}
 >
-  <Text style={{ color: colorTheme["green"] }}>Edit Info</Text>
+  <Text category='h10' style={{ color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
 </TouchableOpacity>
     </View>
   );
