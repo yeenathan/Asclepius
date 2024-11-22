@@ -94,7 +94,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
             marginTop: 4
           }}
           onPress={() => handleTaken(nextMed, currentDay)}
-          children={() => <Text category="c1" style={{paddingHorizontal: 8}}>Mark Taken</Text>}
+          children={() => <Text category="c1" style={{paddingHorizontal: 8}}>Take Now</Text>}
           />
           : null
         }

@@ -74,7 +74,7 @@ export function EditIcon ({navigation, route}) {
           <Button size="large" onPress={() => {
             const _drug = {...drug, icon: icons[index]};
             storeData(drug.name, _drug);
-            navigation.navigate("Home Stack", {screen: "Home", params: {drug: _drug}});
+            navigation.popTo("Home Stack", {screen: "Home", params: {drug: _drug}});
           }}>Confirm</Button>
         </View>
       </Layout>
@@ -95,7 +95,7 @@ export function EditStrength({navigation, route}) {
           <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mL", "mg", "cc", "mol"]}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, strength: `${strength}${unit}`}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, strength: `${strength}${unit}`}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -115,7 +115,7 @@ export function EditDose({navigation, route}) {
           <DisplayDropdown style={{flex: 2}} setUnit={setUnit} data={["tablet(s)", "pill(s)", "injection(s)", "swab(s)", "capsule(s)"]}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, dose: `${dose} ${unit}`}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, dose: `${dose} ${unit}`}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -152,7 +152,7 @@ export function EditDuration({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, duration: duration}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, duration: duration}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -177,7 +177,7 @@ export function EditFrequency({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, frequency: frequency}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, frequency: frequency}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -223,7 +223,7 @@ export function EditSchedule({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {
             ...drug,
             dates: [
               date
@@ -243,11 +243,12 @@ export function EditName({navigation, route}) {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Name"}/>
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 4}}>
-          <SuggestionSearch value={name} setValue={setName}/>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Input style={{width: "100%"}} value={name} onChangeText={(e) => setName(e)}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, name: name}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, name: name}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
