@@ -232,7 +232,7 @@ export const MedFolder = ({ navigation }) => {
             borderWidth: 0.5,
             color:
               selectedTab === 1 ? colorTheme["white"] : "#6E6E6E",
-            fontFamily: selectedTab === 1 ? "PublicSans-Bold" : "PublicSans-Regular",
+            fontFamily: selectedTab === 1 ? "PublicSans-Semibold" : "PublicSans-Regular",
           }}
         >
           Current
@@ -255,7 +255,7 @@ export const MedFolder = ({ navigation }) => {
             color:
               selectedTab === 1 ? "#6E6E6E" : "white",
               borderWidth: 0.5,
-            fontFamily: selectedTab === 1 ? "PublicSans-Regular" : "PublicSans-Bold",
+            fontFamily: selectedTab === 1 ? "PublicSans-Regular" : "PublicSans-Semiboldç",
           }}
         >
           Archive
@@ -337,27 +337,28 @@ export const MedDescription = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
+      <View style={{ alignItems: "center", justifyContent: "center", marginTop: 45, padding: 20 }}>
         <Text category="h4" style={{ color: "white", marginBottom: 10 }}>
         {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ color: "white", marginBottom: 10 }}>
+        <Text style={{ color: "white", marginBottom: 20 }}>
         {medication.directions}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
-          {medication.icon}
+        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 45, marginBottom: 10 }}>
+        {React.cloneElement(medication.icon, { width: 168, height: 168 })}
         </View>
-        <Text category="h6" style={{ color: "white", marginBottom: 8 }}>
-          Description
+        <Text category="h6" style={{ color: "white", marginTop: 55, marginBottom: 8, marginRight: 212, fontFamily: "Poppins-midium" }}>
+        Description
         </Text>
-        <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center" }}>{medication.description}</Text>
+        <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
         <Button
           style={{
             backgroundColor: colorTheme["green"],
             borderColor: colorTheme["white"],
             borderRadius: 20,
             width: "80%",
-            borderWidth: 3
+            borderWidth: 3,
+            marginTop: 40
           }}
           onPress={() => navigation.navigate("Info", {
             medication: medication,
