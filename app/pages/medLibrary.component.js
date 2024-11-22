@@ -345,7 +345,7 @@ export const MedDescription = ({ navigation, route }) => {
         {medication.directions}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 45, marginBottom: 10 }}>
-        {React.cloneElement(medication.icon, { width: 168, height: 168 })}
+        {medication.icon}
         </View>
         <Text category="h6" style={{ color: "white", marginTop: 55, marginBottom: 8, marginRight: 212, fontFamily: "Poppins-midium" }}>
         Description
