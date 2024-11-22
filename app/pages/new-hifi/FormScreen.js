@@ -58,6 +58,7 @@ function parseDate(date) {
 }
 
 export function FormScreen({navigation, route}) {
+  const [checkbox, setCheckbox] = useState(false);
   const drug = route.params.drug;
   const [showAlert, setShowAlert] = useState(false);
   return(
@@ -73,7 +74,7 @@ export function FormScreen({navigation, route}) {
       </Modal>
       <Header navigation={navigation} title={"New Medication"}/>
       <Layout style={{...styles.masterLayoutNoNav, alignItems: "flex-start"}}>
-        <View style={{flex: 4, width: "100%", gap: 12}}>
+        <View style={{flex: 7, width: "100%", gap: 12}}>
           <ScrollView>
             <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 16}}>General Information</Text>
             <View style={{width: "100%", gap: 8}}>
@@ -89,8 +90,8 @@ export function FormScreen({navigation, route}) {
               <FormField navigation={navigation} destination={"Edit Duration"} label="Treatment duration:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
             </View>
             <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 24, marginBottom: 16}}>Set Refill Reminder</Text>
-            <FormField navigation={navigation} destination={"Edit Name"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
-            <CheckBox style={{marginTop: 16}}>Alert when low on refills</CheckBox>
+            <FormField navigation={navigation} destination={""} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
+            <CheckBox checked={checkbox} onChange={() => setCheckbox(!checkbox)} style={{marginTop: 16}}>Alert when low on refills</CheckBox>
           </ScrollView>
         </View>
         <View style={{flex: 1, width: "100%"}}>

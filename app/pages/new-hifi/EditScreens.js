@@ -244,6 +244,7 @@ export function EditNickname({navigation, route}) {
       <Layout style={styles.masterLayout}>
         <View style={{flex: 4, justifyContent: "center"}}>
           {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Text category="p1" style={{marginBottom: 8}}>Nickname</Text>
           <Input style={{width: "100%"}} value={nick} onChangeText={(e) => setNick(e)}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
@@ -263,7 +264,8 @@ export function EditName({navigation, route}) {
       <Layout style={styles.masterLayout}>
         <View style={{flex: 4, justifyContent: "center"}}>
           {/* <SuggestionSearch value={name} setValue={setName}/> */}
-          <Input style={{width: "100%"}} value={name} onChangeText={(e) => setName(e)}/>
+          <Text category="p1" style={{marginBottom: 8}}>Medication Name</Text>
+          <Input style={{width: "100%"}} placeholder="Name" value={name} onChangeText={(e) => setName(e)}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, name: name}})}>Confirm</Button>
