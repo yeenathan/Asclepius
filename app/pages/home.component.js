@@ -285,7 +285,7 @@ export const HomeScreen = ({ route, navigation }) => {
           }
         }
       }).sort((a, b) => {
-        return new Date(a.time).getTime() - new Date(b.time).getTime();
+        return new Date(a.time).getTime() < new Date(b.time).getTime();
       })
     } else return [];
   }
