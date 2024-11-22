@@ -323,12 +323,12 @@ export const MedDescription = ({ navigation, route }) => {
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
-      icon={(props) => <Icon style={{color: "white"}}{...props} name="arrow-back" />}
+      icon={(props) => <Icon {...props} name="arrow-ios-back-outline" fill="#ffffff" style={{width: 45, height: 45}} />}
       style={{
         width: "100%",
         Color: colorTheme["white"],
-        paddingVertical: 32,
-        paddingHorizontal: 24,
+        paddingVertical: 40,
+        paddingHorizontal: 8,
       }}
     />
   );
@@ -337,7 +337,7 @@ export const MedDescription = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
-        <Text category="h4" style={{ color: "white", marginBottom: 10 }}>
+        <Text style={{ color: "white", marginBottom: 10, fontSize: 24, fontFamily: "Poppins-SemiBold" }}>
         {medication.name}, {medication.refills}
         </Text>
         <Text style={{ color: "white", marginBottom: 10 }}>

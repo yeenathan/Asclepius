@@ -7,7 +7,7 @@ export const Header = ({ navigation, title, showSettings = true }) => {
   const BackAction = () => (
     <TopNavigationAction
       onPress={() => navigation.goBack()}
-      icon={(props) => <Icon {...props} name="arrow-back" />}
+      icon={(props) => <Icon {...props} name="arrow-ios-back-outline" fill="#A0A0A0" style={{width: 45, height: 45}} />}
     />
   );
 
@@ -33,8 +33,8 @@ export const Header = ({ navigation, title, showSettings = true }) => {
       style={{
         width: "100%",
         backgroundColor: colorTheme["silver-white"],
-        paddingVertical: 32,
-        paddingHorizontal: 24,
+        paddingVertical: 40,
+        paddingHorizontal: 8,
       }}
     />
   );

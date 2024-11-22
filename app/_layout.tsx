@@ -17,6 +17,7 @@ export default () => {
     "PublicSans-Bold":require("@/assets/fonts/PublicSans-Bold.ttf"),
     "PublicSans-Regular":require("@/assets/fonts/PublicSans-Regular.ttf"),
     "PublicSans-Semibold":require("@/assets/fonts/PublicSans-SemiBold.ttf"),
+    "PublicSans-Medium":require("@/assets//fonts/PublicSans-Medium.ttf")
   })
 
 

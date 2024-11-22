@@ -46,7 +46,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
     <View style={styles.customShape}>
       {data && data.length<1 ?
       <>
-        <Text category="h2" style={{ color: 'white' }}>
+        <Text category="h2" style={{ color: 'white', fontSize: 17 }}>
           No Medications Added Yet.
         </Text>
         <Text category="c1" style={{ color: 'white'}}>
