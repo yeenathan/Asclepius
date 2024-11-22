@@ -366,7 +366,7 @@ export const InfoScreen = ({ navigation, route }) => {
       setFullText('This is the full text to display in the overlay.');
       setDirectionsVisible(true);
     }}>
-      <Text category="s1" style={{ color: "white", marginTop: 20 }}>View More</Text>
+      <Text category="s1" style={{ color: "white", marginTop: 20, textDecorationLine: 'underline' }}>View More</Text>
     </TouchableOpacity>
   );
 
@@ -489,16 +489,16 @@ export const InfoScreen = ({ navigation, route }) => {
               </View>
 
             
-            <View style={{ flexDirection: "row", gap: 6 }}>
+            <View style={{ flexDirection: "row", gap: 6}}>
               
               <View
                 style={{
                   // backgroundColor: "#fff",
-                  padding: 32,
                   borderRadius: 20,
                   gap: 16,
                   flexDirection: "row",
-
+                  width: "100%",
+                  justifyContent: "space-between"
                 }}
               >
                 {/* <View>
@@ -520,6 +520,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     shadowOpacity: 0.25, 
                     shadowRadius: 3.84, 
                     elevation: 5,
+                    width: "35%"
                   }}
                 >
 
@@ -545,7 +546,7 @@ export const InfoScreen = ({ navigation, route }) => {
 
                   <Text 
                     onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20}}
+                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline'}}
                     category="s1"
                   >
                     View more
@@ -590,7 +591,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </Modal>
               </View>
 
-              <View style={{ flexDirection: "column", width: "54%", gap: 20 }}>    
+              <View style={{ flexDirection: "column", width: "60%", gap: 20 }}>    
                 <View
                   style={{
                     flexDirection: "column",
@@ -729,6 +730,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 backgroundColor: colorTheme["princeton-orange"],
                 borderColor: colorTheme["white"],
                 borderRadius: 20,
+                marginTop: 30
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
