@@ -161,32 +161,32 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              width: "90%",
-              alignItems: "center",
+              width: "100%",
               paddingVertical: 10,  
               paddingHorizontal: 15,
               padding: 10,
               borderRadius: 15,
             }}
-          >
+          > 
             <View
             style={{
               backgroundColor: colorTheme["white"],
               borderRadius: 50,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 90,  
-              height: 90,
+              width: 50,  
+              height: 50,
+              alignItems: "center",
             }}
-            ><View
-            style={{
-              width: 60, 
-              height: 59,
-            }}
-          >
+            >
             {med.icon}
-          </View>
         </View>
+        <View style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "90%",
+              alignItems: "center",
+              paddingVertical: 10,  
+              paddingHorizontal: 25,
+            }}>
             <Text style={{fontSize: 20, fontFamily: "Poppins-SemiBold"}}>{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
@@ -195,7 +195,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
               }}
             >
             </Text>
-          </View>
+            </View>
+            </View>
         )}
       />
     </>
@@ -338,19 +339,19 @@ export const MedDescription = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
       <View style={{ alignItems: "center", justifyContent: "center", marginTop: 45, padding: 20 }}>
-        <Text category="h4" style={{ color: "white", marginBottom: 10 }}>
+        <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
         {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ color: "white", marginBottom: 20 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20 }}>
         {medication.directions}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 45, marginBottom: 10 }}>
         {medication.icon}
         </View>
-        <Text category="h6" style={{ color: "white", marginTop: 55, marginBottom: 8, marginRight: 212, fontFamily: "Poppins-midium" }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 55, marginBottom: 8, marginRight: 212 }}>
         Description
         </Text>
-        <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
+        <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
         <Button
           style={{
             backgroundColor: colorTheme["green"],
@@ -394,20 +395,25 @@ export const InfoScreen = ({ navigation, route }) => {
     <View {...props} style={{ flexDirection: "row", gap: 10, alignItems: "center", padding: 10, borderRadius: 15 }}>
       <View
         style={{
+          marginTop: 10,
+          marginBottom:10,
           backgroundColor: colorTheme["green"],
           borderRadius: 50,
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
+          width: 35,
+          height: 35,
+          marginLeft: 10
         }}
       >
         {medication.icon}
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
-        <Text category='h10'>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-off-black"]}}>
           {medication.name}, {medication.refills} units
         </Text>
-        <Text category='h10' appearance='hint' style={{ color: "gray"}}>
+        <Text style={{ fontSize: 14, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-gray"]}}>
           {medication.directions}
         </Text>
       </View>
@@ -420,7 +426,7 @@ export const InfoScreen = ({ navigation, route }) => {
   }
   style={{ position: "absolute", top: 10, right: 10 }}
 >
-  <Text category='h10' style={{ color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
+  <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
 </TouchableOpacity>
     </View>
   );
@@ -454,9 +460,9 @@ export const InfoScreen = ({ navigation, route }) => {
               marginBottom: 60,
             }}
           >
-            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', gap: 6}}>
-            <Text category='h6'>
-              Insulin <Text category='h6' style={{ color: colorTheme["green"] }}>{medication.name}</Text>
+            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 135}}>
+            <Text style={{fontSize: 22, fontFamily: "Poppins-SemiBold"}}>
+              Insulin <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>{medication.name}</Text>
             </Text>
             </View>
             {/* <View style={{flexDirection: "row", justifyContent: 'center', gap: 6}}>
@@ -480,9 +486,9 @@ export const InfoScreen = ({ navigation, route }) => {
   <Layout style={styles.topContainer} level="1">
     <Card style={styles.card} header={medHeader}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-        <Text style={{ color: "gray" }}>Duration</Text>
-        <Text style={{ color: "gray" }}>Dose</Text>
-        <Text style={{ color: "gray" }}>Frequency</Text>
+        <Text style={{ fontSize: 14, fontFamily: "puppin-midium", color: colorTheme["text-gray"]}}>Duration</Text>
+        <Text style={{ fontSize: 14, fontFamily: "puppin-midium", color: colorTheme["text-gray"]}}>Dose</Text>
+        <Text style={{ fontSize: 14, fontFamily: "puppin-midium", color: colorTheme["text-gray"]}}>Frequency</Text>
       </View>
     </Card>
   </Layout>
