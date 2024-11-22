@@ -165,7 +165,7 @@ const MedCard = (props) => {
  */
 const MedList = ({ dayData, init, currentDay, handleTaken }) => {
   return (
-    <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8}}>
+    <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8, boxShadow: "3px 3px 10px 1px rgba(86, 163, 166, 0.15)"}}>
       {
         dayData.length>0? <SectionList
           style={{ flex: 1, width: "100%", padding: 8, paddingBottom: 0}}
@@ -179,7 +179,7 @@ const MedList = ({ dayData, init, currentDay, handleTaken }) => {
           contentContainerStyle={{ padding: 10 }}
         />
         :
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center", boxShadow: "3px 3px 10px 1px rgba(86, 163, 166, 0.15)"}}>
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
           <Text category="h2" style={{color: colorTheme["text-gray"]}}>No medication details for this day.</Text>
         </View>
       }
