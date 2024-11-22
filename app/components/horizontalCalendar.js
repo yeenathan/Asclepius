@@ -37,20 +37,21 @@ const Item = ({ date, setDay, currentDay }) => {
         }}>
             <View
                 style={{
-                    marginHorizontal: 8, // Column gap between days
+                    marginHorizontal: 5, // Column gap between days
                     borderWidth: 1,
                     borderColor: "black",
                     borderRadius: 4,
-                    width: 60,
+                    width: 58,
                     paddingHorizontal: 8,
-                    paddingVertical: 16,
+                    paddingVertical: 15,
                     alignItems: "center",
                     backgroundColor: day === current ? colorTheme["dark-green"] : "#fff",
-                    borderColor: "transparent"
+                    borderColor: "transparent",
+                    boxShadow: "1px 3px 6px 0px rgba(0, 0, 0, 0.10)"
                 }}
             >
-                <Text category="c1" style={{color: day === current ? "#fff" : "000"}}>{date.getDate()}</Text>
-                <Text category="h2" style={{color: day === current ? "#fff" : "000"}}>{getDayString(day)}</Text>
+                <Text category="c1" style={{color: day === current ? "#fff" : colorTheme["text-gray"]}}>{date.getDate()}</Text>
+                <Text category="h2" style={{color: day === current ? "#fff" : colorTheme["text-off-black"], paddingTop: 10}}>{getDayString(day)}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -79,7 +80,7 @@ function parseMonth(monthNum) {
 export function HorizontalCalendar({ setDay, currentDay }) {
     return (
         <>
-            <Text category="p2" style={{color: colorTheme["text-off-black"]}}>{parseMonth(new Date().getMonth())}</Text>
+            <Text category="p2" style={{color: colorTheme["text-off-black"], fontFamily: "PublicSans-SemiBold"}}>{parseMonth(new Date().getMonth())}</Text>
             <FlatList
                 data={getWeek()}
                 renderItem={({ item }) => {
@@ -92,7 +93,7 @@ export function HorizontalCalendar({ setDay, currentDay }) {
                 keyExtractor={(item) => item.id.toString()} // Ensure key is a string
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginBottom: 16, marginTop: 6.4 }}
+                contentContainerStyle={{ marginBottom: 16, marginTop: 6.4, marginLeft: 23 }}
             />
         </>
     );

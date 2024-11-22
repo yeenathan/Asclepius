@@ -355,8 +355,8 @@ export const HomeScreen = ({ route, navigation }) => {
       </Modal> }
       <Layout style={styles.masterLayout}>
         <View style={styles.rowContainer}>
-          <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ color: colorTheme["persian-green"] }}>
-            Good morning, Nathan.
+          <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 26, color: colorTheme["text-off-black"] }}>
+            Good morning, <Text style={{ fontSize: 26, color: colorTheme["persian-green"] }}>Nathan.</Text>
           </Text>
           <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
