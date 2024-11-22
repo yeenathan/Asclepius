@@ -15,6 +15,7 @@ import {
   Card
 } from "@ui-kitten/components";
 import { Header } from "@/app/components/header";
+import ViewMoreText from 'react-native-view-more-text'
 
 import { default as colorTheme } from "@/custom-theme.json";
 import { styles } from "@/app/stylesheet";
@@ -425,6 +426,19 @@ export const InfoScreen = ({ navigation, route }) => {
     </View>
   );
   
+  const [visible, setVisible] = useState(false);
+  const [directionsVisible, setDirectionsVisible] = useState(false);
+  const [fullText, setFullText] = useState('');
+
+  const renderViewMore = (onPress) => (
+    <TouchableOpacity onPress={() => {
+      setFullText('This is the full text to display in the overlay.');
+      setDirectionsVisible(true);
+    }}>
+      <Text category="s1" style={{ color: "white", marginTop: 20, textDecorationLine: 'underline' }}>View More</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
@@ -488,7 +502,7 @@ export const InfoScreen = ({ navigation, route }) => {
   </Layout>
 </View>
             {/* Edit Buttons */}
-            {/* <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
+            <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
               <Button
                 onPress={() =>
                   navigation.navigate("Med Stack", {
@@ -523,14 +537,14 @@ export const InfoScreen = ({ navigation, route }) => {
               >
                 Info
               </Button>
-            </View> */}
+            </View>
             <View style={{ flexDirection: "column", gap: 6 }}>
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
-                <Icon style={{ width: 40 }} name="edit"></Icon>
-                <Text style={{ color: colorTheme["persian-green"] }}>
-                  Medication Info
+                <Icon style={{ width: 40 }} name="clock"></Icon>
+                <Text style={{ color: colorTheme["green"] }}>
+                  Reminder
                 </Text>
               </View>
               <View
@@ -538,30 +552,209 @@ export const InfoScreen = ({ navigation, route }) => {
                   backgroundColor: "#fff",
                   padding: 32,
                   borderRadius: 20,
-                  gap: 16,
                 }}
               >
-                <View>
+                <Text>{medication.reminder}</Text>
+              </View>
+            </View>
+
+            <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
+              >
+                <Icon style={{ width: 40 }} name="edit"></Icon>
+                <Text style={{ color: colorTheme["persian-green"] }}>
+                  Medication Info
+                </Text>
+              </View>
+
+            
+            <View style={{ flexDirection: "row", gap: 6 }}>
+              
+              <View
+                style={{
+                  // backgroundColor: "#fff",
+                  borderRadius: 20,
+                  gap: 16,
+                  flexDirection: "row",
+                  width: "100%",
+                  justifyContent: "space-between"
+                }}
+              >
+                {/* <View>
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Description
                   </Text>
                   <Text>{medication.description}</Text>
-                </View>
-                <View>
-                  <Text style={{ color: colorTheme["persian-green"] }}>
+                </View> */}
+
+
+                <View
+                  style={{
+                    flexDirection: "column",
+                    backgroundColor: "#fff",
+                    padding: 20,
+                    borderRadius: 20,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
+                    elevation: 5,
+                    width: "35%"
+                  }}
+                >
+
+                  <Text
+                    style={{ color: colorTheme["persian-green"] }}
+                  >
                     Side Effects
                   </Text>
+
+                  <ViewMoreText
+                    numberOfLines={3}
+                    renderViewMore={renderViewMore}
+                  >
+                    <View style={{ flexDirection: "column" }}>
+                      {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                      <Text key={index} style={{ marginBottom: 5 }}>
+                        • {effect}
+                      </Text>
+                      ))}
+                    </View>
+
+                  </ViewMoreText>
+
+                  <Text 
+                    onPress={() => setVisible(true)}
+                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline'}}
+                    category="s1"
+                  >
+                    View more
+                  </Text>
+
+                <Modal
+                  visible={visible}
+                  backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                  onBackdropPress={() => setVisible(false)} 
+                >
+
+                <Card
+                  disabled={true}
+                  style={{
+                  width: 300,
+                  borderRadius: 20}}
+                >
+                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                    Side Effects
+                  </Text>
+
+
                   {medication.sideEffects.map((effect, index) => (
-                    <Text key={index}>• {effect}</Text>
+                    <Text key={index} style={{ marginBottom: 5 }}>
+                      • {effect}
+                    </Text>
                   ))}
-                </View>
-                <View>
-                  <Text style={{ color: colorTheme["persian-green"] }}>
+
+
+                  <Button
+                    style={{
+                      marginTop: 20,
+                      backgroundColor: colorTheme["persian-green"],
+                      borderColor: colorTheme["persian-green"],
+                    }}
+                    onPress={() => setVisible(false)}
+                  >
+                    Close
+                  </Button> 
+                </Card>
+
+                </Modal>
+              </View>
+
+              <View style={{ flexDirection: "column", width: "60%", gap: 20, paddingRight: 9 }}>    
+                <View
+                  style={{
+                    flexDirection: "column",
+                    backgroundColor: "#007972",
+                    padding: 20,
+                    borderRadius: 20,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
+                    elevation: 5,
+                  }}
+                >
+                  <Text
+                    style={{ color: colorTheme["persian-green"], fontWeight: "bold" }}
+                    onPress={() => setDirectionsVisible(true)}
+                    category="h2"
+                  >
                     Directions for Use
                   </Text>
-                  <Text>{medication.directions}</Text>
+
+                  <ViewMoreText
+                    numberOfLines={3}
+                    renderViewMore={renderViewMore}
+                  >
+                  <Text style={{ marginBottom: 10 }}>{medication.directions}</Text>
+                  </ViewMoreText>
+
                 </View>
+                  <Modal
+                    visible={directionsVisible}
+                    backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                    onBackdropPress={() => setDirectionsVisible(false)}
+                  >
+                    <Card 
+                      disabled={true}
+                      style={{
+                        width: 300,
+                        borderRadius: 20,
+                      }}
+                    >
+                      <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                        Directions for Use
+                      </Text>
+                      <Text style={{ marginBottom: 10 }}>{medication.directions}</Text>
+                      <Button
+                        style={{
+                          marginTop: 20,
+                          backgroundColor: colorTheme["persian-green"],
+                          borderColor: colorTheme["persian-green"],
+                          }}
+                          onPress={() => setDirectionsVisible(false)}
+                      >
+                        Close
+                      </Button>
+                    </Card>
+
+                  </Modal>
+
                 <View
+                  style={{
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 6,
+                    backgroundColor: '#fff',
+                    borderRadius: 20,
+                    padding: 20,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
+                    elevation: 5,
+                  }}
+                >
+                  <Text style={{ color: colorTheme["persian-green"] }}>
+                    Quantity Prescribed
+                  </Text>
+                  <Text>{medication.quantity}</Text>
+                </View>
+                
+                </View>
+
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -569,12 +762,15 @@ export const InfoScreen = ({ navigation, route }) => {
                     gap: 6,
                   }}
                 >
+
+                  
                   <Text style={{ color: colorTheme["persian-green"] }}>
                     Drug Strength
                   </Text>
                   <Text>{medication.strength}</Text>
-                </View>
-                <View
+                </View> */}
+
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -586,21 +782,12 @@ export const InfoScreen = ({ navigation, route }) => {
                     Dosage Type
                   </Text>
                   <Text>{medication.type}</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 6,
-                  }}
-                >
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Quantity Prescribed
-                  </Text>
-                  <Text>{medication.quantity}</Text>
-                </View>
-                <View
+                </View> */}
+
+                
+
+                
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -612,7 +799,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     Number of Refills
                   </Text>
                   <Text>{medication.refills}</Text>
-                </View>
+                </View> */}
               </View>
             </View>
             <Button
@@ -622,6 +809,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 backgroundColor: colorTheme["princeton-orange"],
                 borderColor: colorTheme["white"],
                 borderRadius: 20,
+                marginTop: 30
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />

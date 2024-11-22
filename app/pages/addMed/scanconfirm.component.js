@@ -175,6 +175,7 @@ export const ConfirmScan = ({route, navigation}) => {
         </View> */}
         <View style={{justifyContent: "center", alignItems: "flex-start", width: "100%"}}>
           <InputPill label="Medication Name" text={drug.name} destination={"Edit Name"} navigation={navigation} drugObj={drug}/>
+          <InputPill label="Schedule" text={[]} destination={"Schedule"} navigation={navigation} />
           <InputPill label="How Often" text={`${drug.interval.number} ${drug.interval.unit}`} destination={"Edit Time"} navigation={navigation} drugObj={drug}/>
           <InputPill label="Dose" text={`${drug.dose.number} ${drug.dose.unit}`} destination={"Edit Dose"} navigation={navigation} drugObj={drug}/>
         </View>
