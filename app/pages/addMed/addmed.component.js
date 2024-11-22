@@ -58,15 +58,9 @@ export const AddScreen = ({navigation}) => {
           <Text style={{marginBottom: 16, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
           <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
-<<<<<<< HEAD
         <View style={{gap: 12, width: "100%", alignItems: "center"}}>
           <Button style={{width: "100%"}} onPress={() => navigation.navigate("Scan")} size='large'>Scan</Button>
           <Text style={{fontSize: 18, color: colorTheme['persian-green']}} onPress={() => navigation.navigate('Form', {drug: {frequency: 0, duration: 0}})}>Manual Input</Text>
-=======
-        <View style={{gap: 12, width: "100%",  }}>
-          <MyButton text="Scan" styles={{...styles.orangerButton, ...styles.baseBigButton}} press={() => navigation.navigate('Scan')}/>
-          <MyButton text="or Manual Input" styles={{...styles.orangeBorder, ...styles.baseBigButton, backgroundColor: "#ffffff"}} press={() => navigation.navigate('Manual Name')}/>
->>>>>>> origin/newupdate
         </View>
       </Layout>
     </SafeAreaView>
