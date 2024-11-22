@@ -236,6 +236,25 @@ export function EditSchedule({navigation, route}) {
   )
 }
 
+export function EditNickname({navigation, route}) {
+  const [nick, setNick] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Nickname"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Input style={{width: "100%"}} value={nick} onChangeText={(e) => setNick(e)}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, nickname: nick}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
 export function EditName({navigation, route}) {
   const [name, setName] = useState("");
   const drug = route.params.drug;

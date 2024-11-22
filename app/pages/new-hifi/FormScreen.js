@@ -5,13 +5,12 @@ import { Header } from '@/app/components/header';
 import { styles } from "@/app/stylesheet";
 import { default as colorTheme } from "@/custom-theme.json";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 
 function FormField({navigation, destination, label, placeholder, value, drugObj=null, required=false}) {
   return(
     <View style={{flexDirection: "row", width: "100%", backgroundColor: "#fff", justifyContent: "space-between", paddingHorizontal: 16, paddingVertical: 16, borderRadius: 12, borderWidth: .5, borderColor: colorTheme["text-gray"]}}>
-      <Text category="p1" style={{color: colorTheme["text-gray"]}}>{label}</Text>
+      <Text category="p1" style={{color: required? colorTheme["persian-green"] : colorTheme["text-gray"]}}>{label}</Text>
       <Text category="p1" style={{color: value?"black":colorTheme["text-gray"]}} onPress={() => navigation.navigate(destination, {drug: drugObj})}>{value || placeholder}</Text>
     </View>
   )
@@ -78,6 +77,7 @@ export function FormScreen({navigation, route}) {
           <Text category="h2" style={{color: colorTheme["text-off-black"]}}>General Information</Text>
           <View style={{width: "100%", gap: 8}}>
             <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug} required={true}/>
+            <FormField navigation={navigation} destination={"Edit Nickname"} label="Nickname:" placeholder="Add Nickname" value={drug.nickname} drugObj={drug}/>
             <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug} required={true}/>
             <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
             <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
