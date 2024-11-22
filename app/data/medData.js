@@ -1,4 +1,4 @@
-import { CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON } from "@/assets/svgExports";
+import { CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON } from "@/assets/images";
 
 export const MED_DATA = {
   Mon: [
@@ -116,7 +116,10 @@ export const LIBRARY_DATA = [
       "Lisinopril is used to treat high blood pressure (hypertension) and heart failure. It helps relax blood vessels, making it easier for your heart to pump blood, thereby lowering blood pressure.",
     sideEffects: ["Dizziness", "Cough", "Headache", "Fatigue", "Nausea"],
     directions: [
-      "Once daily before a meal",
+      "Take one tablet by mouth once daily, preferably at the same time each day.",
+      "Can be taken with or without food.",
+      "Drink plenty of water while on this medication.",
+      "Do not stop taking unless directed by your doctor.",
     ],
     strength: "10 mg per tablet",
     type: "Oral Tablet",
