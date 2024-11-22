@@ -1,4 +1,4 @@
-import { Layout, Text, Button, Datepicker } from "@ui-kitten/components";
+import { Layout, Text, Button, Datepicker, Input } from "@ui-kitten/components";
 import { SafeAreaView, View, Image, Pressable } from "react-native";
 import { Header } from '@/app/components/header';
 import { useState } from "react";
@@ -20,6 +20,7 @@ import {
 const icons = [CAPSULE_ICON, DROPPER_ICON, INJECTION_ICON, LIQUID_ICON, OINTMENT_ICON, SPRAY_ICON, TABLETS_ICON];
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DisplayDropdown } from "@/app/components/displayDropdown";
 
 export function EditIcon ({navigation, route}) {
   const storeData = async (key, value) => {
@@ -72,8 +73,48 @@ export function EditIcon ({navigation, route}) {
           <Button size="large" onPress={() => {
             const _drug = {...drug, icon: icons[index]};
             storeData(drug.name, _drug);
-            navigation.navigate("Home Stack", {screen: "Home", params: {drug: _drug}});
+            navigation.popTo("Home Stack", {screen: "Home", params: {drug: _drug}});
           }}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditStrength({navigation, route}) {
+  const drug = route.params.drug;
+  const [strength, setStrength] = useState();
+  const [unit, setUnit] = useState("mL")
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Dose"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
+          <Input style={{flex: 1}} value={strength} onChange={(e) => setStrength(e.target.value)}/>
+          <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mL", "mg", "cc", "mol"]}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, strength: `${strength}${unit}`}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditDose({navigation, route}) {
+  const drug = route.params.drug;
+  const [dose, setDose] = useState("1");
+  const [unit, setUnit] = useState("tablet(s)")
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Dose"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
+          <DisplayDropdown style={{flex: 1}} setUnit={setDose} data={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}/>
+          <DisplayDropdown style={{flex: 2}} setUnit={setUnit} data={["tablet(s)", "pill(s)", "injection(s)", "swab(s)", "capsule(s)"]}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, dose: `${dose} ${unit}`}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -91,7 +132,7 @@ function FrequencyField({label, value, masterValue, setMasterValue}) {
 }
 
 export function EditDuration({navigation, route}) {
-  const [duration, setDuration] = useState();
+  const [duration, setDuration] = useState(0);
   const drug = route.params.drug;
   return(
     <SafeAreaView style={{ flex: 1 }}>
@@ -110,7 +151,7 @@ export function EditDuration({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, duration: duration}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, duration: duration}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -118,7 +159,7 @@ export function EditDuration({navigation, route}) {
 }
 
 export function EditFrequency({navigation, route}) {
-  const [frequency, setFrequency] = useState();
+  const [frequency, setFrequency] = useState(0);
   const drug = route.params.drug;
   return(
     <SafeAreaView style={{ flex: 1 }}>
@@ -135,7 +176,7 @@ export function EditFrequency({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, frequency: frequency}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, frequency: frequency}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -181,13 +222,32 @@ export function EditSchedule({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {
             ...drug,
             dates: [
               date
             ],
             time: time
           }})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditNickname({navigation, route}) {
+  const [nick, setNick] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Nickname"}/>
+      <Layout style={styles.masterLayout}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Input style={{width: "100%"}} value={nick} onChangeText={(e) => setNick(e)}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, nickname: nick}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -201,11 +261,12 @@ export function EditName({navigation, route}) {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Name"}/>
       <Layout style={styles.masterLayout}>
-        <View style={{flex: 4}}>
-          <SuggestionSearch value={name} setValue={setName}/>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Input style={{width: "100%"}} value={name} onChangeText={(e) => setName(e)}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
-          <Button size="large" style={{width: "100%"}} onPress={() => navigation.navigate("Form", {drug: {...drug, name: name}})}>Confirm</Button>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, name: name}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>

@@ -97,15 +97,16 @@ const MedCard = (props) => {
             borderTopRightRadius: 80,
           }}
         >
-          <Text style={{ marginBottom: 32, paddingHorizontal: 32 }} category="h2">
-            {data.name}
-          </Text>
+          <View style={{ marginBottom: 32, paddingHorizontal: 32 }}>
+            <Text category="h2">{data.name}</Text>
+            <Text category="p1">{data.nickname}</Text>
+          </View>
           <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
             <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
               <Button style={{ flex: 1 }} appearance="outline" size="medium">
                 Skip
               </Button>
-              <Button style={{ flex: 1 }} status="primary" size="medium" onPress={() => setReschedule(true)}>
+              <Button style={{ flex: 1 }} status="primary" size="medium" disabled={isTaken()} onPress={() => setReschedule(true)}>
                 Reschedule
               </Button>
             </View>
@@ -113,7 +114,7 @@ const MedCard = (props) => {
           </View>
         </View>
       </Modal>
-      <Pressable pointerEvents={isTaken()?"none":null} onPress={() => {toggleMenuVisible()}}>
+      <Pressable onPress={() => {toggleMenuVisible()}}>
         <View
           style={
             !isTaken()
@@ -141,7 +142,7 @@ const MedCard = (props) => {
             {/* {data.icon} */}
           </View>
           <View style={{ flex: 6 }}>
-            <Text category="p1">{data.name}</Text>
+            <Text category="p1">{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
             <Text category="c1">{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
