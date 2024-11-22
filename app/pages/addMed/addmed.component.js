@@ -52,7 +52,7 @@ export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} showSettings={false} />
-      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", gap: 55}}>
+      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", gap: 55, paddingTop: 60}}>
         <ScanSVG />
         <View style={{ marginHorizontal: 30 }}>
           <Text style={{marginBottom: 8, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
