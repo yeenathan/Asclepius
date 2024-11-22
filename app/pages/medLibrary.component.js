@@ -515,11 +515,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     backgroundColor: "#fff",
                     padding: 20,
                     borderRadius: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
-                    elevation: 5,
+                    boxShadow: "1px 3px 6px 0px rgba(0, 0, 0, 0.10)",
                     width: "35%"
                   }}
                 >
@@ -555,39 +551,32 @@ export const InfoScreen = ({ navigation, route }) => {
                 <Modal
                   visible={visible}
                   backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-                  onBackdropPress={() => setVisible(false)} 
-                >
+                  onBackdropPress={() => setVisible(false)} >
 
-                <Card
-                  disabled={true}
-                  style={{
-                  width: 300,
-                  borderRadius: 20}}
-                >
-                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
-                    Side Effects
-                  </Text>
-
-
-                  {medication.sideEffects.map((effect, index) => (
-                    <Text key={index} style={{ marginBottom: 5 }}>
-                      • {effect}
-                    </Text>
-                  ))}
-
-
-                  <Button
+                  <Card
+                    disabled={true}
                     style={{
-                      marginTop: 20,
-                      backgroundColor: colorTheme["persian-green"],
-                      borderColor: colorTheme["persian-green"],
-                    }}
-                    onPress={() => setVisible(false)}
-                  >
-                    Close
-                  </Button> 
-                </Card>
+                    width: 300,
+                    borderRadius: 20}}>
 
+                    <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                      Side Effects
+                    </Text>
+                    {medication.sideEffects.map((effect, index) => (
+                      <Text key={index} style={{ marginBottom: 5 }}>
+                        • {effect}
+                      </Text>))}
+
+                    <Button
+                      style={{
+                        marginTop: 20,
+                        backgroundColor: colorTheme["persian-green"],
+                        borderColor: colorTheme["persian-green"],
+                      }}
+                      onPress={() => setVisible(false)} >
+                      Close
+                    </Button> 
+                  </Card>
                 </Modal>
               </View>
 
@@ -598,10 +587,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     backgroundColor: "#007972",
                     padding: 20,
                     borderRadius: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
+                    boxShadow: "1px 3px 6px 0px rgba(0, 0, 0, 0.10)",
                     elevation: 5,
                   }}
                 >
@@ -660,10 +646,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     backgroundColor: '#fff',
                     borderRadius: 20,
                     padding: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
+                    boxShadow: "1px 3px 6px 0px rgba(0, 0, 0, 0.10)",
                     elevation: 5,
                   }}
                 >
