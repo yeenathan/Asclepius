@@ -653,7 +653,6 @@ export const InfoScreen = ({ navigation, route }) => {
                 >
                   <Text
                     style={{ color: colorTheme["persian-green"], fontWeight: "bold" }}
-                    onPress={() => setDirectionsVisible(true)}
                     category="h2"
                   >
                     Directions for Use
