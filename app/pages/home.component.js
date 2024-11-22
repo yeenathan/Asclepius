@@ -364,9 +364,9 @@ export const HomeScreen = ({ route, navigation }) => {
           <HorizontalCalendar setDay={setDay} currentDay={day} />
         </View>
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
-          <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8}}>Next Medication</Text>
+          <Text category="h2" style={{color: colorTheme["text-off-black"], marginBottom: 8, fontFamily:"PublicSans-Medium" }}>Next Medication</Text>
           <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken}/>
-          <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8}}>Overview</Text>
+          <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8, fontFamily:"PublicSans-Medium" }}>Overview</Text>
           <MedList dayData={format(dayData)} init={init} currentDay={day} handleTaken={handleTaken}/>
         </View>
       </Layout>
