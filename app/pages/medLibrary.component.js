@@ -401,7 +401,7 @@ export const InfoScreen = ({ navigation, route }) => {
           padding: 10,
         }}
       >
-        {React.cloneElement(medication.icon, { ...medication.icon.props, style: { ...medication.icon.props.style, width: 30, height: 30 } })}
+        {medication.icon}
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
         <Text category='h10'>
