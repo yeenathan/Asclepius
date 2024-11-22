@@ -14,6 +14,11 @@ export const styles = StyleSheet.create({
     container: {
         width: "100%"
     },
+    greenButton: {
+        backgroundColor: colorTheme["green"],
+        width: "100%",
+        borderRadius: 16
+    },
     orangeButton: {
         backgroundColor: colorTheme["hunyadi-yellow"],
         borderColor: colorTheme["hunyadi-yellow"],

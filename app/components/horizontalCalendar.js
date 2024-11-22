@@ -80,7 +80,7 @@ function parseMonth(monthNum) {
 export function HorizontalCalendar({ setDay, currentDay }) {
     return (
         <>
-            <Text category="p2" style={{color: colorTheme["text-off-black"], fontFamily: "PublicSans-SemiBold"}}>{parseMonth(new Date().getMonth())}</Text>
+            <Text category="p2" style={{color: colorTheme["text-off-black"], fontFamily: "PublicSans-Semibold", fontSize: 18}}>{parseMonth(new Date().getMonth())}</Text>
             <FlatList
                 data={getWeek()}
                 renderItem={({ item }) => {

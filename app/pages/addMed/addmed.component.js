@@ -51,16 +51,16 @@ const ScanSVG = () => (
 export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header navigation={navigation} />
-      <Layout style={{...styles.masterLayoutNoNav, gap: 32}}>
+      <Header navigation={navigation} showSettings={false} />
+      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", gap: 55}}>
         <ScanSVG />
-        <View>
-          <Text style={{marginBottom: 16, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
-          <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
+        <View style={{ marginHorizontal: 30 }}>
+          <Text style={{marginBottom: 8, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
+          <Text style={{ color: colorTheme['text-off-black']}} category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
         </View>
         <View style={{gap: 12, width: "100%", alignItems: "center"}}>
-          <Button style={{width: "100%"}} onPress={() => navigation.navigate("Scan")} size='large'>Scan</Button>
-          <Text style={{fontSize: 18, color: colorTheme['persian-green']}} onPress={() => navigation.navigate('Form', {drug: {frequency: 0, duration: 0}})}>Manual Input</Text>
+          <Button style={{width: "88%", backgroundColor: colorTheme['green']}} onPress={() => navigation.navigate("Scan")} size='large'>Continue</Button>
+          <Text style={{fontSize: 16, color: colorTheme['persian-green'], textDecorationLine: "underline"}} onPress={() => navigation.navigate('Form', {drug: {frequency: 0, duration: 0}})}>Use Manual Input</Text>
         </View>
       </Layout>
     </SafeAreaView>
