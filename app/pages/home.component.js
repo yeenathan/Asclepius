@@ -179,7 +179,7 @@ const MedList = ({ dayData, init, currentDay, handleTaken }) => {
           contentContainerStyle={{ padding: 10 }}
         />
         :
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center", boxShadow: "3px 3px 10px 1px rgba(86, 163, 166, 0.15)"}}>
           <Text category="h2" style={{color: colorTheme["text-gray"]}}>No medication details for this day.</Text>
         </View>
       }
