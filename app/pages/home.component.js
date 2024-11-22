@@ -215,7 +215,6 @@ export const HomeScreen = ({ route, navigation }) => {
 
   const [addedDrug, setAddedDrug] = useState(route.params.drug);
   const [showModal, setShowModal] = useState(false);
-  console.log(data);
 
   useEffect(() => {
     // fetchData()

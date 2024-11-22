@@ -88,10 +88,9 @@ export function FormScreen({navigation, route}) {
               <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug} required={true}/>
               <FormField navigation={navigation} destination={"Edit Frequency"} label="Take every:" placeholder="Edit Frequency" value={drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once"} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Duration"} label="Treatment duration:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
+              <FormField navigation={navigation} destination={""} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
+              <CheckBox checked={checkbox} onChange={() => setCheckbox(!checkbox)} style={{marginTop: 16}}>Alert when low on refills</CheckBox>
             </View>
-            <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 24, marginBottom: 16}}>Set Refill Reminder</Text>
-            <FormField navigation={navigation} destination={""} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
-            <CheckBox checked={checkbox} onChange={() => setCheckbox(!checkbox)} style={{marginTop: 16}}>Alert when low on refills</CheckBox>
           </ScrollView>
         </View>
         <View style={{flex: 1, width: "100%"}}>
