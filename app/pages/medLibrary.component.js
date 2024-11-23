@@ -62,7 +62,7 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
               borderColor: colorTheme["hunyadi-yellow"],
               borderRadius: 16,
             }}
-            children={() => <Text category="h2">cancel</Text>}
+            children={() => <Text category="h2">Cancel</Text>}
           />
           <Button
             size="small"
@@ -153,6 +153,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             ? colorTheme["hunyadi-yellow"]
             : colorTheme["light-blue"],
           ...styles.invisBorder,
+          boxShadow : "1px 3px 6px 0px rgba(0, 0, 0, 0.10)"
         }}
         key={index}
         children={() => (
@@ -162,10 +163,31 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
               justifyContent: "space-between",
               width: "90%",
               alignItems: "center",
+              paddingVertical: 10,  
+              paddingHorizontal: 15,
+              padding: 10,
+              borderRadius: 15,
+            }}
+          >
+            <View
+            style={{
+              backgroundColor: colorTheme["white"],
+              borderRadius: 50,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 90,  
+              height: 90,
+            }}
+            ><View
+            style={{
+              width: 60, 
+              height: 59,
             }}
           >
             {med.icon}
-            <Text category="h2">{med.name}</Text>
+          </View>
+        </View>
+            <Text style={{fontSize: 20, fontFamily: "Poppins-SemiBold"}}>{med.name}</Text>
             <Text
               style={{ fontWeight: "bold" }}
               onPress={() => {
@@ -192,6 +214,7 @@ export const MedFolder = ({ navigation }) => {
 
   const TabSwitch = () => {
     return (
+      <View style={{ backgroundColor: colorTheme["silver-white"]}}>
       <View style={{ flexDirection: "row", gap: 0, }}>
         <Text
           onPress={() => handleSwitch(1)}
@@ -199,15 +222,17 @@ export const MedFolder = ({ navigation }) => {
             flex: 1,
             backgroundColor:
               selectedTab === 1 ? colorTheme["green"] : "#fff",
-            borderColor: "green",
+            borderColor: "#DEDEDE",
             textAlign: "center",
             border: `solid ${colorTheme["green"]} 3`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             height: 64,
             lineHeight: 64,
+            borderWidth: 0.5,
             color:
-              selectedTab === 1 ? colorTheme["white"] : "black",
+              selectedTab === 1 ? colorTheme["white"] : "#6E6E6E",
+            fontFamily: selectedTab === 1 ? "PublicSans-Bold" : "PublicSans-Regular",
           }}
         >
           Current
@@ -218,8 +243,8 @@ export const MedFolder = ({ navigation }) => {
             flex: 1,
             backgroundColor:
               selectedTab === 1 ? "#fff" : colorTheme["green"],
-            borderColor: colorTheme["green"],
             textAlign: "center",
+            borderColor: "#DEDEDE",
             border: `solid ${colorTheme["green"]} 3`,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
@@ -228,11 +253,14 @@ export const MedFolder = ({ navigation }) => {
             height: 64,
             lineHeight: 64,
             color:
-              selectedTab === 1 ? colorTheme["black"] : "white",
+              selectedTab === 1 ? "#6E6E6E" : "white",
+              borderWidth: 0.5,
+            fontFamily: selectedTab === 1 ? "PublicSans-Regular" : "PublicSans-Bold",
           }}
         >
           Archive
         </Text>
+      </View>
       </View>
     );
   };
@@ -252,7 +280,7 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
-  console.log(data)
+
   return (
     <View style={{backgroundColor: colorTheme["white"], flex: 1}}>
       <TabSwitch />
@@ -319,16 +347,17 @@ export const MedDescription = ({ navigation, route }) => {
         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
           {medication.icon}
         </View>
-        <Text style={{ color: "white", marginBottom: 8 }}>
-          description
+        <Text category="h6" style={{ color: "white", marginBottom: 8 }}>
+          Description
         </Text>
         <Text style={{ color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center" }}>{medication.description}</Text>
         <Button
           style={{
             backgroundColor: colorTheme["green"],
             borderColor: colorTheme["white"],
-            borderRadius: 10,
+            borderRadius: 20,
             width: "80%",
+            borderWidth: 3
           }}
           onPress={() => navigation.navigate("Info", {
             medication: medication,
@@ -373,8 +402,8 @@ export const InfoScreen = ({ navigation, route }) => {
       >
         {React.cloneElement(medication.icon, { ...medication.icon.props, style: { ...medication.icon.props.style, width: 30, height: 30 } })}
       </View>
-      <View style={{ flexDirection: "column", flex: 1, marginLeft: 10 }}>
-        <Text category='h6'>
+      <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
+        <Text category='h10'>
           {medication.name}, {medication.refills} units
         </Text>
         <Text category='h10' appearance='hint' style={{ color: "gray"}}>
@@ -390,7 +419,7 @@ export const InfoScreen = ({ navigation, route }) => {
   }
   style={{ position: "absolute", top: 10, right: 10 }}
 >
-  <Text style={{ color: colorTheme["green"] }}>Edit Info</Text>
+  <Text category='h10' style={{ color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
 </TouchableOpacity>
     </View>
   );
@@ -842,14 +871,13 @@ export const MedLibraryScreen = ({ navigation }) => {
         style={{
           ...styles.masterLayout,
           flex: "none",
-          backgroundColor: "white",
+          backgroundColor: colorTheme["silver-white"],
         }}
       >
         <View style={styles.rowContainer}>
-          <Text category="h1" style={{ color: colorTheme["persian-green"] }}>
-            Med Library
+          <Text style={{ fontSize: 22, marginTop: 30, fontFamily: "Poppins-SemiBold", color: colorTheme["text-off-black"], }}>
+            Medication <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily: "Poppins-SemiBold" }}>Library</Text>
           </Text>
-          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
       </Layout>
       <View style={{flex: 8}}>
