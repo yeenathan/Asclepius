@@ -339,7 +339,7 @@ export const MedDescription = ({ navigation, route }) => {
       }}
     />
   );
-
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
