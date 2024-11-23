@@ -179,8 +179,9 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             }}
             ><View>
             <Image source={med.icon} style={{
-              width: 60, 
-              height: 59,
+              width: 30, 
+              height: 30,
+              marginTop: 10
             }}/>
           </View>
         </View>
@@ -343,17 +344,17 @@ export const MedDescription = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
-      <View style={{ alignItems: "center", justifyContent: "center", marginTop: 45, padding: 20 }}>
+      <View style={{ alignItems: "center", justifyContent: "center", padding: 20 }}>
         <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
         {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, textAlign: "center"}}>
         {medication.directions}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
-          <Image source={medication.icon} style={{width: 70, height: 70}}/>
+          <Image source={medication.icon} style={{width: 180, height: 180}}/>
         </View>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 55, marginBottom: 8, marginRight: 212 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 55, marginBottom: 8, marginRight: 212 }}>
         Description
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
@@ -413,7 +414,7 @@ export const InfoScreen = ({ navigation, route }) => {
       >
         <Image
           source={medication.icon}
-          style={{ width: 40, height: 40}}
+          style={{ width: 25, height: 25}}
         /> 
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
