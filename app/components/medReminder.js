@@ -54,7 +54,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
         </Text>
       </> :
       nextMed !== -1?
-      <View style={{flexDirection: "row", gap: 32, alignItems: "center"}}>
+      <View style={{flexDirection: "row", gap: 32, alignItems: "center" }}>
         <Image source={nextMed.icon} resizeMode="contain" style={{maxHeight: 80, maxWidth: 80}}/>
         <View>
           <Text category="h2" style={{color: "#ffffff"}}>{`${nextMed.nickname || nextMed.name}`}</Text>

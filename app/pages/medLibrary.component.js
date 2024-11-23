@@ -343,8 +343,8 @@ export const MedDescription = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
-      <View style={{ alignItems: "center", justifyContent: "center", marginTop: 45, padding: 20 }}>
-        <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
+        <Text style={{ color: "white", marginBottom: 10, fontSize: 24, fontFamily: "Poppins-SemiBold" }}>
         {medication.name}, {medication.refills}
         </Text>
         <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20 }}>

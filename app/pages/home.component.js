@@ -365,7 +365,7 @@ export const HomeScreen = ({ route, navigation }) => {
         </View>
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
           <Text category="h2" style={{color: colorTheme["text-off-black"], fontFamily:"PublicSans-Semibold" }}>Next Medication</Text>
-          <View style={{ marginBottom: 13, width: 397}}>
+          <View style={{ marginBottom: 13, width: "100%"}}>
             <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken} />
           </View>
           <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8, fontFamily:"PublicSans-Semibold" }}>Overview</Text>
