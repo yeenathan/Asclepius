@@ -173,14 +173,14 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             style={{
               backgroundColor: colorTheme["white"],
               borderRadius: 50,
-              width: 50,  
-              height: 50,
+              width: 65,  
+              height: 65,
               alignItems: "center",
             }}
             ><View>
             <Image source={med.icon} style={{
-              width: 30, 
-              height: 30,
+              width: 40, 
+              height: 40,
               marginTop: 10
             }}/>
           </View>
@@ -348,10 +348,10 @@ export const MedDescription = ({ navigation, route }) => {
         <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
         {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, textAlign: "center"}}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 20, textAlign: "center"}}>
         {medication.directions}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 20, marginTop: 35 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30, marginTop: 30 }}>
           <Image source={medication.icon} style={{width: 180, height: 180}}/>
         </View>
         <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 5, marginBottom: 8, marginRight: 212 }}>
@@ -561,6 +561,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   Medication Info
                 </Text>
               </View> */}
+              
             
             <View style={{ flexDirection: "row", gap: 6, marginTop: 20 }}>
               
