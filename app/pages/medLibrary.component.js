@@ -351,10 +351,10 @@ export const MedDescription = ({ navigation, route }) => {
         <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, textAlign: "center"}}>
         {medication.directions}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 20, marginTop: 35 }}>
           <Image source={medication.icon} style={{width: 180, height: 180}}/>
         </View>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 55, marginBottom: 8, marginRight: 212 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 5, marginBottom: 8, marginRight: 212 }}>
         Description
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
@@ -407,15 +407,18 @@ export const InfoScreen = ({ navigation, route }) => {
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
-          width: 35,
-          height: 35,
-          marginLeft: 10
+          width: 50,
+          height: 50,
+          marginLeft: 10,
+          marginBottom: 65
         }}
       >
+        <View>
         <Image
           source={medication.icon}
-          style={{ width: 25, height: 25}}
+          style={{ width: 35, height: 35, marginBottom: 65, marginTop: 65}}
         /> 
+        </View>
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
         <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-off-black"]}}>
@@ -608,7 +611,7 @@ export const InfoScreen = ({ navigation, route }) => {
 
                   <Text 
                     onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline'}}
+                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline', color: colorTheme["persian-green"]}}
                     category="s1"
                   >
                     View more
