@@ -1,6 +1,6 @@
 <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="60" height="60" rx="12.4136" fill="#00A39B"/>
-<path d="M40.4983 16.4985H19.4987C17.8419 16.4985 16.4988 17.8417 16.4988 19.4985V40.4981C16.4988 42.1549 17.8419 43.498 19.4987 43.498H40.4983C42.1552 43.498 43.4983 42.1549 43.4983 40.4981V19.4985C43.4983 17.8417 42.1552 16.4985 40.4983 16.4985Z" fill="#00A39B" stroke="white" stroke-width="3.10339" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M29.9993 23.9985V35.999" stroke="white" stroke-width="3.10339" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M23.9985 30H35.999" stroke="white" stroke-width="3.10339" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40.4983 16.4985H19.4987C17.8419 16.4985 16.4988 17.8417 16.4988 19.4985V40.4981C16.4988 42.1549 17.8419 43.498 19.4987 43.498H40.4983C42.1552 43.498 43.4983 42.1549 43.4983 40.4981V19.4985C43.4983 17.8417 42.1552 16.4985 40.4983 16.4985Z" fill="#00A39B" stroke="white" strokeWidth="3.10339" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M29.9993 23.9985V35.999" stroke="white" strokeWidth="3.10339" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M23.9985 30H35.999" stroke="white" strokeWidth="3.10339" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>

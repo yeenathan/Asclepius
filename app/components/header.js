@@ -1,8 +1,10 @@
 import React from 'react';
 import { TopNavigation, TopNavigationAction, Icon, Text } from "@ui-kitten/components";
-import { default as colorTheme } from "@/custom-theme.json";
+import { default as theme } from "@/custom-theme.json";
+import { ThemeContext } from '../theme-context';
 
 export const Header = ({ navigation, title, showSettings = true }) => {
+  const colorTheme = theme[React.useContext(ThemeContext).theme];
   // Back button action
   const BackAction = () => (
     <TopNavigationAction
@@ -26,13 +28,13 @@ export const Header = ({ navigation, title, showSettings = true }) => {
       accessoryLeft={BackAction}
       accessoryRight={SettingsAction}
       title={(props) => (
-        <Text {...props} style={{ color: colorTheme['black'], fontSize: 18 }}>
+        <Text {...props} style={{ color: colorTheme['header'], fontSize: 18 }}>
           {title}
         </Text>
       )}
       style={{
         width: "100%",
-        backgroundColor: colorTheme["silver-white"],
+        backgroundColor: colorTheme["generic-bg"],
         paddingVertical: 40,
         paddingHorizontal: 8,
       }}

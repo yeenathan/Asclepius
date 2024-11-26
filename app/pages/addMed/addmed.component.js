@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView, Image, View } from 'react-native';
 import { Button, Layout, Text} from '@ui-kitten/components';
 
-import { default as colorTheme } from "@/custom-theme.json"
+import { default as theme } from "@/custom-theme.json"
+import { ThemeContext } from '@/app/theme-context';
 import { Header } from '@/app/components/header';
 import { MyButton } from "@/app/components/MyButton"
 import { styles } from "@/app/stylesheet"
@@ -49,16 +50,19 @@ const ScanSVG = () => (
 )
 
 export const AddScreen = ({navigation}) => {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} showSettings={false} />
-      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", gap: 55}}>
-        <ScanSVG />
-        <View style={{ marginHorizontal: 30 }}>
-          <Text style={{marginBottom: 8, fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
-          <Text style={{ color: colorTheme['text-off-black']}} category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
+      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", }}>
+        <View style={{flex: 4}}>
+          <ScanSVG />
         </View>
-        <View style={{gap: 12, width: "100%", alignItems: "center"}}>
+        <View style={{ marginHorizontal: 30, flex: 1}}>
+          <Text style={{fontSize: 26, color: colorTheme['persian-green'] }} category='h2'>Scan Medication</Text>
+          <Text category='p1'>Scan the label from your pharmacist or the medication package to set reminders.</Text>
+        </View>
+        <View style={{gap: 25, width: "100%", alignItems: "center", flex: 2}}>
           <Button style={{width: "88%", backgroundColor: colorTheme['green']}} onPress={() => navigation.navigate("Scan")} size='large'>Continue</Button>
           <Text style={{fontSize: 16, color: colorTheme['persian-green'], textDecorationLine: "underline"}} onPress={() => navigation.navigate('Form', {drug: {frequency: 0, duration: 0}})}>Use Manual Input</Text>
         </View>
