@@ -207,18 +207,21 @@ const Important = (props) => (
  * main page component
  */
 export const HomeScreen = ({ route, navigation }) => {
-  const [onboarding, setOnboarding] = useState(route.params.onboarding);
-
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState(new Date());
   const [data, setData] = useState(null);
+  const [userName, setUserName] = useState("");
 
   const [addedDrug, setAddedDrug] = useState(route.params.drug);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    // fetchData()
-    if (onboarding) navigation.navigate("Med Stack", { screen: "Onboarding" });
+  useEffect(async () => {
+    async function getOnboarding() {
+      return JSON.parse(await AsyncStorage.getItem("OnboardingFinished"));
+    }
+    const _onboardingFinished = await getOnboarding();
+    if (!_onboardingFinished) navigation.navigate("Med Stack", { screen: "Onboarding" });
+    setUserName(JSON.parse(await AsyncStorage.getItem("Username")));
   }, []);
 
   const init = async () => {
@@ -356,7 +359,7 @@ export const HomeScreen = ({ route, navigation }) => {
       <Layout style={styles.masterLayout}>
         <View style={{...styles.rowContainer, marginTop: 35}}>
           <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["text-off-black"], fontFamily:"Poppins-SemiBold" }}>
-            Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>Nathan.</Text>
+            Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
           </Text>
           <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
         </View>
@@ -551,8 +554,9 @@ export const Onboarding = ({ navigation }) => {
           </View>
           <Button
             size="giant"
-            onPress={() => {
-              onNameSubmit(userName);
+            onPress={async () => {
+              await AsyncStorage.setItem("Username", JSON.stringify(userName));
+              await AsyncStorage.setItem("OnboardingFinished", JSON.stringify(true));
               navigation.navigate("Home Stack", { screen: "Home" });
             }}
             style={{
