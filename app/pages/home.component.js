@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Pressable, SafeAreaView, SectionList } from "react-native";
 import {
   Button,
@@ -6,7 +6,6 @@ import {
   Layout,
   Text,
   Modal,
-  ModalService,
   Input,
   CheckBox,
 } from "@ui-kitten/components";
@@ -16,29 +15,29 @@ import { MedReminder } from "@/app/components/medReminder"
 import { useFocusEffect } from "@react-navigation/native";
 
 import { styles } from "@/app/stylesheet";
-import { default as colorTheme } from "@/custom-theme.json";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ThemeContext } from "../theme-context";
+import { default as theme } from "@/custom-theme.json";
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 /**
  * look at MedList first
  * this is a react component created for react native's FlatList/SectionList to render
  * is a singular item in the list
  */
-const MedCard = (props) => {
-  const data = props.data;
+const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
+  const data = med;
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisible = () => {
     setMenuVisible(!menuVisible);
     setReschedule(false);
   };
-
   const [reschedule, setReschedule] = useState(false);
 
   function getIndex() {
     let _index;
-    const _currentDay = new Date(props.currentDay).getDate();
+    const _currentDay = new Date(currentDay).getDate();
     data.dates.forEach((date, index) => {
       const _day = new Date(date.date).getDate();
       if (_day === _currentDay) {
@@ -50,7 +49,7 @@ const MedCard = (props) => {
 
   function isTaken() {
     let _taken;
-    const _currentDay = new Date(props.currentDay).getDate();
+    const _currentDay = new Date(currentDay).getDate();
     data.dates.forEach((date, index) => {
       const _day = new Date(date.date).getDate();
       if (_day === _currentDay) {
@@ -67,7 +66,7 @@ const MedCard = (props) => {
     setTime(selected);
     let newData = {...data, time: selected}
     await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
-    props.init();
+    init();
   }
 
   const formatTime = (time=null) => {
@@ -89,7 +88,7 @@ const MedCard = (props) => {
       >
         <View
           style={{
-            backgroundColor: "#ffffff",
+            backgroundColor: colorTheme["modal-bg"],
             justifyContent: "center",
             padding: 40,
             paddingTop: 48,
@@ -139,14 +138,13 @@ const MedCard = (props) => {
         >
           <View style={{ flex: 3, alignItems: "center" }}>
             <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
-            {/* {data.icon} */}
           </View>
           <View style={{ flex: 6 }}>
-            <Text category="p1">{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
-            <Text category="c1">{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
+            <Text category="p1" style={{color: colorTheme["generic-text"]}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
+            <Text category="c1" style={{color: colorTheme["generic-text"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
-            <CheckBox onChange={() => props.handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
+            <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
           </View>
         </View>
       </Pressable>
@@ -163,15 +161,15 @@ const MedCard = (props) => {
  * sections (SectionList) or data (FlatList) is required too, as its the data it requires to build the list. specific format is needed check the docs
  * theres a FlatList example in components/horizontalCalendar.js
  */
-const MedList = ({ dayData, init, currentDay, handleTaken }) => {
+const MedList = ({ dayData, init, currentDay, handleTaken, colorTheme }) => {
   return (
-    <View style={{flex: 1, width: "100%", backgroundColor: "#fff", borderTopLeftRadius: 8, borderTopRightRadius: 8, boxShadow: "3px 3px 10px 1px rgba(86, 163, 166, 0.15)"}}>
+    <View style={{flex: 1, width: "100%", backgroundColor: colorTheme["med-list-bg"], borderTopLeftRadius: 8, borderTopRightRadius: 8, boxShadow: "3px 3px 10px 1px rgba(86, 163, 166, 0.15)"}}>
       {
         dayData.length>0? <SectionList
           style={{ flex: 1, width: "100%", padding: 8, paddingBottom: 0}}
           sections={dayData}
           renderItem={({ item }) => (
-            <MedCard data={item} init={init} currentDay={currentDay} handleTaken={handleTaken}/>
+            <MedCard med={item} init={init} currentDay={currentDay} handleTaken={handleTaken} colorTheme={colorTheme}/>
           )}
           renderSectionHeader={({ section: { title } }) => (
             <Text category="p2">{title}</Text>
@@ -187,41 +185,40 @@ const MedList = ({ dayData, init, currentDay, handleTaken }) => {
   );
 };
 
-/**
- * example of styling a button with more freedom. has to have children prop which takes a react component (stick to Views i think)
- */
-const Important = (props) => (
-  <Button
-    onPress={props.toggleOverlayVisible}
-    style={{ ...styles.orangeButton, width: "100%", marginVertical: 8 }}
-    children={() => (
-      <View style={{}}>
-        <Text category="p2">1 serious drug interaction</Text>
-      </View>
-    )}
-  ></Button>
-);
 // ---------------------------------------------------- COMPONENTS ----------------------------------------------------
 
 /**
  * main page component
  */
 export const HomeScreen = ({ route, navigation }) => {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [dayData, setDayData] = useState([]);
   const [day, setDay] = useState(new Date());
   const [data, setData] = useState(null);
   const [userName, setUserName] = useState("");
 
-  const [addedDrug, setAddedDrug] = useState(route.params.drug);
+  const _drug = route.params.drug;
+  const _justAdded = route.params.justAdded;
+  const [addedDrug, setAddedDrug] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
+    if (_justAdded) {
+      setAddedDrug(_drug);
+      setShowModal(_justAdded);
+    }
+  }, [route.params])
+
+  useEffect(() => {
     async function getOnboarding() {
       return JSON.parse(await AsyncStorage.getItem("OnboardingFinished"));
     }
-    const _onboardingFinished = await getOnboarding();
-    if (!_onboardingFinished) navigation.navigate("Med Stack", { screen: "Onboarding" });
-    setUserName(JSON.parse(await AsyncStorage.getItem("Username")));
+    async function handleOnboarding() {
+      const _onboardingFinished = await getOnboarding();
+      if (!_onboardingFinished) navigation.navigate("Med Stack", { screen: "Onboarding" });
+      setUserName(JSON.parse(await AsyncStorage.getItem("Username")));
+    }
+    handleOnboarding();
   }, []);
 
   const init = async () => {
@@ -233,7 +230,6 @@ export const HomeScreen = ({ route, navigation }) => {
   useFocusEffect(
     useCallback(() => {
       init();
-      if (addedDrug) setShowModal(true);
     }, [])
   )
 
@@ -288,7 +284,7 @@ export const HomeScreen = ({ route, navigation }) => {
           }
         }
       }).sort((a, b) => {
-        return new Date(a.time).getTime() < new Date(b.time).getTime();
+        return new Date(a.time).getTime() > new Date(b.time).getTime();
       })
     } else return [];
   }
@@ -341,6 +337,8 @@ export const HomeScreen = ({ route, navigation }) => {
     setAddedDrug(null);
   }
 
+  const themeContext = useContext(ThemeContext);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {addedDrug && <Modal
@@ -348,7 +346,7 @@ export const HomeScreen = ({ route, navigation }) => {
         backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         onBackdropPress={handleCloseModal}
       >
-        <View style={{backgroundColor: "#ffffff", padding: 32, borderRadius: 20, gap: 16}}>
+        <View style={{backgroundColor: colorTheme["modal-bg"], padding: 32, borderRadius: 20, gap: 16}}>
           <Text category="p1">{addedDrug.name} has been added to your schedule.</Text>
           <Button size="medium" onPress={() => {
             setDay(new Date(addedDrug.dates[0].date));
@@ -358,21 +356,23 @@ export const HomeScreen = ({ route, navigation }) => {
       </Modal> }
       <Layout style={styles.masterLayout}>
         <View style={{...styles.rowContainer, marginTop: 35}}>
-          <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["text-off-black"], fontFamily:"Poppins-SemiBold" }}>
+          <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["good-morning"], fontFamily:"Poppins-SemiBold" }}>
             Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
           </Text>
-          <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
+          <Pressable onPress={themeContext.toggleTheme} >
+            <Icon style={{ width: 40 }} name="settings-2-outline"></Icon>
+          </Pressable>
         </View>
         <View style={{ width: "100%" }}>
           <HorizontalCalendar setDay={setDay} currentDay={day} />
         </View>
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
-          <Text category="h2" style={{color: colorTheme["text-off-black"], fontFamily:"PublicSans-Semibold" }}>Next Medication</Text>
+          <Text category="h2" style={{color: colorTheme["home-header"], fontFamily:"PublicSans-Semibold" }}>Next Medication</Text>
           <View style={{ marginBottom: 13, width: "100%"}}>
             <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken} />
           </View>
-          <Text category="h2" style={{color: colorTheme["text-off-black"], marginTop: 8, fontFamily:"PublicSans-Semibold" }}>Overview</Text>
-          <MedList dayData={format(dayData)} init={init} currentDay={day} handleTaken={handleTaken}/>
+          <Text category="h2" style={{color: colorTheme["home-header"], marginTop: 8, fontFamily:"PublicSans-Semibold" }}>Overview</Text>
+          <MedList dayData={format(dayData)} init={init} currentDay={day} handleTaken={handleTaken} colorTheme={colorTheme}/>
         </View>
       </Layout>
     </SafeAreaView>
@@ -381,9 +381,9 @@ export const HomeScreen = ({ route, navigation }) => {
 
 // onboarding
 export const Onboarding = ({ navigation }) => {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [currentPage, setCurrentPage] = useState(0);
   const [userName, setUserName] = useState("");
-  const onNameSubmit = (name) => setUserName(name);
 
   const onboardingPages = [
     {

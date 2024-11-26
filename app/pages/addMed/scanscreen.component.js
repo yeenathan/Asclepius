@@ -95,13 +95,13 @@ export const ScanScreen = ({navigation}) => {
                   children={() => {
                     return (
                       <View style={{alignItems: "flex-start", paddingHorizontal: 16}}>
-                        <Text style={{color: colorTheme['silver-white']}} category='p2'>{photoTaken? (loading? "Loading...": drug.name || "Not detected") : "Take Photo"}</Text>
-                        <Text style={{color: colorTheme['silver-white']}} category='c1'>{photoTaken? (loading? "Please wait" : "Continue") : "Start scanning"}</Text>
+                        <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.name || "Not detected") : "Take Photo"}</Text>
+                        <Text style={{color: "#fff"}} category='c1'>{photoTaken? (loading? "Please wait" : "Continue") : "Start scanning"}</Text>
                       </View>
                     )
                   }}
               ></Button>
-              {photoTaken && <Text category='p2' style={{textAlign: "center", color: colorTheme['silver-white'], marginTop: 8}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
+              {photoTaken && <Text category='p2' style={{textAlign: "center", color: "#fff", marginTop: 8}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
             </View>
             </>
           }

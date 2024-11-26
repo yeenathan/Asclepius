@@ -51,7 +51,7 @@ export function AppNavigator({ navigation }) {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-          initialParams={{justAdded: false, onboarding: false}}
+          initialParams={{justAdded: false}}
         />
         <Screen
           name="Med Folder"

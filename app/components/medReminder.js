@@ -1,10 +1,12 @@
 import {styles} from "@/app/stylesheet"
 import { Image, View } from "react-native"
 import { Button, Text } from "@ui-kitten/components"
-import { useEffect, useState } from "react";
-import {default as colorTheme} from "@/custom-theme.json"
+import { useEffect, useState, useContext } from "react";
+import {default as theme} from "@/custom-theme.json"
+import { ThemeContext } from "@/app/theme-context";
 
 export function MedReminder({navigation, data, currentDay, getDayData, handleTaken}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const _dayData = getDayData(currentDay, data);
 
   function findNextIndex(data, currentDay) {
@@ -81,7 +83,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
               marginTop: 4
             }}
             onPress={() => navigation.navigate("Med Stack", {screen: "Add Med"})}
-            children={() => <Text category="c1" style={{paddingHorizontal: 8}}>Add Medication</Text>}
+            children={() => <Text category="c1" style={{paddingHorizontal: 8, color: colorTheme["generic-text"]}}>Add Medication</Text>}
           /> :
           nextMed !== -1?
           <Button
@@ -94,7 +96,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
             marginTop: 4
           }}
           onPress={() => handleTaken(nextMed, currentDay)}
-          children={() => <Text category="c1" style={{paddingHorizontal: 8}}>Take Now</Text>}
+          children={() => <Text category="c1" style={{paddingHorizontal: 8, color: colorTheme["generic-text"]}}>Take Now</Text>}
           />
           : null
         }
