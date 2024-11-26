@@ -173,14 +173,15 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             style={{
               backgroundColor: colorTheme["white"],
               borderRadius: 50,
-              width: 50,  
-              height: 50,
+              width: 65,  
+              height: 65,
               alignItems: "center",
             }}
             ><View>
             <Image source={med.icon} style={{
-              width: 60, 
-              height: 59,
+              width: 40, 
+              height: 40,
+              marginTop: 10
             }}/>
           </View>
         </View>
@@ -343,17 +344,22 @@ export const MedDescription = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
       <BackAction/>
+<<<<<<< HEAD
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 16 }}>
         <Text style={{ color: "white", marginBottom: 10, fontSize: 24, fontFamily: "Poppins-SemiBold" }}>
+=======
+      <View style={{ alignItems: "center", justifyContent: "center", padding: 20 }}>
+        <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
+>>>>>>> yeongtaek
         {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 20, textAlign: "center"}}>
         {medication.directions}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30 }}>
-          <Image source={medication.icon} style={{width: 70, height: 70}}/>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30, marginTop: 30 }}>
+          <Image source={medication.icon} style={{width: 180, height: 180}}/>
         </View>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 55, marginBottom: 8, marginRight: 212 }}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 5, marginBottom: 8, marginRight: 212 }}>
         Description
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
@@ -406,15 +412,18 @@ export const InfoScreen = ({ navigation, route }) => {
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
-          width: 35,
-          height: 35,
-          marginLeft: 10
+          width: 50,
+          height: 50,
+          marginLeft: 10,
+          marginBottom: 65
         }}
       >
+        <View>
         <Image
           source={medication.icon}
-          style={{ width: 40, height: 40}}
+          style={{ width: 35, height: 35, marginBottom: 65, marginTop: 65}}
         /> 
+        </View>
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
         <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-off-black"]}}>
@@ -478,11 +487,12 @@ export const InfoScreen = ({ navigation, route }) => {
           }}
           contentContainerStyle={{justifyContent: "flex-start"}}
         >
-            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 135}}>
+            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 115}}>
             <Text style={{fontSize: 22, fontFamily: "Poppins-SemiBold"}}>
               Insulin <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>{medication.name}</Text>
               </Text>
             </View>
+            <View style={{ marginTop: 20}}>
             <Card style={styles.card} header={medHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
                 <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Duration</Text>
@@ -490,7 +500,9 @@ export const InfoScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Frequency</Text>      
               </View>
             </Card>
-            <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
+            </View>
+            {/* reminder part */}
+            {/* <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
               <Button
                 onPress={() =>
                   navigation.navigate("Med Stack", {
@@ -525,8 +537,8 @@ export const InfoScreen = ({ navigation, route }) => {
               >
                 Info
               </Button>
-            </View>
-            <View style={{ flexDirection: "column", gap: 6 }}>
+            </View> */}
+            {/* <View style={{ flexDirection: "column", gap: 6 }}>
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
@@ -544,18 +556,19 @@ export const InfoScreen = ({ navigation, route }) => {
               >
                 <Text>{medication.reminder}</Text>
               </View>
-            </View>
+            </View> */}
 
-            <View
+            {/* <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
               >
                 <Icon style={{ width: 40 }} name="edit"></Icon>
                 <Text style={{ color: colorTheme["persian-green"] }}>
                   Medication Info
                 </Text>
-              </View>
+              </View> */}
+              
             
-            <View style={{ flexDirection: "row", gap: 6 }}>
+            <View style={{ flexDirection: "row", gap: 6, marginTop: 20 }}>
               
               <View
                 style={{
@@ -583,7 +596,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 >
 
                   <Text
-                    style={{ color: colorTheme["persian-green"] }}
+                    style={{ color: colorTheme["persian-green"], fontSize: 28, fontFamily: "Poppins-SemiBold", marginBottom: 10 }}
                   >
                     Side Effects
                   </Text>
@@ -594,7 +607,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   >
                     <View style={{ flexDirection: "column" }}>
                       {medication.sideEffects.slice(0, 3).map((effect, index) => (
-                      <Text key={index} style={{ marginBottom: 5 }}>
+                      <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 14 }}>
                         • {effect}
                       </Text>
                       ))}
@@ -604,7 +617,7 @@ export const InfoScreen = ({ navigation, route }) => {
 
                   <Text 
                     onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline'}}
+                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline', color: colorTheme["persian-green"]}}
                     category="s1"
                   >
                     View more
@@ -622,7 +635,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   width: 300,
                   borderRadius: 20}}
                 >
-                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                  <Text style={{ marginBottom: 10, fontWeight: "bold",  }}>
                     Side Effects
                   </Text>
 
@@ -689,12 +702,14 @@ export const InfoScreen = ({ navigation, route }) => {
                       style={{
                         width: 300,
                         borderRadius: 20,
+                        backgroundColor: "#007972",
+                        borderWidth: 0
                       }}
                     >
-                      <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                      <Text style={{ marginBottom: 10, fontWeight: "bold", color: "#8FBAB3" }}>
                         Directions for Use
                       </Text>
-                      <Text style={{ marginBottom: 10 }}>{medication.directions}</Text>
+                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.directions}</Text>
                       <Button
                         style={{
                           marginTop: 20,
@@ -725,10 +740,10 @@ export const InfoScreen = ({ navigation, route }) => {
                     elevation: 5,
                   }}
                 >
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Quantity Prescribed
+                  <Text style={{ color: "#8FBAB3" }}>
+                    Prescription Details
                   </Text>
-                  <Text>{medication.quantity}</Text>
+                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26 }}>{medication.quantity}</Text>
                 </View>
                 
                 </View>
@@ -1053,3 +1068,4 @@ export const MedLibraryScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+``
