@@ -334,6 +334,7 @@ export const MedDescription = ({ navigation, route }) => {
   const medication = route.params.medication;
   const colorTheme = theme[useContext(ThemeContext).theme];
   const BackAction = () => (
+    <View style={{height: 80}}>
     <TopNavigationAction
       onPress={() => navigation.goBack()}
       icon={(props) => <Icon {...props} name="arrow-ios-back-outline" fill="#ffffff" style={{width: 45, height: 45}} />}
@@ -344,45 +345,77 @@ export const MedDescription = ({ navigation, route }) => {
         paddingHorizontal: 8,
       }}
     />
+    </View>
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme["green"] }}>
-      <BackAction/>
-      <View style={{ alignItems: "center", justifyContent: "center", padding: 20 }}>
-        <Text style={{ fontSize: 26, fontFamily: "Poppins-SemiBold", color: colorTheme["silver-white"]}}>
-        {medication.name}, {medication.refills}
+    <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme['green'] }}>
+      <BackAction />
+      <ScrollView contentContainerStyle={{ alignItems: 'center', padding: 20 }}>
+        <Text style={{ fontSize: 26, fontFamily: 'Poppins-SemiBold', color: colorTheme['silver-white'] }}>
+          {medication.name}, {medication.refills}
         </Text>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Regular", color: "white", marginTop: 20, textAlign: "center"}}>
-        {medication.directions}
+        <Text
+          style={{
+            fontSize: 16,
+            fontFamily: 'PublicSans-Regular',
+            color: 'white',
+            marginTop: 20,
+            textAlign: 'center',
+          }}
+        >
+          {medication.directions}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 30, marginTop: 30 }}>
-          <Image source={medication.icon} style={{width: 180, height: 180}}/>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30, marginTop: 30 }}>
+          <Image source={medication.icon} style={{ width: 180, height: 180 }} />
         </View>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-Bold", color: "white", marginTop: 5, marginBottom: 8, marginRight: 212 }}>
-        Description
+        <Text
+          style={{
+            fontSize: 16,
+            fontFamily: 'PublicSans-Bold',
+            color: 'white',
+            marginTop: 5,
+            marginBottom: 8,
+            marginRight: 206,
+          }}
+        >
+          Description
         </Text>
-        <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: "white", marginBottom: 20, justifyContent: 'center', alignItems: "center", width: 300, height: 100 }}>{medication.description}</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontFamily: 'PublicSans-Regular',
+            color: 'white',
+            marginBottom: 20,
+            textAlign: 'center',
+            width: 300,
+          }}
+        >
+          {medication.description}
+        </Text>
         <Button
           style={{
-            backgroundColor: colorTheme["green"],
-            borderColor: colorTheme["white"],
+            backgroundColor: colorTheme['green'],
+            borderColor: colorTheme['white'],
             borderRadius: 20,
-            width: "80%",
-            borderWidth: 3
+            width: '80%',
+            borderWidth: 3,
           }}
-          onPress={() => navigation.navigate("Info", {
-            medication: medication,
-            handleArchive: route.params.handleArchive,
-            handleDelete: route.params.handleDelete,
-          })}
+          onPress={() =>
+            navigation.navigate('Info', {
+              medication: medication,
+              handleArchive: route.params.handleArchive,
+              handleDelete: route.params.handleDelete,
+            })
+          }
         >
-          <Text style={{ color: "green" }}>View & Edit Details</Text>
+          <Text style={{ color: 'green' }}>View & Edit Details</Text>
         </Button>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
+
 
 
 export const InfoScreen = ({ navigation, route }) => {
