@@ -87,12 +87,12 @@
     "color-danger-800": "#7A0C1C",
     "color-danger-900": "#65071C",
     "text-basic-color": "#4D4D4D",
-    "medfolder-background": "#ffffff",
+    "medfolder-background": "#FAF8FE",
     "MedLibraryScreen-color": "#FAF8FE",
     "infoscreen-color": "#FAF8FE",
     "button-color": "#ffffff",
-    "icon-color": "#121212"
-
+    "icon-color": "#121212",
+    "medfolder-background2": "#ffffff"
   },
   "dark": {
     "dark-green": "#007972",
@@ -189,6 +189,7 @@
     "text-basic-color": "#FAF8FE",
     "text-alternate-color": "#fff",
     "text-hint-color": "#A0A0A0",
-    "medfolder-background": "#121212"
+    "medfolder-background": "#121212",
+    "medfolder-background2": "#121212"
   }
 }

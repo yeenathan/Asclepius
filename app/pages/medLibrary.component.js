@@ -226,7 +226,7 @@ export const MedFolder = ({ navigation }) => {
   const TabSwitch = () => {
     return (
       <View style={{ backgroundColor: colorTheme["medfolder-background"]}}>
-      <View style={{ flexDirection: "row", gap: 0, }}>
+      <View style={{ flexDirection: "row", gap: 0 }}>
         <Text
           onPress={() => handleSwitch(1)}
           style={{
@@ -293,7 +293,7 @@ export const MedFolder = ({ navigation }) => {
   };
   
   return (
-    <View style={{backgroundColor: colorTheme["medfolder-background"], flex: 1}}>
+    <View style={{backgroundColor: colorTheme["medfolder-background2"], flex: 1}}>
       <TabSwitch />
         <View
           style={{
