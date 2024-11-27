@@ -3,7 +3,7 @@
     "dark-green": "#007972",
     "text-off-black": "#4D4D4D",
     "text-gray": "#A0A0A0",
-
+    "border-color": "#DEDEDE",
     "persian-green": "#00A39B",
     "light-green": "#89CCC8",
     "light-blue": "#D9EDFF",
@@ -17,6 +17,13 @@
     "black-80": "#00000050",
     "white": "#ffffff",
     "green": "#007972",
+    "card-color" : "#ffffff",
+    "side-effect" : "#007972",
+    "side-text" : "#000000",
+    "direction" : "#8FBAB3",
+    "archive" : "#FFB057",
+    "archive-border" : "#ffffff",
+    "background": "#FAF8FE",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",
@@ -79,13 +86,27 @@
     "color-danger-700": "#97141C",
     "color-danger-800": "#7A0C1C",
     "color-danger-900": "#65071C",
-    "text-basic-color": "#4D4D4D"
-
+    "text-basic-color": "#4D4D4D",
+    "medfolder-background": "#FAF8FE",
+    "MedLibraryScreen-color": "#FAF8FE",
+    "infoscreen-color": "#FAF8FE",
+    "button-color": "#ffffff",
+    "icon-color": "#121212",
+    "medfolder-background2": "#ffffff"
   },
   "dark": {
     "dark-green": "#007972",
     "text-off-black": "#4D4D4D",
     "text-gray": "#A0A0A0",
+    "border-color": "#DEDEDE",
+    "card-color" : "#2A2A2A",
+    "side-effect" : "#8FBAB3",
+    "side-text" : "#A0A0A0",
+    "direction" : "#8FBAB3",
+    "archive" : "#FFD08B",
+    "archive-border" : "#FFD08B",
+    "background": "#121212",
+    "icon-color": "#ffffff",
 
     "persian-green": "#00A39B",
     "light-green": "#89CCC8",
@@ -101,6 +122,7 @@
     "white": "#ffffff",
     "green": "#007972",
     "frequency-field": "#2A2A2A",
+    "button-color": "#121212",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#2A2A2A",
@@ -166,6 +188,8 @@
     "background-basic-color-2": "#2A2A2A",
     "text-basic-color": "#FAF8FE",
     "text-alternate-color": "#fff",
-    "text-hint-color": "#A0A0A0"
+    "text-hint-color": "#A0A0A0",
+    "medfolder-background": "#121212",
+    "medfolder-background2": "#121212"
   }
 }
