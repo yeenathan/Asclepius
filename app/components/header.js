@@ -8,12 +8,10 @@ export const Header = ({ navigation, title, showSettings = true }) => {
   const colorTheme = theme[React.useContext(ThemeContext).theme];
   // Back button action
   const BackAction = () => (
-    <View style={{width: 45, height:5}}>
     <TopNavigationAction
       onPress={() => navigation.goBack()}
       icon={(props) => <Icon {...props} name="arrow-ios-back-outline" fill="#A0A0A0" style={{width: 57, height: 57}} />}
     />
-    </View>
   );
 
   // Settings button action

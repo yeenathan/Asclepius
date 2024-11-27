@@ -1093,8 +1093,8 @@ export const MedLibraryScreen = ({ navigation }) => {
           backgroundColor: colorTheme["MedLibraryScreen-color"],
         }}
       >
-        <View style={styles.rowContainer}>
-          <Text style={{ fontSize: 22, marginTop: 30, fontFamily: "Poppins-SemiBold", color: colorTheme["text-off-black"], }}>
+        <View style={{...styles.rowContainer}}>
+          <Text style={{ fontSize: 22, marginTop: 30, fontFamily: "Poppins-SemiBold"}}>
             Medication <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily: "Poppins-SemiBold" }}>Library</Text>
           </Text>
         </View>
