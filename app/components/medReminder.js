@@ -5,7 +5,7 @@ import { useEffect, useState, useContext } from "react";
 import {default as theme} from "@/custom-theme.json"
 import { ThemeContext } from "@/app/theme-context";
 
-export function MedReminder({navigation, data, currentDay, getDayData, handleTaken}) {
+export function MedReminder({navigation, data, currentDay, getDayData, handleTaken, userName}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   const _dayData = getDayData(currentDay, data);
 
@@ -66,7 +66,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
       </View>
       :
       <View>
-        <Text category="p2" style={{color: "#ffffff"}}>Well done, Nathan!</Text>
+        <Text category="p2" style={{color: "#ffffff"}}>Well done, {userName}!</Text>
         <Text category="c1" style={{color: "#ffffff"}}>All medications done for today.</Text>
       </View>
       }

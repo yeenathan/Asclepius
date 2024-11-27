@@ -827,7 +827,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
           <Icon style={{ width: 40 }} name="clock"></Icon>
           <Text>
@@ -942,7 +942,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
           <Icon style={{ width: 40 }} name="edit"></Icon>
           <Text>Edit medication Info</Text>

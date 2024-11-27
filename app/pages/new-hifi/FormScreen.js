@@ -76,7 +76,7 @@ export function FormScreen({navigation, route}) {
         </View>
       </Modal>
       <Header navigation={navigation} title={"New Medication"}/>
-      <Layout style={{...styles.masterLayoutNoNav, alignItems: "flex-start"}}>
+      <Layout style={{...styles.masterLayoutNoNav, alignItems: "flex-start", backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, width: "100%", gap: 12}}>
           <ScrollView>
             <Text category="h2" style={{marginBottom: 16}}>General Information</Text>

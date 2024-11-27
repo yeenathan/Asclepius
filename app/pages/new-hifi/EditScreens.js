@@ -43,7 +43,7 @@ export function EditIcon ({navigation, route}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
             <Image style={{marginTop: 32, height: 60, width: 60}} source={icons[index]} resizeMode='contain'/>
@@ -83,13 +83,14 @@ export function EditIcon ({navigation, route}) {
 }
 
 export function EditStrength({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const drug = route.params.drug;
   const [strength, setStrength] = useState();
   const [unit, setUnit] = useState("mL")
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Dose"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
           <Input style={{flex: 1}} value={strength} onChange={(e) => setStrength(e.target.value)}/>
           <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mL", "mg", "cc", "mol"]}/>
@@ -103,13 +104,14 @@ export function EditStrength({navigation, route}) {
 }
 
 export function EditDose({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const drug = route.params.drug;
   const [dose, setDose] = useState("1");
   const [unit, setUnit] = useState("tablet(s)")
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Dose"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
           <DisplayDropdown style={{flex: 1}} setUnit={setDose} data={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}/>
           <DisplayDropdown style={{flex: 2}} setUnit={setUnit} data={["tablet(s)", "pill(s)", "injection(s)", "swab(s)", "capsule(s)"]}/>
@@ -134,12 +136,13 @@ function FrequencyField({label, value, masterValue, setMasterValue}) {
 }
 
 export function EditDuration({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [duration, setDuration] = useState(0);
   const drug = route.params.drug;
   return(
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Duration"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, width: "100%", gap: 16}}>
           <View style={{width: "100%", gap: 4}}>
             <FrequencyField label={"One time thing"} value={0} masterValue={duration} setMasterValue={setDuration}/>
@@ -161,12 +164,13 @@ export function EditDuration({navigation, route}) {
 }
 
 export function EditFrequency({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [frequency, setFrequency] = useState(0);
   const drug = route.params.drug;
   return(
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Frequency"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, width: "100%", gap: 16}}>
           <View style={{width: "100%", gap: 4}}>
             <FrequencyField label={"One time thing"} value={0} masterValue={frequency} setMasterValue={setFrequency}/>
@@ -207,7 +211,7 @@ export function EditSchedule({navigation, route}) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Schedule"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, width: "90%", justifyContent: "center", gap: 32}}>
           <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
             <Text category="h2">Start date</Text>
@@ -239,12 +243,13 @@ export function EditSchedule({navigation, route}) {
 }
 
 export function EditNickname({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [nick, setNick] = useState("");
   const drug = route.params.drug;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Nickname"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, justifyContent: "center"}}>
           {/* <SuggestionSearch value={name} setValue={setName}/> */}
           <Text category="p1" style={{marginBottom: 8}}>Nickname</Text>
@@ -259,12 +264,13 @@ export function EditNickname({navigation, route}) {
 }
 
 export function EditName({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
   const [name, setName] = useState("");
   const drug = route.params.drug;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Name"}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, justifyContent: "center"}}>
           {/* <SuggestionSearch value={name} setValue={setName}/> */}
           <Text category="p1" style={{marginBottom: 8}}>Medication Name</Text>

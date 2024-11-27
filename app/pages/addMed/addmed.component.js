@@ -54,7 +54,7 @@ export const AddScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} showSettings={false} />
-      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", }}>
+      <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4}}>
           <ScanSVG />
         </View>

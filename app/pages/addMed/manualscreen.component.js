@@ -117,7 +117,7 @@ export const IconPick = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.90}/>
           <View style={{justifyContent: "center", alignItems: "center", gap: 32, flex: 2}}>
@@ -163,7 +163,7 @@ export const ExtraOptions = ({navigation, route}) => {
   return (
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.80}/>
           <Text category='h2'>Would you like to set: (optional)</Text>
@@ -197,7 +197,7 @@ export const StartDatePick = ({navigation, route}) => {
   return(
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.7}/>
           <Text category='h2'>Select the starting date</Text>
@@ -222,7 +222,7 @@ export const ManualDoseEdit = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.66}/>
           <Text category='h2'>Dose per time</Text>
@@ -253,7 +253,7 @@ export const ManualNameEdit = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.25}/>
           <Text category='h2'>What is the medication name?</Text>
@@ -279,7 +279,7 @@ export const ManualIntervalEdit = ({navigation, route}) => {
   return (
     <SafeAreaView style={{ flex: 1}}>
       <Header navigation={navigation}/>
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 7, alignItems: "center", gap: 16, width: "100%"}}>
           <ProgressBar size="giant" animating={false} style={{width: "100%"}} progress={.47}/>
           <Text category='h2'>Set Time Interval</Text>
