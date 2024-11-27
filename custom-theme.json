@@ -24,6 +24,7 @@
     "archive" : "#FFB057",
     "archive-border" : "#ffffff",
     "background": "#FAF8FE",
+    "card-text": "#4D4D4D",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",
@@ -95,6 +96,7 @@
     "medfolder-background2": "#ffffff"
   },
   "dark": {
+    "card-text": "#ffffff",
     "dark-green": "#007972",
     "text-off-black": "#4D4D4D",
     "text-gray": "#A0A0A0",
