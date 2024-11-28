@@ -64,9 +64,11 @@ export function FormScreen({navigation, route}) {
   async function getInfo(DIN) {
     async function getID(DIN) {
       const _resp = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+      if (!_resp[0]) return null;
       return {id: _resp[0].drug_code, name: _resp[0].brand_name};
     }
     const _drugProduct = await getID(DIN);
+    if (!_drugProduct) return null;
     const _ingredientInfo = await fetch(`https://health-products.canada.ca/api/drug/activeingredient/?id=${_drugProduct.id}`).then(resp => resp.json());
     return {ingredient: _ingredientInfo[0].ingredient_name, name: _drugProduct.name};
   }
@@ -75,19 +77,25 @@ export function FormScreen({navigation, route}) {
     useCallback(() => {
       async function loadData(DIN) {
         const _apiInfo = await getInfo(DIN);
-        setDrug({
-          ...drug,
-          DIN: DIN,
-          name: _apiInfo.name,
-          ingredient: _apiInfo.ingredient
-        })
+        if (!_apiInfo) {
+          setDrug({
+            ..._drug,
+            DIN: DIN,
+            name: "Invalid DIN"
+          })
+          setValidDIN(false);
+        }
+        else {
+          setDrug({
+            ..._drug,
+            DIN: DIN,
+            name: _apiInfo.name,
+            ingredient: _apiInfo.ingredient
+          })
+          setValidDIN(true);
+        }
       }
-      console.log(_drug);
-      if (_drug.DIN && !_drug.name) {
-        loadData(_drug.DIN)
-      } else {
-        setDrug(_drug);
-      };
+      loadData(_drug.DIN);
     }, [route])
   )
   
@@ -96,6 +104,7 @@ export function FormScreen({navigation, route}) {
   const _drug = route.params.drug;
   const [drug, setDrug] = useState(_drug);
   const [showAlert, setShowAlert] = useState(false);
+  const [validDIN, setValidDIN] = useState(false);
   return(
     <SafeAreaView style={{flex: 1}}>
       <Modal
@@ -114,7 +123,7 @@ export function FormScreen({navigation, route}) {
             <Text category="h2" style={{marginBottom: 16}}>General Information</Text>
             <View style={{width: "100%", gap: 8}}>
               <FormField navigation={navigation} destination={"Edit DIN"} label="*DIN:" placeholder="Edit DIN" value={drug.DIN} drugObj={drug} required={true}/>
-              <FormField navigation={navigation} destination={"Edit Name"} label="Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug} pressable={false}/>
+              <FormField navigation={navigation} destination={"Edit Name"} label="Medication Name:" placeholder="Invalid DIN" value={drug.name} drugObj={drug} pressable={false}/>
               <FormField navigation={navigation} destination={"Edit Nickname"} label="Nickname:" placeholder="Add Nickname" value={drug.nickname} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
@@ -131,7 +140,7 @@ export function FormScreen({navigation, route}) {
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {
-            if (!(drug.dates && drug.DIN)) {
+            if (!(drug.dates && validDIN)) {
               setShowAlert(true);
               return;
             }
