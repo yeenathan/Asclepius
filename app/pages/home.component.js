@@ -100,6 +100,9 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
             <Text category="h2">{data.name}</Text>
             <Text category="p1">{data.nickname}</Text>
           </View>
+          <View style={{marginBottom: 32}}>
+            <Text category="p1">{data.description}</Text>
+          </View>
           <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
             <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
               <Button style={{ flex: 1 }} appearance="outline" size="medium">
