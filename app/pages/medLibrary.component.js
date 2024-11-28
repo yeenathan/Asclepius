@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView, TouchableOpacity } from "react-native";
 import {
   Button,
@@ -23,6 +23,8 @@ import { styles } from "@/app/stylesheet";
 import { LIBRARY_DATA } from "@/app/data/medData";
 import { ThemeContext } from "../theme-context";
 import { default as theme } from "@/custom-theme.json";
+import { useFocusEffect } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   return (
@@ -214,7 +216,46 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
 
 export const MedFolder = ({ navigation }) => {
   // med folder component
-  const [data, setData] = useState(LIBRARY_DATA);
+  async function getInfo(DIN) {
+    async function getID(DIN) {
+      const _resp = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+      return {id: _resp[0].drug_code, name: _resp[0].brand_name};
+    }
+    const _drugProduct = await getID(DIN);
+    const _ingredientInfo = await fetch(`https://health-products.canada.ca/api/drug/activeingredient/?id=${_drugProduct.id}`).then(resp => resp.json());
+    return {ingredient: _ingredientInfo[0].ingredient_name, name: _drugProduct.name};
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      async function loadData() {
+        const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+        let meds = []
+        if (keys) {
+          for (let key of keys) {
+            let med = JSON.parse(await AsyncStorage.getItem(key));
+            const _apiInfo = await getInfo(med.DIN);
+            meds.push({
+              name: _apiInfo.name,
+              icon: med.icon,
+              ingredient: _apiInfo.ingredient,
+              description: "description",
+              sideEffects: ["side effect 1", "side effect 2"],
+              reminder: ["reminder"],
+              directions: ["step 1", "step 2"],
+              strength: med.strength,
+              type: "med type",
+              quantity: "quantity",
+              refills: "refills"
+            });
+          }
+        }
+        setData(meds);
+      }
+      loadData();
+    }, [])
+  )
+  const [data, setData] = useState(null);
   const [selectedTab, setSelectedTab] = useState(1);
   const colorTheme = theme[useContext(ThemeContext).theme];
 
@@ -291,7 +332,6 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
-  
   return (
     <View style={{backgroundColor: colorTheme["medfolder-background2"], flex: 1}}>
       <TabSwitch />
@@ -302,7 +342,7 @@ export const MedFolder = ({ navigation }) => {
             gap: 16,
           }}
         >
-          {data.filter((med)=> {
+          {data && data.filter((med)=> {
             if(selectedTab === 1) {
               return !med.isArchive
             } else {

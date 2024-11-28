@@ -104,7 +104,8 @@ export function FormScreen({navigation, route}) {
             }
             navigation.navigate("Edit Icon", {drug: {
               ...drug,
-              dates: getDates(drug.dates[0], drug.frequency, drug.duration)
+              dates: getDates(drug.dates[0], drug.frequency, drug.duration),
+              DIN: "02245524"
             }});
           }}>Continue</Button>
         </View>
