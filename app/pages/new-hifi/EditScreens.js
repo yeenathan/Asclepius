@@ -8,6 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { styles } from "@/app/stylesheet";
 import { default as theme } from "@/custom-theme.json";
 import { ThemeContext } from "@/app/theme-context";
+import { OpenAIGetInfo } from "@/app/components/OpenAIGetInfo";
 
 import {
   CAPSULE_ICON,
@@ -39,6 +40,7 @@ export function EditIcon ({navigation, route}) {
   };
   const colorTheme = theme[useContext(ThemeContext).theme];
   const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
   const drug = route.params.drug;
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -71,11 +73,14 @@ export function EditIcon ({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 2, width: "100%"}}>
-          <Button size="large" onPress={() => {
-            const _drug = {...drug, icon: icons[index]};
-            storeData(drug.name, _drug);
+          <Button size="large" onPress={async () => {
+            setLoading(true);
+            const _info = await OpenAIGetInfo(drug);
+            const _drug = {...drug, icon: icons[index], description: _info.description, sideEffects: _info.sideEffects};
+            storeData(drug.DIN, _drug);
+            setLoading(false);
             navigation.popTo("Home Stack", {screen: "Home", params: {drug: _drug, justAdded: true}});
-          }}>Confirm</Button>
+          }}>{loading?"Loading...":"Confirm"}</Button>
         </View>
       </Layout>
     </SafeAreaView>

@@ -131,14 +131,13 @@ export function FormScreen({navigation, route}) {
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {
-            if (!(drug.dates && drug.name && drug.DIN)) {
+            if (!(drug.dates && drug.DIN)) {
               setShowAlert(true);
               return;
             }
             navigation.navigate("Edit Icon", {drug: {
               ...drug,
               dates: getDates(drug.dates[0], drug.frequency, drug.duration),
-              DIN: drug.DIN
             }});
           }}>Continue</Button>
         </View>
