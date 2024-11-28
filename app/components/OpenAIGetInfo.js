@@ -12,7 +12,7 @@ export const OpenAIGetInfo = async (drugData) => {
         messages: [
           {
             role: 'system',
-            content: 'You are a tool that that returns general information about given active ingredients given the ingredient name and other relevant information.',
+            content: 'You are a tool that that returns general information about given active ingredients given the ingredient name and other relevant information. provide your answers in layman\'s terms',
           },
           {
             role: 'user',
