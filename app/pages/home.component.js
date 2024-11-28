@@ -107,7 +107,7 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
           </View>
           <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
             <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
-              <Button style={{ flex: 1 }} appearance="outline" size="medium">
+              <Button style={{ flex: 1 }} appearance="outline" size="medium" disabled={isTaken()}>
                 Skip
               </Button>
               <Button style={{ flex: 1 }} status="primary" size="medium" disabled={isTaken()} onPress={() => setReschedule(true)}>
@@ -146,7 +146,11 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
           </View>
           <View style={{ flex: 6 }}>
             <Text category="p1" style={{color: colorTheme["generic-text"]}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
-            <Text category="c1" style={{color: colorTheme["generic-text"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
+            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+              <Icon name={"clock-outline"} style={{width: 16, height: 16}}/>
+              <Text category="c1" style={{color: colorTheme["generic-text"]}}>{formatTime(data.time)}</Text>
+            </View>
+            {isTaken() && <Text category="c1" style={{color: colorTheme["generic-text"]}}>Taken at {formatTime(data.dates[getIndex()].timeTaken)}</Text>}
           </View>
           <View style={{flex: 1}}>
             <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>

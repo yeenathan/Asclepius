@@ -60,7 +60,7 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
         <Image source={nextMed.icon} resizeMode="contain" style={{maxHeight: 80, maxWidth: 80}}/>
         <View>
           <Text category="h2" style={{color: "#ffffff"}}>{`${nextMed.nickname || nextMed.name}`}</Text>
-          <Text category="p1" style={{color: "#ffffff"}}>{`${nextMed.dose}`}</Text>
+          <Text category="p1" style={{color: "#ffffff"}}>{`${nextMed.dose || ""}`}</Text>
           <Text category="h1" style={{color: "#BDD6D2", fontFamily:"Poppins-Semibold"}}>{formatTime(nextMed.time)}</Text>
         </View>
       </View>
