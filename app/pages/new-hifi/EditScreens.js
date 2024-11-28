@@ -263,6 +263,27 @@ export function EditNickname({navigation, route}) {
   )
 }
 
+export function EditDIN({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
+  const [DIN, setDIN] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit DIN"}/>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Text category="p1" style={{marginBottom: 8}}>Drug Identification Number</Text>
+          <Input style={{width: "100%"}} placeholder="Name" value={DIN} onChangeText={(e) => setDIN(e)}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, DIN: DIN}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
 export function EditName({navigation, route}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   const [name, setName] = useState("");

@@ -216,16 +216,6 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
 
 export const MedFolder = ({ navigation }) => {
   // med folder component
-  async function getInfo(DIN) {
-    async function getID(DIN) {
-      const _resp = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
-      return {id: _resp[0].drug_code, name: _resp[0].brand_name};
-    }
-    const _drugProduct = await getID(DIN);
-    const _ingredientInfo = await fetch(`https://health-products.canada.ca/api/drug/activeingredient/?id=${_drugProduct.id}`).then(resp => resp.json());
-    return {ingredient: _ingredientInfo[0].ingredient_name, name: _drugProduct.name};
-  }
-
   useFocusEffect(
     useCallback(() => {
       async function loadData() {
@@ -234,11 +224,11 @@ export const MedFolder = ({ navigation }) => {
         if (keys) {
           for (let key of keys) {
             let med = JSON.parse(await AsyncStorage.getItem(key));
-            const _apiInfo = await getInfo(med.DIN);
             meds.push({
-              name: _apiInfo.name,
+              name: med.name,
+              nickname: med.nickname,
               icon: med.icon,
-              ingredient: _apiInfo.ingredient,
+              ingredient: med.ingredient,
               description: "description",
               sideEffects: ["side effect 1", "side effect 2"],
               reminder: ["reminder"],
