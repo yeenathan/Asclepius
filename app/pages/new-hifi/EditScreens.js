@@ -8,6 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { styles } from "@/app/stylesheet";
 import { default as theme } from "@/custom-theme.json";
 import { ThemeContext } from "@/app/theme-context";
+import { OpenAIGetInfo } from "@/app/components/OpenAIGetInfo";
 
 import {
   CAPSULE_ICON,
@@ -39,6 +40,7 @@ export function EditIcon ({navigation, route}) {
   };
   const colorTheme = theme[useContext(ThemeContext).theme];
   const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
   const drug = route.params.drug;
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -71,11 +73,14 @@ export function EditIcon ({navigation, route}) {
           </View>
         </View>
         <View style={{flex: 2, width: "100%"}}>
-          <Button size="large" onPress={() => {
-            const _drug = {...drug, icon: icons[index]};
-            storeData(drug.name, _drug);
+          <Button size="large" onPress={async () => {
+            setLoading(true);
+            const _info = await OpenAIGetInfo(drug);
+            const _drug = {...drug, icon: icons[index], description: _info.description, sideEffects: _info.sideEffects};
+            storeData(drug.DIN, _drug);
+            setLoading(false);
             navigation.popTo("Home Stack", {screen: "Home", params: {drug: _drug, justAdded: true}});
-          }}>Confirm</Button>
+          }}>{loading?"Loading...":"Confirm"}</Button>
         </View>
       </Layout>
     </SafeAreaView>
@@ -85,15 +90,15 @@ export function EditIcon ({navigation, route}) {
 export function EditStrength({navigation, route}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   const drug = route.params.drug;
-  const [strength, setStrength] = useState();
-  const [unit, setUnit] = useState("mL")
+  const [strength, setStrength] = useState(0);
+  const [unit, setUnit] = useState("mg")
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Dose"}/>
       <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
-          <Input style={{flex: 1}} value={strength} onChange={(e) => setStrength(e.target.value)}/>
-          <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mL", "mg", "cc", "mol"]}/>
+          <Input style={{flex: 1}} value={strength} onChangeText={(e) => setStrength(e)}/>
+          <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mg", "mL", "cc", "mol"]}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, strength: `${strength}${unit}`}})}>Confirm</Button>
@@ -257,6 +262,51 @@ export function EditNickname({navigation, route}) {
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, nickname: nick}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditDIN({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
+  const [DIN, setDIN] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit DIN"}/>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Text category="p1" style={{marginBottom: 8}}>Drug Identification Number</Text>
+          <Input style={{width: "100%"}} placeholder="Name" value={DIN} onChangeText={(e) => setDIN(e)}/>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, DIN: DIN}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditQuantity({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
+  const [quantity, setQuantity] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Quantity"}/>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Text category="p1" style={{marginBottom: 8}}>Quantity</Text>
+          <View style={{flexDirection: "row", width: "100%", alignItems: "center", justifyContent: "space-between"}}>
+            <Input style={{width: "30%"}} placeholder="" value={quantity} onChangeText={(e) => setQuantity(e)}/>
+            <Text category="p1" style={{}}>units</Text>
+          </View>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, quantity: quantity}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>

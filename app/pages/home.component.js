@@ -359,8 +359,8 @@ export const HomeScreen = ({ route, navigation }) => {
           <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["good-morning"], fontFamily:"Poppins-SemiBold" }}>
             Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
           </Text>
-          <Pressable onPress={themeContext.toggleTheme} >
-            <Icon style={{ width: 40, color: colorTheme["icon-color"] }} name="settings-2-outline"></Icon>
+          <Pressable onPress={() => navigation.navigate("Med Stack", {screen: "Settings"})} >
+            <Icon style={{ width: 40}} fill={colorTheme["icon-color"]} name="settings-2-outline"></Icon>
           </Pressable>
         </View>
         <View style={{ width: "100%" }}>

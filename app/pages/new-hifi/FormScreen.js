@@ -1,4 +1,4 @@
-import { Layout, Text, Button, Modal, CheckBox } from "@ui-kitten/components";
+import { Layout, Text, Button, Modal, CheckBox, Icon } from "@ui-kitten/components";
 import { Pressable, SafeAreaView, View, ScrollView } from "react-native";
 import { Header } from '@/app/components/header';
 
@@ -6,14 +6,20 @@ import { styles } from "@/app/stylesheet";
 import { default as theme } from "@/custom-theme.json";
 import { ThemeContext } from "@/app/theme-context";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 
-function FormField({navigation, destination, label, placeholder, value, drugObj=null, required=false}) {
+function FormField({navigation, destination, label, placeholder, value, drugObj=null, required=false, pressable=true}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   return(
     <View style={{flexDirection: "row", width: "100%", backgroundColor: colorTheme["form-field"], justifyContent: "space-between", paddingHorizontal: 16, paddingVertical: 16, borderRadius: 12, borderWidth: .5, borderColor: colorTheme["text-gray"]}}>
       <Text category="p1" style={{color: required? colorTheme["persian-green"] : colorTheme["text-gray"]}}>{label}</Text>
-      <Text category="p1" style={{color: value? colorTheme["text-basic-color"] : colorTheme["text-gray"]}} onPress={() => navigation.navigate(destination, {drug: drugObj})}>{value || placeholder}</Text>
+      <Pressable pointerEvents={pressable?"auto":"none"} onPress={pressable? () => navigation.navigate(destination, {drug: drugObj}):null}>
+        <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+          <Text category="p1" style={{color: value? colorTheme["text-basic-color"] : colorTheme["text-gray"]}}>{value || placeholder}</Text>
+          {pressable && <Icon name="chevron-right-outline" style={{width: 16, height: 16}}/>}
+        </View>
+      </Pressable>
     </View>
   )
 }
@@ -60,10 +66,50 @@ function parseDate(date) {
 }
 
 export function FormScreen({navigation, route}) {
+  async function getInfo(DIN) {
+    async function getID(DIN) {
+      const _resp = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
+      if (!_resp[0]) return null;
+      return {id: _resp[0].drug_code, name: _resp[0].brand_name};
+    }
+    const _drugProduct = await getID(DIN);
+    if (!_drugProduct) return null;
+    const _ingredientInfo = await fetch(`https://health-products.canada.ca/api/drug/activeingredient/?id=${_drugProduct.id}`).then(resp => resp.json());
+    return {ingredient: _ingredientInfo[0].ingredient_name, name: _drugProduct.name};
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      async function loadData(DIN) {
+        const _apiInfo = await getInfo(DIN);
+        if (!_apiInfo) {
+          setDrug({
+            ..._drug,
+            DIN: DIN,
+            name: "Invalid DIN"
+          })
+          setValidDIN(false);
+        }
+        else {
+          setDrug({
+            ..._drug,
+            DIN: DIN,
+            name: _apiInfo.name,
+            ingredient: _apiInfo.ingredient
+          })
+          setValidDIN(true);
+        }
+      }
+      loadData(_drug.DIN);
+    }, [route])
+  )
+  
   const colorTheme = theme[useContext(ThemeContext).theme];
   const [checkbox, setCheckbox] = useState(false);
-  const drug = route.params.drug;
+  const _drug = route.params.drug;
+  const [drug, setDrug] = useState(_drug);
   const [showAlert, setShowAlert] = useState(false);
+  const [validDIN, setValidDIN] = useState(false);
   return(
     <SafeAreaView style={{flex: 1}}>
       <Modal
@@ -81,7 +127,8 @@ export function FormScreen({navigation, route}) {
           <ScrollView>
             <Text category="h2" style={{marginBottom: 16}}>General Information</Text>
             <View style={{width: "100%", gap: 8}}>
-              <FormField navigation={navigation} destination={"Edit Name"} label="*Medication Name:" placeholder="Edit Name" value={drug.name} drugObj={drug} required={true}/>
+              <FormField navigation={navigation} destination={"Edit DIN"} label="*DIN:" placeholder="Edit DIN" value={drug.DIN} drugObj={drug} required={true}/>
+              <FormField navigation={navigation} destination={"Edit Name"} label="Medication Name:" placeholder="Invalid DIN" value={drug.name} drugObj={drug} pressable={false}/>
               <FormField navigation={navigation} destination={"Edit Nickname"} label="Nickname:" placeholder="Add Nickname" value={drug.nickname} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Dose"} label="Dose:" placeholder="Edit Dose" value={drug.dose} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Strength"} label="Drug Strength:" placeholder="Edit Drug Strength" value={drug.strength} drugObj={drug}/>
@@ -91,20 +138,20 @@ export function FormScreen({navigation, route}) {
               <FormField navigation={navigation} destination={"Edit Schedule"} label="*Start Date:" placeholder="Edit Schedule" value={drug.dates?`${parseDate(drug.dates[0])}, ${getTime(drug.time)}`:null} drugObj={drug} required={true}/>
               <FormField navigation={navigation} destination={"Edit Frequency"} label="Take every:" placeholder="Edit Frequency" value={drug.frequency !== 0?`Every ${drug.frequency} day(s)`:"Just once"} drugObj={drug}/>
               <FormField navigation={navigation} destination={"Edit Duration"} label="Treatment duration:" placeholder="Edit Duration" value={drug.duration !==0 ?`${drug.duration} days`:"Just once"} drugObj={drug}/>
-              <FormField navigation={navigation} destination={""} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
+              <FormField navigation={navigation} destination={"Edit Quantity"} label={"Current Quantity"} placeholder="Edit Quantity" value={drug.quantity} drugObj={drug}/>
               <CheckBox checked={checkbox} onChange={() => setCheckbox(!checkbox)} style={{marginTop: 16, color: colorTheme["generic-text"]}}>Alert when low on refills</CheckBox>
             </View>
           </ScrollView>
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" onPress={() => {
-            if (!(drug.dates && drug.name)) {
+            if (!(drug.dates && validDIN)) {
               setShowAlert(true);
               return;
             }
             navigation.navigate("Edit Icon", {drug: {
               ...drug,
-              dates: getDates(drug.dates[0], drug.frequency, drug.duration)
+              dates: getDates(drug.dates[0], drug.frequency, drug.duration),
             }});
           }}>Continue</Button>
         </View>

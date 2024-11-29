@@ -21,9 +21,10 @@
     "side-effect" : "#007972",
     "side-text" : "#000000",
     "direction" : "#8FBAB3",
-    "archive" : "#FFB057",
+    "archive" : "#FFD08B",
     "archive-border" : "#ffffff",
     "background": "#FAF8FE",
+    "card-text": "#4D4D4D",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",
@@ -95,6 +96,7 @@
     "medfolder-background2": "#ffffff"
   },
   "dark": {
+    "card-text": "#ffffff",
     "dark-green": "#007972",
     "text-off-black": "#4D4D4D",
     "text-gray": "#A0A0A0",

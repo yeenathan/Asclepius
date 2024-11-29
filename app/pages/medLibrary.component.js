@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView, TouchableOpacity } from "react-native";
 import {
   Button,
@@ -23,6 +23,8 @@ import { styles } from "@/app/stylesheet";
 import { LIBRARY_DATA } from "@/app/data/medData";
 import { ThemeContext } from "../theme-context";
 import { default as theme } from "@/custom-theme.json";
+import { useFocusEffect } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   return (
@@ -214,7 +216,38 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
 
 export const MedFolder = ({ navigation }) => {
   // med folder component
-  const [data, setData] = useState(LIBRARY_DATA);
+  useFocusEffect(
+    useCallback(() => {
+      async function loadData() {
+        const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+        let meds = []
+        if (keys) {
+          for (let key of keys) {
+            let med = JSON.parse(await AsyncStorage.getItem(key));
+            meds.push({
+              name: med.name,
+              nickname: med.nickname,
+              icon: med.icon,
+              ingredient: med.ingredient,
+              DIN: med.DIN,
+              description: med.description,
+              sideEffects: med.sideEffects,
+              duration: med.duration,
+              reminder: ["reminder"],
+              directions: ["step 1", "step 2"],
+              strength: med.strength,
+              type: "med type",
+              quantity: "quantity",
+              refills: "refills"
+            });
+          }
+        }
+        setData(meds);
+      }
+      loadData();
+    }, [])
+  )
+  const [data, setData] = useState(null);
   const [selectedTab, setSelectedTab] = useState(1);
   const colorTheme = theme[useContext(ThemeContext).theme];
 
@@ -291,7 +324,6 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
-  
   return (
     <View style={{backgroundColor: colorTheme["medfolder-background2"], flex: 1}}>
       <TabSwitch />
@@ -302,7 +334,7 @@ export const MedFolder = ({ navigation }) => {
             gap: 16,
           }}
         >
-          {data.filter((med)=> {
+          {data && data.filter((med)=> {
             if(selectedTab === 1) {
               return !med.isArchive
             } else {
@@ -315,7 +347,7 @@ export const MedFolder = ({ navigation }) => {
               index={index}
               icon={med.icon}
               onPress={() =>
-                navigation.navigate("Med Detail", {
+                navigation.navigate('Info', {
                   medication: med,
                   handleDelete,
                   handleArchive,
@@ -460,7 +492,7 @@ export const InfoScreen = ({ navigation, route }) => {
         </View>
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-off-black"]}}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["card-text"], marginBottom:7}}>
           {medication.name}, {medication.refills} units
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-gray"]}}>
@@ -507,7 +539,7 @@ export const InfoScreen = ({ navigation, route }) => {
               handleDelete(medication);
             } else {
               handleArchive(medication);
-              navigation.navigate(MedFolder);
+              navigation.navigate("Med Folder");
             }
             setShowArchiveModal(false);
           }}
@@ -524,7 +556,7 @@ export const InfoScreen = ({ navigation, route }) => {
         >
             <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 115}}>
             <Text style={{fontSize: 22, fontFamily: "Poppins-SemiBold"}}>
-              Insulin <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>{medication.name}</Text>
+              Madication <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>Info</Text>
               </Text>
             </View>
             <View style={{ marginTop: 20,}}>
@@ -636,27 +668,14 @@ export const InfoScreen = ({ navigation, route }) => {
                     Side Effects
                   </Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
+
                     <View style={{ flexDirection: "column" }}>
-                      {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                      {medication.sideEffects.map((effect, index) => (
                       <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 14, color:"#A0A0A0" }}>
                         • {effect}
                       </Text>
                       ))}
                     </View>
-
-                  </ViewMoreText>
-
-                  <Text 
-                    onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline', color: colorTheme["persian-green"]}}
-                    category="s1"
-                  >
-                    View more
-                  </Text>
 
                 <Modal
                   visible={visible}
@@ -717,13 +736,8 @@ export const InfoScreen = ({ navigation, route }) => {
                   >
                     Directions for Use
                   </Text>
+                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.description}</Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
-                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.directions}</Text>
-                  </ViewMoreText>
 
                 </View>
                   <Modal
@@ -743,7 +757,7 @@ export const InfoScreen = ({ navigation, route }) => {
                       <Text style={{ marginBottom: 10, fontWeight: "bold", color: colorTheme["direction"] }}>
                         Directions for Use
                       </Text>
-                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.directions}</Text>
+                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.description}</Text>
                       <Button
                         style={{
                           marginTop: 20,
@@ -776,9 +790,9 @@ export const InfoScreen = ({ navigation, route }) => {
                   }}
                 >
                   <Text style={{ color:colorTheme["side-effect"] }}>
-                    Prescription Details
+                    Active Ingredient
                   </Text>
-                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26 }}>{medication.quantity}</Text>
+                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
                 </View>
                 
                 </View>
@@ -831,6 +845,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View> *
               </View>
             </View>
+            <Text style={{ color: colorTheme["text-gray"], fontSize: 10, marginTop: 15, alignItems: "center"}}>*This app is not a substitute for professional medical advice; always consult your healthcare provider for guidance.</Text>
             <Button
               size="giant"
               onPress={onPress}
@@ -838,7 +853,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 backgroundColor: colorTheme["archive"],
                 borderColor: colorTheme["archive-border"],
                 borderRadius: 20,
-                marginTop: 30
+                marginTop: 15
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
