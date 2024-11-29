@@ -362,93 +362,6 @@ export const MedFolder = ({ navigation }) => {
   );
 };
 
-export const MedDescription = ({ navigation, route }) => {
-  const medication = route.params.medication;
-  const colorTheme = theme[useContext(ThemeContext).theme];
-  const BackAction = () => (
-    <View style={{height: 80}}>
-    <TopNavigationAction
-      onPress={() => navigation.goBack()}
-      icon={(props) => <Icon {...props} name="arrow-ios-back-outline" fill="#ffffff" style={{width: 45, height: 45}} />}
-      style={{
-        width: "100%",
-        Color: colorTheme["white"],
-        paddingVertical: 40,
-        paddingHorizontal: 8,
-      }}
-    />
-    </View>
-  );
-
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colorTheme['green'] }}>
-      <BackAction />
-      <ScrollView contentContainerStyle={{ alignItems: 'center', padding: 20 }}>
-        <Text style={{ fontSize: 26, fontFamily: 'Poppins-SemiBold', color: colorTheme['silver-white'] }}>
-          {medication.name}, {medication.refills}
-        </Text>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: 'PublicSans-Regular',
-            color: 'white',
-            marginTop: 20,
-            textAlign: 'center',
-          }}
-        >
-          {medication.directions}
-        </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30, marginTop: 30 }}>
-          <Image source={medication.icon} style={{ width: 180, height: 180 }} />
-        </View>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: 'PublicSans-Bold',
-            color: 'white',
-            marginTop: 5,
-            marginBottom: 8,
-          }}
-        >
-          Description
-        </Text>
-        <Text
-          style={{
-            fontSize: 14,
-            fontFamily: 'PublicSans-Regular',
-            color: 'white',
-            marginBottom: 20,
-            textAlign: 'center',
-            width: 300,
-          }}
-        >
-          {medication.description}
-        </Text>
-        <Button
-          style={{
-            backgroundColor: colorTheme['green'],
-            borderColor: colorTheme['white'],
-            borderRadius: 20,
-            width: '80%',
-            borderWidth: 3,
-          }}
-          onPress={() =>
-            navigation.navigate('Info', {
-              medication: medication,
-              handleArchive: route.params.handleArchive,
-              handleDelete: route.params.handleDelete,
-            })
-          }
-        >
-          <Text style={{ color: 'green' }}>View & Edit Details</Text>
-        </Button>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-
-
 export const InfoScreen = ({ navigation, route }) => {
   const [showArchiveModal, setShowArchiveModal] = useState(false);
   // info screen
@@ -544,15 +457,6 @@ export const InfoScreen = ({ navigation, route }) => {
           }}
           description={description}
         />
-        <ScrollView style={{
-            width: "100%",
-            flexDirection: "column",
-            gap: 12,
-            marginBottom: 12, 
-            flex: 1,
-          }}
-          contentContainerStyle={{justifyContent: "flex-start"}}
-        >
             <Card style={{ backgroundColor: colorTheme["card-color"], borderRadius: 20, padding: 8}} header={medHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6, }}>
                 <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{medication.duration?`${medication.duration} days` : "Just once"}</Text>
@@ -560,8 +464,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{`Every ${medication.frequency} days` || "Just once"}</Text>      
               </View>
             </Card>
-            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20 }}>
-
+            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%" }}>
               <View
                 style={{
                   flexDirection: "column",
@@ -573,7 +476,6 @@ export const InfoScreen = ({ navigation, route }) => {
                   shadowOpacity: 0.25, 
                   shadowRadius: 3.84, 
                   elevation: 5,
-                  width: "49%",
                   flex: 1
                 }}
               >
@@ -587,8 +489,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text category= "p1" style={{ color: "#000" }}>{medication.description}</Text>
                 </View>
               </View>
-
-              <View style={{ gap: 8 }}>
+              <View style={{ gap: 8, width: "50%" }}>
                 <View
                   style={{
                     flexDirection: "column",
@@ -600,7 +501,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     shadowOpacity: 0.25, 
                     shadowRadius: 3.84, 
                     elevation: 5,
-                    width: "100%",
+                    flex: 1
                   }}
                 >
                   <View style={{ flexDirection: "column" }}>
@@ -645,7 +546,6 @@ export const InfoScreen = ({ navigation, route }) => {
                   <Text style={{ color: "#8FBAB3" }}>
                     Active Ingredient
                   </Text>
-
                   <Text style={{ color: "#000", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
                 </View>
               </View>
@@ -696,7 +596,7 @@ export const InfoScreen = ({ navigation, route }) => {
             </View> 
           </View>
           
-            <Button
+            {/* <Button
               size="giant"
               onPress={onPress}
               style={{
@@ -706,8 +606,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 marginTop: 15
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
-            />
-        </ScrollView>
+            /> */}
       </Layout>
     </SafeAreaView>
   );
