@@ -1,4 +1,4 @@
-import { Layout, Text, Button, Modal, CheckBox } from "@ui-kitten/components";
+import { Layout, Text, Button, Modal, CheckBox, Icon } from "@ui-kitten/components";
 import { Pressable, SafeAreaView, View, ScrollView } from "react-native";
 import { Header } from '@/app/components/header';
 
@@ -14,7 +14,12 @@ function FormField({navigation, destination, label, placeholder, value, drugObj=
   return(
     <View style={{flexDirection: "row", width: "100%", backgroundColor: colorTheme["form-field"], justifyContent: "space-between", paddingHorizontal: 16, paddingVertical: 16, borderRadius: 12, borderWidth: .5, borderColor: colorTheme["text-gray"]}}>
       <Text category="p1" style={{color: required? colorTheme["persian-green"] : colorTheme["text-gray"]}}>{label}</Text>
-      <Text category="p1" style={{color: value? colorTheme["text-basic-color"] : colorTheme["text-gray"]}} onPress={pressable? () => navigation.navigate(destination, {drug: drugObj}):null}>{value || placeholder}</Text>
+      <Pressable pointerEvents={pressable?"auto":"none"} onPress={pressable? () => navigation.navigate(destination, {drug: drugObj}):null}>
+        <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+          <Text category="p1" style={{color: value? colorTheme["text-basic-color"] : colorTheme["text-gray"]}}>{value || placeholder}</Text>
+          {pressable && <Icon name="chevron-right-outline" style={{width: 16, height: 16}}/>}
+        </View>
+      </Pressable>
     </View>
   )
 }
