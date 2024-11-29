@@ -346,7 +346,7 @@ export const MedFolder = ({ navigation }) => {
               index={index}
               icon={med.icon}
               onPress={() =>
-                navigation.navigate("Med Detail", {
+                navigation.navigate('Info', {
                   medication: med,
                   handleDelete,
                   handleArchive,
@@ -491,7 +491,7 @@ export const InfoScreen = ({ navigation, route }) => {
         </View>
       </View>
       <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-off-black"]}}>
+        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["card-text"], marginBottom:7}}>
           {medication.name}, {medication.refills} units
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-gray"]}}>
@@ -538,7 +538,7 @@ export const InfoScreen = ({ navigation, route }) => {
               handleDelete(medication);
             } else {
               handleArchive(medication);
-              navigation.navigate(MedFolder);
+              navigation.navigate("Med Folder");
             }
             setShowArchiveModal(false);
           }}
