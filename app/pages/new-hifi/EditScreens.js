@@ -91,7 +91,7 @@ export function EditStrength({navigation, route}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   const drug = route.params.drug;
   const [strength, setStrength] = useState(0);
-  const [unit, setUnit] = useState("mL")
+  const [unit, setUnit] = useState("mg")
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Dose"}/>
