@@ -635,92 +635,37 @@ export const InfoScreen = ({ navigation, route }) => {
               </View> */}
               
             
-            <View style={{ flexDirection: "row", gap: 6, marginTop: 20 }}>
-              
+            <View style={{ flexDirection: "column", gap: 6, marginTop: 20 }}>
+
               <View
                 style={{
-                  // backgroundColor: "#fff",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 6,
+                  backgroundColor: '#fff',
                   borderRadius: 20,
-                  gap: 16,
-                  flexDirection: "row",
-                  width: "100%",
-                  justifyContent: "space-between"
+                  padding: 20,
+                  shadowColor: "#000", 
+                  shadowOffset: { width: 4, height: 4 }, 
+                  shadowOpacity: 0.25, 
+                  shadowRadius: 3.84, 
+                  elevation: 5,
+                  backgroundColor: "#007972"
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "column",
-                    backgroundColor: colorTheme["card-color"],
-                    padding: 20,
-                    borderRadius: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
-                    elevation: 5,
-                    width: "35%",
-                  }}
-                >
+                <Text style={{ color: colorTheme["direction"] }}>
+                  Active Ingredient
+                </Text>
 
-                  <Text
-                    style={{ color: "#8FBAB3" , fontSize: 28, fontFamily: "Poppins-SemiBold", marginBottom: 10 }}
-                  >
-                    Side Effects
-                  </Text>
-
-
-                    <View style={{ flexDirection: "column" }}>
-                      {medication.sideEffects.map((effect, index) => (
-                      <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 14, color:"#A0A0A0" }}>
-                        • {effect}
-                      </Text>
-                      ))}
-                    </View>
-
-                <Modal
-                  visible={visible}
-                  backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-                  onBackdropPress={() => setVisible(false)} 
-                >
-
-                <Card
-                  disabled={true}
-                  style={{
-                  width: 300,
-                  borderRadius: 20}}
-                >
-                  <Text style={{ marginBottom: 10, fontWeight: "bold"}}>
-                    Side Effects
-                  </Text>
-
-
-                  {medication.sideEffects.map((effect, index) => (
-                    <Text key={index} style={{ marginBottom: 5 }}>
-                      • {effect}
-                    </Text>
-                  ))}
-
-
-                  <Button
-                    style={{
-                      marginTop: 20,
-                      backgroundColor: colorTheme["persian-green"],
-                      borderColor: colorTheme["persian-green"],
-                    }}
-                    onPress={() => setVisible(false)}
-                  >
-                    Close
-                  </Button> 
-                </Card>
-
-                </Modal>
+                <Text style={{ color: "#fff", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
               </View>
 
-              <View style={{ flexDirection: "column", width: "60%", gap: 20, paddingRight: 9 }}>    
+              <View style={{ flexDirection: "column", width: "100%", gap: 20 }}>    
                 <View
                   style={{
                     flexDirection: "column",
-                    backgroundColor: "#007972",
+                    backgroundColor: "#fff",
                     padding: 20,
                     borderRadius: 20,
                     shadowColor: "#000", 
@@ -730,72 +675,45 @@ export const InfoScreen = ({ navigation, route }) => {
                     elevation: 5,
                   }}
                 >
-                  <Text
-                    style={{ color: colorTheme["direction"], fontWeight: "bold", marginBottom:7, fontSize: 20 }}
-                    onPress={() => setDirectionsVisible(true)}
-                  >
-                    Directions for Use
-                  </Text>
-                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.description}</Text>
-
-
-                </View>
-                  <Modal
-                    visible={directionsVisible}
-                    backdropStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-                    onBackdropPress={() => setDirectionsVisible(false)}
-                  >
-                    <Card 
-                      disabled={true}
-                      style={{
-                        width: 300,
-                        borderRadius: 20,
-                        backgroundColor: "#007972",
-                        borderWidth: 0
-                      }}
-                    >
-                      <Text style={{ marginBottom: 10, fontWeight: "bold", color: colorTheme["direction"] }}>
-                        Directions for Use
-                      </Text>
-                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.description}</Text>
-                      <Button
-                        style={{
-                          marginTop: 20,
-                          backgroundColor: colorTheme["persian-green"],
-                          borderColor: colorTheme["persian-green"],
-                          }}
-                          onPress={() => setDirectionsVisible(false)}
-                      >
-                        Close
-                      </Button>
-                    </Card>
-
-                  </Modal>
-
-                <View
-                  style={{
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 6,
-                    backgroundColor: '#fff',
-                    borderRadius: 20,
-                    padding: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
-                    elevation: 5,
-                    backgroundColor:colorTheme["card-color"]
-                  }}
+                <Text
+                  style={{ color: colorTheme["direction"], fontWeight: "bold", marginBottom:7, fontSize: 20 }}
+                  onPress={() => setDirectionsVisible(true)}
                 >
-                  <Text style={{ color:colorTheme["side-effect"] }}>
-                    Active Ingredient
+                  Description
+                </Text>
+                <Text style={{ marginBottom: 10, color: "#A0A0A0", fontSize: 18 }}>{medication.description}</Text>
+              </View>
+
+
+              <View
+                style={{
+                  flexDirection: "column",
+                  backgroundColor: colorTheme["card-color"],
+                  padding: 20,
+                  borderRadius: 20,
+                  shadowColor: "#000", 
+                  shadowOffset: { width: 4, height: 4 }, 
+                  shadowOpacity: 0.25, 
+                  shadowRadius: 3.84, 
+                  elevation: 5,
+                  width: "100%",
+                }}
+              >
+                <Text
+                  style={{ color: "#8FBAB3" , fontSize: 28, fontFamily: "Poppins-SemiBold", marginBottom: 10 }}
+                >
+                  Side Effects
+                </Text>
+                <View style={{ flexDirection: "column" }}>
+                  {medication.sideEffects.map((effect, index) => (
+                  <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 18, color:"#A0A0A0" }}>
+                    • {effect}
                   </Text>
-                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
+                  ))}
                 </View>
+              </View>
                 
-                </View>
+
 
                  <View
                   style={{
