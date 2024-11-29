@@ -650,21 +650,21 @@ export const InfoScreen = ({ navigation, route }) => {
                   shadowOpacity: 0.25, 
                   shadowRadius: 3.84, 
                   elevation: 5,
-                  backgroundColor:colorTheme["card-color"]
+                  backgroundColor: "#007972"
                 }}
               >
-                <Text style={{ color:colorTheme["side-effect"] }}>
+                <Text style={{ color: colorTheme["direction"] }}>
                   Active Ingredient
                 </Text>
 
-                <Text style={{ color: colorTheme["persian-green"], fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
+                <Text style={{ color: "#fff", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
               </View>
 
               <View style={{ flexDirection: "column", width: "100%", gap: 20 }}>    
                 <View
                   style={{
                     flexDirection: "column",
-                    backgroundColor: "#007972",
+                    backgroundColor: "#fff",
                     padding: 20,
                     borderRadius: 20,
                     shadowColor: "#000", 
@@ -680,7 +680,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 >
                   Description
                 </Text>
-                <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 18 }}>{medication.description}</Text>
+                <Text style={{ marginBottom: 10, color: "#A0A0A0", fontSize: 18 }}>{medication.description}</Text>
               </View>
 
 
