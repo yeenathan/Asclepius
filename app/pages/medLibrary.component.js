@@ -315,7 +315,7 @@ export const MedFolder = ({ navigation }) => {
               index={index}
               icon={med.icon}
               onPress={() =>
-                navigation.navigate("Med Detail", {
+                navigation.navigate('Info', {
                   medication: med,
                   handleDelete,
                   handleArchive,
@@ -507,7 +507,7 @@ export const InfoScreen = ({ navigation, route }) => {
               handleDelete(medication);
             } else {
               handleArchive(medication);
-              navigation.navigate(MedFolder);
+              navigation.navigate("Med Folder");
             }
             setShowArchiveModal(false);
           }}
