@@ -8,6 +8,9 @@ import { useFonts } from 'expo-font';
 import { Image, SafeAreaView, Text } from 'react-native';
 import { MainNavigator } from "@/app/navigators/mainnavigator.component"
 import { ThemeContext } from './theme-context'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 export default () => {
   const [loaded, error] = useFonts({

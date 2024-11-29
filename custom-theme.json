@@ -192,6 +192,7 @@
     "text-alternate-color": "#fff",
     "text-hint-color": "#A0A0A0",
     "medfolder-background": "#121212",
-    "medfolder-background2": "#121212"
+    "medfolder-background2": "#121212",
+    "MedLibraryScreen-color": "#121212"
   }
 }

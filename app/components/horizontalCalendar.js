@@ -83,7 +83,7 @@ export function HorizontalCalendar({ setDay, currentDay }) {
     const colorTheme = theme[useContext(ThemeContext).theme];
     return (
         <>
-            <Text category="p2" style={{color: colorTheme["text-off-black"], fontFamily: "PublicSans-Semibold", fontSize: 18}}>{parseMonth(new Date().getMonth())} {new Date().getFullYear()}</Text>
+            <Text category="p2" style={{color: colorTheme["home-header"], fontFamily: "PublicSans-Semibold", fontSize: 18}}>{parseMonth(new Date().getMonth())} {new Date().getFullYear()}</Text>
             <FlatList
                 data={getWeek()}
                 renderItem={({ item }) => {

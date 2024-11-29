@@ -95,7 +95,7 @@ export const ScanScreen = ({navigation}) => {
                   children={() => {
                     return (
                       <View style={{alignItems: "flex-start", paddingHorizontal: 16}}>
-                        <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.name || "Not detected") : "Take Photo"}</Text>
+                        <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.nickname || "Not detected") : "Take Photo"}</Text>
                         <Text style={{color: "#fff"}} category='c1'>{photoTaken? (loading? "Please wait" : "Continue") : "Start scanning"}</Text>
                       </View>
                     )

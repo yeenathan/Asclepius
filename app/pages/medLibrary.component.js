@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { SafeAreaView, StyleSheet, View, ViewProps, Image, ScrollView, TouchableOpacity } from "react-native";
 import {
   Button,
@@ -23,6 +23,8 @@ import { styles } from "@/app/stylesheet";
 import { LIBRARY_DATA } from "@/app/data/medData";
 import { ThemeContext } from "../theme-context";
 import { default as theme } from "@/custom-theme.json";
+import { useFocusEffect } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
   return (
@@ -214,7 +216,38 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
 
 export const MedFolder = ({ navigation }) => {
   // med folder component
-  const [data, setData] = useState(LIBRARY_DATA);
+  useFocusEffect(
+    useCallback(() => {
+      async function loadData() {
+        const keys = JSON.parse(await AsyncStorage.getItem("KEYS"));
+        let meds = []
+        if (keys) {
+          for (let key of keys) {
+            let med = JSON.parse(await AsyncStorage.getItem(key));
+            meds.push({
+              name: med.name,
+              nickname: med.nickname,
+              icon: med.icon,
+              ingredient: med.ingredient,
+              DIN: med.DIN,
+              description: med.description,
+              sideEffects: med.sideEffects,
+              duration: med.duration,
+              reminder: ["reminder"],
+              directions: ["step 1", "step 2"],
+              strength: med.strength,
+              type: "med type",
+              quantity: "quantity",
+              refills: "refills"
+            });
+          }
+        }
+        setData(meds);
+      }
+      loadData();
+    }, [])
+  )
+  const [data, setData] = useState(null);
   const [selectedTab, setSelectedTab] = useState(1);
   const colorTheme = theme[useContext(ThemeContext).theme];
 
@@ -291,7 +324,6 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
-  
   return (
     <View style={{backgroundColor: colorTheme["medfolder-background2"], flex: 1}}>
       <TabSwitch />
@@ -302,7 +334,7 @@ export const MedFolder = ({ navigation }) => {
             gap: 16,
           }}
         >
-          {data.filter((med)=> {
+          {data && data.filter((med)=> {
             if(selectedTab === 1) {
               return !med.isArchive
             } else {
@@ -636,27 +668,14 @@ export const InfoScreen = ({ navigation, route }) => {
                     Side Effects
                   </Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
+
                     <View style={{ flexDirection: "column" }}>
-                      {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                      {medication.sideEffects.map((effect, index) => (
                       <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 14, color:"#A0A0A0" }}>
                         • {effect}
                       </Text>
                       ))}
                     </View>
-
-                  </ViewMoreText>
-
-                  <Text 
-                    onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline', color: colorTheme["persian-green"]}}
-                    category="s1"
-                  >
-                    View more
-                  </Text>
 
                 <Modal
                   visible={visible}
@@ -717,13 +736,8 @@ export const InfoScreen = ({ navigation, route }) => {
                   >
                     Directions for Use
                   </Text>
+                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.description}</Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
-                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.directions}</Text>
-                  </ViewMoreText>
 
                 </View>
                   <Modal
@@ -743,7 +757,7 @@ export const InfoScreen = ({ navigation, route }) => {
                       <Text style={{ marginBottom: 10, fontWeight: "bold", color: colorTheme["direction"] }}>
                         Directions for Use
                       </Text>
-                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.directions}</Text>
+                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.description}</Text>
                       <Button
                         style={{
                           marginTop: 20,
@@ -776,9 +790,9 @@ export const InfoScreen = ({ navigation, route }) => {
                   }}
                 >
                   <Text style={{ color:colorTheme["side-effect"] }}>
-                    Prescription Details
+                    Active Ingredient
                   </Text>
-                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26 }}>{medication.quantity}</Text>
+                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
                 </View>
                 
                 </View>
@@ -869,7 +883,7 @@ export const EditReminderScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
           <Icon style={{ width: 40 }} name="clock"></Icon>
           <Text>
@@ -984,7 +998,7 @@ export const EditInfoScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{ flex: 1, justifyContent: "flex-start", width: "95%" }}>
           <Icon style={{ width: 40 }} name="edit"></Icon>
           <Text>Edit medication Info</Text>
@@ -1094,8 +1108,8 @@ export const MedLibraryScreen = ({ navigation }) => {
           backgroundColor: colorTheme["MedLibraryScreen-color"],
         }}
       >
-        <View style={styles.rowContainer}>
-          <Text style={{ fontSize: 22, marginTop: 30, fontFamily: "Poppins-SemiBold", color: colorTheme["text-off-black"], }}>
+        <View style={{...styles.rowContainer}}>
+          <Text style={{ fontSize: 22, marginTop: 30, fontFamily: "Poppins-SemiBold"}}>
             Medication <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily: "Poppins-SemiBold" }}>Library</Text>
           </Text>
         </View>

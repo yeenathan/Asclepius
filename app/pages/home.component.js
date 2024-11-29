@@ -354,13 +354,13 @@ export const HomeScreen = ({ route, navigation }) => {
           }}>Go Now</Button>
         </View>
       </Modal> }
-      <Layout style={styles.masterLayout}>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{...styles.rowContainer, marginTop: 35}}>
           <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["good-morning"], fontFamily:"Poppins-SemiBold" }}>
             Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
           </Text>
-          <Pressable onPress={themeContext.toggleTheme} >
-            <Icon style={{ width: 40, color: colorTheme["icon-color"] }} name="settings-2-outline"></Icon>
+          <Pressable onPress={() => navigation.navigate("Med Stack", {screen: "Settings"})} >
+            <Icon style={{ width: 40}} fill={colorTheme["icon-color"]} name="settings-2-outline"></Icon>
           </Pressable>
         </View>
         <View style={{ width: "100%" }}>
@@ -369,7 +369,7 @@ export const HomeScreen = ({ route, navigation }) => {
         <View style={{ ...styles.container, flex: 1, justifyContent: "flex-start", alignItems: "flex-start", gap: 8, marginTop: 16 }}>
           <Text category="h2" style={{color: colorTheme["home-header"], fontFamily:"PublicSans-Semibold" }}>Next Medication</Text>
           <View style={{ marginBottom: 13, width: "100%"}}>
-            <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken} />
+            <MedReminder navigation={navigation} data={data} currentDay={new Date()} getDayData={getDayData} handleTaken={handleTaken} userName={userName}/>
           </View>
           <Text category="h2" style={{color: colorTheme["home-header"], marginTop: 8, fontFamily:"PublicSans-Semibold" }}>Overview</Text>
           <MedList dayData={format(dayData)} init={init} currentDay={day} handleTaken={handleTaken} colorTheme={colorTheme}/>
