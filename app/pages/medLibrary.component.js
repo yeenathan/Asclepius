@@ -394,6 +394,7 @@ export const InfoScreen = ({ navigation, route }) => {
         <Image
           source={medication.icon}
           style={{ width: 35, height: 35}}
+          resizeMode="contain"
         />
       </View>
       {/* </View> */}
@@ -459,6 +460,7 @@ export const InfoScreen = ({ navigation, route }) => {
           }}
           description={description}
         />
+          <ScrollView>
             <Card style={{ backgroundColor: colorTheme["card-color"], borderRadius: 20, padding: 8}} header={medHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6, }}>
                 <View style={{flex: 1}}>
@@ -475,7 +477,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View>   
               </View>
             </Card>
-            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%" }}>
+            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%"}}>
               <View
                 style={{
                   flexDirection: "column",
@@ -496,7 +498,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 >
                   Description
                 </Text>
-                <View style={{  }}>
+                <View style={{ justifyContent: "center"}}>
                   <Text category= "p1" style={{ color: "#000" }}>{medication.description}</Text>
                 </View>
               </View>
@@ -563,7 +565,7 @@ export const InfoScreen = ({ navigation, route }) => {
             </View>
 
 
-            <View style={{ flexDirection: "column", width: "100%", gap: 20 }}>    
+            <View style={{ flexDirection: "column", width: "100%", gap: 20}}>    
               <View
                 style={{
                   flexDirection: "row",
@@ -607,7 +609,7 @@ export const InfoScreen = ({ navigation, route }) => {
             </View> 
           </View>
           
-            {/* <Button
+            <Button
               size="giant"
               onPress={onPress}
               style={{
@@ -617,7 +619,8 @@ export const InfoScreen = ({ navigation, route }) => {
                 marginTop: 15
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
-            /> */}
+            />
+          </ScrollView>
       </Layout>
     </SafeAreaView>
   );
