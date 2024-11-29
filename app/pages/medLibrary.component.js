@@ -61,22 +61,22 @@ const ArchiveModal = ({ open, close, actionWord, onPress, description }) => {
             onPress={() => close()}
             style={{
               flex: 1,
-              backgroundColor: colorTheme["white"],
-              borderColor: colorTheme["hunyadi-yellow"],
-              borderRadius: 16,
+              backgroundColor: "#FFffff",
+              borderColor: "#FFD08B",
+              borderRadius: 20,
             }}
-            children={() => <Text category="h2">Cancel</Text>}
+            children={() => <Text style={{ fontSize:16}}>Cancel</Text>}
           />
           <Button
             size="small"
             onPress={onPress}
             style={{
               flex: 1,
-              backgroundColor: colorTheme["hunyadi-yellow"],
-              borderColor: colorTheme["hunyadi-yellow"],
-              borderRadius: 16,
+              backgroundColor: "#FFD08B",
+              borderColor: "#FFD08B",
+              borderRadius: 20,
             }}
-            children={() => <Text category="h2">{actionWord}</Text>}
+            children={() => <Text style={{ fontSize:16}}>{actionWord}</Text>}
           />
         </View>
       </View>
