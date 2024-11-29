@@ -524,7 +524,7 @@ export const InfoScreen = ({ navigation, route }) => {
         >
             <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 115}}>
             <Text style={{fontSize: 22, fontFamily: "Poppins-SemiBold"}}>
-              Insulin <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>{medication.name}</Text>
+              Madication <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>Info</Text>
               </Text>
             </View>
             <View style={{ marginTop: 20,}}>
@@ -831,6 +831,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View> *
               </View>
             </View>
+            <Text style={{ color: colorTheme["text-gray"], fontSize: 10, marginTop: 15, alignItems: "center"}}>*This app is not a substitute for professional medical advice; always consult your healthcare provider for guidance.</Text>
             <Button
               size="giant"
               onPress={onPress}
@@ -838,7 +839,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 backgroundColor: colorTheme["archive"],
                 borderColor: colorTheme["archive-border"],
                 borderRadius: 20,
-                marginTop: 30
+                marginTop: 15
               }}
               children={() => <Text category="h2">{actionWord} This Med</Text>}
             />
