@@ -408,7 +408,6 @@ export const MedDescription = ({ navigation, route }) => {
             color: 'white',
             marginTop: 5,
             marginBottom: 8,
-            marginRight: 206,
           }}
         >
           Description
@@ -628,55 +627,7 @@ export const InfoScreen = ({ navigation, route }) => {
               </View> */}
               
             
-            <View style={{ flexDirection: "column", gap: 6, marginTop: 20 }}>
-
-              <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: 6,
-                  backgroundColor: '#fff',
-                  borderRadius: 20,
-                  padding: 20,
-                  shadowColor: "#000", 
-                  shadowOffset: { width: 4, height: 4 }, 
-                  shadowOpacity: 0.25, 
-                  shadowRadius: 3.84, 
-                  elevation: 5,
-                  backgroundColor: "#007972"
-                }}
-              >
-                <Text style={{ color: colorTheme["direction"] }}>
-                  Active Ingredient
-                </Text>
-
-                <Text style={{ color: "#fff", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
-              </View>
-
-              <View style={{ flexDirection: "column", width: "100%", gap: 20 }}>    
-                <View
-                  style={{
-                    flexDirection: "column",
-                    backgroundColor: "#fff",
-                    padding: 20,
-                    borderRadius: 20,
-                    shadowColor: "#000", 
-                    shadowOffset: { width: 4, height: 4 }, 
-                    shadowOpacity: 0.25, 
-                    shadowRadius: 3.84, 
-                    elevation: 5,
-                  }}
-                >
-                <Text
-                  style={{ color: colorTheme["direction"], fontWeight: "bold", marginBottom:7, fontSize: 20 }}
-                  onPress={() => setDirectionsVisible(true)}
-                >
-                  Description
-                </Text>
-                <Text style={{ marginBottom: 10, color: "#A0A0A0", fontSize: 18 }}>{medication.description}</Text>
-              </View>
-
+            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20 }}>
 
               <View
                 style={{
@@ -689,74 +640,129 @@ export const InfoScreen = ({ navigation, route }) => {
                   shadowOpacity: 0.25, 
                   shadowRadius: 3.84, 
                   elevation: 5,
-                  width: "100%",
+                  width: "49%",
+                  flex: 1
                 }}
               >
                 <Text
-                  style={{ color: "#8FBAB3" , fontSize: 28, fontFamily: "Poppins-SemiBold", marginBottom: 10 }}
+                  style={{ color: colorTheme["direction"], fontWeight: "bold", marginBottom: 7, fontSize: 23 }}
+                  onPress={() => setDirectionsVisible(true)}
                 >
-                  Side Effects
+                  Description
                 </Text>
-                <View style={{ flexDirection: "column" }}>
-                  {medication.sideEffects.map((effect, index) => (
-                  <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 18, color:"#A0A0A0" }}>
-                    • {effect}
-                  </Text>
-                  ))}
+                <View style={{  }}>
+                  <Text category= "p1" style={{ color: "#000" }}>{medication.description}</Text>
                 </View>
               </View>
-                
 
-
-                 <View
+              <View style={{ gap: 8 }}>
+                <View
                   style={{
-                    flexDirection: "row",
+                    flexDirection: "column",
+                    backgroundColor: "#007972",
+                    padding: 20,
+                    borderRadius: 20,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
+                    elevation: 5,
+                    width: "100%",
+                  }}
+                >
+                  <View style={{ flexDirection: "column" }}>
+                    {medication.sideEffects.map((effect, index) => (
+                    <Text key={index} category= "p1" style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", color:"#fff" }}>
+                      • {effect}
+                    </Text>
+                    ))}
+                  </View>
+
+                  <View style={{ alignItems: 'flex-end' }}> 
+                    <Text
+                      style={{ color: colorTheme["direction"] , fontSize: 28, fontFamily: "Poppins-SemiBold", }}
+                    >
+                      Side
+                    </Text>
+                    <Text
+                      style={{ color: colorTheme["direction"] , fontSize: 28, fontFamily: "Poppins-SemiBold", }}
+                    >
+                      Effects
+                    </Text>
+                  </View>
+                </View>
+                
+                <View
+                  style={{
+                    flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: 6,
+                    backgroundColor: colorTheme["card-color"],
+                    borderRadius: 20,
+                    padding: 20,
+                    shadowColor: "#000", 
+                    shadowOffset: { width: 4, height: 4 }, 
+                    shadowOpacity: 0.25, 
+                    shadowRadius: 3.84, 
+                    elevation: 5,
+                    backgroundColor: "#fff"
                   }}
                 >
-
-                  
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Drug Strength
+                  <Text style={{ color: "#8FBAB3" }}>
+                    Active Ingredient
                   </Text>
-                  <Text>{medication.strength}</Text>
-                </View> 
 
-                 <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 6,
-                  }}
-                >
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Dosage Type
-                  </Text>
-                  <Text>{medication.type}</Text>
-                </View> 
-
-                
-
-                
-                 <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 6,
-                  }}
-                >
-                  <Text style={{ color: colorTheme["persian-green"] }}>
-                    Number of Refills
-                  </Text>
-                  <Text>{medication.refills}</Text>
-                </View> *
+                  <Text style={{ color: "#000", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
+                </View>
               </View>
             </View>
-            <Text style={{ color: colorTheme["text-gray"], fontSize: 10, marginTop: 15, alignItems: "center"}}>*This app is not a substitute for professional medical advice; always consult your healthcare provider for guidance.</Text>
+
+
+            <View style={{ flexDirection: "column", width: "100%", gap: 20 }}>    
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                <Text style={{ color: colorTheme["persian-green"] }}>
+                  Drug Strength
+                </Text>
+                <Text>{medication.strength}</Text>
+              </View> 
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+              <Text style={{ color: colorTheme["persian-green"] }}>
+                Dosage Type
+              </Text>
+              <Text>{medication.type}</Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <Text style={{ color: colorTheme["persian-green"] }}>
+                Number of Refills
+              </Text>
+              <Text>{medication.refills}</Text>
+            </View> 
+          </View>
+          
             <Button
               size="giant"
               onPress={onPress}
