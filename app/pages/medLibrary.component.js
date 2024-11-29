@@ -324,6 +324,7 @@ export const MedFolder = ({ navigation }) => {
       return newData
     });
   };
+  
   return (
     <View style={{backgroundColor: colorTheme["medfolder-background2"], flex: 1}}>
       <TabSwitch />
