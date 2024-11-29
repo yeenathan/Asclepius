@@ -382,20 +382,22 @@ export const InfoScreen = ({ navigation, route }) => {
   console.log(medication);
   const medHeader = () => (
     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 12, backgroundColor: colorTheme["card-color"], width: "100%", gap: 8}}>
-      <View style={{
+      {/* <View style={{
           backgroundColor: colorTheme["green"],
           borderRadius: "50%",
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
         }}
-      >
+      > */}
+      <View style={{flex: 2, alignItems: "center"}}>
         <Image
           source={medication.icon}
           style={{ width: 35, height: 35}}
-        /> 
+        />
       </View>
-      <View style={{flex: 4}}>
+      {/* </View> */}
+      <View style={{flex: 5}}>
         {
           medication.nickname?
           <>
@@ -415,7 +417,7 @@ export const InfoScreen = ({ navigation, route }) => {
             medication,
             })
           }
-          style={{flex: 2}}
+          style={{flex: 3}}
       >
         <View>
           <Text category="c1" style={{ color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
@@ -459,9 +461,18 @@ export const InfoScreen = ({ navigation, route }) => {
         />
             <Card style={{ backgroundColor: colorTheme["card-color"], borderRadius: 20, padding: 8}} header={medHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6, }}>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{medication.duration?`${medication.duration} days` : "Just once"}</Text>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{medication.dose || "None"}</Text>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{`Every ${medication.frequency} days` || "Just once"}</Text>      
+                <View style={{flex: 1}}>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Duration</Text>
+                  <Text category="p2">{medication.duration?`${medication.duration} days` : "Just once"}</Text>
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Dose</Text>
+                  <Text category="p2">{medication.dose || "None"}</Text>
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Frequency</Text>
+                  <Text category="p2">{medication.frequency? `Every ${medication.frequency} days` : "Just once"}</Text>
+                </View>   
               </View>
             </Card>
             <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%" }}>
