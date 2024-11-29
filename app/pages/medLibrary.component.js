@@ -232,6 +232,7 @@ export const MedFolder = ({ navigation }) => {
               DIN: med.DIN,
               description: med.description,
               sideEffects: med.sideEffects,
+              duration: med.duration,
               reminder: ["reminder"],
               directions: ["step 1", "step 2"],
               strength: med.strength,

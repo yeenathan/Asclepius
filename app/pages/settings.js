@@ -32,7 +32,7 @@ export const SettingsScreen = ({navigation}) => {
         <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between", borderColor: colorTheme["text-grey"], borderWidth: .5, padding: 16, borderRadius: 12, backgroundColor: colorTheme["form-field"]}}>
           <Text category="p1">Text Settings</Text>
         </View>
-        <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between", borderColor: colorTheme["text-grey"], borderWidth: .5, padding: 16, borderRadius: 12, backgroundColor: colorTheme["form-field"]}}>
+        <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between", alignItems: "center", borderColor: colorTheme["text-grey"], borderWidth: .5, padding: 16, borderRadius: 12, backgroundColor: colorTheme["form-field"]}}>
           <Text category="p1">Dark Mode</Text>
           <Switch onValueChange={handleSwitch} value={switchValue}/>
         </View>

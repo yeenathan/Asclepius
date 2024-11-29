@@ -16,7 +16,7 @@ import { SettingsScreen } from "@/app/pages/settings"
 
 
 import { FormScreen } from "@/app/pages/new-hifi/FormScreen"
-import { EditIcon, EditName, EditSchedule, EditFrequency, EditDuration, EditDose, EditStrength, EditNickname, EditDIN } from "@/app/pages/new-hifi/EditScreens"
+import { EditIcon, EditName, EditSchedule, EditFrequency, EditDuration, EditDose, EditStrength, EditNickname, EditDIN, EditQuantity } from "@/app/pages/new-hifi/EditScreens"
 
 
 const Stack = createStackNavigator();
@@ -62,6 +62,7 @@ export const MedNavigator = () => {
       <Stack.Screen name="Edit Dose" component={EditDose} options={{headerShown: false}}/>
       <Stack.Screen name="Edit Strength" component={EditStrength} options={{headerShown: false}}/>
       <Stack.Screen name="Edit DIN" component={EditDIN} options={{headerShown: false}}/>
+      <Stack.Screen name="Edit Quantity" component={EditQuantity} options={{headerShown: false}}/>
       </Stack.Navigator>
   )
 }

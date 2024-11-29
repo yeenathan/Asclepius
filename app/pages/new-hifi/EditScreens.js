@@ -90,15 +90,15 @@ export function EditIcon ({navigation, route}) {
 export function EditStrength({navigation, route}) {
   const colorTheme = theme[useContext(ThemeContext).theme];
   const drug = route.params.drug;
-  const [strength, setStrength] = useState();
+  const [strength, setStrength] = useState(0);
   const [unit, setUnit] = useState("mL")
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} title={"Edit Dose"}/>
       <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{flex: 4, flexDirection: "row", width: "100%", alignItems: "center"}}>
-          <Input style={{flex: 1}} value={strength} onChange={(e) => setStrength(e.target.value)}/>
-          <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mL", "mg", "cc", "mol"]}/>
+          <Input style={{flex: 1}} value={strength} onChangeText={(e) => setStrength(e)}/>
+          <DisplayDropdown style={{flex: 3}} setUnit={setUnit} data={["mg", "mL", "cc", "mol"]}/>
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, strength: `${strength}${unit}`}})}>Confirm</Button>
@@ -283,6 +283,30 @@ export function EditDIN({navigation, route}) {
         </View>
         <View style={{flex: 1, width: "100%"}}>
           <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, DIN: DIN}})}>Confirm</Button>
+        </View>
+      </Layout>
+    </SafeAreaView>
+  )
+}
+
+export function EditQuantity({navigation, route}) {
+  const colorTheme = theme[useContext(ThemeContext).theme];
+  const [quantity, setQuantity] = useState("");
+  const drug = route.params.drug;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header navigation={navigation} title={"Edit Quantity"}/>
+      <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
+        <View style={{flex: 4, justifyContent: "center"}}>
+          {/* <SuggestionSearch value={name} setValue={setName}/> */}
+          <Text category="p1" style={{marginBottom: 8}}>Quantity</Text>
+          <View style={{flexDirection: "row", width: "100%", alignItems: "center", justifyContent: "space-between"}}>
+            <Input style={{width: "30%"}} placeholder="" value={quantity} onChangeText={(e) => setQuantity(e)}/>
+            <Text category="p1" style={{}}>units</Text>
+          </View>
+        </View>
+        <View style={{flex: 1, width: "100%"}}>
+          <Button size="large" style={{width: "100%"}} onPress={() => navigation.popTo("Form", {drug: {...drug, quantity: quantity}})}>Confirm</Button>
         </View>
       </Layout>
     </SafeAreaView>
