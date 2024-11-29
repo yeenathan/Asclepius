@@ -4,7 +4,7 @@ import { default as theme } from "@/custom-theme.json";
 import { ThemeContext } from '../theme-context';
 import { View } from 'react-native';
 
-export const Header = ({ navigation, title, showSettings = true }) => {
+export const Header = ({ navigation, title, showSettings = true, style=null }) => {
   const colorTheme = theme[React.useContext(ThemeContext).theme];
   // Back button action
   const BackAction = () => (
@@ -34,6 +34,7 @@ export const Header = ({ navigation, title, showSettings = true }) => {
         </Text>
       )}
       style={{
+        ...style,
         width: "100%",
         backgroundColor: colorTheme["generic-bg"],
         paddingVertical: 40,

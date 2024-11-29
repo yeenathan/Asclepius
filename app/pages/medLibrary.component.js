@@ -233,12 +233,12 @@ export const MedFolder = ({ navigation }) => {
               description: med.description,
               sideEffects: med.sideEffects,
               duration: med.duration,
+              quantity: med.quantity,
+              dose: med.dose,
               reminder: ["reminder"],
               directions: ["step 1", "step 2"],
               strength: med.strength,
-              type: "med type",
-              quantity: "quantity",
-              refills: "refills"
+              quantity: med.quantity,
             });
           }
         }
@@ -467,49 +467,49 @@ export const InfoScreen = ({ navigation, route }) => {
     setShowArchiveModal(true);
   };
 
-  const medHeader = (props) => (
-    <View {...props} style={{ flexDirection: "row", gap: 10, alignItems: "center", padding: 10, borderRadius: 20, backgroundColor: colorTheme["card-color"], }}>
-      <View
-        style={{
-          marginTop: 10,
-          marginBottom:10,
+  console.log(medication);
+  const medHeader = () => (
+    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 12, backgroundColor: colorTheme["card-color"], width: "100%", gap: 8}}>
+      <View style={{
           backgroundColor: colorTheme["green"],
           borderRadius: "50%",
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
-          width: 50,
-          height: 50,
-          marginLeft: 10,
-          marginBottom: 65,
         }}
       >
-        <View>
         <Image
           source={medication.icon}
-          style={{ width: 35, height: 35, marginBottom: 65, marginTop: 65}}
+          style={{ width: 35, height: 35}}
         /> 
-        </View>
       </View>
-      <View style={{ flexDirection: "column", flex: 1, marginright: 20 }}>
-        <Text style={{ fontSize: 16, fontFamily: "PublicSans-SemiBold", color: colorTheme["card-text"], marginBottom:7}}>
-          {medication.name}, {medication.refills} units
-        </Text>
-        <Text style={{ fontSize: 14, fontFamily: "PublicSans-SemiBold", color: colorTheme["text-gray"]}}>
-          {medication.directions}
-        </Text>
+      <View style={{flex: 4}}>
+        {
+          medication.nickname?
+          <>
+            <Text category="h2">{medication.nickname}</Text>
+            <Text category="c1">{medication.name}</Text>
+          </>
+          :
+          <>
+            <Text category="h2">{medication.name}</Text>
+          </>
+        }
       </View>
       <TouchableOpacity
-  onPress={() =>
-    navigation.navigate("Med Stack", {
-      screen: "Edit Reminder",
-      medication,
-    })
-  }
-  style={{ position: "absolute", top: 10, right: 10 }}
->
-  <Text style={{ fontSize: 14, fontFamily: "PublicSans-Regular", color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
-</TouchableOpacity>
+        onPress={() =>
+          navigation.navigate("Med Stack", {
+            screen: "Edit Reminder",
+            medication,
+            })
+          }
+          style={{flex: 2}}
+      >
+        <View>
+          <Text category="c1" style={{ color: colorTheme["green"], textDecorationLine: 'underline' }}>Edit Info</Text>
+          <Text category="c1">DIN: {medication.DIN} </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
   
@@ -527,7 +527,7 @@ export const InfoScreen = ({ navigation, route }) => {
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} title={"Medication Info"} style={{paddingBottom: 0}}/>
       <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["background"]}}>
         <ArchiveModal
           open={showArchiveModal}
@@ -554,20 +554,13 @@ export const InfoScreen = ({ navigation, route }) => {
           }}
           contentContainerStyle={{justifyContent: "flex-start"}}
         >
-            <View style={{flexDirection: "row", alignItems:'center', textAlign: 'center', marginLeft: 115}}>
-            <Text style={{fontSize: 22, fontFamily: "Poppins-SemiBold"}}>
-              Madication <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: colorTheme["green"], }}>Info</Text>
-              </Text>
-            </View>
-            <View style={{ marginTop: 20,}}>
-            <Card style={{ backgroundColor: colorTheme["card-color"]}} header={medHeader}>
+            <Card style={{ backgroundColor: colorTheme["card-color"], borderRadius: 20, padding: 8}} header={medHeader}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6, }}>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Duration</Text>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Dose</Text>
-                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Frequency</Text>      
+                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{medication.duration?`${medication.duration} days` : "Just once"}</Text>
+                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{medication.dose || "None"}</Text>
+                <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>{`Every ${medication.frequency} days` || "Just once"}</Text>      
               </View>
             </Card>
-            </View>
             {/* reminder part */}
             {/* <View style={{ flexDirection: "row", gap: 8, marginBottom: 16 }}>
               <Button
