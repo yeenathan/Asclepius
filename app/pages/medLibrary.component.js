@@ -667,27 +667,14 @@ export const InfoScreen = ({ navigation, route }) => {
                     Side Effects
                   </Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
+
                     <View style={{ flexDirection: "column" }}>
-                      {medication.sideEffects.slice(0, 3).map((effect, index) => (
+                      {medication.sideEffects.map((effect, index) => (
                       <Text key={index} style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", fontSize: 14, color:"#A0A0A0" }}>
                         • {effect}
                       </Text>
                       ))}
                     </View>
-
-                  </ViewMoreText>
-
-                  <Text 
-                    onPress={() => setVisible(true)}
-                    style={{ display: 'flex', marginTop: 20, textDecorationLine: 'underline', color: colorTheme["persian-green"]}}
-                    category="s1"
-                  >
-                    View more
-                  </Text>
 
                 <Modal
                   visible={visible}
@@ -748,13 +735,8 @@ export const InfoScreen = ({ navigation, route }) => {
                   >
                     Directions for Use
                   </Text>
+                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.description}</Text>
 
-                  <ViewMoreText
-                    numberOfLines={3}
-                    renderViewMore={renderViewMore}
-                  >
-                  <Text style={{ marginBottom: 10, color:colorTheme["white"], fontSize: 12 }}>{medication.directions}</Text>
-                  </ViewMoreText>
 
                 </View>
                   <Modal
@@ -774,7 +756,7 @@ export const InfoScreen = ({ navigation, route }) => {
                       <Text style={{ marginBottom: 10, fontWeight: "bold", color: colorTheme["direction"] }}>
                         Directions for Use
                       </Text>
-                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.directions}</Text>
+                      <Text style={{ marginBottom: 10, color: "#ffffff" }}>{medication.description}</Text>
                       <Button
                         style={{
                           marginTop: 20,
@@ -807,9 +789,9 @@ export const InfoScreen = ({ navigation, route }) => {
                   }}
                 >
                   <Text style={{ color:colorTheme["side-effect"] }}>
-                    Prescription Details
+                    Active Ingredient
                   </Text>
-                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26 }}>{medication.quantity}</Text>
+                  <Text style={{ color: colorTheme["persian-green"], fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
                 </View>
                 
                 </View>
