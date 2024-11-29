@@ -18,8 +18,8 @@ export const OpenAIGetInfo = async (drugData) => {
             role: 'user',
             content: `
               given active ingredient ${drugData.ingredient} and medication name ${drugData.name}, return a json object with properties "description" and "sideEffects".
-              description: is a string. make it brief. 1-2 sentences
-              sideEffects: array of strings. each string should be 1 side effect. only include 3
+              description: is a string. max 250 characters
+              sideEffects: array of strings. each string should be a single word. limit to 3-5 items
             `
           },
         ],
