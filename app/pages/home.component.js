@@ -96,13 +96,15 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
             borderTopRightRadius: 80,
           }}
         >
-          <View style={{ marginBottom: 32, paddingHorizontal: 32 }}>
-            <Text category="h2">{data.name}</Text>
-            <Text category="p1">{data.nickname}</Text>
+          <View style={{ marginBottom: 32, width: "100%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 16}}>
+            <Image source={data.icon} style={{width: 48, height: 48}} resizeMode="contain"/>
+            <Text category="h2">{data.nickname} ({data.name})</Text>
           </View>
+          <Text category="p2" style={{marginBottom: 16}}>Active Ingredient: {data.ingredient}</Text>
+          <Text style={{marginBottom: 32}} category="p1">{data.description}</Text>
           <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
             <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
-              <Button style={{ flex: 1 }} appearance="outline" size="medium">
+              <Button style={{ flex: 1 }} appearance="outline" size="medium" disabled={isTaken()}>
                 Skip
               </Button>
               <Button style={{ flex: 1 }} status="primary" size="medium" disabled={isTaken()} onPress={() => setReschedule(true)}>
@@ -119,12 +121,12 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
             !isTaken()
               ? {
                   ...styles.rowContainer,
-                  padding: 12,
+                  padding: 18,
                   borderRadius: 8,
                   justifyContent: "center",
                   marginTop: 12,
                   marginBottom: 24,
-                  backgroundColor: colorTheme["light-orange"],
+                  backgroundColor: colorTheme["home-page-yellow"],
                 }
               : {
                   ...styles.rowContainer,
@@ -132,16 +134,23 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
                   borderRadius: 8,
                   justifyContent: "center",
                   marginVertical: 12,
-                  backgroundColor: colorTheme["light-orange-80"],
+                  backgroundColor: colorTheme["home-page-yellow"],
+                  opacity: 0.5,
                 }
           }
         >
+          <View style={{ backgroundColor: colorTheme["hunyadi-yellow"], width: 20, height: "100%", position: "absolute", left: 0, top: 0, borderBottomLeftRadius: 8, borderTopLeftRadius: 8 }}></View>
           <View style={{ flex: 3, alignItems: "center" }}>
             <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
           </View>
           <View style={{ flex: 6 }}>
-            <Text category="p1" style={{color: colorTheme["generic-text"]}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
-            <Text category="c1" style={{color: colorTheme["generic-text"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
+            <Text category="p1" style={{color: colorTheme["card-text"], fontFamily: "PublicSans-SemiBold"}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
+            {/* <Text category="c1" style={{color: colorTheme["card-gray"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text> */}
+            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+              <Icon fill={colorTheme["card-gray"]} name={"clock-outline"} style={{width: 16, height: 16}}/>
+              <Text category="c1" style={{color: colorTheme["card-gray"]}}>{formatTime(data.time)}</Text>
+            </View>
+            {isTaken() && <Text category="c1" style={{color: colorTheme["card-gray"]}}>Taken at {formatTime(data.dates[getIndex()].timeTaken)}</Text>}
           </View>
           <View style={{flex: 1}}>
             <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
@@ -172,7 +181,7 @@ const MedList = ({ dayData, init, currentDay, handleTaken, colorTheme }) => {
             <MedCard med={item} init={init} currentDay={currentDay} handleTaken={handleTaken} colorTheme={colorTheme}/>
           )}
           renderSectionHeader={({ section: { title } }) => (
-            <Text category="p2">{title}</Text>
+            <Text category="p2" style={{ fontFamily:"Poppins-Regular", color: colorTheme["text-gray"]}}>{title}</Text>
           )}
           contentContainerStyle={{ padding: 10 }}
         />
@@ -328,7 +337,7 @@ export const HomeScreen = ({ route, navigation }) => {
         return date;
       })
     };
-    await AsyncStorage.setItem(data.name, JSON.stringify(newData));
+    await AsyncStorage.setItem(data.DIN, JSON.stringify(newData));
     init();
   }
 
@@ -336,8 +345,6 @@ export const HomeScreen = ({ route, navigation }) => {
     setShowModal(false);
     setAddedDrug(null);
   }
-
-  const themeContext = useContext(ThemeContext);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -405,8 +412,8 @@ export const Onboarding = ({ navigation }) => {
                 style={{ width: 300, marginBottom: 20 }}
                 resizeMode="contain"
               />
-              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["light-green"]}}></Text>
-              <Text category="p" style={{ fontSize: 8, fontWeight: "bold", color: colorTheme["light-green"] }}>
+              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["green"]}}></Text>
+              <Text category="p" style={{ fontSize: 16, fontWeight: "bold", color: colorTheme["green"] }}>
                 from Asclepius
               </Text>
             </View>
@@ -417,11 +424,11 @@ export const Onboarding = ({ navigation }) => {
                 width: "100%",
                 borderRadius: 16,
                 marginTop: 20,
-                backgroundColor: colorTheme["light-green"],
-                borderColor: colorTheme["light-green"],
+                backgroundColor: colorTheme["green"],
+                borderColor: colorTheme["green"],
               }}
             >
-              {() => <Text category="h2">Next</Text>}
+              {() => <Text category="h2" style={{ color: colorTheme["white"]}}>Next</Text>}
             </Button>
           </Layout>
         );
@@ -445,7 +452,7 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 300, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B" }}>
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
               Welcome to Remedify
             </Text>
             <Text
@@ -462,11 +469,11 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
           >
-            {() => <Text category="h2">Next</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white"]}} >Next</Text>}
           </Button>
         </Layout>
       ),
@@ -489,21 +496,27 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 250, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 16, marginBottom: 30, textAlign: "center", color: "#00A39B" }}>
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
               Introduce yourself!
             </Text>
             <Input
-              placeholder="Enter your name"
+              placeholder="Enter your name..."
               value={userName}
               onChangeText={setUserName}
               size="large"
               style={{
                 width: "100%",
                 marginBottom: 15,
-                borderRadius: 20,
-                borderColor: colorTheme["light-green"],
-                borderWidth: 3,
+                borderRadius: 10,
+                borderColor: colorTheme["input-gray"],
+                borderWidth: 1,
+                shadowColor: '#ECEAF0',
+                shadowOffset: {width: 5, height: 5},
+                shadowRadius: 7,
+                paddingVertical: 17,
+                paddingHorizontal: 8,
               }}
+              textStyle={{ fontFamily: "PublicSans-Regular" }}
             />
           </View>
           <Button
@@ -513,12 +526,12 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
             disabled={!userName.trim()}
           >
-            {() => <Text category="h2">Confirm</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white"]}}>Confirm</Text>}
           </Button>
         </Layout>
       ),
@@ -541,8 +554,8 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 250, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 16, marginBottom: 15, textAlign: "center", color: "#00A39B" }}>
-              Welcome, {userName}!{"\n"}
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
+              {/* Welcome, {userName}!{"\n"} */}
               Your health, our priority
             </Text>
             <Text
@@ -563,11 +576,11 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
           >
-            {() => <Text category="h2">Get Started</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white" ]}}>Get Started</Text>}
           </Button>
         </Layout>
       ),

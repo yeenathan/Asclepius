@@ -72,7 +72,7 @@ export function EditIcon ({navigation, route}) {
             }
           </View>
         </View>
-        <View style={{flex: 2, width: "100%"}}>
+        <View pointerEvents={loading?"none":"auto"} style={{flex: 2, width: "100%"}}>
           <Button size="large" onPress={async () => {
             setLoading(true);
             const _info = await OpenAIGetInfo(drug);

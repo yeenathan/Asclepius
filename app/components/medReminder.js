@@ -57,7 +57,8 @@ export function MedReminder({navigation, data, currentDay, getDayData, handleTak
       </> :
       nextMed !== -1?
       <View style={{flexDirection: "row", alignItems: "center", width: "100%", gap: 32}}>
-        <Image source={nextMed.icon} resizeMode="contain" style={{maxHeight: 80, flex: 1}}/>
+        <Image source={nextMed.icon} resizeMode="contain" style={{maxHeight: 80, flex: 1, shadowColor: '#025C57',
+          shadowOffset: {width: 8, height: 8}, shadowRadius: 2, overflow: "visible"}}/>
         <View style={{flex: 3}}>
           <Text category="h2" style={{color: "#ffffff", width: "100%"}}>{`${nextMed.nickname || nextMed.name}`}</Text>
           <Text category="p1" style={{color: "#ffffff"}}>{`${nextMed.dose || ""}`}</Text>
