@@ -7,6 +7,10 @@ import { default as mapping } from "../mapping.json"
 import { useFonts } from 'expo-font';
 import { Image, SafeAreaView, Text } from 'react-native';
 import { MainNavigator } from "@/app/navigators/mainnavigator.component"
+import { ThemeContext } from './theme-context'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 export default () => {
   const [loaded, error] = useFonts({
@@ -20,6 +24,12 @@ export default () => {
     "PublicSans-Medium":require("@/assets//fonts/PublicSans-Medium.ttf")
   })
 
+  const [theme, setTheme] = React.useState('light');
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+  };
 
   if(!loaded){
     return (
@@ -31,13 +41,15 @@ export default () => {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider
-        {...eva}
-        theme={{ ...eva.light, ...colorTheme, }}
-        customMapping={mapping}
-      >
-        <MainNavigator />
-      </ApplicationProvider>
+      <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <ApplicationProvider
+          {...eva}
+          theme={{ ...eva[theme], ...colorTheme[theme] }}
+          customMapping={mapping}
+        >
+          <MainNavigator />
+        </ApplicationProvider>
+      </ThemeContext.Provider>
     </>
   )
 }

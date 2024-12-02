@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui-kitten/components";
-import { default as colorTheme } from "@/custom-theme.json";
+import { ThemeContext } from "../theme-context";
+import { default as theme } from "@/custom-theme.json";
 
 function getWeek() {
     let _week = [];
@@ -17,7 +18,7 @@ function getWeek() {
 /**
  * Individual calendar item component
  */
-const Item = ({ date, setDay, currentDay }) => {
+const Item = ({ date, setDay, currentDay, colorTheme }) => {
     function getDayString(dayNum) {
         switch (dayNum) {
             case 0 : return "Sun";
@@ -45,13 +46,13 @@ const Item = ({ date, setDay, currentDay }) => {
                     paddingHorizontal: 8,
                     paddingVertical: 15,
                     alignItems: "center",
-                    backgroundColor: day === current ? colorTheme["dark-green"] : "#fff",
+                    backgroundColor: day === current ? colorTheme["calendar-day-selected"] : colorTheme["calendar-day-unselected"],
                     borderColor: "transparent",
                     boxShadow: "1px 3px 6px 0px rgba(0, 0, 0, 0.10)"
                 }}
             >
-                <Text category="c1" style={{color: day === current ? "#fff" : colorTheme["text-gray"]}}>{date.getDate()}</Text>
-                <Text category="h2" style={{color: day === current ? "#fff" : colorTheme["text-off-black"], paddingTop: 10}}>{getDayString(day)}</Text>
+                <Text category="c1" style={{color: day === current ? colorTheme["text-enabled"] : colorTheme["text-disabled-soft"]}}>{date.getDate()}</Text>
+                <Text category="h2" style={{color: day === current ? colorTheme["text-enabled"] : colorTheme["text-disabled-black"], paddingTop: 10}}>{getDayString(day)}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -74,13 +75,15 @@ function parseMonth(monthNum) {
     }
 }
 
+
 /**
  * Horizontal calendar component
  */
 export function HorizontalCalendar({ setDay, currentDay }) {
+    const colorTheme = theme[useContext(ThemeContext).theme];
     return (
         <>
-            <Text category="p2" style={{color: colorTheme["text-off-black"], fontFamily: "PublicSans-Semibold", fontSize: 18}}>{parseMonth(new Date().getMonth())}</Text>
+            <Text category="p2" style={{color: colorTheme["home-header"], fontFamily: "PublicSans-Semibold", fontSize: 18}}>{parseMonth(new Date().getMonth())} {new Date().getFullYear()}</Text>
             <FlatList
                 data={getWeek()}
                 renderItem={({ item }) => {
@@ -88,6 +91,7 @@ export function HorizontalCalendar({ setDay, currentDay }) {
                         date={item.date}
                         setDay={setDay}
                         currentDay={currentDay}
+                        colorTheme={colorTheme}
                     />
                 }}
                 keyExtractor={(item) => item.id.toString()} // Ensure key is a string

@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native"
 import {default as colorTheme} from "@/custom-theme.json"
 
 export const styles = StyleSheet.create({
-    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16, paddingBottom: "0", backgroundColor: colorTheme['silver-white']},
-    masterLayoutNoNav: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16, backgroundColor: colorTheme['silver-white'], gap: 16},
+    masterLayout: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16, paddingBottom: "0", backgroundColor: colorTheme["light"]['silver-white']},
+    masterLayoutNoNav: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16, backgroundColor: colorTheme["light"]['silver-white'], gap: 16},
     rowContainer: {
         flexDirection: "row",
         justifyContent: "space-between",

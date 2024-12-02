@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { SafeAreaView, View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Button, ButtonGroup, Layout, Text} from '@ui-kitten/components';
+import { SafeAreaView, View, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { Button, ButtonGroup, Icon, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
 import { CameraView, useCameraPermissions, Camera } from 'expo-camera';
@@ -33,17 +33,6 @@ export const ScanScreen = ({navigation}) => {
     getMediaPermissions();
   }, [permission, cameraRef])
 
-  function getDIN(imageData) {
-    const _DIN_REGEX = /^[0-9]{8}$/;
-    // console.log(_DIN_REGEX.test("12345678"));
-    const _lines = imageData[0].lines;
-    for (const line of _lines) {
-      for (const word of line.words) {
-        if (_DIN_REGEX.test(word.text)) return word.text;
-      }
-    }
-  }
-
   function parseText(imageData) {
     let _text = "";
     const _lines = imageData[0].lines;
@@ -55,28 +44,9 @@ export const ScanScreen = ({navigation}) => {
     return _text;
   }
 
-  async function getDrugInfo(DIN=null) {
-    const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=${DIN}`).then(resp => resp.json());
-    // const _drugProduct = await fetch(`https://health-products.canada.ca/api/drug/drugproduct/?din=0021`).then(resp => resp.json());
-    if (!_drugProduct[0]) {
-      return {
-        name: "DIN not detected",
-        duration: 0,
-        frequency: 0
-      }
-    }
-    const _code = _drugProduct[0].drug_code;
-    const _name = _drugProduct[0].brand_name;
-    return {
-      name: _name,
-      duration: 0,
-      frequency: 0
-    }
-  }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header navigation={navigation} />
+      {/* <Header navigation={navigation} /> */}
       <Layout style={{...styles.masterLayoutNoNav}}>
         { 
           //Camera permissions are still loading.
@@ -93,14 +63,21 @@ export const ScanScreen = ({navigation}) => {
               </View>
             </View>
           //Camera permissions are granted.
-          : <View style={{gap: 12, flex: 1, width: "100%"}}>
+          : <>
+            <View style={{width: Dimensions.get("window").width, height: Dimensions.get("window").height, position: "absolute", top: 0, left: 0}}>
+              <View style={{backgroundColor: "#ffffff00", position: "absolute", zIndex: 1, padding: 32, width: "100%"}}>
+                <Icon name="arrow-back" style={{maxWidth: 32}} onPress={() => navigation.goBack()} />
+              </View>
               { !photoTaken?
-                <CameraView style={{flex: 5}} ref={cameraRef}
+                <CameraView style={{flex: 1}} ref={cameraRef}
                   onCameraReady={() => setCamReady(true)}
                 /> :
                 <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
               }
-                <Button
+            </View>
+            <View style={{width: "100%", alignItems: "center", position: "absolute", bottom: 32}}> {/*button view*/}
+              <Button
+                  style={{backgroundColor: "#000000aa", ...styles.invisBorder, width: "80%"}}
                   size='large'
                   onPress={async () => {
                     if (loading) return;
@@ -111,16 +88,22 @@ export const ScanScreen = ({navigation}) => {
                       setPhotoTaken(true);
                       setLoading(true);
                       const _imageData = await Upload(_photo.uri || _photo.base64);
-                      // setDrug(await getDrugInfo(
-                      //   getDIN(_imageData)
-                      // ));
                       setDrug(await OpenAIParser(parseText(_imageData)));
                       setLoading(false);
                     }
                   }}
-                >{photoTaken? (loading? "Loading...": drug.name) : "Take Photo"}</Button>
-                {photoTaken && <Text category='p2' style={{textAlign: "center", color: colorTheme['persian-green']}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
+                  children={() => {
+                    return (
+                      <View style={{alignItems: "flex-start", paddingHorizontal: 16}}>
+                        <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.nickname || "Not detected") : "Take Photo"}</Text>
+                        <Text style={{color: "#fff"}} category='c1'>{photoTaken? (loading? "Please wait" : "Continue") : "Start scanning"}</Text>
+                      </View>
+                    )
+                  }}
+              ></Button>
+              {photoTaken && <Text category='p2' style={{textAlign: "center", color: "#fff", marginTop: 8}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
             </View>
+            </>
           }
       </Layout>
     </SafeAreaView>
