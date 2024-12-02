@@ -26,6 +26,8 @@
     "background": "#FAF8FE",
     "card-text": "#4D4D4D",
     "home-page-yellow": "#FFF3E2",
+    "card-gray": "#84827F",
+    "card-drop-shadow": "#025C57",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",

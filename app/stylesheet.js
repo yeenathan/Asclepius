@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
         justifyContent:'center',
         paddingVertical: 24,
         paddingHorizontal: 30,
-        width: "100%"
+        width: "100%",
       },
       cutout: {
         position: 'absolute',

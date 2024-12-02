@@ -133,6 +133,7 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
                   justifyContent: "center",
                   marginVertical: 12,
                   backgroundColor: colorTheme["home-page-yellow"],
+                  opacity: 0.5,
                 }
           }
         >
@@ -141,8 +142,8 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
             <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
           </View>
           <View style={{ flex: 6 }}>
-            <Text category="p1" style={{color: colorTheme["generic-text"]}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
-            <Text category="c1" style={{color: colorTheme["generic-text"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
+            <Text category="p1" style={{color: colorTheme["card-text"], fontFamily: "PublicSans-SemiBold"}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
+            <Text category="c1" style={{color: colorTheme["card-gray"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
           </View>
           <View style={{flex: 1}}>
             <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
@@ -173,7 +174,7 @@ const MedList = ({ dayData, init, currentDay, handleTaken, colorTheme }) => {
             <MedCard med={item} init={init} currentDay={currentDay} handleTaken={handleTaken} colorTheme={colorTheme}/>
           )}
           renderSectionHeader={({ section: { title } }) => (
-            <Text category="p2">{title}</Text>
+            <Text category="p2" style={{ fontFamily:"Poppins-Regular", color: colorTheme["text-gray"]}}>{title}</Text>
           )}
           contentContainerStyle={{ padding: 10 }}
         />
