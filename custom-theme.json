@@ -100,7 +100,8 @@
     "medfolder-background2": "#ffffff"
   },
   "dark": {
-    "card-text": "#ffffff",
+    "card-text": "#000000",
+    "card-gray": "#84827F",
     "dark-green": "#007972",
     "text-off-black": "#4D4D4D",
     "text-gray": "#A0A0A0",

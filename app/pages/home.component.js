@@ -96,13 +96,15 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
             borderTopRightRadius: 80,
           }}
         >
-          <View style={{ marginBottom: 32, paddingHorizontal: 32 }}>
-            <Text category="h2">{data.name}</Text>
-            <Text category="p1">{data.nickname}</Text>
+          <View style={{ marginBottom: 32, width: "100%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 16}}>
+            <Image source={data.icon} style={{width: 48, height: 48}} resizeMode="contain"/>
+            <Text category="h2">{data.nickname} ({data.name})</Text>
           </View>
+          <Text category="p2" style={{marginBottom: 16}}>Active Ingredient: {data.ingredient}</Text>
+          <Text style={{marginBottom: 32}} category="p1">{data.description}</Text>
           <View style={{alignItems: "flex-end", gap: 8, width: "100%"}}>
             <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", width: "100%"}}>
-              <Button style={{ flex: 1 }} appearance="outline" size="medium">
+              <Button style={{ flex: 1 }} appearance="outline" size="medium" disabled={isTaken()}>
                 Skip
               </Button>
               <Button style={{ flex: 1 }} status="primary" size="medium" disabled={isTaken()} onPress={() => setReschedule(true)}>
@@ -143,7 +145,12 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
           </View>
           <View style={{ flex: 6 }}>
             <Text category="p1" style={{color: colorTheme["card-text"], fontFamily: "PublicSans-SemiBold"}}>{`${data.nickname || data.name} ${data.strength || ""}`}</Text>
-            <Text category="c1" style={{color: colorTheme["card-gray"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text>
+            {/* <Text category="c1" style={{color: colorTheme["card-gray"]}}>{isTaken()?`Taken at ${formatTime(data.dates[getIndex()].timeTaken)}`:formatTime(data.time)}</Text> */}
+            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+              <Icon fill={colorTheme["card-gray"]} name={"clock-outline"} style={{width: 16, height: 16}}/>
+              <Text category="c1" style={{color: colorTheme["card-gray"]}}>{formatTime(data.time)}</Text>
+            </View>
+            {isTaken() && <Text category="c1" style={{color: colorTheme["card-gray"]}}>Taken at {formatTime(data.dates[getIndex()].timeTaken)}</Text>}
           </View>
           <View style={{flex: 1}}>
             <CheckBox onChange={() => handleTaken(data)} disabled={isTaken()} checked={isTaken()}/>
@@ -330,7 +337,7 @@ export const HomeScreen = ({ route, navigation }) => {
         return date;
       })
     };
-    await AsyncStorage.setItem(data.name, JSON.stringify(newData));
+    await AsyncStorage.setItem(data.DIN, JSON.stringify(newData));
     init();
   }
 
@@ -338,8 +345,6 @@ export const HomeScreen = ({ route, navigation }) => {
     setShowModal(false);
     setAddedDrug(null);
   }
-
-  const themeContext = useContext(ThemeContext);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
