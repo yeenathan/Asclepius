@@ -120,12 +120,12 @@ const MedCard = (props) => {
             !isTaken()
               ? {
                   ...styles.rowContainer,
-                  padding: 12,
+                  padding: 18,
                   borderRadius: 8,
                   justifyContent: "center",
                   marginTop: 12,
                   marginBottom: 24,
-                  backgroundColor: colorTheme["light-orange"],
+                  backgroundColor: colorTheme["home-page-yellow"],
                 }
               : {
                   ...styles.rowContainer,
@@ -133,10 +133,11 @@ const MedCard = (props) => {
                   borderRadius: 8,
                   justifyContent: "center",
                   marginVertical: 12,
-                  backgroundColor: colorTheme["light-orange-80"],
+                  backgroundColor: colorTheme["home-page-yellow"],
                 }
           }
         >
+          <View style={{ backgroundColor: colorTheme["hunyadi-yellow"], width: 20, height: "100%", position: "absolute", left: 0, top: 0, borderBottomLeftRadius: 8, borderTopLeftRadius: 8 }}></View>
           <View style={{ flex: 3, alignItems: "center" }}>
             <Image source={data.icon} style={{width: 50, height: 50}} alt="No image" resizeMode="contain"/>
             {/* {data.icon} */}
