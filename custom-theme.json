@@ -28,6 +28,7 @@
     "home-page-yellow": "#FFF3E2",
     "card-gray": "#84827F",
     "card-drop-shadow": "#025C57",
+    "input-gray": "#CFCDCF",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",

@@ -407,8 +407,8 @@ export const Onboarding = ({ navigation }) => {
                 style={{ width: 300, marginBottom: 20 }}
                 resizeMode="contain"
               />
-              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["light-green"]}}></Text>
-              <Text category="p" style={{ fontSize: 8, fontWeight: "bold", color: colorTheme["light-green"] }}>
+              <Text category="h1" style={{ fontSize: 32, fontWeight: "bold", color: colorTheme["green"]}}></Text>
+              <Text category="p" style={{ fontSize: 16, fontWeight: "bold", color: colorTheme["green"] }}>
                 from Asclepius
               </Text>
             </View>
@@ -419,11 +419,11 @@ export const Onboarding = ({ navigation }) => {
                 width: "100%",
                 borderRadius: 16,
                 marginTop: 20,
-                backgroundColor: colorTheme["light-green"],
-                borderColor: colorTheme["light-green"],
+                backgroundColor: colorTheme["green"],
+                borderColor: colorTheme["green"],
               }}
             >
-              {() => <Text category="h2">Next</Text>}
+              {() => <Text category="h2" style={{ color: colorTheme["white"]}}>Next</Text>}
             </Button>
           </Layout>
         );
@@ -447,7 +447,7 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 300, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B" }}>
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
               Welcome to Remedify
             </Text>
             <Text
@@ -464,11 +464,11 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
           >
-            {() => <Text category="h2">Next</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white"]}} >Next</Text>}
           </Button>
         </Layout>
       ),
@@ -491,21 +491,27 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 250, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 16, marginBottom: 30, textAlign: "center", color: "#00A39B" }}>
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
               Introduce yourself!
             </Text>
             <Input
-              placeholder="Enter your name"
+              placeholder="Enter your name..."
               value={userName}
               onChangeText={setUserName}
               size="large"
               style={{
                 width: "100%",
                 marginBottom: 15,
-                borderRadius: 20,
-                borderColor: colorTheme["light-green"],
-                borderWidth: 3,
+                borderRadius: 10,
+                borderColor: colorTheme["input-gray"],
+                borderWidth: 1,
+                shadowColor: '#ECEAF0',
+                shadowOffset: {width: 5, height: 5},
+                shadowRadius: 7,
+                paddingVertical: 17,
+                paddingHorizontal: 8,
               }}
+              textStyle={{ fontFamily: "PublicSans-Regular" }}
             />
           </View>
           <Button
@@ -515,12 +521,12 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
             disabled={!userName.trim()}
           >
-            {() => <Text category="h2">Confirm</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white"]}}>Confirm</Text>}
           </Button>
         </Layout>
       ),
@@ -543,8 +549,8 @@ export const Onboarding = ({ navigation }) => {
               style={{ width: 250, marginBottom: 20 }}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 16, marginBottom: 15, textAlign: "center", color: "#00A39B" }}>
-              Welcome, {userName}!{"\n"}
+            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
+              {/* Welcome, {userName}!{"\n"} */}
               Your health, our priority
             </Text>
             <Text
@@ -565,11 +571,11 @@ export const Onboarding = ({ navigation }) => {
               width: "100%",
               borderRadius: 16,
               marginTop: 20,
-              backgroundColor: colorTheme["light-green"],
-              borderColor: colorTheme["light-green"],
+              backgroundColor: colorTheme["green"],
+              borderColor: colorTheme["green"],
             }}
           >
-            {() => <Text category="h2">Get Started</Text>}
+            {() => <Text category="h2" style={{ color: colorTheme["white" ]}}>Get Started</Text>}
           </Button>
         </Layout>
       ),
