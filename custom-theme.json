@@ -29,6 +29,7 @@
     "card-gray": "#84827F",
     "card-drop-shadow": "#025C57",
     "input-gray": "#CFCDCF",
+    "text-color": "#4D4D4D",
 
     "calendar-day-selected": "#007972",
     "calendar-day-unselected": "#ffffff",
@@ -97,7 +98,8 @@
     "infoscreen-color": "#FAF8FE",
     "button-color": "#ffffff",
     "icon-color": "#121212",
-    "medfolder-background2": "#ffffff"
+    "medfolder-background2": "#ffffff",
+    "actionword": "#4D4D4D"
   },
   "dark": {
     "card-text": "#000000",
@@ -114,6 +116,8 @@
     "archive-border" : "#FFD08B",
     "background": "#121212",
     "icon-color": "#ffffff",
+    "text-color": "#ffffff",
+    "actionword": "#4D4D4D",
 
   "persian-green": "#00A39B",
   "light-green": "#89CCC8",

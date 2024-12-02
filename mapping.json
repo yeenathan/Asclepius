@@ -15,7 +15,10 @@
     "text-paragraph-2-font-family": "PublicSans-Bold",
 
     "text-caption-1-font-size": 14,
-    "text-caption-1-font-family": "Poppins-Regular"
+    "text-caption-1-font-family": "Poppins-Regular",
+
+    "text-caption-2-font-size": 14,
+    "text-caption-2-font-family": "PublicSans-Medium"
   },
   "components": {
       "Button": {

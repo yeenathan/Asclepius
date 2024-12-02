@@ -466,15 +466,15 @@ export const InfoScreen = ({ navigation, route }) => {
               <View style={{ flexDirection: "row", alignItems: "center", gap: 6, }}>
                 <View style={{flex: 1}}>
                   <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Duration</Text>
-                  <Text category="p2">{medication.duration?`${medication.duration} days` : "Just once"}</Text>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-SemiBold", color: colorTheme["persian-green"]}}>{medication.duration?`${medication.duration} days` : "Just once"}</Text>
                 </View>
                 <View style={{flex: 1}}>
                   <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Dose</Text>
-                  <Text category="p2">{medication.dose || "None"}</Text>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-SemiBold", color: colorTheme["persian-green"]}}>{medication.dose || "None"}</Text>
                 </View>
                 <View style={{flex: 1}}>
                   <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium", color: colorTheme["text-gray"]}}>Frequency</Text>
-                  <Text category="p2">{medication.frequency? `Every ${medication.frequency} days` : "Just once"}</Text>
+                  <Text style={{ fontSize: 14, fontFamily: "Poppins-Medium"}}>{medication.frequency? `Every ${medication.frequency} days` : "Just once"}</Text>
                 </View>   
               </View>
             </Card>
@@ -500,7 +500,7 @@ export const InfoScreen = ({ navigation, route }) => {
                   Description
                 </Text>
                 <View style={{ justifyContent: "center"}}>
-                  <Text category= "p1" style={{ color: "#000" }}>{medication.description}</Text>
+                  <Text style={{ fontSize: 12, fontFamily: "Poppins-Medium", color: "#6E6E6E" }}>{medication.description}</Text>
                 </View>
               </View>
               <View style={{ gap: 8, width: "50%" }}>
@@ -520,7 +520,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 >
                   <View style={{ flexDirection: "column" }}>
                     {medication.sideEffects.map((effect, index) => (
-                    <Text key={index} category= "p1" style={{ marginBottom: 5, fontFamily: "Poppins-SemiBold", color:"#fff" }}>
+                    <Text key={index} style={{ fontSize: 14, marginBottom: 5, fontFamily: "PublicSans-Medium", color:"#fff" }}>
                       • {effect}
                     </Text>
                     ))}
@@ -554,13 +554,12 @@ export const InfoScreen = ({ navigation, route }) => {
                     shadowOpacity: 0.25, 
                     shadowRadius: 3.84, 
                     elevation: 5,
-                    backgroundColor: "#fff"
                   }}
                 >
                   <Text style={{ color: "#8FBAB3" }}>
                     Active Ingredient
                   </Text>
-                  <Text style={{ color: "#000", fontSize: 26, textAlign: 'center' }}>{medication.ingredient}</Text>
+                  <Text style={{ color: colorTheme["text-color"], fontSize: 16, textAlign: 'center', fontFamily: "PublicSans-Medium" }}>{medication.ingredient}</Text>
                 </View>
               </View>
             </View>
@@ -609,7 +608,9 @@ export const InfoScreen = ({ navigation, route }) => {
               <Text>{medication.refills}</Text>
             </View> 
           </View>
-          
+          <View style={{ alignItems: "center"}}>
+          <Text style={{ fontSize: 10, fontFamily: "Poppins-Medium", marginTop: 8, color: "#A0A0A0", width: 330}}>*This app is not a substitute for professional medical advice; always consult your healthcare provider for guidance.</Text>
+          </View>
             <Button
               size="giant"
               onPress={onPress}
@@ -619,7 +620,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 borderRadius: 20,
                 marginTop: 15
               }}
-              children={() => <Text category="h2">{actionWord} This Med</Text>}
+              children={() => <Text style={{ fontSize: 20, fontFamily: "Poppins-SemiBold", color: colorTheme["actionword"]}}>{actionWord} This Med</Text>}
             />
           </ScrollView>
       </Layout>
