@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { SafeAreaView, View, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { SafeAreaView, View, ScrollView, TouchableOpacity, Image, Dimensions, Pressable } from 'react-native';
 import { Button, ButtonGroup, Icon, Layout, Text} from '@ui-kitten/components';
 import { MyButton } from '@/app/components/MyButton';
 import { styles } from '@/app/stylesheet';
@@ -75,13 +75,22 @@ export const ScanScreen = ({navigation}) => {
                 <Image source={{uri: `${photo.uri}`}} style={{flex: 1}}/>
               }
             </View>
-            <View style={{width: "100%", alignItems: "center", position: "absolute", bottom: 32}}> {/*button view*/}
-              <Button
-                  style={{backgroundColor: "#000000aa", ...styles.invisBorder, width: "80%"}}
+            <View style={{width: "90%", alignItems: "center", position: "absolute", bottom: 32, gap: 16}}>
+              <Pressable onPress={() => {
+                if (!loading && photoTaken) navigation.navigate("Form", {drug: drug});
+              }} style={{flex: 1}}>
+                <View style={{alignItems: "flex-start", justifyContent: "space-between", alignItems: "center", flexDirection: "row", backgroundColor: "#000000aa", paddingHorizontal: 32, paddingVertical: 16, borderRadius: 16, width: "100%"}}>
+                  <View style={{width: "100%"}}>
+                    <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.nickname || "Not detected") : "Take Photo"}</Text>
+                    <Text style={{color: "#fff"}} category='c1'>{photoTaken? (loading? "Please wait" : "Tap to continue") : "Make sure the DIN is in view."}</Text>
+                  </View>
+                  {(!loading && photoTaken) && <Icon name="chevron-right-outline" fill="#ffffff"/>}
+                </View>
+              </Pressable>
+              {(!loading && !photoTaken) && <Button
+                  style={{backgroundColor: "transparent", ...styles.invisBorder, width: "80%"}}
                   size='large'
                   onPress={async () => {
-                    if (loading) return;
-                    if (!loading && photoTaken) navigation.navigate("Form", {drug: drug});
                     if (camReady && !photoTaken) {
                       const _photo = await cameraRef.current.takePictureAsync({quality: 0.2})
                       setPhoto(_photo);
@@ -94,14 +103,11 @@ export const ScanScreen = ({navigation}) => {
                   }}
                   children={() => {
                     return (
-                      <View style={{alignItems: "flex-start", paddingHorizontal: 16}}>
-                        <Text style={{color: "#fff"}} category='p2'>{photoTaken? (loading? "Loading...": drug.nickname || "Not detected") : "Take Photo"}</Text>
-                        <Text style={{color: "#fff"}} category='c1'>{photoTaken? (loading? "Please wait" : "Continue") : "Start scanning"}</Text>
-                      </View>
+                      <Icon name="radio-button-off-outline" fill="#ffffff" style={{width: 86, height: 86}}/>
                     )
                   }}
-              ></Button>
-              {photoTaken && <Text category='p2' style={{textAlign: "center", color: "#fff", marginTop: 8}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
+              ></Button>}
+              {photoTaken && <Text category='p2' style={{textAlign: "center", color: "#fff"}} onPress={() => setPhotoTaken(false)}>Retake</Text>}
             </View>
             </>
           }
