@@ -364,7 +364,7 @@ export const HomeScreen = ({ route, navigation }) => {
       <Layout style={{...styles.masterLayout, backgroundColor: colorTheme["generic-bg"]}}>
         <View style={{...styles.rowContainer, marginTop: 35}}>
           <Text onPress={() => {AsyncStorage.clear(); init()}} category="h2" style={{ fontSize: 22, color: colorTheme["good-morning"], fontFamily:"Poppins-SemiBold" }}>
-            Good morning, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
+            Hello, <Text style={{ fontSize: 22, color: colorTheme["persian-green"], fontFamily:"Poppins-SemiBold" }}>{userName}</Text>
           </Text>
           <Pressable onPress={() => navigation.navigate("Med Stack", {screen: "Settings"})} >
             <Icon style={{ width: 40}} fill={colorTheme["icon-color"]} name="settings-2-outline"></Icon>
