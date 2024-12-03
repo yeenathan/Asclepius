@@ -448,11 +448,11 @@ export const Onboarding = ({ navigation }) => {
         >
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 20 }}>
             <Image
-              source={require("@/assets/graphics/onboarding1.svg")}
-              style={{ width: 300, marginBottom: 20 }}
+              source={require("@/assets/graphics/welcomeGraphic.png")}
+              style={{ width: 300, height: 250}}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
+            <Text category="h1" style={{ fontSize: 28, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold", width: "100%"}}>
               Welcome to Remedify
             </Text>
             <Text
@@ -492,11 +492,11 @@ export const Onboarding = ({ navigation }) => {
         >
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", width: "100%", paddingHorizontal: 20 }}>
             <Image
-              source={require("@/assets/graphics/onboarding2.svg")}
-              style={{ width: 250, marginBottom: 20 }}
+              source={require("@/assets/graphics/nameGraphic.png")}
+              style={{ width: 300, height: 250}}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
+            <Text category="h1" style={{ fontSize: 28, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
               Introduce yourself!
             </Text>
             <Input
@@ -550,11 +550,11 @@ export const Onboarding = ({ navigation }) => {
         >
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 20 }}>
             <Image
-              source={require("@/assets/graphics/onboarding3.svg")}
-              style={{ width: 250, marginBottom: 20 }}
+              source={require("@/assets/graphics/getStartGraphic.png")}
+              style={{ width: 300, height: 250}}
               resizeMode="contain"
             />
-            <Text category="h1" style={{ fontSize: 28, marginBottom: 15, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold" }}>
+            <Text category="h1" style={{ fontSize: 28, textAlign: "center", color: "#00A39B", fontFamily: "Poppins-SemiBold", width: "100%" }}>
               {/* Welcome, {userName}!{"\n"} */}
               Your health, our priority
             </Text>
