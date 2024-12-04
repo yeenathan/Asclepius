@@ -98,7 +98,7 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
         >
           <View style={{ marginBottom: 32, width: "100%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 16}}>
             <Image source={data.icon} style={{width: 48, height: 48}} resizeMode="contain"/>
-            <Text category="h2">{data.nickname} ({data.name})</Text>
+            <Text category="h2" style={{maxWidth: "85%"}}>{data.nickname} ({data.name})</Text>
           </View>
           <Text category="p2" style={{marginBottom: 16}}>Active Ingredient: {data.ingredient}</Text>
           <Text style={{marginBottom: 32}} category="p1">{data.description}</Text>
