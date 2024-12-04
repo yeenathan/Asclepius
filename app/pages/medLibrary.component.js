@@ -167,6 +167,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
+              alignItems: "center",
               width: "100%",
               paddingVertical: 10,  
               paddingHorizontal: 15,
@@ -186,7 +187,8 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
             <Image source={med.icon} style={{
               width: 40, 
               height: 40,
-              marginTop: 10
+              marginTop: 10,
+              resizeMode: "contain"
             }}/>
           </View>
         </View>
@@ -198,7 +200,7 @@ const MedButton = ({ index, med, onPress, handleArchive, handleDelete, icon }) =
               paddingVertical: 10,  
               paddingHorizontal: 25,
             }}>
-            <Text style={{fontSize: 20, fontFamily: "Poppins-SemiBold", color: colorTheme ["generic-text"]}}>{med.name}</Text>
+            <Text style={{fontSize: 20, fontFamily: "Poppins-SemiBold", color: colorTheme ["generic-text"]}}>{med.nickname}</Text>
             <Text
               style={{ fontWeight: "bold" }}
               onPress={() => {
