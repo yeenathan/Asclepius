@@ -204,7 +204,7 @@ export function EditSchedule({navigation, route}) {
 
   function handlePickTime(e, selected) {
     setTime(selected);
-    setShowPicker(false);
+    // setShowPicker(false);
   }
 
   function getTime(time) {

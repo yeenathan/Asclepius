@@ -62,7 +62,7 @@ const MedCard = ({med, handleTaken, init, currentDay, colorTheme}) => {
   // scuffed code because android and ios have different requirements for this datepicker
   const [time, setTime] = useState(new Date());
   async function handlePickTime(e, selected) {
-    if (e.type === "set") setReschedule(false);
+    // if (e.type === "set") setReschedule(false);
     setTime(selected);
     let newData = {...data, time: selected}
     await AsyncStorage.mergeItem(data.key, JSON.stringify(newData));
