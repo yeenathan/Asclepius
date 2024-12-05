@@ -567,7 +567,7 @@ export const InfoScreen = ({ navigation, route }) => {
             </View>
 
 
-            <View style={{ flexDirection: "column", width: "100%", gap: 20}}>    
+            {/* <View style={{ flexDirection: "column", width: "100%", gap: 20}}>    
               <View
                 style={{
                   flexDirection: "row",
@@ -609,7 +609,7 @@ export const InfoScreen = ({ navigation, route }) => {
               </Text>
               <Text>{medication.refills}</Text>
             </View> 
-          </View>
+          </View> */}
           <View style={{ alignItems: "center"}}>
           <Text style={{ fontSize: 10, fontFamily: "Poppins-Medium", marginTop: 8, color: "#A0A0A0", width: 330}}>*This app is not a substitute for professional medical advice; always consult your healthcare provider for guidance.</Text>
           </View>
