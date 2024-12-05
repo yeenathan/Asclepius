@@ -480,7 +480,7 @@ export const InfoScreen = ({ navigation, route }) => {
                 </View>   
               </View>
             </Card>
-            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%"}}>
+            <View style={{ flexDirection: "row", gap: 6, marginTop: 20, marginBottom: 20, width: "100%", paddingHorizontal: 8}}>
               <View
                 style={{
                   flexDirection: "column",
@@ -517,7 +517,7 @@ export const InfoScreen = ({ navigation, route }) => {
                     shadowOpacity: 0.25, 
                     shadowRadius: 3.84, 
                     elevation: 5,
-                    flex: 1
+                    flex: 1,
                   }}
                 >
                   <View style={{ flexDirection: "column" }}>
