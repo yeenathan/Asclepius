@@ -64,7 +64,7 @@ export const AddScreen = ({navigation}) => {
         </View>
         <View style={{ marginHorizontal: 30, flex: 1}}>
           <Text style={{fontSize: 26, color: colorTheme['persian-green'], textAlign: "center" }} category='h2'>Scan Medication</Text>
-          <Text style={{textAlign: "center"}} category='p1'>Scan the label from your pharmacist or the medication package to set reminders. Make sure the DIN is visible</Text>
+          <Text style={{textAlign: "center"}} category='p1'>Scan the label from your pharmacist or the medication package to set reminders. Make sure the DIN is visible.</Text>
         </View>
         <View style={{gap: 25, width: "100%", alignItems: "center", flex: 2}}>
           <Button style={{width: "88%", backgroundColor: colorTheme['green']}} onPress={() => navigation.navigate("Scan")} size='large'>Take a Picture</Button>
