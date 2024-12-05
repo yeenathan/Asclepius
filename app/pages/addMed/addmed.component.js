@@ -86,15 +86,13 @@ export const AddScreen = ({navigation}) => {
     const nextIndex = () => (index.value + 1) % medScanImages.length;
 
     return (
-      <View style ={{flex: 4}}>
-        {/* <Animated.View style={[imageFade1]}>
-          <Image source ={{ uri: require('@/assets/graphics/pillBottleScan.png')}} style={{width: 180, height: 310}}/>
-        </Animated.View> */}
-        <Image source ={require('@/assets/graphics/pillBottleScan.png')} style={{width: 180, height: 310}}/>
-
-        {/* <Animated.View style={[imageFade2]}>
-          <Image source ={{ uri: medScanImages[nextIndex()]}} style={{width: 180, height: 310}}/>
-        </Animated.View> */}
+      <View style ={{flex: 1}}>
+        <Animated.View style={{...imageFade1, position: "absolute"}}>
+          <Image source = {medScanImages[currentIndex()]} style={{width: 180, height: 310}}/>
+        </Animated.View>
+        <Animated.View style={{...imageFade2, position: "absolute"}}>
+          <Image source = {medScanImages[nextIndex()]} style={{width: 180, height: 310}}/>
+        </Animated.View>
       </View>
     )
   }
@@ -102,14 +100,12 @@ export const AddScreen = ({navigation}) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Header navigation={navigation} showSettings={false} />
       <Layout style={{...styles.masterLayoutNoNav, justifyContent: "flex-start", backgroundColor: colorTheme["generic-bg"], gap: 30 }}>
-        <ScanImageFade/>
-        {/* <View style={{flex: 4}}>
-          <ScanSVG />
+        {/* <ScanImageFade/> */}
           <Image
             source={require("@/assets/graphics/pillBottleScan.png")}
-            style={{width: 180, height: 310}}
+            style={{flex: 4}}
+            resizeMode="contain"
           />
-        </View> */}
         <View style={{ marginHorizontal: 30, flex: 1}}>
           <Text style={{fontSize: 26, color: colorTheme['persian-green'], textAlign: "center" }} category='h2'>Scan Medication</Text>
           <Text style={{textAlign: "center"}} category='p1'>Scan the label from your pharmacist or the medication package to set reminders. Make sure the DIN is visible.</Text>
