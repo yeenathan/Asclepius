@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 
-const ClipIcon = (props) => <Icon {...props} name="clipboard-outline" />;
+const ClipIcon = (props) => <Icon {...props} name="folder-add-outline" />;
 
 const BottomTabBar = ({ navigation, state }) => (
   <>
